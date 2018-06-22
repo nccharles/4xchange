@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { createStackNavigator, createSwitchNavigator} from 'react-navigation'
+import { StackNavigator, SwitchNavigator} from 'react-navigation'
 import { FontAwesome } from '@expo/vector-icons'
 
 import TabNavScreen from './tabNav'
@@ -19,7 +19,7 @@ import AddCurrency from '../Screens/BureauApp/AddCurrency'
 
 
 // Manifest of possible screens
-const WelcomeStack = createStackNavigator({
+const WelcomeStack = StackNavigator({
   WelcomeScreen: {
     screen: WelcomeScreen,
     navigationOptions: {
@@ -45,7 +45,7 @@ const WelcomeStack = createStackNavigator({
     }
   },
 })
-const UserStack = createStackNavigator({
+const UserStack = StackNavigator({
   TabNavScreen: { screen: TabNavScreen },
   Local: { screen: Local },
   MapView: { screen: MapView },
@@ -64,7 +64,7 @@ const UserStack = createStackNavigator({
     } 
   },
 })
-const SignedIn = createStackNavigator({
+const SignedIn = StackNavigator({
   AddCurrency: { 
     screen: AddCurrency,
     navigationOptions: {
@@ -76,7 +76,7 @@ const SignedIn = createStackNavigator({
 })
 
 export default PrimaryNav = (signedIn = false, userChoice = false) => {
-  return createSwitchNavigator(
+  return SwitchNavigator(
     {
       SignedIn: {
         screen: SignedIn
