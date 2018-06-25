@@ -16,6 +16,7 @@ import {
 } from 'react-native-indicators';
 
 import styles from './Style/SignupStyles'
+import { Colors } from '../../Assets/Themes'
 
 //backend things
 import * as firebase from 'firebase'
@@ -165,7 +166,7 @@ class Signup extends Component {
                     <ScrollView>
                         <Input
                             placeholder='Email'
-                            leftIcon={{ type: 'simple-line-icon', name: 'user', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'user', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -179,7 +180,7 @@ class Signup extends Component {
                         <Text style={styles.texterr}>{this.state.errs.email}</Text>
                         <Input
                             placeholder='Password'
-                            leftIcon={{ type: 'simple-line-icon', name: 'key', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'key', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -192,7 +193,7 @@ class Signup extends Component {
                         <Text style={styles.texterr}>{this.state.errs.password}</Text>
                         <Input
                             placeholder='Confirm password'
-                            leftIcon={{ type: 'simple-line-icon', name: 'key', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'key', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -204,7 +205,7 @@ class Signup extends Component {
                         />
                         <Input
                             placeholder='Company name'
-                            leftIcon={{ type: 'material-community', name: 'city', color: '#740000' }}
+                            leftIcon={{ type: 'material-community', name: 'city', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}

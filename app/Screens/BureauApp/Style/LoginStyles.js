@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#aa2200',
+        backgroundColor: Colors.primary,
     },
     keyboard: {
         flex: 1,
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginBottom: height * .1,
     },
     input: {
-        backgroundColor: '#e3562e',
+        backgroundColor: Colors.primaryLight,
         borderRadius: 5,
         marginTop: height * .05,
         alignSelf: 'center',

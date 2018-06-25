@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
+import { Colors } from '../../../Assets/Themes';
 const { width, height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
     },
     button: {
-        backgroundColor: '#740000',
+        backgroundColor: Colors.dark,
         borderRadius: 5,
         marginTop: 20,
         marginLeft: width * .05,

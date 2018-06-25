@@ -5,7 +5,7 @@ import { Location, Permissions, MapView } from 'expo';
 import MapViewDirections from 'react-native-maps-directions'
 
 import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
-import LocationBank from '../../Assets/MapImage/bank-location.png'
+import LocationBank from '../../Assets/MapImage/dollar-spot.png'
 import UserLocation from '../../Assets/MapImage/user.png'
 import logout from '../../Assets/Icons/logout.png'
 import styles from './Style/MapStyle';
@@ -22,9 +22,7 @@ const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.20003
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const locOptions = { enableHighAccuracy: true, distanceInterval: 3 }
-// const APIKEY = 'AIzaSyB2L8kbuQG1j0XAeDuYoHm_Ql-8fwRGSms';
-// const APIKEY = 'AIzaSyA9P6wB4z6JHlRxElAAVKzbzOAM3mWw_lY'
-const APIKEY = 'AIzaSyDQBSAVxZozG5WDEj8nbZbtAxXJUFQUOzI'
+const APIKEY = 'AIzaSyAqDLy4cmdwWQV7thAsxyXfUtB15JqgwcE'
 
 const coordinates = [];
 

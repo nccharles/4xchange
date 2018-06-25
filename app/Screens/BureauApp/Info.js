@@ -85,6 +85,7 @@ class Info extends Component {
 
     componentDidMount() {
         const { latitude, longitude } = this.state.info
+        alert('4xChange is going to take your current location please make sure you are currently sitting in your forex bureau')
         if (!latitude && !longitude) {
             this._getCurrentUserLocation();
         }
@@ -219,7 +220,7 @@ class Info extends Component {
                     <ScrollView>
                         <Input
                             placeholder='Phone'
-                            leftIcon={{ type: 'material-community', name: 'city', color: '#740000' }}
+                            leftIcon={{ type: 'material-community', name: 'city', color: Colors.dark }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -230,7 +231,7 @@ class Info extends Component {
                         />
                         <Input
                             placeholder='Phone'
-                            leftIcon={{ type: 'simple-line-icon', name: 'phone', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'phone', color: Colors.dark }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -242,7 +243,7 @@ class Info extends Component {
                         />
                         <Input
                             placeholder='Detail address, eg: Chic no 230'
-                            leftIcon={{ type: 'simple-line-icon', name: 'directions', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'directions', color: Colors.dark }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -254,7 +255,7 @@ class Info extends Component {
                         <TouchableOpacity onPress={() => this._timePicker('openAt')}>
                             <Input
                                 placeholder='Open at'
-                                leftIcon={<Image source={open} style={{ width: 30, height: 30 }} />}
+                                leftIcon={<Image source={open} style={{ width: 30, height: 30, tintColor: Colors.dark }} />}
                                 containerStyle={styles.input}
                                 underlineColorAndroid={'transparent'}
                                 inputStyle={styles.inputStyle}
@@ -268,7 +269,7 @@ class Info extends Component {
                         <TouchableOpacity onPress={() => this._timePicker('closeAt')}>
                             <Input
                                 placeholder='Closed at'
-                                leftIcon={<Image source={close} style={{ width: 30, height: 30 }} />}
+                                leftIcon={<Image source={close} style={{ width: 30, height: 30, tintColor: Colors.dark }} />}
                                 containerStyle={styles.input}
                                 underlineColorAndroid={'transparent'}
                                 inputStyle={styles.inputStyle}
@@ -283,7 +284,7 @@ class Info extends Component {
                             <Icon
                                 name='calendar'
                                 type='simple-line-icon'
-                                color='#740000'
+                                color= {Colors.dark}
                             />
                             <Text style={styles.label}>
                                 Working days

@@ -32,10 +32,10 @@ const Card= ({
         <View style={styles.wrapper}>
             <View style={styles.leftContainer}>
                 <Text style={styles.boldLabel}>{text}</Text>
-                <View style={styles.leftCategory}>
+                {/* <View style={styles.leftCategory}> */}
                     <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
-                    <Text style={styles.label}>Sell: {`${bidPrice} ${''}`}</Text>
-                </View>
+                    <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
+                {/* </View> */}
             </View>
             <View style={styles.rightContainer}>
                 <Text style={styles.rightCategory}>{category}</Text>

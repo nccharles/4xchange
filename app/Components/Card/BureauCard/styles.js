@@ -43,17 +43,17 @@ export default StyleSheet.create({
     },
   boldLabel: {
     position: 'absolute',
-    top: 5,
+    top: screenheight/250,
     left: 15,
     // top: 3,
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
     color: Colors.charcoal,
   },
   label: {
     fontWeight: '500',
     color: 'gray',
-    fontSize: 15
+    fontSize: 15,
   },
   iconBtn:{
     position: 'absolute',
@@ -69,7 +69,7 @@ export default StyleSheet.create({
     right: 15, 
     bottom: 5, 
     fontWeight: '500',
-    color: 'gray',
+    color: Colors.secondary,
     fontSize: 13
 }
 })

@@ -1,7 +1,10 @@
 const colors = {
-  primary: '#aa2200',
-  dark: '#740000',
-  primaryLight: '#e3562e',
+  // primary: '#aa2200',
+  // dark: '#740000',
+  // primaryLight: '#e3562e',
+  primary: '#006442',
+  dark: '#00391b',
+  primaryLight: '#00863F',
   secondary: '#3498DB',
   // secondary2: '#f1f8fb',
   // secondary3: '#eeeeee',

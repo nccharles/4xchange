@@ -1,19 +1,18 @@
 {
   "expo": {
-    "name": "ForExchange",
+    "name": "4xChange",
     "description": "A very interesting project.",
-    "slug": "ForExchange",
+    "slug": "4xChange",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#aa2200",
+    "primaryColor": "#006442",
     "icon": "./app/Assets/Logo/logoresized.png",
     "splash": {
-      "image": "./app/Assets/Logo/title.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#aa2200"
+      "image": "./app/Assets/Logo/mylogo.png",
+      "backgroundColor": "#006442"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,6 +22,19 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "android": {
+      "package": "com.limitless.i4xChange",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "READ_INTERNAL_STORAGE"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAqDLy4cmdwWQV7thAsxyXfUtB15JqgwcE"
+        }
+      }
+    }  
   }
 }
