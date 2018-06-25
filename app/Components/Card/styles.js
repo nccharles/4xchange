@@ -27,7 +27,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   leftContainer: {
-    flex: 1,
+    // flex: 1,
   },
   leftCategory: {
     position: 'absolute',
@@ -38,14 +38,24 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 17,
     color: Colors.charcoal,
   },
   label: {
     fontWeight: '500',
     color: 'gray',
     fontSize: 15,
-    paddingVertical: 2
+    position: 'absolute',
+    left: 15,
+    bottom: 25
+  },
+  label2: {
+    fontWeight: '500',
+    color: 'gray',
+    fontSize: 15,
+    position: 'absolute',
+    left: 15,
+    bottom: 1
   },
   amount: {
     fontSize: 17, 
@@ -64,7 +74,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between', 
   },
   rightCategory:{
-    fontSize: 20,  
+    fontSize: 17,  
     color: Colors.dark, 
     fontWeight:'bold', 
     position: 'absolute',
@@ -143,7 +153,7 @@ export default StyleSheet.create({
     right: 15, 
     bottom: 5, 
     fontWeight: '500',
-    color: 'gray',
+    color: Colors.secondary,
     fontSize: 13
 }
 });

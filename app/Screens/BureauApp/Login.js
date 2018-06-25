@@ -14,6 +14,8 @@ import {
   WaveIndicator,
 } from 'react-native-indicators';
 import styles from './Style/LoginStyles'
+
+import { Colors } from '../../Assets/Themes'
 //backend things
 import * as firebase from 'firebase'
 class Login extends Component {
@@ -129,7 +131,7 @@ class Login extends Component {
                     <ScrollView>
                         <Input
                             placeholder='Email'
-                            leftIcon={{ type: 'simple-line-icon', name: 'user', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'user', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid='transparent'
                             inputStyle={{ color: '#fff' }}
@@ -142,7 +144,7 @@ class Login extends Component {
                         <Text style={styles.texterr}>{this.state.errors.errEmail}</Text>
                         <Input
                             placeholder='Password'
-                            leftIcon={{ type: 'simple-line-icon', name: 'key', color: '#740000' }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'key', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid='transparent'
                             inputStyle={{ color: '#fff' }}
