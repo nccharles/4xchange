@@ -14,6 +14,7 @@ import International from '../Screens/UserApp/International'
 import Login from '../Screens/BureauApp/Login'
 import Signup from '../Screens/BureauApp/Signup'
 import Info from '../Screens/BureauApp/Info'
+import Agreement from '../Screens/BureauApp/agreement'
 import AddCurrency from '../Screens/BureauApp/AddCurrency'
 // import Intro from '../Screens/Intro'
 
@@ -38,6 +39,7 @@ const WelcomeStack = StackNavigator({
   MapView: { screen: MapView },
   International: { screen: International },
   CurrencyList: { screen: CurrencyList },
+  Agreement: {screen: Agreement},
   Details: { 
     screen: Details,
     navigationOptions: {

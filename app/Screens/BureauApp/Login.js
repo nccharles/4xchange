@@ -165,7 +165,7 @@ class Login extends Component {
                             />
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={styles.text}>Don't have an account yet?</Text>
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('Agreement')}>
                                 <Text style={{ marginLeft: 2, marginTop: 20, color: '#fff', fontWeight: 'bold' }}>Create one here</Text>
                             </TouchableOpacity>
                         </View>

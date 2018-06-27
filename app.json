@@ -24,7 +24,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.limitless.i4xChange",
+      "package": "rw.limitless.i4xChange",
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",

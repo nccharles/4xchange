@@ -219,7 +219,7 @@ class Info extends Component {
                 >
                     <ScrollView>
                         <Input
-                            placeholder='Phone'
+                            placeholder='Company name'
                             leftIcon={{ type: 'material-community', name: 'city', color: Colors.dark }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}

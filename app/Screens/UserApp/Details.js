@@ -165,10 +165,10 @@ export default class Details extends Component {
               <Text>{userInfo.workingDays}</Text>
             </View>
             <View style={styles.separator}/>
-            <View style={styles.itemContainer}>
+            {/* <View style={styles.itemContainer}>
               <Text style={styles.itemTitle}>Distance :</Text>
               <Text> 80KM </Text>
-            </View>
+            </View> */}
           </ScrollView>
         </View>
       );
