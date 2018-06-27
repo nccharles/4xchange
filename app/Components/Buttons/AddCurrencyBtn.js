@@ -22,7 +22,7 @@ class AddButton extends Component {
                 color="white"/>
             <Text 
                 style={styles.buttonText}>
-                Add Some Currencies
+                Add currencies
             </Text>
         </TouchableOpacity>
     )
