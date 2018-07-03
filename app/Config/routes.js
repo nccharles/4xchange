@@ -16,6 +16,8 @@ import Signup from '../Screens/BureauApp/Signup'
 import Info from '../Screens/BureauApp/Info'
 import Agreement from '../Screens/BureauApp/agreement'
 import AddCurrency from '../Screens/BureauApp/AddCurrency'
+import InfoRegis from '../Screens/BureauApp/infoRegis'
+import AdditionalInfo from '../Screens/BureauApp/additionalInfo'
 // import Intro from '../Screens/Intro'
 
 
@@ -34,6 +36,8 @@ const WelcomeStack = StackNavigator({
     }
   },
   Signup: { screen: Signup },
+  InfoRegis: {screen:InfoRegis},
+  AdditionalInfo: {screen: AdditionalInfo},
   TabNavScreen: { screen: TabNavScreen },
   Local: { screen: Local },
   MapView: { screen: MapView },

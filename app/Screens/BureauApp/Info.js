@@ -85,7 +85,7 @@ class Info extends Component {
 
     componentDidMount() {
         const { latitude, longitude } = this.state.info
-        alert('4xChange is going to take your current location please make sure you are currently sitting in your forex bureau')
+        alert('')
         if (!latitude && !longitude) {
             this._getCurrentUserLocation();
         }

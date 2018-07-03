@@ -199,7 +199,7 @@ class Local extends Component {
                   borderRadius: 2,}}
                 buyTextStyle={{
                   color: this.state.buyTextColor,
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: 'bold',
                   textAlign: 'center'}}
                   btnSellStyle={{
@@ -212,7 +212,7 @@ class Local extends Component {
                     borderRadius: 2,}}
                   sellTextStyle={{
                     color: this.state.sellTextColor,
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: 'bold',
                     textAlign: 'center'}}/>
           </View>

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     buttonText:{
         color: Colors.snow,
-        fontSize: 17,
+        fontSize: 16,
         fontWeight: 'bold',
         alignItems: 'center',
         textAlign: 'center',

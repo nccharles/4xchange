@@ -9,7 +9,7 @@ export default StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     width: screenwidth -30,
-    height: screenheight /8,
+    height: screenheight /10,
     elevation: 3,
     backgroundColor: Colors.snow,
     marginVertical: 10,
@@ -38,32 +38,32 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 16,
     color: Colors.charcoal,
   },
   label: {
     fontWeight: '500',
     color: 'gray',
-    fontSize: 15,
+    fontSize: 14,
     position: 'absolute',
     left: 15,
-    bottom: 25
+    bottom: 20
   },
   label2: {
     fontWeight: '500',
     color: 'gray',
-    fontSize: 15,
+    fontSize: 14,
     position: 'absolute',
     left: 15,
     bottom: 1
   },
   amount: {
-    fontSize: 17, 
+    fontSize: 16, 
     color: '#99A3A4', 
     fontWeight:'bold'
   },
   currencyName:{
-    fontSize: 17, 
+    fontSize: 16, 
     color: '#99A3A4',  
     fontWeight:'bold',
     marginLeft: 5
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between', 
   },
   rightCategory:{
-    fontSize: 17,  
+    fontSize: 16,  
     color: Colors.dark, 
     fontWeight:'bold', 
     position: 'absolute',
@@ -83,7 +83,7 @@ export default StyleSheet.create({
   equivalentContainer: {
     position: 'absolute',
     right: 15,
-    bottom: 25,
+    bottom: 20,
     flexDirection: 'row'
   },
   
@@ -151,9 +151,9 @@ export default StyleSheet.create({
   updated: {
     position: 'absolute',
     right: 15, 
-    bottom: 5, 
+    bottom: 1.5, 
     fontWeight: '500',
     color: Colors.secondary,
-    fontSize: 13
+    fontSize: 12
 }
 });

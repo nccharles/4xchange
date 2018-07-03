@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     height: screenheight/16,
     borderRadius: 5,
-    width: screenwidth -50,
+    width: screenwidth -30,
     alignContent : 'center',
     justifyContent: 'center',
     elevation: 3,
