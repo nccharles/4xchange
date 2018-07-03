@@ -21,7 +21,7 @@ const Card =(props) => {
                 <View style={{
                     position: 'absolute',
                     left: 15,
-                    bottom: 5
+                    bottom: 1.5
                 }}>
                     <Text style={styles.label}>Buy: {askPrice}</Text>
                     <Text style={styles.label}>Sell: {bidPrice}</Text>
@@ -33,7 +33,7 @@ const Card =(props) => {
             style={styles.iconBtn}>
           <Ionicons  
               name='ios-trash' 
-              size={30} 
+              size={20} 
               color='#E74C3C'
               // color="white"
               />

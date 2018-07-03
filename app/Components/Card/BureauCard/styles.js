@@ -8,7 +8,7 @@ export default StyleSheet.create({
   container:{
     flexDirection: 'row',
     width: screenwidth -30,
-    height: screenheight/8,
+    height: screenheight/10,
     elevation: 3,
     alignSelf: 'center',
     marginVertical: 8,
@@ -43,17 +43,17 @@ export default StyleSheet.create({
     },
   boldLabel: {
     position: 'absolute',
-    top: screenheight/250,
+    // top: screenheight/250,
     left: 15,
     // top: 3,
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
     color: Colors.charcoal,
   },
   label: {
     fontWeight: '500',
     color: 'gray',
-    fontSize: 15,
+    fontSize: 14,
   },
   iconBtn:{
     position: 'absolute',

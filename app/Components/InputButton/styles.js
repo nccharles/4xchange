@@ -36,7 +36,7 @@ export default StyleSheet.create({
     },
       buttonText:{
         fontWeight: '600',
-        fontSize: 18,
+        fontSize: 16,
         paddingHorizontal: 5,
         color: 'white'
     },

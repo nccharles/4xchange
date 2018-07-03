@@ -18,7 +18,7 @@ class AddButton extends Component {
             style={styles.button}>
             <Feather 
                 name="plus-circle"
-                size={30}
+                size={20}
                 color="white"/>
             <Text 
                 style={styles.buttonText}>

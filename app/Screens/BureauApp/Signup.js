@@ -140,7 +140,7 @@ class Signup extends Component {
              displayName: companyName,
              photoURL: "https://example.com/jane-q-user/profile.jpg"
            }).then(function() {
-             that.props.navigation.navigate('AddCurrency', {userId: currentUser.uid})
+             that.props.navigation.navigate('InfoRegis', {userId: currentUser.uid})
            }).catch(function(error) {
                 // console.log(error)
            });
@@ -215,7 +215,7 @@ class Signup extends Component {
                         />
                             <Button
                                 onPress={this._handleSignUp.bind(this)}
-                                title='Create account'
+                                title='Add'
                                 icon={{ type: 'material-community', name: 'account-plus-outline', color: '#fff' }}
                                 buttonStyle={styles.button}
                                 loading={this.state.isSubmitting}
