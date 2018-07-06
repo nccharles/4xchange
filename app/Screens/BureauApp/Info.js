@@ -52,7 +52,7 @@ class Info extends Component {
         this.state = {
             // showAlert: false,
             info: {
-                phone: '',
+                phoneNumber: '',
                 address: '',
                 openAt: '',
                 closeAt: '',
@@ -90,7 +90,7 @@ class Info extends Component {
             this._getCurrentUserLocation();
         }
     }
-
+    
     _handleTextInput = (key, value) => {
         this.setState(state => ({
             info: {
@@ -102,7 +102,7 @@ class Info extends Component {
     _getUserInfo = async () => {
         const { userId } = this.state
         const that = this
-        await firebase.database().ref(`/infos/${userId}/info`).on('value', snapshot => {
+        await firebase.database().ref(`/infos/${userId}/publicInfo`).on('value', snapshot => {
             //console.log(snapshot)
             if (snapshot != null) {
                 that.setState(state => ({
@@ -138,7 +138,7 @@ class Info extends Component {
     }
 
     _handleInfoSave = async () => {
-        const { info: { address, phone, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, userId, infoId, isSubmitting } = this.state
+        const { info: { address, phoneNumber, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, userId, infoId, isSubmitting } = this.state
         if (isSubmitting) {
             return
         }
@@ -146,10 +146,10 @@ class Info extends Component {
             isSubmitting: true
         })
         const that = this
-        await firebase.database().ref(`/infos/${userId}/info`)
+        await firebase.database().ref(`/infos/${userId}/publicInfo`)
             .set({
                 address,
-                phone,
+                phoneNumber,
                 closeAt,
                 openAt,
                 workingDays,
@@ -205,7 +205,7 @@ class Info extends Component {
     }
     render() {
         // const { showAlert } = this.state;
-        const { address, openAt, closeAt, companyName, phone, workingDays } = this.state.info
+        const { address, openAt, closeAt, companyName, phoneNumber, workingDays } = this.state.info
         return (
             <View
                 onResponderRelease={(event) => { Keyboard.dismiss(); }}
@@ -237,9 +237,9 @@ class Info extends Component {
                             inputStyle={styles.inputStyle}
                             returnKeyType={"next"}
                             keyboardType="numeric"
-                            onChangeText={value => this._handleTextInput('phone', value)}
+                            onChangeText={value => this._handleTextInput('phoneNumber', value)}
                             editable={true}
-                            value={phone}
+                            value={phoneNumber}
                         />
                         <Input
                             placeholder='Detail address, eg: Chic no 230'

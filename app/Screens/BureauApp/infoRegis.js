@@ -27,9 +27,9 @@ class Signup extends Component {
      super(props);
      this.state = {
        credentails: {
-        tinno: null,
-        busnessregistration: null,
-        phone: null,
+        tinNumber: null,
+        licenceNumber: null,
+        phoneNumber: null,
         companyName: null,
        },
        isSubmitting: false,
@@ -46,21 +46,38 @@ class Signup extends Component {
 
     //Alert message that come when the page is opening
     hideAlert = () => {
+        this._queryExistingRegInfo()
         this.setState({
           showAlert: false
         });
-      };
+    };
 
     //luc's backend things
 
-    componentDidMount() {
-      const currentUser = firebase.auth().currentUser
+    async componentDidMount() {
+        const currentUser = firebase.auth().currentUser
+        const {uid, email} = currentUser
         this.setState({
-            showAlert: true
+            showAlert: true,
+            userId: uid,
+            email
         })
-      console.log(currentUser)
     }
-
+    _queryExistingRegInfo = () => {
+        const {userId} = this.state
+        firebase.database().ref(`infos/${userId}/businessInfo`)
+        .once('value')
+        .then(sanpshot =>{
+            this.setState({
+                credentails:{
+                    ...this.state.credentails,
+                    ...sanpshot.val()
+                }
+            })
+        }).catch(error => {
+            console.log(error)
+        })
+    }
     _getCurrentUserLocation = async () => {
         const { status } = await Permissions.askAsync(Permissions.LOCATION);
         if (status !== 'granted') {
@@ -94,8 +111,24 @@ class Signup extends Component {
     }
 
     _handleSignUp = async () =>{
-        alert('new shit')
-        this.props.navigation.navigate('AdditionalInfo')
+        const that = this
+        this.setState({
+            isSubmitting: true,
+        })
+        const {credentails: {tinNumber, licenceNumber, phoneNumber, companyName}, userId, email} = this.state
+        firebase.database().ref(`infos/${userId}/businessInfo`).set({
+            tinNumber,
+            licenceNumber,
+            companyName,
+            phoneNumber,
+            completed: true,
+            isSubmitting: false,
+        }).then(resp => {
+            console.log(resp)
+            that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email}) 
+        }).catch( error => {
+            console.log(error)
+        })
     }
     //backend end
 
@@ -120,6 +153,7 @@ class Signup extends Component {
                             autoCorrect={false}
                             returnKeyType={"next"}
                             onChangeText={(input) => this._handleInput('companyName', input)}
+                            value={this.state.credentails.companyName}
                         />
                         <Input
                             placeholder='TIN number'
@@ -130,7 +164,8 @@ class Signup extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             returnKeyType={"next"}
-                            onChangeText={(input) => this._handleInput('tinno', input)}
+                            onChangeText={(input) => this._handleInput('tinNumber', input)}
+                            value={this.state.credentails.tinNumber}
                         />
                         <Input
                             placeholder='Licence number'
@@ -141,7 +176,8 @@ class Signup extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             returnKeyType={"next"}
-                            onChangeText={(input) => this._handleInput('busnessregistration', input)}
+                            onChangeText={(input) => this._handleInput('licenceNumber', input)}
+                            value={this.state.credentails.licenceNumber}
                         />
                         <Input
                             placeholder='Phone'
@@ -151,17 +187,19 @@ class Signup extends Component {
                             inputStyle={styles.inputStyle}
                             returnKeyType={"next"}
                             keyboardType="numeric"
-                            onChangeText={value => this._handleTextInput('phone', value)}
+                            onChangeText={value => this._handleInput('phoneNumber', value)}
+                            value={this.state.credentails.phoneNumber}
                             editable={true}
                         />
-                            <Button
-                                onPress={this._handleSignUp.bind(this)}
-                                title='Add'
-                                icon={{ type: 'material-community', name: 'account-plus-outline', color: '#fff' }}
-                                buttonStyle={styles.button}
-                                loading={this.state.isSubmitting}
-                                activityIndicatorStyle={{color: 'white'}}
-                            />
+                        <Button
+                            onPress={this._handleSignUp.bind(this)}
+                            title='Add'
+                            icon={{ type: 'material-community', name: 'account-plus-outline', color: '#fff' }}
+                            buttonStyle={styles.button}
+                            loading={this.state.isSubmitting}
+                            disabled={this.state.isSubmitting}
+                            activityIndicatorStyle={{color: 'white'}}
+                        />
                     </ScrollView>
                 </KeyboardAvoidingView>
                 <AwesomeAlert
