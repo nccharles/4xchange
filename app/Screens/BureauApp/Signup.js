@@ -51,8 +51,6 @@ class Signup extends Component {
 
     componentDidMount() {
       const currentUser = firebase.auth().currentUser
-
-      console.log(currentUser)
     }
 
     _handleInput = (key, value) =>{
@@ -137,10 +135,10 @@ class Signup extends Component {
            const currentUser = firebase.auth().currentUser;
 
            currentUser.updateProfile({
-             displayName: companyName,
+             displayName: '',
              photoURL: "https://example.com/jane-q-user/profile.jpg"
            }).then(function() {
-             that.props.navigation.navigate('InfoRegis', {userId: currentUser.uid})
+             that.props.navigation.navigate('InfoRegis', {userId: currentUser.uid, email: currentUser.email})
            }).catch(function(error) {
                 // console.log(error)
            });
@@ -203,24 +201,14 @@ class Signup extends Component {
                             returnKeyType={"next"}
                             onChangeText={(input) => this._handleInput('confirmPassword', input)}
                         />
-                        <Input
-                            placeholder='Company name'
-                            leftIcon={{ type: 'material-community', name: 'city', color: Colors.snow }}
-                            containerStyle={styles.input}
-                            underlineColorAndroid={'transparent'}
-                            inputStyle={styles.inputStyle}
-                            autoCorrect={false}
-                            returnKeyType={"next"}
-                            onChangeText={(input) => this._handleInput('companyName', input)}
+                        <Button
+                            onPress={this._handleSignUp.bind(this)}
+                            title='Add'
+                            icon={{ type: 'material-community', name: 'account-plus-outline', color: '#fff' }}
+                            buttonStyle={styles.button}
+                            loading={this.state.isSubmitting}
+                            activityIndicatorStyle={{color: 'white'}}
                         />
-                            <Button
-                                onPress={this._handleSignUp.bind(this)}
-                                title='Add'
-                                icon={{ type: 'material-community', name: 'account-plus-outline', color: '#fff' }}
-                                buttonStyle={styles.button}
-                                loading={this.state.isSubmitting}
-                                activityIndicatorStyle={{color: 'white'}}
-                            />
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>

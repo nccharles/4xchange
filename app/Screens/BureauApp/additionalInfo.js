@@ -9,7 +9,13 @@ import {
     Platform,
     Picker,
     PickerIOS,
+    ToastAndroid,
+    TimePickerAndroid
 } from 'react-native'
+import {
+    Location,
+    Permissions
+} from 'expo';
 import {
     Icon,
     Button,
@@ -35,11 +41,11 @@ class Signup extends Component {
      super(props);
      this.state = {
         info: {
-            phone: '',
+            phoneNumber: '',
             address: '',
             openAt: '',
             closeAt: '',
-            workingDays: '',
+            workingDays: 'Monday to Friday',
             latitude: null,
             longitude: null,
             companyName: '',
@@ -62,25 +68,97 @@ class Signup extends Component {
     //luc's backend things
 
     componentDidMount() {
-      const currentUser = firebase.auth().currentUser
+        const {userId, phoneNumber, email, companyName} = this.props.navigation.state.params
         this.setState({
-            showAlert: true
+            showAlert: true,
+            userId,
+            info:{
+                ...this.state.info,
+                phoneNumber,
+                email,
+                companyName
+            }
         })
-      console.log(currentUser)
+        const { latitude, longitude } = this.state.info
+        if (!latitude && !longitude) {
+            this._getCurrentUserLocation();
+        }
     }
 
-    _handleInput = (key, value) =>{
+    _handleTextInput = (key, value) =>{
+        console.log(key, value)
         this.setState(state =>({
-            credentails:{
-                ...state.credentails,
+            info:{
+                ...state.info,
                 [key]: value,
             }
         }))
     }
 
-    _handleSignUp = async () =>{
-        alert('new shit')
-        this.props.navigation.navigate('AddCurrency')
+    _getCurrentUserLocation = async () => {
+        const { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({
+                errorMessage: 'Permission to access location was denied',
+            });
+            return alert('Enable to Access your location');
+        }
+
+        const location = await Location.getCurrentPositionAsync({});
+        //const address = await Location.geocodeAsync()
+        //console.log(address)
+        const { latitude, longitude } = location.coords
+        this.setState(state => ({
+            info: {
+                ...state.info,
+                latitude,
+                longitude,
+            }
+        }));
+        //console.log(latitude, longitude)
+    }
+
+    _handleInfoSave = async () => {
+        const { info: { address, phoneNumber, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, userId, isSubmitting } = this.state
+        if (isSubmitting) {
+            return
+        }
+        this.setState({
+            isSubmitting: true
+        })
+        const that = this
+        await firebase.database().ref(`/infos/${userId}/publicInfo`)
+            .set({
+                address,
+                phoneNumber,
+                closeAt,
+                openAt,
+                workingDays,
+                email,
+                companyName,
+                latitude,
+                longitude,
+                completed: true,
+            })
+            .then(response => {
+                ToastAndroid.showWithGravityAndOffset(
+                    'Information saved!',
+                    ToastAndroid.LONG,
+                    ToastAndroid.BOTTOM,
+                    25,
+                    50
+                );
+                that.props.navigation.navigate('SignedIn')
+                that.setState({
+                    isSubmitting: false,
+                })
+            })
+            .catch(err => {
+                console.log(err)
+                that.setState({
+                    isSubmitting: false,
+                })
+            })
     }
     //backend end
 
@@ -100,12 +178,12 @@ class Signup extends Component {
             }))
           }
         } catch ({code, message}) {
-          console.warn('Cannot open time picker', message);
+          console.warn(code, message);
         }
     }
 
     render() {
-        const { workingDays } = this.state.info
+        const { address, openAt, closeAt, workingDays } = this.state.info
         return (
             <View
                 onResponderRelease={(event) => { Keyboard.dismiss(); }}
@@ -125,6 +203,7 @@ class Signup extends Component {
                             inputStyle={styles.inputStyle}
                             returnKeyType={"next"}
                             editable={true}
+                            value={address}
                             onChangeText={value => this._handleTextInput('address', value)}
                         />
                         <TouchableOpacity onPress={() => this._timePicker('openAt')}>
@@ -138,6 +217,7 @@ class Signup extends Component {
                                 editable={true}
                                 // onChangeText={value => this._handleTextInput('address', value)}
                                 editable={false}
+                                value={openAt}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this._timePicker('closeAt')}>
@@ -151,6 +231,7 @@ class Signup extends Component {
                                 editable={true}
                                 // onChangeText={value => this._handleTextInput('address', value)}
                                 editable={false}
+                                value={closeAt}
                             />
                         </TouchableOpacity>
                         <View style={styles.ilabel}>
@@ -177,14 +258,14 @@ class Signup extends Component {
                                 <Picker.Item label="Whole week" value="Whole week" />
                             </Picker>
                         }
-                            <Button
-                                onPress={this._handleSignUp.bind(this)}
-                                title='Save'
-                                icon={{ type: 'font-awesome', name: 'save', color: '#fff' }}
-                                buttonStyle={styles.button}
-                                loading={this.state.isSubmitting}
-                                activityIndicatorStyle={{color: 'white'}}
-                            />
+                        <Button
+                            onPress={this._handleInfoSave.bind(this)}
+                            title='Save'
+                            icon={{ type: 'font-awesome', name: 'save', color: '#fff' }}
+                            buttonStyle={styles.button}
+                            loading={this.state.isSubmitting}
+                            activityIndicatorStyle={{color: 'white'}}
+                        />
                     </ScrollView>
                 </KeyboardAvoidingView>
             </View>

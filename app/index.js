@@ -5,6 +5,7 @@ import PrimaryNav from './Config/routes'
 
 import { Colors } from './Assets/Themes'
 import {userChoice} from './Config/constants'
+import { TabHeading } from 'native-base';
 export default class App extends Component {
 	constructor(props) {
 	  super(props);
@@ -13,7 +14,8 @@ export default class App extends Component {
 	  	signedIn: false,
 		checkedSignIn: false,
 		userSignedIn: false,
-		userViewConformed: false,  
+		userViewConformed: false,
+		initialRouter: 'WelcomeStack'
 	  };
 	}
 	 //   async componentWillMount() {
@@ -32,25 +34,47 @@ export default class App extends Component {
 	  	});
 
 	  	firebase.auth().onAuthStateChanged(async user => {
+			const that = this
 	  		const retrievedUserChoice = await AsyncStorage.getItem(userChoice);
 	  	    if (user) {
-	  	    	this.setState({
-	  	    		signedIn: true,
-	  	    		checkedSignIn: true
-	  	    	})
+				  firebase.database().ref(`infos/${user.uid}/publicInfo`).once("value")
+					.then( snapshot => {
+						const { completed} = snapshot.val()
+						if(completed){
+							that.setState({
+								signedIn: true,
+								checkedSignIn: true,
+								initialRouter: 'SignedIn'
+							})
+						} else {
+							that.setState({
+								signedIn: true,
+								checkedSignIn: true,
+								initialRouter: 'InfoRegis'
+							})
+						}
+					}).catch(error => {
+						that.setState({
+							signedIn: true,
+							checkedSignIn: true,
+							initialRouter: 'InfoRegis'
+						})	
+					})
 	  	    } else {
 	  	    	try {
 	  	    	  if (retrievedUserChoice === 'true'){
 	  	    	    this.setState({
 	  	    	    	userViewConformed: true,
 	  	    	    	checkedSignIn: true,
-	  	    			signedIn: false,
+						signedIn: false,
+						initialRouter: 'UserStack'
 	  	    	    })
 
 	  	    	  } else {
 	  	    	  	this.setState({
     	  		    	checkedSignIn: true,
-    	  				signedIn: false,
+						signedIn: false,
+						initialRouter: 'WelcomeStack'
 	  	    	  	})
 	  	    	  }
 	  	    	} catch (error) {
@@ -63,7 +87,7 @@ export default class App extends Component {
 	}
 
 	render() {
-		const {checkedSignIn, signedIn,userViewConformed} = this.state
+		const {checkedSignIn, signedIn,userViewConformed, initialRouter} = this.state
 		if (!checkedSignIn) {
 		    return (
 				<View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -72,7 +96,7 @@ export default class App extends Component {
 				)
 		}
 		
-		const Layout = PrimaryNav(signedIn, userViewConformed);
+		const Layout = PrimaryNav(initialRouter);
 		
 		return (
 		    <Layout />

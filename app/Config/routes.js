@@ -22,6 +22,11 @@ import AdditionalInfo from '../Screens/BureauApp/additionalInfo'
 
 
 // Manifest of possible screens
+const RegistrationNavigator = SwitchNavigator({
+  Signup: { screen: Signup },
+  InfoRegis: {screen:InfoRegis},
+  AdditionalInfo: {screen: AdditionalInfo},
+})
 const WelcomeStack = StackNavigator({
   WelcomeScreen: {
     screen: WelcomeScreen,
@@ -29,15 +34,6 @@ const WelcomeStack = StackNavigator({
       header: () => null
     } 
   },
-  Login: { 
-    screen: Login,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  Signup: { screen: Signup },
-  InfoRegis: {screen:InfoRegis},
-  AdditionalInfo: {screen: AdditionalInfo},
   TabNavScreen: { screen: TabNavScreen },
   Local: { screen: Local },
   MapView: { screen: MapView },
@@ -81,7 +77,7 @@ const SignedIn = StackNavigator({
   Info: { screen: Info },
 })
 
-export default PrimaryNav = (signedIn = false, userChoice = false) => {
+export default PrimaryNav = (initialRouter ="WelcomeStack") => {
   return SwitchNavigator(
     {
       SignedIn: {
@@ -92,10 +88,22 @@ export default PrimaryNav = (signedIn = false, userChoice = false) => {
       },
       UserStack:{
         screen: UserStack
-      }
+      },
+      Signup: {
+         screen: Signup 
+      },
+      InfoRegis: {
+        screen:InfoRegis
+      },
+      AdditionalInfo: {
+        screen: AdditionalInfo
+      },
+      Login: { 
+        screen: Login,
+      },
     },
     {
-      initialRouteName: signedIn ? "SignedIn" : userChoice ? "UserStack" : "WelcomeStack",
+      initialRouteName: `${initialRouter}`,
       headerMode: 'float',
       mode: 'modal',
     }

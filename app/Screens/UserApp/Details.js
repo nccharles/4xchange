@@ -79,7 +79,7 @@ export default class Details extends Component {
 
     _getCompanyProfile = async (companyId) => {
       const that = this
-      await firebase.database().ref(`/infos/${companyId}/info`)
+      await firebase.database().ref(`/infos/${companyId}/publicInfo`)
       .once('value').then(snapshot => {
         if (snapshot != null) {
           that.setState(state =>({
