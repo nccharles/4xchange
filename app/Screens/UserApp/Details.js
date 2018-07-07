@@ -147,7 +147,7 @@ export default class Details extends Component {
             <View style={styles.separator}/>
             <View style={styles.itemContainer}>
               <Text style={styles.itemTitle}>Phone:</Text>
-              <Text>{userInfo.phone}</Text>
+              <Text>{userInfo.phoneNumber}</Text>
             </View>
             <View style={styles.separator}/>
             <View style={styles.itemContainer}>

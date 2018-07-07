@@ -22,7 +22,7 @@ const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.20003
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const locOptions = { enableHighAccuracy: true, distanceInterval: 3 }
-const APIKEY = 'AIzaSyAqDLy4cmdwWQV7thAsxyXfUtB15JqgwcE'
+const APIKEY = 'AIzaSyBY98iwojUACHKNijddP76b4wQfHTPIZvQ'
 
 const coordinates = [];
 
@@ -63,16 +63,15 @@ class MapScreen extends Component {
     await firebase.database().ref('/infos/').once('value').then(snapshot => {
       const coordinates = _.map( snapshot.val(), (val, uid) =>{
           // return { latitude: val.info.latitude, longitude: val.info.longitude, uid }
-          return {...val, uid}
+          return {...val.publicInfo, uid}          
       })
       if(coordinates){
-        that.setState({
-          forexCoords:[...coordinates],
-          loading: false,
-        })
+          that.setState({
+            forexCoords:[...coordinates],
+            loading: false,
+          })
       }
     })
-    // console.log(this.state.forexCoords[0])
 
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status === 'granted') {
@@ -118,11 +117,11 @@ class MapScreen extends Component {
               return <MapView.Marker
                           onPress={() => this.props.navigation.navigate('Details',{companyId:  marker.uid})}
                           coordinate={{
-                              latitude: marker.info.latitude, 
-                              longitude: marker.info.longitude}}
+                              latitude: marker.latitude, 
+                              longitude: marker.longitude}}
                           key={key} 
                           image={LocationBank}
-                          title={marker.info.companyName}/>
+                          title={marker.companyName}/>
             })}
             <MapView.Marker coordinate={{ latitude, longitude }}
               title={"Here you are!."} pinColor={"green"} image={UserLocation} />

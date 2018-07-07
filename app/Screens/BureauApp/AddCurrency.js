@@ -52,7 +52,7 @@ const screenheight = Dimensions.get('window').height
 const initailState = {
   loading: true,
   inputedValue: 0,
-  baseCurrency: 'USD',
+  baseCurrency: 'Choose',
   initialCurrency: null,
   category: 'Buy or Sell',
   isBuying: true,
@@ -90,7 +90,7 @@ class AddCurrency extends Component {
   async componentWillMount() {
     const base = this.state.baseCurrency
     const currentUser = await firebase.auth().currentUser
-   
+   console.log(currentUser)
     this.setState({
       companyName: currentUser.displayName,
       userId: currentUser.uid
@@ -120,7 +120,7 @@ class AddCurrency extends Component {
       const { newCurrency: {currency, askPrice, bidPrice}, userId, companyName, isSubmitting} = this.state
       if( _.find(this.state.data, {currency: currency})){
          ToastAndroid.showWithGravityAndOffset(
-           `${currency} alread exist!`,
+           `${currency} already exist!`,
            ToastAndroid.LONG,
            ToastAndroid.BOTTOM,
            25,
@@ -188,7 +188,7 @@ class AddCurrency extends Component {
         })
     }
   _handleUpdateCurrency = async () => {
-    const {currentItem:{askPrice, bidPrice, uid}, userId, isSubmitting} = this.state
+    const {currentItem:{askPrice, bidPrice, uid}, userId, isSubmitting, companyName} = this.state
     const that = this
     if (isSubmitting) {
       return
@@ -202,6 +202,7 @@ class AddCurrency extends Component {
           askPrice,
           bidPrice,
           updatedAt,
+          companyName,
         })
         .then( response => {
           that.setState({
