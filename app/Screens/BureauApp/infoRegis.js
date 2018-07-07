@@ -124,8 +124,15 @@ class Signup extends Component {
             completed: true,
             isSubmitting: false,
         }).then(resp => {
-            console.log(resp)
-            that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email}) 
+            firebase.auth().currentUser.updateProfile({
+                displayName: companyName,
+                phoneNumber,
+            }).then(resp => {
+                that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email})
+            }).catch(error => {
+                console.log(error)
+            })
+             
         }).catch( error => {
             console.log(error)
         })
@@ -198,6 +205,7 @@ class Signup extends Component {
                             buttonStyle={styles.button}
                             loading={this.state.isSubmitting}
                             disabled={this.state.isSubmitting}
+                            disabledStyle={styles.button}
                             activityIndicatorStyle={{color: 'white'}}
                         />
                     </ScrollView>

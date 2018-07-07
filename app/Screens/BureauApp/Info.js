@@ -85,7 +85,6 @@ class Info extends Component {
 
     componentDidMount() {
         const { latitude, longitude } = this.state.info
-        alert('')
         if (!latitude && !longitude) {
             this._getCurrentUserLocation();
         }
@@ -306,8 +305,8 @@ class Info extends Component {
                         }
                         <Button
                             onPress={this._handleInfoSave.bind(this)}
-                            title='ADD INFO'
-                            icon={{ type: 'simple-line-icon', name: 'plus', color: '#fff' }}
+                            title='Update Info'
+                            icon={{ type: 'feather', name: 'refresh-ccw', color: '#fff' }}
                             buttonStyle={styles.button}
                         />
                     </ScrollView>

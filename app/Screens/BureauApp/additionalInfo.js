@@ -253,7 +253,7 @@ class Signup extends Component {
                                 style={styles.picker}
                                 onValueChange={(itemValue, itemIndex) => this._handleTextInput('workingDays', itemValue)}>
                                 <Picker.Item label="Monday to Friday" value="Monday to Friday" />
-                                <Picker.Item label="Sunday to Firday" value="Sunday to Friday" />
+                                <Picker.Item label="Sunday to Friday" value="Sunday to Friday" />
                                 <Picker.Item label="Monday to Saturday" value="Monday to Saturday" />
                                 <Picker.Item label="Whole week" value="Whole week" />
                             </Picker>
