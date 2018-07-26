@@ -16,18 +16,29 @@ import Signup from '../Screens/BureauApp/Signup'
 import Info from '../Screens/BureauApp/Info'
 import Agreement from '../Screens/BureauApp/agreement'
 import AddCurrency from '../Screens/BureauApp/AddCurrency'
-import InfoRegis from '../Screens/BureauApp/infoRegis'
+import InfoReg from '../Screens/BureauApp/infoRegis'
 import AdditionalInfo from '../Screens/BureauApp/additionalInfo'
 import Country from '../Screens/BureauApp/countryList'
 // import Intro from '../Screens/Intro'
 
 
 // Manifest of possible screens
+const InfoRegis = StackNavigator({
+  InfoReg:{
+    screen: InfoReg,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  Country: {
+    screen: Country,
+  }
+})
+
 const RegistrationNavigator = SwitchNavigator({
   Signup: { screen: Signup },
   InfoRegis: {screen:InfoRegis},
   AdditionalInfo: {screen: AdditionalInfo},
-  Country:{screen: Country},
 })
 const WelcomeStack = StackNavigator({
   // InfoRegis: {screen:InfoRegis},

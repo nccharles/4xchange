@@ -170,7 +170,7 @@ class InfoRegis extends Component {
                 countryName,
                 flag
             }).then(resp => {
-                that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email, countryName, flag})
+                that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email, countryName, flag, countryName,flag})
             }).catch(error => {
                 console.log(error)
             })
