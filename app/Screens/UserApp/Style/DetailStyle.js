@@ -63,4 +63,13 @@ export default StyleSheet.create({
         fontWeight: '900', 
         marginRight: 15
     },
+    flag_icon: {
+        width: screenwidth/ 8, 
+        height: screenheight /25,
+        backgroundColor: 'transparent',
+        // alignSelf: 'center',
+        // justifyContent: 'center',
+        marginTop: -2,
+        marginLeft: screenwidth/ 2.5 
+    },
 })

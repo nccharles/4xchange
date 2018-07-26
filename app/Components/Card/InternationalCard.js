@@ -22,30 +22,33 @@ class InternationalCard extends Component {
 
   render() {
     return (
-      <TouchableOpacity style={styles.parent}  onPress={this.props.onPress}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.leftRectangular} resizeMode="stretch" source={this.props.avatar} />
+      <View style={{flex: 1}} >
+        <TouchableOpacity style={styles.parent}  onPress={this.props.onPress}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.leftRectangular} resizeMode="stretch" source={this.props.avatar} />
+        </View>
+          <View style={styles.center}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>
+                {this.props.title}
+              </Text>
+            </View>
+            <View style={styles.subTitleContainer} >
+              <Text style={styles.subTitle}>
+                {this.props.subtitle}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.right} >
+            <Text style={styles.amount} >
+              {this.props.rightComponentText ? this.props.rightComponentText.toString()
+                : null
+              }
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <View style={styles.separator}/>
       </View>
-        <View style={styles.center}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>
-              {this.props.title}
-            </Text>
-          </View>
-          <View style={styles.subTitleContainer} >
-            <Text style={styles.subTitle}>
-              {this.props.subtitle}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.right} >
-          <Text style={styles.amount} >
-            {this.props.rightComponentText ? this.props.rightComponentText.toString()
-              : null
-            }
-          </Text>
-        </View>
-      </TouchableOpacity>
     );
   }
 }

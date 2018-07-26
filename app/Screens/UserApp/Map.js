@@ -22,7 +22,8 @@ const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.20003
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const locOptions = { enableHighAccuracy: true, distanceInterval: 3 }
-const APIKEY = 'AIzaSyBY98iwojUACHKNijddP76b4wQfHTPIZvQ'
+// const APIKEY = 'AIzaSyAenbry778jeWAEx23EK-5DCoB0i-4NW9g'
+const APIKEY = 'AIzaSyAKkQ1Ja2RPFawSpdEium37ytBZgaA4iAs'
 
 const coordinates = [];
 
@@ -75,7 +76,7 @@ class MapScreen extends Component {
 
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status === 'granted') {
-      await Location.setApiKey(APIKEY);
+      await Expo.Location.setApiKey(APIKEY);
       const { coords } = await Location.getCurrentPositionAsync({});
       this.setState({ coords })
     } else {

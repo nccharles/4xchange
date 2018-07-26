@@ -9,27 +9,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.snow,
   },
   parent: {
     flex: 1,
-    width: screenwidth -30,
+    width: screenwidth,
     height: screenheight /10,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    // backgroundColor: 'transparent',
     // shadowColor: '#000',
     // shadowOffset: { width: 0, height: 2 },
     // shadowOpacity: 5.0,
     // shadowRadius: 2,
-    elevation: 3,
+    // elevation: 3,
     backgroundColor: Colors.snow,
     alignSelf: 'center',
     alignItems: 'center',
     // marginVertical: 10,
-    margin: 5,
+    // margin: 5,
     // padding: 5,
-    // paddingVertical: 10,
-    borderRadius: Metrics.smallMargin,
+    paddingLeft: 5,
+    // borderRadius: Metrics.smallMargin,
     // paddingVertical: 1.5
     // justifyContent: 'center'
   },
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
     paddingHorizontal: 10,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   right: {
     height: '100%',
@@ -106,11 +106,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center'
   },
+  // separator: {
+  //   height: 1,
+  //   width: screenwidth,
+  //   backgroundColor: "#CED0CE",
+  //   // marginLeft: "14%"
+  // },
   separator: {
-    height: 1,
-    width: screenwidth,
-    backgroundColor: "#CED0CE",
-    // marginLeft: "14%"
+    flex: 1,
+    height: 1, 
+    width: screenwidth -5,
+    backgroundColor: "#CED0CE", 
+    // margin: 8
   },
 
 });

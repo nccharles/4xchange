@@ -19,7 +19,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
-        marginBottom: 20,
+        marginBottom: 10,
         // margin: 10,
         // marginHorizontal: 20
     },

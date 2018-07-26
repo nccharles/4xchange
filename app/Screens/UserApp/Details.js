@@ -3,6 +3,7 @@ import { TouchableOpacity, Dimensions, ScrollView,
   Image, View, Text,Linking,Platform, ActivityIndicator 
 } from 'react-native';
 import {Avatar} from 'react-native-elements'
+import SVGImage from 'react-native-svg-image'
 
 import styles from './Style/DetailStyle'
 // import DetailsHeader from '../../Components/Header/DetailsHeader';
@@ -55,6 +56,8 @@ export default class Details extends Component {
         longitude: '',
         companyName: '',
         email: '',
+       countryName: 'Rwanda',
+       flag: 'https://restcountries.eu/data/rwa.svg',
       },
       loading: true,
       error: false,
@@ -138,6 +141,15 @@ export default class Details extends Component {
             </View>
             <View style={styles.contactContainer}>
               <Text style={styles.contacts}>Contacts</Text>
+            </View>
+            <View style={styles.separator}/>
+            <View style={styles.itemContainer}>
+              <Text style={styles.itemTitle}>Country:</Text>
+              <Text>Rwanda</Text>
+              <SVGImage
+                style={styles.flag_icon}
+                source={{uri:userInfo.flag}}
+              />
             </View>
             <View style={styles.separator}/>
             <View style={styles.itemContainer}>

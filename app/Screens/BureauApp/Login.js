@@ -131,7 +131,7 @@ class Login extends Component {
                     <ScrollView>
                         <Input
                             placeholder='Email'
-                            leftIcon={{ type: 'simple-line-icon', name: 'user', color: Colors.snow }}
+                            leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid='transparent'
                             inputStyle={{ color: '#fff' }}

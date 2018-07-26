@@ -1,49 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Text, Image,
+  View, Text, Image,Dimensions,
   StyleSheet, TouchableOpacity
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
+import SVGImage from 'react-native-svg-image'
 
 import { Separator, styles } from '.';
+
+const screenwidth = Dimensions.get('window').width
+const screenheight = Dimensions.get('window').height
+
 
 class ListItem extends Component {
 
   static propTypes = {
     hideAvatar: PropTypes.bool,
     roundAvatar: PropTypes.bool,
-    avatar: Image.propTypes.source,
+    svgFiles: PropTypes.bool,
+    avatar: PropTypes.any,
     title: PropTypes.string,
     subtitle: PropTypes.string,
     onPress: PropTypes.func,
     rightComponentText: PropTypes.string
   }
 
-  renderAvatar = (hiden, round, source) => {
-    if (!hiden) {
-      if (round) {
-        return (
-          <Image style={styles.leftRound} resizeMethod='resize' source={source} />
-        )
-      } else {
-        return (
-          <View style={styles.imageContainer}>
-            <Image style={styles.leftRectangular} resizeMode="stretch" source={source} />
-          </View>
-        )
-      }
-    } else { }
-  };
-
   render() {
+    const{ svgFiles, avatar, onPress }=this.props
     return (
-      // <View style={styles.parent}>
-        <TouchableOpacity style={styles.parent} onPress={this.props.onPress} >
-        {this.renderAvatar(
-          this.props.hideAvatar,
-          this.props.roundAvatar, this.props.avatar
-        )}
+      <View>
+        <TouchableOpacity style={styles.parent} onPress={onPress} >
+          {svgFiles? (
+            <View style={styles.imageContainer}>
+                     <SVGImage
+                      style={{width: screenwidth/ 6, height: screenheight /17}}
+                      resizeMode="contain"
+                      source={{uri:avatar}}
+                    />
+                  </View>
+          ):(
+            <View style={styles.imageContainer}>
+             <Image style={styles.leftRectangular} resizeMode="stretch" source={avatar} />
+            </View>
+          )}
         <View style={styles.center}>
           <View style={styles.titleContainer} >
             <Text style={styles.title}>
@@ -64,14 +64,8 @@ class ListItem extends Component {
               // color="white"
               />
         </TouchableOpacity>
-        // <View style={styles.right} >
-        //   <Text style={styles.amount} >
-        //     {this.props.rightComponentText ? this.props.rightComponentText.toString()
-        //       : null
-        //     }
-        //   </Text>
-        // </View>
-      // </View>
+        <View style={styles.separator}/>
+      </View>
     );
   }
 }

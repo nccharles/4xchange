@@ -30,22 +30,28 @@ const TabNavigationScreen = TabNavigator({
         let iconName
         if(routeName === 'Local') {
           iconName = listBureaus
+          label = 'Local'
         }
         else if (routeName === 'MapView') {
           iconName = location
+          label = 'Locate'
         } 
         else if (routeName === 'International'){
             iconName = globe
+            label = 'Global'
         }
 
-        return  (<View style={{flex:1, alignSelf: 'center', justifyContent: 'center'}}>
+        return  (
+              <View style={{alignSelf: 'center', justifyContent: 'center'}}>
                 <Image 
                   source={iconName} 
                   tintColor={tintColor} 
                   resizeMode='cover' 
-                  style={{width: screenWidth/12, height: screenWidth/12}}
+                  style={{width: screenWidth/15, height: screenWidth/15, alignSelf: 'center', }}
                 />
-                </View>)
+                <Text style={{fontSize: 10, color: tintColor, textAlign: 'center'}}>{label}</Text>
+              </View>
+              )
       }
     }),
     tabBarOptions: {
@@ -59,10 +65,8 @@ const TabNavigationScreen = TabNavigator({
         justifyContent: 'center',
         alignSelf: 'center',
         elevation: 3,
-        // marginTop: 100
       }
     },  
     tabBarComponent: TabBarBottom,
-    // tabBarPosition: 'bottom'
   })
 export default TabNavigationScreen
