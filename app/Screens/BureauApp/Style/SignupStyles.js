@@ -79,5 +79,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: Colors.snow
     },
+    flag_icon: {
+        width: width/ 8, 
+        height: height /25,
+        backgroundColor: 'transparent',
+        // alignSelf: 'center',
+        // justifyContent: 'center',
+        marginTop: 7,
+        marginLeft: 12 
+    },
+    country_text: {
+        color: 'white',
+        fontWeight: 'bold',
+        position: 'absolute',
+        // marginRight: (screenwidth/ 3),
+        // marginLeft: screenwidth/ 6,
+        textAlign: 'center' 
+    },
 });
 export default styles;

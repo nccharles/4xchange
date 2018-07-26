@@ -8,13 +8,13 @@ export default StyleSheet.create({
   row: {
     flex: 1,
     alignSelf: 'center',
-    width: screenwidth -30,
-    height: screenheight /10,
-    elevation: 3,
+    width: screenwidth -5,
+    height: screenheight /7.5,
+    // elevation: 3,
     backgroundColor: Colors.snow,
     marginVertical: 10,
     borderRadius: 5,
-    flexDirection: 'row'
+    // flexDirection: 'row'
   },
   left:{
     width: 20, 
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   leftContainer: {
-    // flex: 1,
+    flex: 2.5,
   },
   leftCategory: {
     position: 'absolute',
@@ -47,7 +47,7 @@ export default StyleSheet.create({
     fontSize: 14,
     position: 'absolute',
     left: 15,
-    bottom: 20
+    top: 20
   },
   label2: {
     fontWeight: '500',
@@ -55,7 +55,12 @@ export default StyleSheet.create({
     fontSize: 14,
     position: 'absolute',
     left: 15,
-    bottom: 1
+    bottom: 21
+  },
+  icon_btn: {
+    position:"absolute",
+    bottom:0,
+    left: 30
   },
   amount: {
     fontSize: 16, 
@@ -69,7 +74,7 @@ export default StyleSheet.create({
     marginLeft: 5
   },
   rightContainer:{
-    flex: 2, 
+    flex: 4, 
     flexDirection: 'column',
     justifyContent: 'space-between', 
   },
@@ -79,26 +84,45 @@ export default StyleSheet.create({
     fontWeight:'bold', 
     position: 'absolute',
     right: 15,
+    top: 25
   },
+  flag_icon: {
+    width: screenwidth/ 12, 
+    height: screenheight /20,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    right: 15
+    // alignSelf: 'center',
+    // justifyContent: 'center',
+    // marginTop: -2,
+    // marginLeft: screenwidth/ 2.5 
+},
   equivalentContainer: {
     position: 'absolute',
     right: 15,
-    bottom: 20,
+    bottom: 15,
     flexDirection: 'row'
   },
-  
+  updated: {
+    position: 'absolute',
+    right: 15, 
+    bottom: 0, 
+    fontWeight: '500',
+    color: Colors.secondary,
+    fontSize: 12
+  },
   parent: {
     flex: 1,
     width: screenwidth -30,
     height: screenheight /10,
     flexDirection: 'row',
     backgroundColor: 'white',
-    elevation: 3,
+    // elevation: 3,
     backgroundColor: Colors.snow,
     alignSelf: 'center',
     alignItems: 'center',
     marginVertical: 5,
-    borderRadius: 5,
+    // borderRadius: 5,
   },
   imageContainer: {
     borderWidth: 0.5,
@@ -148,12 +172,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
   },
-  updated: {
-    position: 'absolute',
-    right: 15, 
-    bottom: 1.5, 
-    fontWeight: '500',
-    color: Colors.secondary,
-    fontSize: 12
-}
+  
+  separator: {
+    flex: 1,
+    height: 1, 
+    width: screenwidth -5,
+    backgroundColor: "#CED0CE", 
+    // margin: 8
+  },
+  
 });

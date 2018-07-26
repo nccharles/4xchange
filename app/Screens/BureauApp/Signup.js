@@ -83,11 +83,11 @@ class Signup extends Component {
             return
         }
         
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
 
             this.setState(state => ({
+                isSubmitting: false,
                 errs:{
-                    ...state.errs,
                     password: 'password not matching',
                 }
             }))
@@ -95,11 +95,11 @@ class Signup extends Component {
             console.log('password not matching')
             return
         } 
-        if(password.length != 6){
+        if(password.length < 6){
             this.setState(state => ({
+                isSubmitting: false,
                 errs:{
                     password: 'password must be at least 6 characters',
-                    isSubmitting: false,
                 }
             }))
             return
@@ -164,7 +164,7 @@ class Signup extends Component {
                     <ScrollView>
                         <Input
                             placeholder='Email'
-                            leftIcon={{ type: 'simple-line-icon', name: 'user', color: Colors.snow }}
+                            leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -204,7 +204,7 @@ class Signup extends Component {
                         <Button
                             onPress={this._handleSignUp.bind(this)}
                             title='Add'
-                            icon={{ type: 'material-community', name: 'account-plus-outline', color: '#fff' }}
+                            icon={{ type: 'materialIcons', name: 'add-circle-outline', color: '#fff' }}
                             buttonStyle={styles.button}
                             loading={this.state.isSubmitting}
                             activityIndicatorStyle={{color: 'white'}}

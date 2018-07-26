@@ -38,6 +38,9 @@ const initailState = {
   category: 'Buy',
   isBuying: true,
   userData: [],
+  flag: 'https://restcountries.eu/data/rwa.svg',
+  fav_icon: false,
+  bureau: null
 }
 
 class Local extends Component {
@@ -124,11 +127,11 @@ class Local extends Component {
       .orderByChild('currency')
       .equalTo(base)
       .on('value', snapshot => {
-        //console.log(snapshot)
+        // console.log(snapshot)
         const usersData = _.map( snapshot.val(), (val, uid) =>{
           return {...val, uid}
         })
-        console.log(usersData)
+        // console.log(usersData)
         that.setState({
           data: usersData,
           loading: false,
@@ -176,7 +179,7 @@ class Local extends Component {
     }
     return (
       <View style={styles.container}>
-      <View style={{marginTop: 20,}}>
+      <View style={{marginTop: 10,}}>
         <InputButton
               text='Enter Amount ...'
               onPress={() => this.props.navigation.navigate('CurrencyList', {setBaseCurrency: this.setBaseCurrency})}
@@ -233,7 +236,9 @@ class Local extends Component {
                 currency= {this.state.initialCurrency}
                 equivalent={this.state.isBuying ?  parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
                 category={this.state.category}
-                
+                source={this.state.flag}
+                iconStyle={this.state.fav_icon? 'red': 'grey'}
+                onPressIcon={()=> this.handle_fav({index, item})}
                 />
             )}
             numColumns={1}
@@ -243,6 +248,17 @@ class Local extends Component {
           />
       </View>
     );
+  }
+  handle_fav =({ item, index })=> {
+    let { data } = this.state;
+    let targetbureau = data[index];
+
+    targetbureau.fav_icon = !targetbureau.fav_icon;
+    data[index]= targetbureau
+    this.setState({ 
+      data,
+      fav_icon: data[index]
+     });
   }
 }
 

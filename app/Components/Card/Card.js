@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import SVGImage from 'react-native-svg-image'
 
 import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
 
@@ -23,30 +24,54 @@ const Card= ({
     currency,
     bidPrice,
     askPrice,
-    time
+    time,
+    onPressIcon,
+    iconStyle
 }) => (
+    <View style={{flex: 1}}>
 
-    <TouchableOpacity style={styles.row}
-                      onPress={onPress}>
-    {/* <View style={styles.left}/> */}
-        <View style={styles.wrapper}>
-            <View style={styles.leftContainer}>
-                <Text style={styles.boldLabel}>{text}</Text>
-                {/* <View style={styles.leftCategory}> */}
-                    <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
-                    <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
-                {/* </View> */}
-            </View>
-            <View style={styles.rightContainer}>
-                <Text style={styles.rightCategory}>{category}</Text>
-                <View style={styles.equivalentContainer}>
-                    <Text style={styles.amount}>{`${equivalent.toFixed(2)}`}</Text>
-                    <Text style={styles.currencyName}>{currency}</Text>
+        <View style={styles.row}>
+        
+            <View style={styles.wrapper}>
+                <View style={styles.leftContainer}>
+                <TouchableOpacity
+                style={{flex: 1}}
+                        onPress={onPress}>
+                    <Text style={styles.boldLabel}>{text}</Text>
+                        <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
+                        <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                        style={styles.icon_btn}
+                        onPress={onPressIcon}>
+                    <Ionicons
+                        name= "md-heart-outline"
+                        color= {iconStyle}
+                        size={23}
+                        // style={iconStyle}
+                    />
+                </TouchableOpacity>
                 </View>
-                <Text style={styles.updated}>Updated {time}</Text>
+                <View style={styles.rightContainer}>
+                <TouchableOpacity 
+                style={{flex: 1}}
+                        onPress={onPress}>
+                    <SVGImage
+                        style={styles.flag_icon}
+                        source={{uri:source}}
+                    />
+                    <Text style={styles.rightCategory}>{category}</Text>
+                    <View style={styles.equivalentContainer}>
+                        <Text style={styles.amount}>{`${equivalent.toFixed(2)}`}</Text>
+                        <Text style={styles.currencyName}>{currency}</Text>
+                    </View>
+                    <Text style={styles.updated}>Updated {time}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
-    </TouchableOpacity>
+        <View style={styles.separator}/>
+    </View>
 );
 
 Card.propTypes = {
@@ -58,9 +83,11 @@ Card.propTypes = {
     equivalent: PropTypes.number,
     text: PropTypes.string,
     onPress: PropTypes.func,
-    source: PropTypes.number,
+    source: PropTypes.any,
     containerStyle: PropTypes.any,
     leftViewStyle: PropTypes.any,
     currency: PropTypes.string,
+    onPressIcon: PropTypes.func,
+    iconStyle: PropTypes.string
     };
 export default Card;

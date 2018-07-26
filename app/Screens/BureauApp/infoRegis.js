@@ -4,7 +4,9 @@ import {
     KeyboardAvoidingView,
     ScrollView,
     TouchableOpacity,
-    Text
+    Text,
+    Image,
+    Dimensions
 } from 'react-native'
 import {
     Icon,
@@ -15,6 +17,7 @@ import {
   WaveIndicator,
 } from 'react-native-indicators';
 import AwesomeAlert from 'react-native-awesome-alerts'
+import SVGImage from 'react-native-svg-image'
 
 import styles from './Style/SignupStyles'
 import { Colors } from '../../Assets/Themes'
@@ -22,7 +25,10 @@ import { Colors } from '../../Assets/Themes'
 //backend things
 import * as firebase from 'firebase'
 
-class Signup extends Component {
+const screenwidth = Dimensions.get('window').width
+const screenheight = Dimensions.get('window').height
+
+class InfoRegis extends Component {
     constructor(props) {
      super(props);
      this.state = {
@@ -32,8 +38,14 @@ class Signup extends Component {
         phoneNumber: null,
         companyName: null,
        },
+       countryName: 'Rwanda',
+       countries: null,
+       flag: 'https://restcountries.eu/data/rwa.svg',
        isSubmitting: false,
        showAlert: false,
+       errs:{
+        tinNumber: null,
+    }
     //    isLoading: false,
      };
     }
@@ -111,11 +123,31 @@ class Signup extends Component {
     }
 
     _handleSignUp = async () =>{
+        const {
+            credentails: {tinNumber, licenceNumber, phoneNumber, companyName}, 
+            userId, 
+            email, 
+            errs, 
+            isSubmitting,
+            countryName,
+            flag
+        } = this.state
+        
+        if (isSubmitting) {
+            return
+        }
         const that = this
         this.setState({
             isSubmitting: true,
         })
-        const {credentails: {tinNumber, licenceNumber, phoneNumber, companyName}, userId, email} = this.state
+        if(tinNumber.length < 9){
+            this.setState({
+                isSubmitting: false,
+                errs:{
+                    tinNumber: 'Invalid tin number'
+                }
+            })
+        }
         firebase.database().ref(`infos/${userId}/businessInfo`).set({
             tinNumber,
             licenceNumber,
@@ -123,12 +155,22 @@ class Signup extends Component {
             phoneNumber,
             completed: true,
             isSubmitting: false,
+            countryName,
+            flag
         }).then(resp => {
+            that.setState({
+                errors:{
+                    tinNumber: null,
+                },
+                isSubmitting: false,
+            })
             firebase.auth().currentUser.updateProfile({
                 displayName: companyName,
                 phoneNumber,
+                countryName,
+                flag
             }).then(resp => {
-                that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email})
+                that.props.navigation.navigate('AdditionalInfo', {userId, phoneNumber, companyName, email, countryName, flag})
             }).catch(error => {
                 console.log(error)
             })
@@ -138,6 +180,23 @@ class Signup extends Component {
         })
     }
     //backend end
+
+    setCountry = async (country) => {
+        // const {baseCurrency} = country
+        this.setState({
+            countries: country,
+            countryName: country.countryName,
+            flag: country.countryFlag
+        })
+        // console.log(this.state.countries.countryName)
+    }
+    getCountry = async(setCountry)=>{
+        this.setState({
+          ...this.state,
+        })
+        this.props.navigation.navigate('Country', {setCountry: this.setCountry})
+      }
+    
 
     render() {
         return (
@@ -151,6 +210,18 @@ class Signup extends Component {
                     keyboardVerticalOffset={30}
                 >
                     <ScrollView>
+                        <TouchableOpacity 
+                            onPress={()=>this.getCountry(this.state.countries)}
+                            style={styles.button}>
+                                <SVGImage
+                                        style={styles.flag_icon}
+                                        source={{uri:this.state.flag}}
+                                    />
+                            <Text 
+                                style={styles.country_text}>
+                                {this.state.countryName}
+                            </Text>
+                        </TouchableOpacity>
                         <Input
                             placeholder='Company name'
                             leftIcon={{ type: 'material-community', name: 'city', color: Colors.snow }}
@@ -174,7 +245,8 @@ class Signup extends Component {
                             onChangeText={(input) => this._handleInput('tinNumber', input)}
                             value={this.state.credentails.tinNumber}
                         />
-                        <Input
+                        {/* <Text style={styles.texterr}>{this.state.errs.tinNumber}</Text> */}
+                        {/* <Input
                             placeholder='Licence number'
                             leftIcon={{ type: 'font-awesome', name: 'drivers-license-o', color: Colors.snow }}
                             containerStyle={styles.input}
@@ -185,7 +257,7 @@ class Signup extends Component {
                             returnKeyType={"next"}
                             onChangeText={(input) => this._handleInput('licenceNumber', input)}
                             value={this.state.credentails.licenceNumber}
-                        />
+                        /> */}
                         <Input
                             placeholder='Phone'
                             leftIcon={{ type: 'simple-line-icon', name: 'phone', color: Colors.snow }}
@@ -230,4 +302,4 @@ class Signup extends Component {
         )
     }
 }
-export default Signup;
+export default InfoRegis;

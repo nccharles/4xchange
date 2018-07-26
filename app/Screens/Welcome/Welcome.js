@@ -67,13 +67,13 @@ export default class Home extends React.Component {
                         style = {styles.button}
                         onPress = {this._handleUser.bind(this)}
                     >
-                        <Text style = {styles.buttonText}> See the bureaus around you </Text>
+                        <Text style = {styles.buttonText}> Locate Forex </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style = {styles.button}
                         onPress = {()=> this.props.navigation.navigate('Login')}
                     >
-                        <Text style = {styles.buttonText}> Continue as Bureau </Text>
+                        <Text style = {styles.buttonText}> Manage a Forex </Text>
                     </TouchableOpacity>
                 </View>
             </View>
