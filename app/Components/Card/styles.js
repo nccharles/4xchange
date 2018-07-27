@@ -37,6 +37,7 @@ export default StyleSheet.create({
   boldLabel: {
     position: 'absolute',
     left: 15,
+    top: 8,
     fontWeight: 'bold',
     fontSize: 16,
     color: Colors.charcoal,
@@ -47,7 +48,7 @@ export default StyleSheet.create({
     fontSize: 14,
     position: 'absolute',
     left: 15,
-    top: 20
+    top: 30
   },
   label2: {
     fontWeight: '500',
@@ -55,7 +56,7 @@ export default StyleSheet.create({
     fontSize: 14,
     position: 'absolute',
     left: 15,
-    bottom: 21
+    bottom: 10
   },
   icon_btn: {
     position:"absolute",
