@@ -41,7 +41,7 @@ const Card= ({
                         <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
                         <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                         style={styles.icon_btn}
                         onPress={onPressIcon}>
                     <Ionicons
@@ -50,7 +50,7 @@ const Card= ({
                         size={23}
                         // style={iconStyle}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 </View>
                 <View style={styles.rightContainer}>
                 <TouchableOpacity 

@@ -116,6 +116,7 @@ class Local extends Component {
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
   });
+  console.log(this.state.data)
   }
 
   _fetchCurrencies = async (base) => {
@@ -131,12 +132,11 @@ class Local extends Component {
         const usersData = _.map( snapshot.val(), (val, uid) =>{
           return {...val, uid}
         })
-        // console.log(usersData)
         that.setState({
           data: usersData,
           loading: false,
         })
-      }) 
+      })
     this.changeBtnBuy()
   }
   setBaseCurrency = async (currency) => {
@@ -236,7 +236,7 @@ class Local extends Component {
                 currency= {this.state.initialCurrency}
                 equivalent={this.state.isBuying ?  parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
                 category={this.state.category}
-                source={this.state.flag}
+                // source={this.state.flag}
                 iconStyle={this.state.fav_icon? 'red': 'grey'}
                 onPressIcon={()=> this.handle_fav({index, item})}
                 />
