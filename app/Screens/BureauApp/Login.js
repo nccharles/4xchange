@@ -11,7 +11,7 @@ import {
     Button
 } from 'react-native-elements'
 import {
-  WaveIndicator,
+    WaveIndicator,
 } from 'react-native-indicators';
 import styles from './Style/LoginStyles'
 
@@ -20,18 +20,18 @@ import { Colors } from '../../Assets/Themes'
 import * as firebase from 'firebase'
 class Login extends Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        credentials:{
-            email: null,
-            password: null,
-        },
-        isSubmitting: false,
-        errors:{
-            errPassword: null,
-            errEmail: null,
-        }
-      };
+        super(props);
+        this.state = {
+            credentials: {
+                email: null,
+                password: null,
+            },
+            isSubmitting: false,
+            errors: {
+                errPassword: null,
+                errEmail: null,
+            }
+        };
     }
     static navigationOptions = ({ navigation }) => {
         return {
@@ -43,18 +43,18 @@ class Login extends Component {
 
     //backend login
 
-    _handleInput = (key, value) =>{
+    _handleInput = (key, value) => {
 
-        this.setState(state =>({
-            credentials:{
+        this.setState(state => ({
+            credentials: {
                 ...state.credentials,
-                [key] : value,
+                [key]: value,
             }
         }))
     }
 
-    _handleLogin = async () =>{
-        const {credentials: {email, password}, isSubmitting} = this.state
+    _handleLogin = async () => {
+        const { credentials: { email, password }, isSubmitting } = this.state
         if (!email && !password) {
             alert('nothing was entered')
             this.setState({
@@ -68,7 +68,7 @@ class Login extends Component {
             })
         }
         this.setState({
-            errors:{
+            errors: {
                 errPassword: null,
                 errEmail: null,
             }
@@ -76,47 +76,47 @@ class Login extends Component {
         const that = this
 
         await firebase.auth().signInWithEmailAndPassword(email, password)
-        .then( user => {
-            // please pass the userId to this screen
-            that.setState({
-                errors:{
-                    errEmail: null,
-                    errPassword: null,
-                },
-                isSubmitting: false,
+            .then(user => {
+                // please pass the userId to this screen
+                that.setState({
+                    errors: {
+                        errEmail: null,
+                        errPassword: null,
+                    },
+                    isSubmitting: false,
+                })
+                that.props.navigation.navigate('SignedIn')
             })
-            that.props.navigation.navigate('SignedIn')
-        })
-        .catch(error => {
+            .catch(error => {
 
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode, errorMessage)
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode, errorMessage)
 
-          if (errorCode === 'auth/invalid-email') {
-            that.setState( state =>({
-                isSubmitting: false,
-                errors:{
-                    ...state.errors,
-                    errEmail: 'The email address is badly formatted'
+                if (errorCode === 'auth/invalid-email') {
+                    that.setState(state => ({
+                        isSubmitting: false,
+                        errors: {
+                            ...state.errors,
+                            errEmail: 'The email address is badly formatted'
+                        }
+                    }))
+
+                } else {
+
+                    that.setState(state => ({
+                        isSubmitting: false,
+                        errors: {
+                            ...state.errors,
+                            errPassword: 'Invalid email or password'
+                        }
+                    }))
                 }
-            }))
-
-          } else {
-
-            that.setState(state =>({
-                isSubmitting: false,
-                errors:{
-                    ...state.errors,
-                    errPassword: 'Invalid email or password'
-                }
-            }))
-          }
-        });
+            });
     }
 
-        //end of backend
+    //end of backend
     render() {
         return (
             <View
@@ -155,14 +155,14 @@ class Login extends Component {
                             onChangeText={(input) => this._handleInput('password', input)}
                         />
                         <Text style={styles.texterr}>{this.state.errors.errPassword}</Text>
-                            <Button
-                                onPress={this._handleLogin.bind(this)}
-                                title='LOGIN'
-                                icon={{ type: 'simple-line-icon', name: 'login', color: '#fff' }}
-                                buttonStyle={styles.button}
-                                loading={this.state.isSubmitting}
-                                activityIndicatorStyle={{color: 'white'}}
-                            />
+                        <Button
+                            onPress={this._handleLogin.bind(this)}
+                            title='LOGIN'
+                            icon={{ type: 'simple-line-icon', name: 'login', color: '#fff' }}
+                            buttonStyle={styles.button}
+                            loading={this.state.isSubmitting}
+                            activityIndicatorStyle={{ color: 'white' }}
+                        />
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={styles.text}>Don't have an account yet?</Text>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate('Agreement')}>

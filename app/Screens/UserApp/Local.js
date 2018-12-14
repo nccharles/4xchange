@@ -1,10 +1,11 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import { 
+import {
   StyleSheet, Text, View, Button, TouchableHighlight, AsyncStorage,
-  FlatList, Image, Animated,   Modal, ActivityIndicator, Dimensions,
-  TouchableOpacity, ToastAndroid } from 'react-native';
-import {Header} from 'react-native-elements'
+  FlatList, Image, Animated, Modal, ActivityIndicator, Dimensions,
+  TouchableOpacity, ToastAndroid
+} from 'react-native';
+import { Header } from 'react-native-elements'
 import { FontAwesome } from '@expo/vector-icons'
 import Moment from 'moment'
 
@@ -16,7 +17,7 @@ import CategoryBtn from '../../Components/Buttons/BtnCategory'
 import Card from '../../Components/Card/Card'
 import InputButton from '../../Components/InputButton/InputButton'
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
-import {userChoice} from '../../Config/constants'
+import { userChoice } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
@@ -45,23 +46,23 @@ const initailState = {
 
 class Local extends Component {
 
-  static navigationOptions = ({navigation})=>{
-    const {params} = navigation.state
-    return{
-        headerTitle: '4xChange',
-        headerLeft: null,
-        headerRight: (
-          <HeaderBtn 
-            onPress={() =>params.handleThis()}
-            source={logout}/>
-        ),
-        headerStyle: {
-            backgroundColor: Colors.primary,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    return {
+      headerTitle: '4xChange',
+      headerLeft: null,
+      headerRight: (
+        <HeaderBtn
+          onPress={() => params.handleThis()}
+          source={logout} />
+      ),
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
     }
   };
 
@@ -71,7 +72,7 @@ class Local extends Component {
     this.state = initailState
   };
 
-  changeBtnBuy=()=>{
+  changeBtnBuy = () => {
     this.setState({
       // buyBackgroundColor: '#3498DB',
       buyBackgroundColor: Colors.dark,
@@ -84,7 +85,7 @@ class Local extends Component {
     })
   }
 
-  changeBtnSell=()=>{
+  changeBtnSell = () => {
     this.setState({
       sellBackgroundColor: Colors.dark,
       buyBackgroundColor: 'transparent',
@@ -109,14 +110,14 @@ class Local extends Component {
     })
   }
 
-// back-end code written by Luc Dev
+  // back-end code written by Luc Dev
   async componentDidMount() {
     const base = this.state.baseCurrency
     this._fetchCurrencies(base)
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
-  });
-  console.log(this.state.data)
+    });
+    console.log(this.state.data)
   }
 
   _fetchCurrencies = async (base) => {
@@ -129,8 +130,8 @@ class Local extends Component {
       .equalTo(base)
       .on('value', snapshot => {
         // console.log(snapshot)
-        const usersData = _.map( snapshot.val(), (val, uid) =>{
-          return {...val, uid}
+        const usersData = _.map(snapshot.val(), (val, uid) => {
+          return { ...val, uid }
         })
         that.setState({
           data: usersData,
@@ -140,7 +141,7 @@ class Local extends Component {
     this.changeBtnBuy()
   }
   setBaseCurrency = async (currency) => {
-    const {baseCurrency} = currency
+    const { baseCurrency } = currency
     this.setState({
       ...initailState,
       baseCurrency: baseCurrency,
@@ -148,9 +149,9 @@ class Local extends Component {
     const base = baseCurrency
     this._fetchCurrencies(base)
   }
-  _clearChoiceCache = async () =>{
+  _clearChoiceCache = async () => {
     try {
-      await AsyncStorage.setItem(userChoice, '').then(() =>{
+      await AsyncStorage.setItem(userChoice, '').then(() => {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
@@ -161,114 +162,118 @@ class Local extends Component {
       );
     }
   }
-// end of Luc Dev codes
+  // end of Luc Dev codes
 
   keyExtractor = (item, index) => item.uid
 
   oneScreensWorth = 20
 
   render() {
-    const {inputedValue} = this.state
-    if(this.state.loading){
-      return(
+    const { inputedValue } = this.state
+    if (this.state.loading) {
+      return (
 
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator size="large" color={Colors.primary} />
         </View>
       )
     }
     return (
       <View style={styles.container}>
-      <View style={{marginTop: 10,}}>
-        <InputButton
-              text='Enter Amount ...'
-              onPress={() => this.props.navigation.navigate('CurrencyList', {setBaseCurrency: this.setBaseCurrency})}
-              buttonText={this.state.baseCurrency}
-              editable= {true}
-              keyboardType="numeric"
-              onChangeText={(value) => this._handleCurrencyInput(value)}
+        <View style={{ marginTop: 10, }}>
+          <InputButton
+            text='Enter Amount ...'
+            onPress={() => this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })}
+            buttonText={this.state.baseCurrency}
+            editable={true}
+            keyboardType="numeric"
+            onChangeText={(value) => this._handleCurrencyInput(value)}
           />
 
-           <CategoryBtn
-                onPressBuy={this.changeBtnBuy}
-                onPressSell={this.changeBtnSell}
-                btnBuyStyle={{
-                  flex: 1,
-                  backgroundColor: this.state.buyBackgroundColor,
-                  alignSelf: 'center',
-                  height: '100%',
-                  width: '100%',
-                  justifyContent: 'center',
-                  borderRadius: 2,}}
-                buyTextStyle={{
-                  color: this.state.buyTextColor,
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                  textAlign: 'center'}}
-                  btnSellStyle={{
-                    flex: 1,
-                    backgroundColor: this.state.sellBackgroundColor,
-                    alignSelf: 'center',
-                    height: '100%',
-                    width: '100%',
-                    justifyContent: 'center',
-                    borderRadius: 2,}}
-                  sellTextStyle={{
-                    color: this.state.sellTextColor,
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    textAlign: 'center'}}/>
-          </View>
-          <FlatList
-            contentContainerStyle={styles.listContent}
-            data={this.state.data}
-            extraData={this.state}
-            keyExtractor={this.keyExtractor}
-            renderItem={({ item, index }) => (
-              <Card
-                onPress={() => this.props.navigation.navigate('Details',{companyId:  item.userId})}
-                text={item.companyName}
-                text2={parseInt(item.bidPrice)}
-                bidPrice={item.bidPrice}
-                askPrice={item.askPrice}
-                baseCurrency={item.currency}
-                time={Moment(item.updatedAt).fromNow()}
-                currency= {this.state.initialCurrency}
-                equivalent={this.state.isBuying ?  parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
-                category={this.state.category}
-                // source={this.state.flag}
-                iconStyle={this.state.fav_icon? 'red': 'grey'}
-                onPressIcon={()=> this.handle_fav({index, item})}
-                />
-            )}
-            numColumns={1}
-            initialNumToRender={this.oneScreensWorth}
-            ListEmptyComponent={this.renderEmpty}
-            // ItemSeparatorComponent={this.renderSeparator}
-          />
+          <CategoryBtn
+            onPressBuy={this.changeBtnBuy}
+            onPressSell={this.changeBtnSell}
+            btnBuyStyle={{
+              flex: 1,
+              backgroundColor: this.state.buyBackgroundColor,
+              alignSelf: 'center',
+              height: '100%',
+              width: '100%',
+              justifyContent: 'center',
+              borderRadius: 2,
+            }}
+            buyTextStyle={{
+              color: this.state.buyTextColor,
+              fontSize: 16,
+              fontWeight: 'bold',
+              textAlign: 'center'
+            }}
+            btnSellStyle={{
+              flex: 1,
+              backgroundColor: this.state.sellBackgroundColor,
+              alignSelf: 'center',
+              height: '100%',
+              width: '100%',
+              justifyContent: 'center',
+              borderRadius: 2,
+            }}
+            sellTextStyle={{
+              color: this.state.sellTextColor,
+              fontSize: 16,
+              fontWeight: 'bold',
+              textAlign: 'center'
+            }} />
+        </View>
+        <FlatList
+          contentContainerStyle={styles.listContent}
+          data={this.state.data}
+          extraData={this.state}
+          keyExtractor={this.keyExtractor}
+          renderItem={({ item, index }) => (
+            <Card
+              onPress={() => this.props.navigation.navigate('Details', { companyId: item.userId })}
+              text={item.companyName}
+              text2={parseInt(item.bidPrice)}
+              bidPrice={item.bidPrice}
+              askPrice={item.askPrice}
+              baseCurrency={item.currency}
+              time={Moment(item.updatedAt).fromNow()}
+              currency={this.state.initialCurrency}
+              equivalent={this.state.isBuying ? parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
+              category={this.state.category}
+              // source={this.state.flag}
+              iconStyle={this.state.fav_icon ? 'red' : 'grey'}
+              onPressIcon={() => this.handle_fav({ index, item })}
+            />
+          )}
+          numColumns={1}
+          initialNumToRender={this.oneScreensWorth}
+          ListEmptyComponent={this.renderEmpty}
+        // ItemSeparatorComponent={this.renderSeparator}
+        />
       </View>
     );
   }
-  handle_fav =({ item, index })=> {
+  handle_fav = ({ item, index }) => {
     let { data } = this.state;
     let targetbureau = data[index];
 
     targetbureau.fav_icon = !targetbureau.fav_icon;
-    data[index]= targetbureau
-    this.setState({ 
+    data[index] = targetbureau
+    this.setState({
       data,
       fav_icon: data[index]
-     });
+    });
   }
 }
 
-Local.propType={
+Local.propType = {
   data: PropTypes.shape({
     loading: PropTypes.bool,
     error: PropTypes.object,
     allInfoBureauses: PropTypes.object,
   }).isRequired,
-  }
+}
 
 
 export default Local

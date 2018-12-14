@@ -200,7 +200,7 @@ class Signup extends Component {
         }));
       }
     } catch ({ code, message }) {
-      console.warn(code, message);
+      console.log(code, message);
     }
   };
 
@@ -284,29 +284,29 @@ class Signup extends Component {
             {Platform.OS === "ios" ? (
               <Text>IOS</Text>
             ) : (
-              <Picker
-                mode="dropdown"
-                selectedValue={workingDays}
-                style={styles.picker}
-                onValueChange={(itemValue, itemIndex) =>
-                  this._handleTextInput("workingDays", itemValue)
-                }
-              >
-                <Picker.Item
-                  label="Monday to Friday"
-                  value="Monday to Friday"
-                />
-                <Picker.Item
-                  label="Sunday to Friday"
-                  value="Sunday to Friday"
-                />
-                <Picker.Item
-                  label="Monday to Saturday"
-                  value="Monday to Saturday"
-                />
-                <Picker.Item label="Whole week" value="Whole week" />
-              </Picker>
-            )}
+                <Picker
+                  mode="dropdown"
+                  selectedValue={workingDays}
+                  style={styles.picker}
+                  onValueChange={(itemValue, itemIndex) =>
+                    this._handleTextInput("workingDays", itemValue)
+                  }
+                >
+                  <Picker.Item
+                    label="Monday to Friday"
+                    value="Monday to Friday"
+                  />
+                  <Picker.Item
+                    label="Sunday to Friday"
+                    value="Sunday to Friday"
+                  />
+                  <Picker.Item
+                    label="Monday to Saturday"
+                    value="Monday to Saturday"
+                  />
+                  <Picker.Item label="Whole week" value="Whole week" />
+                </Picker>
+              )}
             <Button
               onPress={this._handleInfoSave.bind(this)}
               title="Save"

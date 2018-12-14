@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
-import {Colors} from '../../../Assets/Themes'
+import { Colors } from '../../../Assets/Themes'
 
 const { width, height } = Dimensions.get('window');
 
@@ -27,16 +27,16 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: height * .05,
         alignSelf: 'center',
-        height: height/16,
-        width: width -50,
+        height: height / 16,
+        width: width - 50,
     },
     button: {
         backgroundColor: Colors.dark,
         marginTop: height * .05,
-        width: width -50,
-        height: height/16,
+        width: width - 50,
+        height: height / 16,
         borderRadius: 5,
-        alignContent : 'center',
+        alignContent: 'center',
         justifyContent: 'center',
         elevation: 3,
         flexDirection: 'row',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         marginLeft: width * .07,
         marginTop: 20,
     },
-    texterr:{
+    texterr: {
         color: '#fff',
         marginLeft: width * .07,
     },

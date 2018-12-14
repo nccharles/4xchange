@@ -3,14 +3,14 @@ import { Text, FlatList, View, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
 // import { SearchBar } from "react-native-elements"
 import SearchBar from 'react-native-searchbar'
-import {contains} from '../../Config/constants'
+import { contains } from '../../Config/constants'
 import _ from 'lodash'
-import {Ionicons} from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 import ListItem from '../../Components/List/ListItem'
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 
-import {currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url} from '../../Assets/resources/data';
+import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 import { Colors } from '../../Assets/Themes'
 import loupe from '../../Assets/Icons/magnifier.png'
 
@@ -19,7 +19,7 @@ const TEMP_CURRENT_CURRENCY = 'CAD';
 class CurrencyList extends Component {
 
   static navigationOptions = ({ navigation }) => {
-    const {params} = navigation.state
+    const { params } = navigation.state
     return {
       headerTitle: '4xChange',
       headerStyle: {
@@ -38,23 +38,22 @@ class CurrencyList extends Component {
       // showModal: false,
       refreshing: false,
       dataloaded: false,
-      data:[],
+      data: [],
       text: '',
       countries: []
 
     };
-  this.onRefresh = this.onRefresh.bind(this);
-  this.onEnd = this.onEnd.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
+    this.onEnd = this.onEnd.bind(this);
 
   }
- onEnd() {
-  if(this.state.dataloaded)
-  {
-   alert("hi");
-   this.setState({dataloaded:false});
+  onEnd() {
+    if (this.state.dataloaded) {
+      alert("hi");
+      this.setState({ dataloaded: false });
+    }
   }
- }
-   componentDidMount() {
+  componentDidMount() {
     this.fetchData();
   }
   fetchData() {
@@ -62,9 +61,9 @@ class CurrencyList extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-            data:responseData,  
+          data: responseData,
           dataSource: responseData,
-          loaded: true,   
+          loaded: true,
           refreshing: false,
           countries: responseData
 
@@ -73,21 +72,21 @@ class CurrencyList extends Component {
       .done();
   }
 
- onRefresh() {
+  onRefresh() {
     this.setState({
-          refreshing: true,
+      refreshing: true,
     });
 
 
-setTimeout( () => {
+    setTimeout(() => {
 
-  this.setState({
-      refreshing: false,
-      dataloaded:true,
-    });
+      this.setState({
+        refreshing: false,
+        dataloaded: true,
+      });
 
-      },200);
-      this.fetchData();
+    }, 200);
+    this.fetchData();
 
   }
 
@@ -100,14 +99,14 @@ setTimeout( () => {
       }}
     />
   keyExtractor = (item, index) => index.toString()
-  
+
   goBack = (countryName, countryFlag) => {
     // console.log(countryFlag)
     const { navigation } = this.props
     navigation.goBack();
-    navigation.state.params.setCountry({ countryName: countryName, countryFlag:countryFlag })
+    navigation.state.params.setCountry({ countryName: countryName, countryFlag: countryFlag })
   }
- 
+
   oneScreensWorth = 30
   render() {
     return (

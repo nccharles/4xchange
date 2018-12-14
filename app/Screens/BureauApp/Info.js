@@ -89,7 +89,7 @@ class Info extends Component {
             this._getCurrentUserLocation();
         }
     }
-    
+
     _handleTextInput = (key, value) => {
         this.setState(state => ({
             info: {
@@ -183,23 +183,23 @@ class Info extends Component {
     //         showAlert: false
     //     });
     // };
-    _timePicker = async (key) =>{
+    _timePicker = async (key) => {
         try {
-          const {action, hour, minute} = await TimePickerAndroid.open({
-            hour: 12,
-            minute: 0,
-            is24Hour: true, // Will display '2 PM'
-          });
-          if (action !== TimePickerAndroid.dismissedAction) {
-            this.setState(state =>({
-                info:{
-                    ...state.info,
-                    [key]: `${hour}: ${minute}`
-                }
-            }))
-          }
-        } catch ({code, message}) {
-          console.warn('Cannot open time picker', message);
+            const { action, hour, minute } = await TimePickerAndroid.open({
+                hour: 12,
+                minute: 0,
+                is24Hour: true, // Will display '2 PM'
+            });
+            if (action !== TimePickerAndroid.dismissedAction) {
+                this.setState(state => ({
+                    info: {
+                        ...state.info,
+                        [key]: `${hour}: ${minute}`
+                    }
+                }))
+            }
+        } catch ({ code, message }) {
+            console.log('Cannot open time picker', message);
         }
     }
     render() {
@@ -283,7 +283,7 @@ class Info extends Component {
                             <Icon
                                 name='calendar'
                                 type='simple-line-icon'
-                                color= {Colors.dark}
+                                color={Colors.dark}
                             />
                             <Text style={styles.label}>
                                 Working days

@@ -11,7 +11,7 @@ import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";
 import MapView from "../Screens/UserApp/Map";
 import International from "../Screens/UserApp/International";
-import Login from "../Screens/BureauApp/Login";
+import Login from "../Screens/BureauApp/Jauth";
 import Signup from "../Screens/BureauApp/Signup";
 import Info from "../Screens/BureauApp/Info";
 import Agreement from "../Screens/BureauApp/agreement";
@@ -54,7 +54,6 @@ const WelcomeStack = StackNavigator({
   MapView: { screen: MapView },
   International: { screen: International },
   CurrencyList: { screen: CurrencyList },
-  Agreement: { screen: Agreement },
   Details: {
     screen: Details,
     navigationOptions: {
@@ -93,7 +92,7 @@ const SignedIn = StackNavigator({
 });
 
 export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
-  return SwitchNavigator(
+  return StackNavigator(
     {
       SignedIn: {
         screen: SignedIn
@@ -102,7 +101,10 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
         screen: WelcomeStack
       },
       UserStack: {
-        screen: UserStack
+        screen: UserStack,
+        navigationOptions: {
+          header: () => null
+        }
       },
       Signup: {
         screen: Signup
@@ -110,6 +112,7 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
       InfoRegis: {
         screen: InfoRegis
       },
+      Agreement: { screen: Agreement },
       AdditionalInfo: {
         screen: AdditionalInfo
       },

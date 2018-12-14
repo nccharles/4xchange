@@ -8,7 +8,7 @@ import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
 
 import styles from './styles'
 
-const Card= ({
+const Card = ({
     title,
     text,
     onPress,
@@ -17,7 +17,7 @@ const Card= ({
     text2,
     text3,
     baseCurrency,
-    equivalent=0,
+    equivalent = 0,
     containerStyle,
     category,
     leftViewStyle,
@@ -28,20 +28,20 @@ const Card= ({
     onPressIcon,
     iconStyle
 }) => (
-    <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
 
-        <View style={styles.row}>
-        
-            <View style={styles.wrapper}>
-                <View style={styles.leftContainer}>
-                <TouchableOpacity
-                style={{flex: 1}}
-                        onPress={onPress}>
-                    <Text style={styles.boldLabel}>{text}</Text>
-                        <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
-                        <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
-                </TouchableOpacity>
-                {/* <TouchableOpacity
+            <View style={styles.row}>
+
+                <View style={styles.wrapper}>
+                    <View style={styles.leftContainer}>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={onPress}>
+                            <Text style={styles.boldLabel}>{text}</Text>
+                            <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
+                            <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
+                        </TouchableOpacity>
+                        {/* <TouchableOpacity
                         style={styles.icon_btn}
                         onPress={onPressIcon}>
                     <Ionicons
@@ -51,28 +51,28 @@ const Card= ({
                         // style={iconStyle}
                     />
                 </TouchableOpacity> */}
-                </View>
-                <View style={styles.rightContainer}>
-                <TouchableOpacity 
-                style={{flex: 1}}
-                        onPress={onPress}>
-                    <SVGImage
-                        style={styles.flag_icon}
-                        source={{uri:source}}
-                    />
-                    <Text style={styles.rightCategory}>{category}</Text>
-                    <View style={styles.equivalentContainer}>
-                        <Text style={styles.amount}>{`${equivalent.toFixed(2)}`}</Text>
-                        <Text style={styles.currencyName}>{currency}</Text>
                     </View>
-                    <Text style={styles.updated}>Updated {time}</Text>
-                    </TouchableOpacity>
+                    <View style={styles.rightContainer}>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            onPress={onPress}>
+                            {/* <SVGImage
+                                style={styles.flag_icon}
+                                source={{ uri: source }}
+                            /> */}
+                            <Text style={styles.rightCategory}>{category}</Text>
+                            <View style={styles.equivalentContainer}>
+                                <Text style={styles.amount}>{`${equivalent.toFixed(2)}`}</Text>
+                                <Text style={styles.currencyName}>{currency}</Text>
+                            </View>
+                            <Text style={styles.updated}>Updated {time}</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
+            <View style={styles.separator} />
         </View>
-        <View style={styles.separator}/>
-    </View>
-);
+    );
 
 Card.propTypes = {
     title: PropTypes.string,
@@ -83,11 +83,11 @@ Card.propTypes = {
     equivalent: PropTypes.number,
     text: PropTypes.string,
     onPress: PropTypes.func,
-    source: PropTypes.any,
+    // source: PropTypes.any,
     containerStyle: PropTypes.any,
     leftViewStyle: PropTypes.any,
     currency: PropTypes.string,
     onPressIcon: PropTypes.func,
     iconStyle: PropTypes.string
-    };
+};
 export default Card;
