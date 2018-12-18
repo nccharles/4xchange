@@ -120,16 +120,13 @@ class Local extends Component {
     console.log(this.state.data)
   }
 
-  _fetchCurrencies = async (base) => {
+  _fetchCurrencies = async () => {
     this.setState({
       loading: true
     })
     const that = this
-    await firebase.database().ref(`/currencies`)
-      .orderByChild('currency')
-      .equalTo(base)
+    firebase.database().ref(`/currencies/250784603404`)
       .on('value', snapshot => {
-        // console.log(snapshot)
         const usersData = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
         })

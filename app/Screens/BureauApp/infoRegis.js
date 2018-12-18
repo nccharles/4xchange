@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   Text,
   Image,
-  Dimensions
+  Dimensions, AsyncStorage
+
 } from "react-native";
 import { Icon, Button, Input } from "react-native-elements";
 import { WaveIndicator } from "react-native-indicators";
 import AwesomeAlert from "react-native-awesome-alerts";
 import SVGImage from "react-native-svg-image";
-
+import { userPhone } from '../../Config/constants'
 import styles from "./Style/SignupStyles";
 import { Colors } from "../../Assets/Themes";
 
@@ -29,7 +30,7 @@ class InfoRegis extends Component {
       credentails: {
         tinNumber: null,
         licenceNumber: null,
-        phoneNumber: null,
+        email: null,
         companyName: null
       },
       countryName: "Rwanda",
@@ -61,19 +62,16 @@ class InfoRegis extends Component {
   //luc's backend things
 
   async componentDidMount() {
-    const currentUser = firebase.auth().currentUser;
-    const { uid, email } = currentUser;
     this.setState({
       showAlert: true,
-      userId: uid,
-      email
+      userPhone: await AsyncStorage.getItem(userPhone)
     });
   }
   _queryExistingRegInfo = () => {
-    const { userId } = this.state;
+    const { userPhone } = this.state;
     firebase
       .database()
-      .ref(`infos/${userId}/businessInfo`)
+      .ref(`/infos/${userPhone}/businessInfo`)
       .once("value")
       .then(sanpshot => {
         this.setState({
@@ -84,7 +82,7 @@ class InfoRegis extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.message);
       });
   };
   _getCurrentUserLocation = async () => {
@@ -121,9 +119,8 @@ class InfoRegis extends Component {
 
   _handleSignUp = async () => {
     const {
-      credentails: { tinNumber, licenceNumber, phoneNumber, companyName },
-      userId,
-      email,
+      credentails: { tinNumber, licenceNumber, email, companyName },
+      userPhone,
       errs,
       isSubmitting,
       countryName,
@@ -147,12 +144,12 @@ class InfoRegis extends Component {
     }
     firebase
       .database()
-      .ref(`infos/${userId}/businessInfo`)
+      .ref(`/infos/${userPhone}/businessInfo`)
       .set({
         tinNumber,
         licenceNumber,
         companyName,
-        phoneNumber,
+        email,
         completed: true,
         isSubmitting: false,
         countryName,
@@ -166,19 +163,18 @@ class InfoRegis extends Component {
           isSubmitting: false
         });
         firebase
-          .auth()
-          .currentUser.updateProfile({
+          .database()
+          .ref(`/infos/${userPhone}/businessInfo`).update({
             displayName: companyName,
-            phoneNumber,
+            email,
             countryName,
             flag
           })
           .then(resp => {
             that.props.navigation.navigate("AdditionalInfo", {
-              userId,
-              phoneNumber,
-              companyName,
+              userPhone,
               email,
+              companyName,
               countryName,
               flag
             });
@@ -279,19 +275,17 @@ class InfoRegis extends Component {
                             value={this.state.credentails.licenceNumber}
                         /> */}
             <Input
-              placeholder="Phone"
-              leftIcon={{
-                type: "simple-line-icon",
-                name: "phone",
-                color: Colors.snow
-              }}
+              placeholder='Email'
+              leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
               containerStyle={styles.input}
-              underlineColorAndroid={"transparent"}
+              underlineColorAndroid={'transparent'}
               inputStyle={styles.inputStyle}
+              autoCapitalize='none'
+              keyboardType="email-address"
+              autoCorrect={false}
               returnKeyType={"next"}
-              keyboardType="numeric"
-              onChangeText={value => this._handleInput("phoneNumber", value)}
-              value={this.state.credentails.phoneNumber}
+              onChangeText={(input) => this._handleInput('email', input)}
+              value={this.state.credentails.email}
               editable={true}
             />
             <Button

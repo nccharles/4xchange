@@ -17,7 +17,6 @@ import { Icon, Button, Input } from "react-native-elements";
 import { WaveIndicator } from "react-native-indicators";
 import AwesomeAlert from "react-native-awesome-alerts";
 import DateTimePicker from "react-native-modal-datetime-picker";
-
 import styles from "./Style/SignupStyles";
 import { Colors } from "../../Assets/Themes";
 import TimePicker from "../../Components/TimePicker";
@@ -44,7 +43,7 @@ class Signup extends Component {
         countryName: "",
         flag: ""
       },
-      userId: null,
+      userPhone: null,
       errorMessage: null,
       infoId: null,
       loading: true,
@@ -62,8 +61,7 @@ class Signup extends Component {
 
   componentDidMount() {
     const {
-      userId,
-      phoneNumber,
+      userPhone,
       email,
       companyName,
       countryName,
@@ -71,10 +69,9 @@ class Signup extends Component {
     } = this.props.navigation.state.params;
     this.setState({
       showAlert: true,
-      userId,
+      userPhone,
       info: {
         ...this.state.info,
-        phoneNumber,
         email,
         companyName,
         countryName,
@@ -124,7 +121,7 @@ class Signup extends Component {
     const {
       info: {
         address,
-        phoneNumber,
+
         closeAt,
         openAt,
         workingDays,
@@ -135,7 +132,7 @@ class Signup extends Component {
         countryName,
         flag
       },
-      userId,
+      userPhone,
       isSubmitting
     } = this.state;
     if (isSubmitting) {
@@ -147,10 +144,10 @@ class Signup extends Component {
     const that = this;
     await firebase
       .database()
-      .ref(`/infos/${userId}/publicInfo`)
+      .ref(`/infos/${userPhone}/publicInfo`)
       .set({
         address,
-        phoneNumber,
+
         closeAt,
         openAt,
         workingDays,

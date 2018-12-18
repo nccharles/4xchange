@@ -15,11 +15,11 @@ import {
   Modal,
   TextInput,
   YellowBox,
+  AsyncStorage,
   ToastAndroid
 } from 'react-native';
 import { Feather, Ionicons } from '@expo/vector-icons'
 import Moment from 'moment'
-
 import { Colors } from '../../Assets/Themes'
 import logout from '../../Assets/Icons/logout.png'
 import user from '../../Assets/Icons/user.png'
@@ -39,6 +39,7 @@ import styles from './Style/AddCurrencyStyle'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
+import { userPhone } from '../../Config/constants';
 YellowBox.ignoreWarnings(['Setting a timer']);
 const _console = _.clone(console);
 console.log = message => {
@@ -63,8 +64,8 @@ const initailState = {
   currentItem: {
     askPrice: null,
     bidPrice: null,
-    uid: null,
     Currency: null,
+    uid: null,
   },
   error: null,
   isSubmitting: false,
@@ -78,7 +79,7 @@ class AddCurrency extends Component {
       ...initailState,
       data: null,
       isLoading: true,
-      userId: null,
+      userPhone: null,
       companyName: null,
       newCurrency: {
         currency: null,
@@ -90,23 +91,22 @@ class AddCurrency extends Component {
 
   async componentWillMount() {
     const base = this.state.baseCurrency
-    const currentUser = await firebase.auth().currentUser
+    const currentUser = await AsyncStorage.getItem(userPhone)
     console.log(currentUser)
     this.setState({
-      companyName: currentUser.displayName,
-      userId: currentUser.uid
+      // companyName: currentUser.infos.businessInfo.displayName,
+      companyName: "KUKU",
+      userPhone: currentUser
     })
     this._getUserCurrencies()
   }
 
   //backend start
   _getUserCurrencies = async () => {
-    const { userId } = this.state
+    const { userPhone } = this.state
     const that = this
 
-    firebase.database().ref(`/currencies`)
-      .orderByChild('userId')
-      .equalTo(userId)
+    firebase.database().ref(`/currencies/${userPhone}`)
       .on('value', snapshot => {
         const currencies = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
@@ -118,10 +118,10 @@ class AddCurrency extends Component {
       })
   }
   _handleSaveCurrency = async () => {
-    const { newCurrency: { currency, askPrice, bidPrice }, userId, companyName, isSubmitting } = this.state
+    const { newCurrency: { currency, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
     if (_.find(this.state.data, { currency: currency })) {
       ToastAndroid.showWithGravityAndOffset(
-        `${currency} already exist!`,
+        `${currency} already exist!!!`,
         ToastAndroid.LONG,
         ToastAndroid.BOTTOM,
         25,
@@ -144,8 +144,8 @@ class AddCurrency extends Component {
     this.setState({
       isSubmitting: true
     })
-    //console.log(baseCurrency, inputedValue, userId)
-    if (!userId) {
+    //console.log(baseCurrency, inputedValue, userPhone)
+    if (!userPhone) {
       return
     }
     if (!currency || !askPrice || !bidPrice) {
@@ -157,13 +157,13 @@ class AddCurrency extends Component {
     }
     const updatedAt = new Date()
     const that = this
-    await firebase.database().ref(`/currencies`)
+    await firebase.database().ref(`/currencies/${userPhone}`)
       .push({
         currency,
         askPrice,
         bidPrice,
         companyName,
-        userId,
+        userPhone,
         updatedAt,
       })
 
@@ -189,7 +189,7 @@ class AddCurrency extends Component {
       })
   }
   _handleUpdateCurrency = async () => {
-    const { currentItem: { askPrice, bidPrice, uid }, userId, isSubmitting, companyName } = this.state
+    const { currentItem: { askPrice, bidPrice, uid }, userPhone, isSubmitting, companyName } = this.state
     const that = this
     if (isSubmitting) {
       return
@@ -198,7 +198,7 @@ class AddCurrency extends Component {
       isSubmitting: true
     })
     const updatedAt = new Date()
-    await firebase.database().ref(`/currencies/${uid}`)
+    await firebase.database().ref(`/currencies/${userPhone}${uid}`)
       .update({
         askPrice,
         bidPrice,
@@ -222,14 +222,18 @@ class AddCurrency extends Component {
       })
   }
 
-  _handleSignOut = () => {
-    //this.props.navigation.navigate('Info')
-    const that = this
-    firebase.auth().signOut().then(function () {
-      that.props.navigation.navigate('SignedOut')
-    }).catch(function (error) {
-      console.log(error)
-    });
+  _handleSignOut = async () => {
+    try {
+      await AsyncStorage.setItem(userPhone, '').then(() => {
+        this.props.navigation.navigate('WelcomeScreen')
+      });
+    } catch (error) {
+      ToastAndroid.showWithGravity(
+        error.message,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM
+      );
+    }
   }
   //backend ends
 
@@ -256,6 +260,7 @@ class AddCurrency extends Component {
         bidPrice: item.bidPrice,
         uid: item.uid,
         currency: item.currency
+
       }
     });
   };
@@ -267,7 +272,7 @@ class AddCurrency extends Component {
   };
 
   handleDelete = () => {
-    const { userId, currentItem, isSubmitting } = this.state
+    const { userPhone, currentItem, isSubmitting } = this.state
     const that = this
     if (isSubmitting) {
       return
@@ -275,7 +280,7 @@ class AddCurrency extends Component {
     this.setState({
       isSubmitting: true
     })
-    firebase.database().ref(`/currencies/${currentItem.uid}`)
+    firebase.database().ref(`currencies/${userPhone}/${currentItem.uid}`)
       .set(null)
       .then(response => {
         ToastAndroid.showWithGravityAndOffset(

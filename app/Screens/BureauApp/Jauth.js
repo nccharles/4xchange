@@ -165,12 +165,12 @@ export default class Phone extends Component {
                         console.log('Code:' + this.state.confirm)
                         console.log('Phone:' + await AsyncStorage.getItem(userPhone))
                         this.refs.form.refs.textInput.setNativeProps({ text: '' });
-                        const inserted = await firebase
-                            .database()
-                            .ref(`/${this.state.country.callingCode + this.state.Phone}`)
-                            .update({
-                                userCode: this.state.Code
-                            });
+                        // const inserted = await firebase
+                        //     .database()
+                        //     .ref(`/${this.state.country.callingCode + this.state.Phone}`)
+                        //     .update({
+                        //         userCode: this.state.Code
+                        //     });
                         setTimeout(() => {
                             // Alert.alert('Sent!', "We've sent you a verification code", [{
                             //     text: 'OK',
