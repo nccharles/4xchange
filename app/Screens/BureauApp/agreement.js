@@ -263,7 +263,7 @@ export default class Agreement extends Component {
           <View style={{ flexDirection: 'row' }}>
             <Button
               onPress={() => this.props.navigation.navigate('Signup')}
-              title='Go to Signup'
+              title='Next'
               buttonStyle={styles.button}
               disabled={!this.state.checked}
             />

@@ -10,13 +10,21 @@ import {
     Dimensions,
     ScrollView,
     Platform,
-    Alert
+    AsyncStorage,
+    Alert,
+    YellowBox,
+    ToastAndroid
 } from 'react-native';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
 import { Colors } from '../../Assets/Themes'
+import { userPhone } from '../../Config/constants'
+//backend imports 
+import * as firebase from 'firebase'
+import _ from 'lodash'
+//back end done
 const MAX_LENGTH_CODE = 6;
 const MAX_LENGTH_NUMBER = 9;
 const { width, height } = Dimensions.get('window');
@@ -124,8 +132,17 @@ export default class Phone extends Component {
         }
     };
     _getCode = () => {
+        if (this.state.Phone.length !== MAX_LENGTH_NUMBER) {
+            ToastAndroid.showWithGravity(
+                'Please add a valid number',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+            return;
+        }
+
         this.setState({ spinner: true });
-        fetch('http://192.168.1.75/4exchange/auth.php', {
+        fetch('http://192.168.1.75/4exchange/Auth', {
             method: 'POST',
             headers:
                 {
@@ -136,20 +153,46 @@ export default class Phone extends Component {
                 Phone: this.state.country.callingCode + this.state.Phone,
                 Code: this.state.Code
             })
-        }).then((response) => response.json()).then((responseJsonFromServer) => {
+        }).then((response) => response.json()).then(async (responseJsonFromServer) => {
             this.setState({
                 spinner: false,
                 enterCode: true,
                 confirm: this.state.Code
             });
-            console.log('Code:' + this.state.confirm)
-            this.refs.form.refs.textInput.setNativeProps({ text: '' });
-            setTimeout(() => {
-                Alert.alert('Sent!', "We've sent you a verification code", [{
-                    text: 'OK',
-                    onPress: () => this.refs.form.refs.textInput.focus()
-                }]);
-            }, 100);
+            try {
+                await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
+                    .then(async () => {
+                        console.log('Code:' + this.state.confirm)
+                        console.log('Phone:' + await AsyncStorage.getItem(userPhone))
+                        this.refs.form.refs.textInput.setNativeProps({ text: '' });
+                        const inserted = await firebase
+                            .database()
+                            .ref(`/${this.state.country.callingCode + this.state.Phone}`)
+                            .update({
+                                userCode: this.state.Code
+                            });
+                        setTimeout(() => {
+                            // Alert.alert('Sent!', "We've sent you a verification code", [{
+                            //     text: 'OK',
+                            //     onPress: () => this.refs.form.refs.textInput.focus()
+                            // }]);
+                            ToastAndroid.showWithGravity(
+                                "Sent!: We've sent you a verification code",
+                                ToastAndroid.LONG,
+                                ToastAndroid.BOTTOM
+                            );
+                            () => this.refs.form.refs.textInput.focus()
+                        }, 100);
+                    })
+            } catch (error) {
+                console.log(error.message)
+                ToastAndroid.showWithGravity(
+                    error.message,
+                    ToastAndroid.SHORT,
+                    ToastAndroid.BOTTOM
+                );
+            }
+
         }).catch((error) => {
             console.log(error.message);
             this.setState({ spinner: false });
@@ -169,7 +212,7 @@ export default class Phone extends Component {
                     this.refs.form.refs.textInput.blur();
                     this.setState({ spinner: false });
                     setTimeout(() => {
-                        Alert.alert('Mismatch!', 'You have entered invalid Code');
+                        Alert.alert('Warning!', 'You have entered invalid Code');
                     }, 100);
                 } else {
                     this.refs.form.refs.textInput.blur();

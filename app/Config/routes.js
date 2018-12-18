@@ -61,18 +61,12 @@ const WelcomeStack = StackNavigator({
     }
   }
 });
-const UserStack = StackNavigator({
+const UserStack = SwitchNavigator({
   TabNavScreen: { screen: TabNavScreen },
   Local: { screen: Local },
   MapView: { screen: MapView },
   International: { screen: International },
-  CurrencyList: { screen: CurrencyList },
-  Details: {
-    screen: Details,
-    navigationOptions: {
-      header: () => null
-    }
-  },
+
   WelcomeScreen: {
     screen: WelcomeScreen,
     navigationOptions: {
@@ -97,14 +91,12 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
       SignedIn: {
         screen: SignedIn
       },
+      CurrencyList: { screen: CurrencyList },
       WelcomeStack: {
         screen: WelcomeStack
       },
       UserStack: {
         screen: UserStack,
-        navigationOptions: {
-          header: () => null
-        }
       },
       Signup: {
         screen: Signup
@@ -115,6 +107,12 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
       Agreement: { screen: Agreement },
       AdditionalInfo: {
         screen: AdditionalInfo
+      },
+      Details: {
+        screen: Details,
+        navigationOptions: {
+          header: () => null
+        }
       },
       Login: {
         screen: Login

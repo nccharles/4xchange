@@ -12,7 +12,7 @@ import {
     Input
 } from 'react-native-elements'
 import {
-  WaveIndicator,
+    WaveIndicator,
 } from 'react-native-indicators';
 
 import styles from './Style/SignupStyles'
@@ -23,21 +23,21 @@ import * as firebase from 'firebase'
 
 class Signup extends Component {
     constructor(props) {
-     super(props);
-     this.state = {
-       credentails: {
-         email: null,
-         password: null,
-         confirmPassword: null,
-         companyName: null,
-       },
-       isSubmitting: false,
-    //    isLoading: false,
-       errs:{
-           password: null,
-           email: null,
-       }
-     };
+        super(props);
+        this.state = {
+            credentails: {
+                email: null,
+                password: null,
+                confirmPassword: null,
+                companyName: null,
+            },
+            isSubmitting: false,
+            //    isLoading: false,
+            errs: {
+                password: null,
+                email: null,
+            }
+        };
     }
     static navigationOptions = ({ navigation }) => {
         return {
@@ -50,27 +50,27 @@ class Signup extends Component {
     //luc's backend things
 
     componentDidMount() {
-      const currentUser = firebase.auth().currentUser
+        const currentUser = firebase.auth().currentUser
     }
 
-    _handleInput = (key, value) =>{
-        this.setState(state =>({
-            credentails:{
+    _handleInput = (key, value) => {
+        this.setState(state => ({
+            credentails: {
                 ...state.credentails,
                 [key]: value,
             }
         }))
     }
 
-    _handleSignUp = async () =>{
+    _handleSignUp = async () => {
         // console.log(this.state.credentails)
-        const {credentails: {email, password, confirmPassword, companyName}, isSubmitting} = this.state
+        const { credentails: { email, password, confirmPassword, companyName }, isSubmitting } = this.state
         if (isSubmitting) {
             return
         }
         this.setState({
             isSubmitting: true,
-            errors:{
+            errors: {
                 password: null,
                 email: null,
             }
@@ -82,35 +82,33 @@ class Signup extends Component {
             })
             return
         }
-        
+
         if (password !== confirmPassword) {
 
             this.setState(state => ({
                 isSubmitting: false,
-                errs:{
+                errs: {
                     password: 'password not matching',
                 }
             }))
 
             console.log('password not matching')
             return
-        } 
-        if(password.length < 6){
+        }
+        if (password.length < 6) {
             this.setState(state => ({
                 isSubmitting: false,
-                errs:{
+                errs: {
                     password: 'password must be at least 6 characters',
                 }
             }))
             return
         }
-
-
         const atSign = email.indexOf('@')
 
         if (atSign < 1) {
             this.setState(state => ({
-                errs:{
+                errs: {
                     ...state.errs,
                     email: 'Invalid email',
                     isSubmitting: false,
@@ -122,31 +120,31 @@ class Signup extends Component {
         const that = this
 
         await firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then( user => {
+            .then(user => {
 
-            that.setState({
-                errors:{
-                    password: null,
-                    email: null,
-                },
-                isSubmitting: false,
+                that.setState({
+                    errors: {
+                        password: null,
+                        email: null,
+                    },
+                    isSubmitting: false,
+                })
+
+                const currentUser = firebase.auth().currentUser;
+
+                currentUser.updateProfile({
+                    displayName: '',
+                    photoURL: "https://example.com/jane-q-user/profile.jpg"
+                }).then(function () {
+                    that.props.navigation.navigate('InfoRegis', { userId: currentUser.uid, email: currentUser.email })
+                }).catch(function (error) {
+                    // console.log(error)
+                });
             })
-
-           const currentUser = firebase.auth().currentUser;
-
-           currentUser.updateProfile({
-             displayName: '',
-             photoURL: "https://example.com/jane-q-user/profile.jpg"
-           }).then(function() {
-             that.props.navigation.navigate('InfoRegis', {userId: currentUser.uid, email: currentUser.email})
-           }).catch(function(error) {
+            .catch(function (error) {
                 // console.log(error)
-           });
-        })
-        .catch(function(error) {
-            // console.log(error)
-            return   
-        });
+                return
+            });
     }
     //backend end
 
@@ -207,7 +205,7 @@ class Signup extends Component {
                             icon={{ type: 'materialIcons', name: 'add-circle-outline', color: '#fff' }}
                             buttonStyle={styles.button}
                             loading={this.state.isSubmitting}
-                            activityIndicatorStyle={{color: 'white'}}
+                            activityIndicatorStyle={{ color: 'white' }}
                         />
                     </ScrollView>
                 </KeyboardAvoidingView>
