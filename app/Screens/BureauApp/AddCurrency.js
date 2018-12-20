@@ -106,7 +106,9 @@ class AddCurrency extends Component {
     const { userPhone } = this.state
     const that = this
 
-    firebase.database().ref(`/currencies/${userPhone}`)
+    firebase.database().ref(`/currencies`)
+      .orderByChild(`userPhone`)
+      .equalTo(userPhone)
       .on('value', snapshot => {
         const currencies = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
@@ -157,7 +159,7 @@ class AddCurrency extends Component {
     }
     const updatedAt = new Date()
     const that = this
-    await firebase.database().ref(`/currencies/${userPhone}`)
+    await firebase.database().ref(`/currencies`)
       .push({
         currency,
         askPrice,
@@ -198,7 +200,7 @@ class AddCurrency extends Component {
       isSubmitting: true
     })
     const updatedAt = new Date()
-    await firebase.database().ref(`/currencies/${userPhone}${uid}`)
+    await firebase.database().ref(`/currencies/${uid}`)
       .update({
         askPrice,
         bidPrice,
@@ -280,7 +282,7 @@ class AddCurrency extends Component {
     this.setState({
       isSubmitting: true
     })
-    firebase.database().ref(`currencies/${userPhone}/${currentItem.uid}`)
+    firebase.database().ref(`currencies/${currentItem.uid}`)
       .set(null)
       .then(response => {
         ToastAndroid.showWithGravityAndOffset(

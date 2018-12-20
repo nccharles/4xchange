@@ -10,6 +10,7 @@ import {
     Picker,
     PickerIOS,
     ToastAndroid,
+    AsyncStorage,
     TimePickerAndroid
 } from 'react-native'
 import {
@@ -29,10 +30,10 @@ import TimePicker from '../../Components/TimePicker'
 import open from '../../Assets/Icons/open-sign.png'
 import close from '../../Assets/Icons/closed.png'
 import { Colors } from '../../Assets/Themes'
-
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
+import { userPhone } from '../../Config/constants';
 class Info extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
@@ -71,7 +72,7 @@ class Info extends Component {
     };
     //backend codes
     async componentWillMount() {
-        const { uid, displayName, email } = await firebase.auth().currentUser
+        const userPhone = AsyncStorage.getItem(userPhone)
         this.setState(state => ({
             info: {
                 ...state.info,
@@ -99,9 +100,8 @@ class Info extends Component {
         }))
     }
     _getUserInfo = async () => {
-        const { userId } = this.state
         const that = this
-        await firebase.database().ref(`/infos/${userId}/publicInfo`).on('value', snapshot => {
+        await firebase.database().ref(`/infos/${userPhone}/publicInfo`).on('value', snapshot => {
             //console.log(snapshot)
             if (snapshot != null) {
                 that.setState(state => ({
@@ -145,7 +145,7 @@ class Info extends Component {
             isSubmitting: true
         })
         const that = this
-        await firebase.database().ref(`/infos/${userId}/publicInfo`)
+        await firebase.database().ref(`/infos/${userPhone}/publicInfo`)
             .set({
                 address,
                 phoneNumber,

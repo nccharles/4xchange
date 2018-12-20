@@ -142,7 +142,7 @@ export default class Phone extends Component {
         }
 
         this.setState({ spinner: true });
-        fetch('http://192.168.1.75/4exchange/Auth', {
+        fetch('http://192.168.43.112/4exchange/Auth', {
             method: 'POST',
             headers:
                 {

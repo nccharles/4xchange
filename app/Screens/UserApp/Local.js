@@ -125,7 +125,7 @@ class Local extends Component {
       loading: true
     })
     const that = this
-    firebase.database().ref(`/currencies/250784603404`)
+    firebase.database().ref(`/currencies`)
       .on('value', snapshot => {
         const usersData = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
@@ -228,7 +228,7 @@ class Local extends Component {
           keyExtractor={this.keyExtractor}
           renderItem={({ item, index }) => (
             <Card
-              onPress={() => this.props.navigation.navigate('Details', { companyId: item.userId })}
+              onPress={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
               text={item.companyName}
               text2={parseInt(item.bidPrice)}
               bidPrice={item.bidPrice}
