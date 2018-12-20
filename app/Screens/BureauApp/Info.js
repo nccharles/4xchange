@@ -53,17 +53,16 @@ class Info extends Component {
         this.state = {
             // showAlert: false,
             info: {
-                phoneNumber: '',
-                address: '',
-                openAt: '',
-                closeAt: '',
-                workingDays: '',
+                address: null,
+                openAt: null,
+                closeAt: null,
+                workingDays: null,
                 latitude: null,
                 longitude: null,
-                companyName: '',
-                email: '',
+                companyName: null,
+                email: null,
             },
-            userId: null,
+            phone: null,
             errorMessage: null,
             infoId: null,
             loading: true,
@@ -72,15 +71,11 @@ class Info extends Component {
     };
     //backend codes
     async componentWillMount() {
-        const userPhone = AsyncStorage.getItem(userPhone)
-        this.setState(state => ({
-            info: {
-                ...state.info,
-                companyName: displayName,
-                email: email,
-            },
-            userId: uid,
-        }))
+        const Phone = await AsyncStorage.getItem(userPhone)
+        console.log(Phone)
+        this.setState({
+            phone: Phone,
+        })
         this._getUserInfo()
     }
 
@@ -100,18 +95,21 @@ class Info extends Component {
         }))
     }
     _getUserInfo = async () => {
-        const that = this
-        await firebase.database().ref(`/infos/${userPhone}/publicInfo`).on('value', snapshot => {
-            //console.log(snapshot)
-            if (snapshot != null) {
-                that.setState(state => ({
-                    info: {
-                        ...state.info,
-                        ...snapshot.val()
-                    },
-                }))
-            }
-        });
+        await firebase.database().ref(`/infos/${this.state.phone}/publicInfo`)
+            .once("value")
+            .then(snapshot => {
+                try {
+                    this.setState({
+                        info: {
+                            ...this.state.info,
+                            ...snapshot.val()
+                        },
+                    })
+                } catch (error) {
+                    console.log(error.message);
+                }
+
+            });
     }
     _getCurrentUserLocation = async () => {
         const { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -137,18 +135,17 @@ class Info extends Component {
     }
 
     _handleInfoSave = async () => {
-        const { info: { address, phoneNumber, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, userId, infoId, isSubmitting } = this.state
+        const { info: { address, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, infoId, isSubmitting } = this.state
         if (isSubmitting) {
             return
         }
         this.setState({
             isSubmitting: true
         })
-        const that = this
-        await firebase.database().ref(`/infos/${userPhone}/publicInfo`)
+        await firebase.database().ref(`/infos/${this.state.phone}/publicInfo`)
             .set({
                 address,
-                phoneNumber,
+
                 closeAt,
                 openAt,
                 workingDays,
@@ -158,7 +155,7 @@ class Info extends Component {
                 longitude,
             })
             .then(response => {
-                that.setState({
+                this.setState({
                     isSubmitting: false,
                 })
                 ToastAndroid.showWithGravityAndOffset(
@@ -168,11 +165,11 @@ class Info extends Component {
                     25,
                     50
                 );
-                that.props.navigation.goBack(null)
+                this.props.navigation.goBack(null)
             })
             .catch(err => {
                 console.log(err)
-                that.setState({
+                this.setState({
                     isSubmitting: false,
                 })
             })
@@ -204,7 +201,7 @@ class Info extends Component {
     }
     render() {
         // const { showAlert } = this.state;
-        const { address, openAt, closeAt, companyName, phoneNumber, workingDays } = this.state.info
+        const { address, email, openAt, closeAt, companyName, workingDays } = this.state.info
         return (
             <View
                 onResponderRelease={(event) => { Keyboard.dismiss(); }}
@@ -229,16 +226,18 @@ class Info extends Component {
                             value={companyName}
                         />
                         <Input
-                            placeholder='Phone'
-                            leftIcon={{ type: 'simple-line-icon', name: 'phone', color: Colors.dark }}
+                            placeholder='Email'
+                            leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
+                            autoCapitalize='none'
+                            keyboardType="email-address"
+                            autoCorrect={false}
                             returnKeyType={"next"}
-                            keyboardType="numeric"
-                            onChangeText={value => this._handleTextInput('phoneNumber', value)}
+                            onChangeText={(input) => this._handleInput('email', input)}
+                            value={email}
                             editable={true}
-                            value={phoneNumber}
                         />
                         <Input
                             placeholder='Detail address, eg: Chic no 230'

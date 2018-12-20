@@ -39,7 +39,7 @@ import styles from './Style/AddCurrencyStyle'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { userPhone } from '../../Config/constants';
+import { userPhone, cName } from '../../Config/constants';
 YellowBox.ignoreWarnings(['Setting a timer']);
 const _console = _.clone(console);
 console.log = message => {
@@ -95,7 +95,7 @@ class AddCurrency extends Component {
     console.log(currentUser)
     this.setState({
       // companyName: currentUser.infos.businessInfo.displayName,
-      companyName: "KUKU",
+      companyName: await AsyncStorage.getItem(cName),
       userPhone: currentUser
     })
     this._getUserCurrencies()
@@ -164,9 +164,9 @@ class AddCurrency extends Component {
         currency,
         askPrice,
         bidPrice,
+        updatedAt,
         companyName,
         userPhone,
-        updatedAt,
       })
 
       .then(response => {

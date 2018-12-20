@@ -20,7 +20,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
 import { Colors } from '../../Assets/Themes'
-import { userPhone } from '../../Config/constants'
+import { userPhone, cName } from '../../Config/constants'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
@@ -115,7 +115,14 @@ export default class Phone extends Component {
             country: {
                 cca2: 'RW',
                 callingCode: '250'
-            }
+            },
+
+            credentails: {
+                tinNumber: null,
+                licenceNumber: null,
+                email: null,
+                companyName: null
+            },
         };
     }
     static navigationOptions = ({ navigation }) => {
@@ -165,12 +172,7 @@ export default class Phone extends Component {
                         console.log('Code:' + this.state.confirm)
                         console.log('Phone:' + await AsyncStorage.getItem(userPhone))
                         this.refs.form.refs.textInput.setNativeProps({ text: '' });
-                        // const inserted = await firebase
-                        //     .database()
-                        //     .ref(`/${this.state.country.callingCode + this.state.Phone}`)
-                        //     .update({
-                        //         userCode: this.state.Code
-                        //     });
+
                         setTimeout(() => {
                             // Alert.alert('Sent!', "We've sent you a verification code", [{
                             //     text: 'OK',
@@ -204,7 +206,7 @@ export default class Phone extends Component {
         let { checked, confirm } = this.state
         this.setState({ spinner: true });
         console.log('Code:' + this.state.checked)
-        setTimeout(() => {
+        setTimeout(async () => {
 
             try {
 
@@ -215,14 +217,41 @@ export default class Phone extends Component {
                         Alert.alert('Warning!', 'You have entered invalid Code');
                     }, 100);
                 } else {
+                    await firebase
+                        .database()
+                        .ref(`/infos/${await AsyncStorage.getItem(userPhone)}/businessInfo`)
+                        .once("value")
+                        .then(snapshot => {
+                            this.setState({
+                                credentails: {
+                                    ...this.state.credentails,
+                                    ...snapshot.val()
+                                }
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                        });
                     this.refs.form.refs.textInput.blur();
                     this.setState({ spinner: false });
-                    setTimeout(() => {
-                        Alert.alert('Success!', 'You have successfully verified your phone number', [{
-                            text: 'OK',
-                            onPress: () => this.props.navigation.navigate('Agreement')
-                        }]);
-                    }, 100);
+                    if (this.state.credentails.companyName) {
+                        ToastAndroid.showWithGravity(
+                            "You have successfully verified your phone number",
+                            ToastAndroid.LONG,
+                            ToastAndroid.BOTTOM
+                        );
+                        await AsyncStorage.setItem(cName, this.state.credentails.companyName)
+                            .then(() => this.props.navigation.navigate("SignedIn"))
+
+                    } else {
+                        setTimeout(() => {
+                            Alert.alert('Success!', 'You have successfully verified your phone number', [{
+                                text: 'OK',
+                                onPress: () => this.props.navigation.navigate('Agreement')
+                            }]);
+                        }, 100);
+                    }
+
                 }
             } catch (err) {
                 this.setState({ spinner: false });

@@ -11,7 +11,7 @@ import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";
 import MapView from "../Screens/UserApp/Map";
 import International from "../Screens/UserApp/International";
-import Login from "../Screens/BureauApp/Jauth";
+import Loged from "../Screens/BureauApp/Jauth";
 import Signup from "../Screens/BureauApp/Signup";
 import Info from "../Screens/BureauApp/Info";
 import Agreement from "../Screens/BureauApp/agreement";
@@ -33,13 +33,24 @@ const InfoRegis = StackNavigator({
     screen: Country
   }
 });
-
-const RegistrationNavigator = SwitchNavigator({
-  Signup: { screen: Signup },
-  InfoRegis: { screen: InfoRegis },
-  AdditionalInfo: { screen: AdditionalInfo },
-  Country: { screen: Country }
+const Login = StackNavigator({
+  Loged: {
+    screen: Loged,
+  },
+  Agreement: { screen: Agreement },
+  InfoRegis: {
+    screen: InfoRegis
+  },
+  AdditionalInfo: {
+    screen: AdditionalInfo
+  },
 });
+// const RegistrationNavigator = SwitchNavigator({
+//   Signup: { screen: Signup },
+//   InfoRegis: { screen: InfoRegis },
+//   AdditionalInfo: { screen: AdditionalInfo },
+//   Country: { screen: Country }
+// });
 const WelcomeStack = StackNavigator({
   // InfoRegis: {screen:InfoRegis},
   WelcomeScreen: {
@@ -61,9 +72,12 @@ const WelcomeStack = StackNavigator({
     }
   }
 });
-const UserStack = SwitchNavigator({
-  TabNavScreen: { screen: TabNavScreen },
+const UserStack = StackNavigator({
+  TabNavScreen: {
+    screen: TabNavScreen
+  },
   Local: { screen: Local },
+  CurrencyList: { screen: CurrencyList },
   MapView: { screen: MapView },
   International: { screen: International },
 
@@ -86,27 +100,20 @@ const SignedIn = StackNavigator({
 });
 
 export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
-  return StackNavigator(
+  return SwitchNavigator(
     {
       SignedIn: {
         screen: SignedIn
       },
-      CurrencyList: { screen: CurrencyList },
+
       WelcomeStack: {
         screen: WelcomeStack
       },
       UserStack: {
         screen: UserStack,
       },
-      Signup: {
-        screen: Signup
-      },
-      InfoRegis: {
-        screen: InfoRegis
-      },
-      Agreement: { screen: Agreement },
-      AdditionalInfo: {
-        screen: AdditionalInfo
+      Login: {
+        screen: Login
       },
       Details: {
         screen: Details,
@@ -114,9 +121,6 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
           header: () => null
         }
       },
-      Login: {
-        screen: Login
-      }
     },
     {
       initialRouteName: `${initialRouter}`,

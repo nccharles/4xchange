@@ -13,10 +13,9 @@ import { Icon, Button, Input } from "react-native-elements";
 import { WaveIndicator } from "react-native-indicators";
 import AwesomeAlert from "react-native-awesome-alerts";
 import SVGImage from "react-native-svg-image";
-import { userPhone } from '../../Config/constants'
+import { userPhone, cName } from '../../Config/constants'
 import styles from "./Style/SignupStyles";
 import { Colors } from "../../Assets/Themes";
-
 //backend things
 import * as firebase from "firebase";
 
@@ -126,7 +125,7 @@ class InfoRegis extends Component {
       countryName,
       flag
     } = this.state;
-
+    await AsyncStorage.setItem(cName, companyName)
     if (isSubmitting) {
       return;
     }
