@@ -40,13 +40,13 @@ import styles from './Style/AddCurrencyStyle'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { userPhone, cName } from '../../Config/constants';
-YellowBox.ignoreWarnings(['Setting a timer']);
-const _console = _.clone(console);
-console.log = message => {
-  if (message.indexOf('Setting a timer') <= -1) {
-    _console.log(message);
-  }
-};
+// YellowBox.ignoreWarnings(['Setting a timer']);
+// const _console = _.clone(console);
+// console.log = message => {
+//   if (message.indexOf('Setting a timer') <= -1) {
+//     _console.log(message);
+//   }
+// };
 //back end done
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
@@ -220,7 +220,7 @@ class AddCurrency extends Component {
         );
       })
       .catch(err => {
-        console.log(err)
+        console.log(err.message)
       })
   }
 

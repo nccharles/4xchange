@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import {
   StyleSheet, Text, View, Button, TouchableHighlight, AsyncStorage,
   FlatList, Image, Animated, Modal, ActivityIndicator, Dimensions,
-  TouchableOpacity, ToastAndroid
+  TouchableOpacity, ToastAndroid, Alert
 } from 'react-native';
 import { Header } from 'react-native-elements'
 import { FontAwesome } from '@expo/vector-icons'
 import Moment from 'moment'
-
 import { Colors } from '../../Assets/Themes'
 import logout from '../../Assets/Icons/logout.png'
 import styles from './Style/ListStyle'
@@ -21,6 +20,7 @@ import { userChoice } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 const screenwidth = Dimensions.get('window').width
@@ -39,6 +39,7 @@ const initailState = {
   category: 'Buy',
   isBuying: true,
   userData: [],
+  showAlert: true,
   flag: 'https://restcountries.eu/data/rwa.svg',
   fav_icon: false,
   bureau: null
@@ -119,14 +120,30 @@ class Local extends Component {
     });
     console.log(this.state.data)
   }
+  requestUpdate = () => {
+    Alert.alert('Update!', "Do you want to request for update to this currency?", [{
+      text: 'Yes',
+      onPress: () => this.Updated()
+    }]);
 
-  _fetchCurrencies = async () => {
+  };
+  Updated = () => {
+    ToastAndroid.showWithGravity(
+      "Sent!: We've sent your request to forexbureau",
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM
+    );
+  }
+  _fetchCurrencies = async (base) => {
     this.setState({
       loading: true
     })
     const that = this
-    firebase.database().ref(`/currencies`)
+    await firebase.database().ref(`/currencies`)
+      .orderByChild('currency')
+      .equalTo(base)
       .on('value', snapshot => {
+        // console.log(snapshot)
         const usersData = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
         })
@@ -228,7 +245,8 @@ class Local extends Component {
           keyExtractor={this.keyExtractor}
           renderItem={({ item, index }) => (
             <Card
-              onPress={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
+              // onPress={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
+              onPress={() => this.requestUpdate()}
               text={item.companyName}
               text2={parseInt(item.bidPrice)}
               bidPrice={item.bidPrice}

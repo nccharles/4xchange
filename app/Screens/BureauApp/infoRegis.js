@@ -148,6 +148,7 @@ class InfoRegis extends Component {
         tinNumber,
         licenceNumber,
         companyName,
+        userPhone,
         email,
         completed: true,
         isSubmitting: false,
@@ -166,6 +167,7 @@ class InfoRegis extends Component {
           .ref(`/infos/${userPhone}/businessInfo`).update({
             displayName: companyName,
             email,
+            userPhone,
             countryName,
             flag
           })

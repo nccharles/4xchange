@@ -59,6 +59,9 @@ const WelcomeStack = StackNavigator({
       header: () => null
     }
   },
+  Login: {
+    screen: Loged,
+  },
   Country: { screen: Country },
   TabNavScreen: { screen: TabNavScreen },
   Local: { screen: Local },
@@ -80,7 +83,12 @@ const UserStack = StackNavigator({
   CurrencyList: { screen: CurrencyList },
   MapView: { screen: MapView },
   International: { screen: International },
-
+  Details: {
+    screen: Details,
+    navigationOptions: {
+      header: () => null
+    }
+  },
   WelcomeScreen: {
     screen: WelcomeScreen,
     navigationOptions: {
@@ -114,6 +122,12 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
       },
       Login: {
         screen: Login
+      },
+      AdditionalInfo: {
+        screen: AdditionalInfo
+      },
+      InfoRegis: {
+        screen: InfoRegis
       },
       Details: {
         screen: Details,

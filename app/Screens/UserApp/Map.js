@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Image, ToastAndroid, AsyncStorage, 
-  Platform, Text, View, StyleSheet, Dimensions } from 'react-native'
+import {
+  Image, ToastAndroid, AsyncStorage,
+  Platform, Text, View, StyleSheet, Dimensions
+} from 'react-native'
 import { Location, Permissions, MapView } from 'expo';
 import MapViewDirections from 'react-native-maps-directions'
 
@@ -12,7 +14,7 @@ import styles from './Style/MapStyle';
 
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 // import { map } from 'rxjs/operator/map';
-import {userChoice} from '../../Config/constants'
+import { userChoice } from '../../Config/constants'
 
 //backend things firebase
 import firebase from 'firebase'
@@ -30,31 +32,31 @@ const coordinates = [];
 class MapScreen extends Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
-      forexCoords:[],
+      forexCoords: [],
       loading: true,
-      coords: {}, 
+      coords: {},
       selectedMarker: ''
     };
   }
-  static navigationOptions = ({navigation})=>{
-    const {params} = navigation.state
-    return{
-        headerTitle: '4xChange',
-        headerLeft: null,
-        headerRight: (
-          <HeaderBtn 
-            onPress={() =>params.handleThis()}
-            source={logout}/>
-        ),
-        headerStyle: {
-            backgroundColor: Colors.primary,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    return {
+      headerTitle: '4xChange',
+      headerLeft: null,
+      headerRight: (
+        <HeaderBtn
+          onPress={() => params.handleThis()}
+          source={logout} />
+      ),
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
     }
   };
 
@@ -62,15 +64,15 @@ class MapScreen extends Component {
   componentWillMount = async () => {
     const that = this
     await firebase.database().ref('/infos/').once('value').then(snapshot => {
-      const coordinates = _.map( snapshot.val(), (val, uid) =>{
-          // return { latitude: val.info.latitude, longitude: val.info.longitude, uid }
-          return {...val.publicInfo, uid}          
+      const coordinates = _.map(snapshot.val(), (val, uid) => {
+        // return { latitude: val.info.latitude, longitude: val.info.longitude, uid }
+        return { ...val.publicInfo, uid }
       })
-      if(coordinates){
-          that.setState({
-            forexCoords:[...coordinates],
-            loading: false,
-          })
+      if (coordinates) {
+        that.setState({
+          forexCoords: [...coordinates],
+          loading: false,
+        })
       }
     })
 
@@ -86,9 +88,9 @@ class MapScreen extends Component {
       handleThis: this._clearChoiceCache
     });
   };
-  _clearChoiceCache = async () =>{
+  _clearChoiceCache = async () => {
     try {
-      await AsyncStorage.setItem(userChoice, '').then(() =>{
+      await AsyncStorage.setItem(userChoice, '').then(() => {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
@@ -101,7 +103,7 @@ class MapScreen extends Component {
   }
 
   render() {
-    const { coords:{longitude, latitude, speed}, forexCoords } = this.state
+    const { coords: { longitude, latitude, speed }, forexCoords } = this.state
     return (
       <View style={styles.container}>
         {
@@ -116,13 +118,14 @@ class MapScreen extends Component {
           >
             {forexCoords.map((marker, key) => {
               return <MapView.Marker
-                          onPress={() => this.props.navigation.navigate('Details',{companyId:  marker.uid})}
-                          coordinate={{
-                              latitude: marker.latitude, 
-                              longitude: marker.longitude}}
-                          key={key} 
-                          image={LocationBank}
-                          title={marker.companyName}/>
+                onPress={() => this.props.navigation.navigate('Details', { userPhone: marker.userPhone })}
+                coordinate={{
+                  latitude: marker.latitude,
+                  longitude: marker.longitude
+                }}
+                key={key}
+                image={LocationBank}
+                title={marker.companyName} />
             })}
             <MapView.Marker coordinate={{ latitude, longitude }}
               title={"Here you are!."} pinColor={"green"} image={UserLocation} />

@@ -4,7 +4,7 @@ import * as firebase from 'firebase'
 import PrimaryNav from './Config/routes'
 
 import { Colors } from './Assets/Themes'
-import { userChoice } from './Config/constants'
+import { userPhone, userChoice } from './Config/constants'
 import { TabHeading } from 'native-base';
 export default class App extends Component {
 	constructor(props) {
@@ -33,56 +33,61 @@ export default class App extends Component {
 			messagingSenderId: "327647928890"
 		});
 
-		firebase.auth().onAuthStateChanged(async user => {
-			const that = this
-			const retrievedUserChoice = await AsyncStorage.getItem(userChoice);
-			if (user) {
-				firebase.database().ref(`infos/${user.uid}/publicInfo`).once("value")
+		const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
+		const retrieveduserChoice = await AsyncStorage.getItem(userChoice);
+		console.log(retrieveduserPhone)
+		if (retrieveduserPhone) {
+			try {
+				await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
 					.then(snapshot => {
 						const { completed } = snapshot.val()
 						if (completed) {
-							that.setState({
+							this.setState({
 								signedIn: true,
 								checkedSignIn: true,
 								initialRouter: 'SignedIn'
 							})
 						} else {
-							that.setState({
+							this.setState({
 								signedIn: true,
 								checkedSignIn: true,
 								initialRouter: 'InfoRegis'
 							})
 						}
 					}).catch(error => {
-						that.setState({
+						this.setState({
 							signedIn: true,
 							checkedSignIn: true,
 							initialRouter: 'InfoRegis'
 						})
 					})
-			} else {
-				try {
-					if (retrievedUserChoice === 'true') {
-						this.setState({
-							userViewConformed: true,
-							checkedSignIn: true,
-							signedIn: false,
-							initialRouter: 'UserStack'
-						})
-
-					} else {
-						this.setState({
-							checkedSignIn: true,
-							signedIn: false,
-							initialRouter: 'WelcomeStack'
-						})
-					}
-				} catch (error) {
-					// Error retrieving data
-					console.log('error')
-				}
+			} catch (error) {
+				console.log(error.message)
 			}
-		})
+		} else {
+			try {
+				if (retrieveduserChoice === 'true') {
+					this.setState({
+						userViewConformed: true,
+						checkedSignIn: true,
+						signedIn: false,
+						initialRouter: 'UserStack'
+					})
+
+				} else {
+					this.setState({
+						checkedSignIn: true,
+						signedIn: false,
+						initialRouter: 'WelcomeStack'
+					})
+				}
+			} catch (error) {
+				// Error retrieving data
+				console.log(error.message)
+			}
+
+		}
+
 
 	}
 

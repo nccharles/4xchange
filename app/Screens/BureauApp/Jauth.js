@@ -149,7 +149,7 @@ export default class Phone extends Component {
         }
 
         this.setState({ spinner: true });
-        fetch('http://192.168.43.112/4exchange/Auth', {
+        fetch('https://forexchange-sms.herokuapp.com/Auth', {
             method: 'POST',
             headers:
                 {

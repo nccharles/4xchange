@@ -152,6 +152,7 @@ class Signup extends Component {
         openAt,
         workingDays,
         email,
+        userPhone,
         companyName,
         latitude,
         longitude,
