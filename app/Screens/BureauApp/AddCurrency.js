@@ -381,10 +381,10 @@ class AddCurrency extends Component {
               <Card
                 onPress={() => this.showUpdateDialog(item)}
                 onPressDel={() => this.showDeleteDialog(item)}
-                text={item.currency}
-                askPrice={item.askPrice}
-                bidPrice={item.bidPrice}
-                time={Moment(item.updatedAt).fromNow()} />
+                text={item.currency + '   '}
+                askPrice={item.askPrice + '   '}
+                bidPrice={item.bidPrice + '   '}
+                time={Moment(item.updatedAt).fromNow() + '   '} />
             )}
             keyExtractor={this.keyExtractor}
             initialNumToRender={this.oneScreensWorth}

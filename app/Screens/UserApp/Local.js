@@ -36,7 +36,7 @@ const initailState = {
   buyTextColor: Colors.dark,
   sellBackgroundColor: 'transparent',
   sellTextColor: Colors.dark,
-  category: 'Buy   ',
+  category: 'Buy',
   isBuying: true,
   userData: [],
   showAlert: true,
@@ -250,15 +250,15 @@ class Local extends Component {
             <Card
               // onPress={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
               onPress={() => this.requestUpdate()}
-              text={item.companyName}
-              text2={parseInt(item.bidPrice)}
-              bidPrice={item.bidPrice}
-              askPrice={item.askPrice}
-              baseCurrency={item.currency}
-              time={Moment(item.updatedAt).fromNow()}
-              currency={this.state.initialCurrency}
+              text={item.companyName + '   '}
+              text2={parseInt(item.bidPrice) + '   '}
+              bidPrice={item.bidPrice + '   '}
+              askPrice={item.askPrice + '   '}
+              baseCurrency={item.currency + '   '}
+              time={Moment(item.updatedAt).fromNow() + '   '}
+              currency={this.state.initialCurrency + '   '}
               equivalent={this.state.isBuying ? parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
-              category={this.state.category}
+              category={this.state.category + '   '}
               // source={this.state.flag}
               iconStyle={this.state.fav_icon ? 'red' : 'grey'}
               onPressIcon={() => this.handle_fav({ index, item })}
