@@ -211,7 +211,7 @@ class Signup extends Component {
         }}
         style={styles.container}
       >
-        <Text style={styles.logo}>4xChange</Text>
+        <Text style={styles.logo}>4xChange   </Text>
         <KeyboardAvoidingView
           behavior="padding"
           style={{ flex: 1 }}
@@ -307,7 +307,7 @@ class Signup extends Component {
               )}
             <Button
               onPress={this._handleInfoSave.bind(this)}
-              title="Save"
+              title="Save   "
               icon={{ type: "font-awesome", name: "save", color: "#fff" }}
               buttonStyle={styles.button}
               loading={this.state.isSubmitting}

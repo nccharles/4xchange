@@ -1,4 +1,4 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { ApplicationStyles, Metrics, Colors } from '../../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
@@ -8,6 +8,6 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.snow
+    backgroundColor: Colors.snow,
   },
 })

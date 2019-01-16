@@ -21,7 +21,7 @@ class CurrencyList extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state
     return {
-      headerTitle: '4xChange',
+      headerTitle: '4xChange   ',
       headerStyle: {
         backgroundColor: Colors.primary,
       },

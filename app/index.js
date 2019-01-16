@@ -18,10 +18,7 @@ export default class App extends Component {
 			initialRouter: 'WelcomeStack'
 		};
 	}
-	//   async componentWillMount() {
-	//     // await AsyncStorage.setItem('@ForExchange:key', '1');
-	//     console.log(await AsyncStorage.setItem('@ForExchange:key', token))
-	//   }
+
 
 	async componentWillMount() {
 		firebase.initializeApp({

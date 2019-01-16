@@ -36,7 +36,7 @@ const initailState = {
   buyTextColor: Colors.dark,
   sellBackgroundColor: 'transparent',
   sellTextColor: Colors.dark,
-  category: 'Buy',
+  category: 'Buy   ',
   isBuying: true,
   userData: [],
   showAlert: true,
@@ -49,8 +49,9 @@ class Local extends Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state
+    let Title = '4xChange   '
     return {
-      headerTitle: '4xChange',
+      headerTitle: Title + '   ',
       headerLeft: null,
       headerRight: (
         <HeaderBtn
@@ -62,7 +63,9 @@ class Local extends Component {
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontWeight: 'bold',
+        // fontWeight: 'bold',
+        fontSize: 20,
+        marginLeft: 15,
       },
     }
   };
@@ -78,7 +81,7 @@ class Local extends Component {
       // buyBackgroundColor: '#3498DB',
       buyBackgroundColor: Colors.dark,
       sellBackgroundColor: 'transparent',
-      category: 'Buy',
+      category: 'Buy   ',
       buyTextColor: 'white',
       sellTextColor: Colors.dark,
       initialCurrency: 'RWF',
@@ -90,7 +93,7 @@ class Local extends Component {
     this.setState({
       sellBackgroundColor: Colors.dark,
       buyBackgroundColor: 'transparent',
-      category: 'Sell',
+      category: 'Sell   ',
       sellTextColor: 'white',
       buyTextColor: Colors.dark,
       initialCurrency: this.state.baseCurrency,
@@ -198,7 +201,7 @@ class Local extends Component {
           <InputButton
             text='Enter Amount ...'
             onPress={() => this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })}
-            buttonText={this.state.baseCurrency}
+            buttonText={this.state.baseCurrency + '   '}
             editable={true}
             keyboardType="numeric"
             onChangeText={(value) => this._handleCurrencyInput(value)}

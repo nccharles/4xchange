@@ -6,7 +6,7 @@ import {
 import { SearchBar } from "react-native-elements";
 import { Ionicons, Entypo } from '@expo/vector-icons'
 import ActionButton from 'react-native-action-button';
-import {userChoice} from '../../Config/constants'
+import { userChoice } from '../../Config/constants'
 
 import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
 
@@ -27,23 +27,23 @@ import styles from './Style/shared-styles';
 let data;
 class International extends Component {
 
-  static navigationOptions = ({navigation})=>{
-    const {params} = navigation.state
-    return{
-        headerTitle: '4xChange',
-        headerLeft: null,
-        headerRight: (
-          <HeaderBtn 
-            onPress={() =>params.handleThis()}
-            source={logout}/>
-        ),
-        headerStyle: {
-            backgroundColor: Colors.primary,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    return {
+      headerTitle: '4xChange',
+      headerLeft: null,
+      headerRight: (
+        <HeaderBtn
+          onPress={() => params.handleThis()}
+          source={logout} />
+      ),
+      headerStyle: {
+        backgroundColor: Colors.primary,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
     }
   };
 
@@ -74,7 +74,7 @@ class International extends Component {
     }
   };
 
-  async componentWillMount(){
+  async componentWillMount() {
     this.convertCurrency(this.state.userEntered, this.state.baseCurrency);
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
@@ -106,15 +106,15 @@ class International extends Component {
     });
   };
   setBaseCurrency = async (currency) => {
-    const {baseCurrency} = currency
+    const { baseCurrency } = currency
     this.setState({
       baseCurrency: baseCurrency,
     })
   }
-  _clearChoiceCache = async () =>{
+  _clearChoiceCache = async () => {
     // alert('click')
     try {
-      await AsyncStorage.setItem(userChoice, '').then(() =>{
+      await AsyncStorage.setItem(userChoice, '').then(() => {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
@@ -131,14 +131,14 @@ class International extends Component {
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <InputButton
-                text='Enter Amount ...'
-                onPress={() => this.props.navigation.navigate('CurrencyList', {setBaseCurrency: this.setBaseCurrency})}
-                buttonText={this.state.baseCurrency}
-                editable= {true}
-                defaultValue='1.00'
-                keyboardType="numeric"
-                onChangeText={(value) => this.convertCurrency(value, this.state.baseCurrency)}
-            />
+            text='Enter Amount ...'
+            onPress={() => this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })}
+            buttonText={this.state.baseCurrency + '   '}
+            editable={true}
+            defaultValue='1.00'
+            keyboardType="numeric"
+            onChangeText={(value) => this.convertCurrency(value, this.state.baseCurrency)}
+          />
         </View>
         {
           this.state.success ? null :

@@ -11,15 +11,14 @@ import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";
 import MapView from "../Screens/UserApp/Map";
 import International from "../Screens/UserApp/International";
-import Loged from "../Screens/BureauApp/Jauth";
-import Signup from "../Screens/BureauApp/Signup";
+import Loged from "../Screens/BureauApp/Login";
 import Info from "../Screens/BureauApp/Info";
 import Agreement from "../Screens/BureauApp/agreement";
 import AddCurrency from "../Screens/BureauApp/AddCurrency";
 import InfoReg from "../Screens/BureauApp/infoRegis";
 import AdditionalInfo from "../Screens/BureauApp/additionalInfo";
 import Country from "../Screens/BureauApp/countryList";
-// import Intro from '../Screens/Intro'
+
 
 // Manifest of possible screens
 const InfoRegis = StackNavigator({
@@ -45,14 +44,7 @@ const Login = StackNavigator({
     screen: AdditionalInfo
   },
 });
-// const RegistrationNavigator = SwitchNavigator({
-//   Signup: { screen: Signup },
-//   InfoRegis: { screen: InfoRegis },
-//   AdditionalInfo: { screen: AdditionalInfo },
-//   Country: { screen: Country }
-// });
 const WelcomeStack = StackNavigator({
-  // InfoRegis: {screen:InfoRegis},
   WelcomeScreen: {
     screen: WelcomeScreen,
     navigationOptions: {

@@ -1,25 +1,27 @@
-import {StyleSheet, Dimensions} from 'react-native'
+
+import { Text, StyleSheet, Dimensions } from 'react-native'
 import { Colors } from '../../Assets/Themes'
 
 const screenWidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
 export default StyleSheet.create({
+
     container: {
-        backgroundColor: Colors.primary, 
-        height: screenheight /8,
-        width: screenWidth ,
-        elevation: 3
+        backgroundColor: Colors.primary,
+        height: screenheight / 8,
+        width: screenWidth,
+        elevation: 3,
     },
     wrapper: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: screenheight/ 17, 
+        marginTop: screenheight / 17,
     },
     title: {
-        color: 'white', 
-        fontWeight: 'bold', 
-        fontSize: 20, 
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
         marginLeft: 15
     },
     buttonContainer: {
@@ -32,14 +34,14 @@ export default StyleSheet.create({
     },
     image1: {
         tintColor: 'white',
-        width: screenWidth/14,
-        height: screenWidth/14,
+        width: screenWidth / 14,
+        height: screenWidth / 14,
         marginVertical: 2.5
     },
     image2: {
         tintColor: 'white',
-        width: screenWidth/16,
-        height: screenWidth/16,
+        width: screenWidth / 16,
+        height: screenWidth / 16,
         marginVertical: 5
     },
 })

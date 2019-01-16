@@ -229,7 +229,7 @@ class InfoRegis extends Component {
                 style={styles.flag_icon}
                 source={{ uri: this.state.flag }}
               />
-              <Text style={styles.country_text}>{this.state.countryName}</Text>
+              <Text style={styles.country_text}>{this.state.countryName + '   '}</Text>
             </TouchableOpacity>
             <Input
               placeholder="Company name"
@@ -291,7 +291,7 @@ class InfoRegis extends Component {
             />
             <Button
               onPress={this._handleSignUp.bind(this)}
-              title="Add"
+              title="Add   "
               icon={{
                 type: "material-community",
                 name: "account-plus-outline",

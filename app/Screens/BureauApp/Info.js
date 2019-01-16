@@ -36,8 +36,9 @@ import _ from 'lodash'
 import { userPhone } from '../../Config/constants';
 class Info extends Component {
     static navigationOptions = ({ navigation }) => {
+        let Title = '4xChange   '
         return {
-            headerTitle: '4xChange',
+            headerTitle: Title + '   ',
             headerStyle: {
                 backgroundColor: Colors.primary,
             },

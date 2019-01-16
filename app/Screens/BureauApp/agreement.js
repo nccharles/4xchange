@@ -11,8 +11,9 @@ import styles from './Style/agreementStyle'
 export default class Agreement extends Component {
 
   static navigationOptions = ({ navigation }) => {
+    let Title = '4xChange   '
     return {
-      headerTitle: 'ForExchange',
+      headerTitle: Title + '   ',
       headerStyle: {
         backgroundColor: Colors.primary,
       },
@@ -40,9 +41,9 @@ export default class Agreement extends Component {
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <Text style={styles.title}>4xChange Mobile Application TERMS OF USE</Text>
+            <Text style={styles.title}>4xChange Mobile Application TERMS OF USE  </Text>
             <View>
-              <Text style={styles.subtitle}>ACCEPTANCE OF TERMS</Text>
+              <Text style={styles.subtitle}>ACCEPTANCE OF TERMS  </Text>
               <Text style={styles.text}>
                 The services that 4xChange provides to User is subject to the following
                 Terms of Use ("TOU"). 4xChange reserves the right to update the TOU at any
@@ -263,7 +264,7 @@ export default class Agreement extends Component {
           <View style={{ flexDirection: 'row' }}>
             <Button
               onPress={() => this.props.navigation.navigate('InfoRegis')}
-              title='Next'
+              title='Next   '
               buttonStyle={styles.button}
               disabled={!this.state.checked}
             />

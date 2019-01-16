@@ -3,14 +3,14 @@ import { Text, FlatList, View, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
 // import { SearchBar } from "react-native-elements"
 import SearchBar from 'react-native-searchbar'
-import {contains} from '../../Config/constants'
+import { contains } from '../../Config/constants'
 import _ from 'lodash'
-import {Ionicons} from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 import ListItem from '../../Components/List/ListItem'
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 
-import {currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url} from '../../Assets/resources/data';
+import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 import { Colors } from '../../Assets/Themes'
 import loupe from '../../Assets/Icons/magnifier.png'
 
@@ -19,14 +19,14 @@ const TEMP_CURRENT_CURRENCY = 'CAD';
 class CurrencyList extends Component {
 
   static navigationOptions = ({ navigation }) => {
-    const {params} = navigation.state
+    const { params } = navigation.state
     return {
       // headerTitle: 'ForExchange',
-      headerTitle: params.handleThis ? params.animation :'4xChange',
+      headerTitle: params.handleThis ? params.animation : '4xChange ',
       headerRight: (
         <HeaderBtn
-          onPress={() =>params.handleThis()}
-          source={loupe}/>
+          onPress={() => params.handleThis()}
+          source={loupe} />
       ),
       headerStyle: {
         backgroundColor: Colors.primary,
@@ -62,8 +62,8 @@ class CurrencyList extends Component {
       animation: this._animation
     });
   }
-  
-  animate = () =>{
+
+  animate = () => {
     this.searchBar.show()
     this.setState({
       anim: true
@@ -72,22 +72,22 @@ class CurrencyList extends Component {
   _animation = () => {
     return (
       <SearchBar
-          ref={(ref) => this.searchBar = ref}
-          data={this.state.data}
-          handleChangeText= {(text)=>this.handleSearch(text)}
-          heightAdjust = {10}
-          fontSize = {16}
-          backCloseSize = {15}
-          backButton = {
-            <Ionicons 
-              name= 'md-close'
-              size= {20}
-              color= 'gray' 
-              style={{ marginTop: -2, marginLeft: 2}} />
-          }
-          // handleResults={(text)=>this.handleSearch(text)}
-          showOnLoad
-        />
+        ref={(ref) => this.searchBar = ref}
+        data={this.state.data}
+        handleChangeText={(text) => this.handleSearch(text)}
+        heightAdjust={10}
+        fontSize={16}
+        backCloseSize={15}
+        backButton={
+          <Ionicons
+            name='md-close'
+            size={20}
+            color='gray'
+            style={{ marginTop: -2, marginLeft: 2 }} />
+        }
+        // handleResults={(text)=>this.handleSearch(text)}
+        showOnLoad
+      />
     )
   }
 
@@ -116,9 +116,9 @@ class CurrencyList extends Component {
     navigation.state.params.setBaseCurrency({ baseCurrency: baseCurrency })
   }
 
-  handleSearch = (text) =>{
+  handleSearch = (text) => {
     const searchQuery = text.toLowerCase()
-    const data = _.filter(this.state.fullData, currency =>{
+    const data = _.filter(this.state.fullData, currency => {
       return contains(currency, searchQuery)
     })
     this.setState({
@@ -137,7 +137,7 @@ class CurrencyList extends Component {
   keyExtractor = (item, index) => index.toString()
   // renderHeader = () => {
   //     return (
-        
+
   //     );
   // };
   oneScreensWorth = 30
