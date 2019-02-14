@@ -12,6 +12,7 @@ const Card = ({
     title,
     text,
     onPress,
+    onPress1,
     style,
     source,
     text2,
@@ -36,7 +37,7 @@ const Card = ({
                     <View style={styles.leftContainer}>
                         <TouchableOpacity
                             style={{ flex: 1 }}
-                            onPress={onPress}>
+                            onPress={onPress1}>
                             <Text style={styles.boldLabel}>{text}</Text>
                             <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
                             <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
@@ -77,12 +78,13 @@ const Card = ({
 Card.propTypes = {
     title: PropTypes.string,
     text3: PropTypes.string,
-    text2: PropTypes.number,
+    text2: PropTypes.string,
     time: PropTypes.string,
     category: PropTypes.string,
     equivalent: PropTypes.number,
     text: PropTypes.string,
     onPress: PropTypes.func,
+    onPress1: PropTypes.func,
     // source: PropTypes.any,
     containerStyle: PropTypes.any,
     leftViewStyle: PropTypes.any,

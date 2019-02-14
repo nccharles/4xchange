@@ -5,8 +5,6 @@ import {
   FlatList, Image, Animated, Modal, ActivityIndicator, Dimensions,
   TouchableOpacity, ToastAndroid, Alert
 } from 'react-native';
-import { Header } from 'react-native-elements'
-import { FontAwesome } from '@expo/vector-icons'
 import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import logout from '../../Assets/Icons/logout.png'
@@ -20,11 +18,6 @@ import { userChoice } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import AwesomeAlert from 'react-native-awesome-alerts';
-
-
-const screenwidth = Dimensions.get('window').width
-const screenheight = Dimensions.get('window').height
 
 const initailState = {
   data: [],
@@ -248,7 +241,7 @@ class Local extends Component {
           keyExtractor={this.keyExtractor}
           renderItem={({ item, index }) => (
             <Card
-              // onPress={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
+              onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
               onPress={() => this.requestUpdate()}
               text={item.companyName + '   '}
               text2={parseInt(item.bidPrice) + '   '}

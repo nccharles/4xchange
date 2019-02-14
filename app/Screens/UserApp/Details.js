@@ -24,7 +24,7 @@ const screenheight = Dimensions.get('window').height
 
 const colors = [
   '#7FB3D5', '#A569BD', '#F7DC6F', '#E74C3C', '#EB9CA8', '#7C878E',
-  '#8A004F', '#000000', '#10069F', '#00a3e0', '#4CC1A1'
+  '#8A004F', '#000000', '#10069F', '#00a3e1', '#4CC1A1'
 ]
 
 export default class Details extends Component {
@@ -146,7 +146,7 @@ export default class Details extends Component {
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
             <Text style={styles.itemTitle}>Country:</Text>
-            <Text>Rwanda</Text>
+            <Text>{userInfo.countryName}</Text>
             <SVGImage
               style={styles.flag_icon}
               source={{ uri: userInfo.flag }}

@@ -214,7 +214,7 @@ class InfoRegis extends Component {
         }}
         style={styles.container}
       >
-        <Text style={styles.logo}>4xChange</Text>
+        <Text style={styles.logo}>4xChange   </Text>
         <KeyboardAvoidingView
           behavior="padding"
           style={{ flex: 1 }}

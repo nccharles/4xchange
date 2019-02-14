@@ -1,8 +1,4 @@
-import React from "react";
-import { TouchableOpacity, View } from "react-native";
 import { StackNavigator, SwitchNavigator } from "react-navigation";
-import { FontAwesome } from "@expo/vector-icons";
-
 import TabNavScreen from "./tabNav";
 import WelcomeScreen from "../Screens/Welcome/Welcome";
 

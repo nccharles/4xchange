@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import {
-  View, Text, TextInput, FlatList, ActivityIndicator,
-  StatusBar, StyleSheet, ScrollView, Platform, ToastAndroid, AsyncStorage
+  View, FlatList, ActivityIndicator, ToastAndroid, AsyncStorage
 } from 'react-native';
-import { SearchBar } from "react-native-elements";
-import { Ionicons, Entypo } from '@expo/vector-icons'
-import ActionButton from 'react-native-action-button';
 import { userChoice } from '../../Config/constants'
 
-import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
+import { Colors } from '../../Assets/Themes'
 
 import Card from '../../Components/Card/InternationalCard'
 import InputButton from '../../Components/InputButton/InputButton'
-import { Separator } from '../../Components/List';
-import ListItem from '../../Components/List/ListItem';
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 
 import {
