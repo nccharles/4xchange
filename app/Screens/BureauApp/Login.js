@@ -152,10 +152,10 @@ export default class Phone extends Component {
         fetch('https://forexchange-sms.herokuapp.com/Auth', {
             method: 'POST',
             headers:
-                {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
+            {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 Phone: this.state.country.callingCode + this.state.Phone,
                 Code: this.state.Code

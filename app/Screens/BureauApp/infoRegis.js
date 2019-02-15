@@ -9,8 +9,7 @@ import {
   Dimensions, AsyncStorage
 
 } from "react-native";
-import { Icon, Button, Input } from "react-native-elements";
-import { WaveIndicator } from "react-native-indicators";
+import { Button, Input } from "react-native-elements";
 import AwesomeAlert from "react-native-awesome-alerts";
 import SVGImage from "react-native-svg-image";
 import { userPhone, cName } from '../../Config/constants'

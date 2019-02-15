@@ -23,8 +23,9 @@ class International extends Component {
 
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state
+    let Title = '4xChange   '
     return {
-      headerTitle: '4xChange',
+      headerTitle: Title + '   ',
       headerLeft: null,
       headerRight: (
         <HeaderBtn

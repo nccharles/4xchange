@@ -4,14 +4,10 @@ import {
     Image,
     TouchableOpacity,
     Text,
-    ImageBackground,
     AsyncStorage,
     ToastAndroid
 } from 'react-native';
-import { Entypo } from '@expo/vector-icons'
-import AwesomeAlert from 'react-native-awesome-alerts'
 import styles from './styles'
-import { Colors } from '../../Assets/Themes'
 import { userChoice } from '../../Config/constants'
 // import money from '../../Assets/Background/money.jpg'
 

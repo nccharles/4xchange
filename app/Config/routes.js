@@ -1,4 +1,4 @@
-import { StackNavigator, SwitchNavigator } from "react-navigation";
+import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import TabNavScreen from "./tabNav";
 import WelcomeScreen from "../Screens/Welcome/Welcome";
 
@@ -17,7 +17,7 @@ import Country from "../Screens/BureauApp/countryList";
 
 
 // Manifest of possible screens
-const InfoRegis = StackNavigator({
+const InfoRegis = createStackNavigator({
   InfoReg: {
     screen: InfoReg,
     navigationOptions: {
@@ -28,7 +28,7 @@ const InfoRegis = StackNavigator({
     screen: Country
   }
 });
-const Login = StackNavigator({
+const Login = createStackNavigator({
   Loged: {
     screen: Loged,
   },
@@ -40,7 +40,7 @@ const Login = StackNavigator({
     screen: AdditionalInfo
   },
 });
-const WelcomeStack = StackNavigator({
+const WelcomeStack = createStackNavigator({
   WelcomeScreen: {
     screen: WelcomeScreen,
     navigationOptions: {
@@ -63,7 +63,7 @@ const WelcomeStack = StackNavigator({
     }
   }
 });
-const UserStack = StackNavigator({
+const UserStack = createStackNavigator({
   TabNavScreen: {
     screen: TabNavScreen
   },
@@ -84,7 +84,7 @@ const UserStack = StackNavigator({
     }
   }
 });
-const SignedIn = StackNavigator({
+const SignedIn = createStackNavigator({
   AddCurrency: {
     screen: AddCurrency,
     navigationOptions: {
@@ -96,7 +96,7 @@ const SignedIn = StackNavigator({
 });
 
 export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
-  return SwitchNavigator(
+  return createSwitchNavigator(
     {
       SignedIn: {
         screen: SignedIn

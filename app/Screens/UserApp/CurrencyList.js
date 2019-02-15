@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Text, FlatList, View, StatusBar } from 'react-native'
-import PropTypes from 'prop-types'
+import { FlatList, View, StatusBar } from 'react-native'
 // import { SearchBar } from "react-native-elements"
 import SearchBar from 'react-native-searchbar'
 import { contains } from '../../Config/constants'
@@ -13,8 +12,6 @@ import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 import { Colors } from '../../Assets/Themes'
 import loupe from '../../Assets/Icons/magnifier.png'
-
-const TEMP_CURRENT_CURRENCY = 'CAD';
 
 class CurrencyList extends Component {
 
@@ -158,13 +155,6 @@ class CurrencyList extends Component {
           keyExtractor={this.keyExtractor}
           ListHeaderComponent={this.renderHeader}
         />
-        {/* <SearchBar
-          ref={(ref) => this.searchBar = ref}
-          data={this.state.data}
-          handleChangeText= {(text)=>this.handleSearch(text)}
-          // handleResults={(text)=>this.handleSearch(text)}
-          // showOnLoad
-        /> */}
       </View>
     );
   }

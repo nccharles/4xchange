@@ -45,7 +45,6 @@ class Local extends Component {
     let Title = '4xChange   '
     return {
       headerTitle: Title + '   ',
-      headerLeft: null,
       headerRight: (
         <HeaderBtn
           onPress={() => params.handleThis()}
@@ -56,7 +55,7 @@ class Local extends Component {
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
-        // fontWeight: 'bold',
+        fontWeight: 'bold',
         fontSize: 20,
         marginLeft: 15,
       },

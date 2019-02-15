@@ -1,15 +1,10 @@
-import React from 'react'
-import {Platform, Image, View, Dimensions, Text} from 'react-native'
+import React, { Component } from 'react'
+import { Image, View, Dimensions, Text } from 'react-native'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
-import { FontAwesome } from '@expo/vector-icons'
-
-import { ApplicationStyles, Metrics, Colors } from '../Assets/Themes'
-
+import { Colors } from '../Assets/Themes'
 import MapView from '../Screens/UserApp/Map'
 import International from '../Screens/UserApp/International'
 import Local from '../Screens/UserApp/Local'
-
-import Header from '../Components/Header/Header'
 
 import location from '../Assets/TabImage/location-map-orientation.png'
 import listBureaus from '../Assets/TabImage/bank-512.png'
@@ -19,54 +14,54 @@ const screenheight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
 const TabNavigationScreen = TabNavigator({
-  Local: {screen: Local},
-  MapView: {screen: MapView},
-  International: {screen: International},
+  Local: { screen: Local },
+  MapView: { screen: MapView },
+  International: { screen: International },
 },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
         let iconName
-        if(routeName === 'Local') {
+        if (routeName === 'Local') {
           iconName = listBureaus
           label = 'Local'
         }
         else if (routeName === 'MapView') {
           iconName = location
           label = 'Locate'
-        } 
-        else if (routeName === 'International'){
-            iconName = globe
-            label = 'Global'
+        }
+        else if (routeName === 'International') {
+          iconName = globe
+          label = 'Global'
         }
 
-        return  (
-              <View style={{alignSelf: 'center', justifyContent: 'center'}}>
-                <Image 
-                  source={iconName} 
-                  tintColor={tintColor} 
-                  resizeMode='cover' 
-                  style={{width: screenWidth/15, height: screenWidth/15, alignSelf: 'center', }}
-                />
-                <Text style={{fontSize: 10, color: tintColor, textAlign: 'center'}}>{label}</Text>
-              </View>
-              )
+        return (
+          <View style={{ alignSelf: 'center', justifyContent: 'center' }}>
+            <Image
+              source={iconName}
+              tintColor={tintColor}
+              resizeMode='cover'
+              style={{ width: screenWidth / 15, height: screenWidth / 15, alignSelf: 'center', }}
+            />
+            <Text style={{ fontSize: 10, color: tintColor, textAlign: 'center' }}>{label}</Text>
+          </View>
+        )
       }
     }),
     tabBarOptions: {
-      activeTintColor: Colors.primary,
+      activeTintColor: '#fff',
       inactiveTintColor: '#B2BABB',
       showLabel: false,
       indicatorStyle: { backgroundColor: 'skyblue', },
       style: {
-        backgroundColor: Colors.snow,
-        height: screenheight /12,
+        backgroundColor: Colors.primary,
+        height: screenheight / 12,
         justifyContent: 'center',
         alignSelf: 'center',
         elevation: 3,
       }
-    },  
+    },
     tabBarComponent: TabBarBottom,
   })
 export default TabNavigationScreen

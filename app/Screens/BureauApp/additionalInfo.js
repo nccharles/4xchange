@@ -8,18 +8,13 @@ import {
   Image,
   Platform,
   Picker,
-  PickerIOS,
   ToastAndroid,
   TimePickerAndroid
 } from "react-native";
 import { Location, Permissions } from "expo";
 import { Icon, Button, Input } from "react-native-elements";
-import { WaveIndicator } from "react-native-indicators";
-import AwesomeAlert from "react-native-awesome-alerts";
-import DateTimePicker from "react-native-modal-datetime-picker";
 import styles from "./Style/SignupStyles";
 import { Colors } from "../../Assets/Themes";
-import TimePicker from "../../Components/TimePicker";
 import open from "../../Assets/Icons/open-sign.png";
 import close from "../../Assets/Icons/closed.png";
 
