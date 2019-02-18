@@ -72,7 +72,7 @@ class CurrencyList extends Component {
         ref={(ref) => this.searchBar = ref}
         data={this.state.data}
         handleChangeText={(text) => this.handleSearch(text)}
-        heightAdjust={10}
+        heightAdjust={6}
         fontSize={16}
         backCloseSize={15}
         backButton={

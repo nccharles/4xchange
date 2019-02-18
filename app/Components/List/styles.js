@@ -11,27 +11,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.snow,
   },
-  parent: {
+  MainStyle: {
     flex: 1,
     width: screenwidth,
-    height: screenheight /10,
+    height: screenheight / 10,
     flexDirection: 'row',
-    // backgroundColor: 'transparent',
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 5.0,
-    // shadowRadius: 2,
-    // elevation: 3,
     backgroundColor: Colors.snow,
     alignSelf: 'center',
     alignItems: 'center',
-    // marginVertical: 10,
-    // margin: 5,
-    // padding: 5,
     paddingLeft: 5,
-    // borderRadius: Metrics.smallMargin,
-    // paddingVertical: 1.5
-    // justifyContent: 'center'
   },
   leftRound: {
     width: 45,
@@ -51,9 +39,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   leftRectangular: {
-    flex: 1, 
+    flex: 1,
     // alignSelf: 'stretch',
-    height: null, 
+    height: null,
     width: null
   },
   center: {
@@ -98,8 +86,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     borderWidth: 0.5,
-    width: screenwidth/ 6,
-    height: screenheight /17,
+    width: screenwidth / 6,
+    height: screenheight / 17,
     // height: 38,
     marginLeft: 5,
     marginVertical: 5,
@@ -114,9 +102,9 @@ const styles = StyleSheet.create({
   // },
   separator: {
     flex: 1,
-    height: 1, 
-    width: screenwidth -5,
-    backgroundColor: "#CED0CE", 
+    height: 1,
+    width: screenwidth - 5,
+    backgroundColor: "#CED0CE",
     // margin: 8
   },
 

@@ -1,29 +1,48 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { TouchableOpacity, Image } from 'react-native';
-
+import { View, TouchableOpacity, ToastAndroid, AsyncStorage, Image } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import logout from '../..//Assets/Icons/logout.png'
 import styles from './styles'
-
-const Header = (props) => {
-    const {
-        onPress,
-        source } = props
-
-    return (
-        <TouchableOpacity
-            style={styles.headerBtn}
-            onPress={onPress}>
-            <Image
-                source={source}
-                style={styles.headerImg} />
-        </TouchableOpacity>
-    );
+import { userChoice } from '../../Config/constants';
+class HeaderBtn extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            handleThis: null
+        };
+    }
+    async componentDidMount() {
+        this.setState({
+            handleThis: this._clearChoiceCache
+        });
+    }
+    _clearChoiceCache = async () => {
+        try {
+            await AsyncStorage.setItem(userChoice, '').then(() => {
+                this.props.navigation.navigate('WelcomeScreen')
+            });
+        } catch (error) {
+            ToastAndroid.showWithGravity(
+                `Error: ${error.message}`,
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM
+            );
+        }
+    }
+    render() {
+        return (
+            <View>
+                <TouchableOpacity
+                    style={styles.headerBtn}
+                    onPress={() => this.state.handleThis()}>
+                    <Image
+                        source={logout}
+                        style={styles.headerImg} />
+                </TouchableOpacity>
+            </View>
+        );
+    }
 }
 
-Header.propTypes = {
-    onPress: PropTypes.func,
-    source: PropTypes.any,
-}
 
-
-export default Header
+export default withNavigation(HeaderBtn);

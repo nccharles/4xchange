@@ -1,7 +1,10 @@
+import React from 'react';
 import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import TabNavScreen from "./tabNav";
 import WelcomeScreen from "../Screens/Welcome/Welcome";
-
+import HeaderBtn from '../Components/Buttons/HeaderBtn'
+// import logout from '../Assets/Icons/logout.png'
+// import { userChoice } from './constants';
 import Local from "../Screens/UserApp/Local";
 import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";
@@ -14,6 +17,7 @@ import AddCurrency from "../Screens/BureauApp/AddCurrency";
 import InfoReg from "../Screens/BureauApp/infoRegis";
 import AdditionalInfo from "../Screens/BureauApp/additionalInfo";
 import Country from "../Screens/BureauApp/countryList";
+import { Colors } from '../Assets/Themes';
 
 
 // Manifest of possible screens
@@ -51,7 +55,28 @@ const WelcomeStack = createStackNavigator({
     screen: Loged,
   },
   Country: { screen: Country },
-  TabNavScreen: { screen: TabNavScreen },
+  TabNavScreen: {
+    screen: TabNavScreen,
+    navigationOptions: ({ navigation }) => {
+      const { params } = navigation.state
+      let Title = '4xChange   '
+      return {
+        headerTitle: Title + '   ',
+        headerRight: (
+          <HeaderBtn />
+        ),
+        headerStyle: {
+          backgroundColor: Colors.primary,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 20,
+          marginLeft: 15,
+        },
+      }
+    }
+  },
   Local: { screen: Local },
   MapView: { screen: MapView },
   International: { screen: International },
@@ -65,7 +90,26 @@ const WelcomeStack = createStackNavigator({
 });
 const UserStack = createStackNavigator({
   TabNavScreen: {
-    screen: TabNavScreen
+    screen: TabNavScreen,
+    navigationOptions: ({ navigation }) => {
+      const { params } = navigation.state
+      let Title = '4xChange   '
+      return {
+        headerTitle: Title + '   ',
+        headerRight: (
+          <HeaderBtn />
+        ),
+        headerStyle: {
+          backgroundColor: Colors.primary,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 20,
+          marginLeft: 15,
+        },
+      }
+    }
   },
   Local: { screen: Local },
   CurrencyList: { screen: CurrencyList },
@@ -103,10 +147,10 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
       },
 
       WelcomeStack: {
-        screen: WelcomeStack
+        screen: WelcomeStack,
       },
       UserStack: {
-        screen: UserStack,
+        screen: UserStack
       },
       Login: {
         screen: Login

@@ -5,13 +5,16 @@ import { Colors } from '../Assets/Themes'
 import MapView from '../Screens/UserApp/Map'
 import International from '../Screens/UserApp/International'
 import Local from '../Screens/UserApp/Local'
-
+// import HeaderBtn from '../Components/Buttons/HeaderBtn'
+// import logout from '../Assets/Icons/logout.png'
+// import { userChoice } from './constants';
 import location from '../Assets/TabImage/location-map-orientation.png'
 import listBureaus from '../Assets/TabImage/bank-512.png'
 import globe from '../Assets/TabImage/business.png'
-
 const screenheight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
+
+
 
 const TabNavigationScreen = TabNavigator({
   Local: { screen: Local },
@@ -50,12 +53,12 @@ const TabNavigationScreen = TabNavigator({
       }
     }),
     tabBarOptions: {
-      activeTintColor: '#fff',
+      activeTintColor: Colors.primary,
       inactiveTintColor: '#B2BABB',
       showLabel: false,
       indicatorStyle: { backgroundColor: 'skyblue', },
       style: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.snow,
         height: screenheight / 12,
         justifyContent: 'center',
         alignSelf: 'center',

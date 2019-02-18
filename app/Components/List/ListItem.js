@@ -5,9 +5,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'
 import SVGImage from 'react-native-svg-image'
-
-import { styles } from '.';
-
+import styles from './styles';
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
@@ -29,7 +27,7 @@ class ListItem extends Component {
     const { svgFiles, avatar, onPress } = this.props
     return (
       <View>
-        <TouchableOpacity style={styles.parent} onPress={onPress} >
+        <TouchableOpacity style={styles.MainStyle} onPress={onPress}>
           {svgFiles ? (
             <View style={styles.imageContainer}>
               <SVGImage
