@@ -18,7 +18,7 @@ import { userChoice } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-
+// const sg = require('sendgrid')('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');
 const initailState = {
   data: [],
   loading: true,
@@ -115,19 +115,84 @@ class Local extends Component {
     });
     console.log(this.state.data)
   }
-  requestUpdate = () => {
-    Alert.alert('Update!', "Do you want to request for update to this currency?", [{
-      text: 'Yes',
-      onPress: () => this.Updated()
-    }]);
+  requestUpdate = (User, Company) => {
+    firebase
+      .database()
+      .ref(`/infos/${User}/businessInfo`)
+      .once("value")
+      .then(sanpshot => {
+        console.log(sanpshot.val().email)
+        Alert.alert('Update!', `Do you want to request for update ${this.state.baseCurrency}?`, [{
+          text: 'Yes',
+          onPress: () => this.Updated(sanpshot.val().email, Company)
+        }]);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
 
   };
-  Updated = () => {
-    ToastAndroid.showWithGravity(
-      "Sent!: We've sent your request to forexbureau",
-      ToastAndroid.LONG,
-      ToastAndroid.BOTTOM
-    );
+  Updated = (femail, fcompany) => {
+    const body = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": femail
+            }
+          ],
+          "subject": "Request New Update"
+        }
+      ],
+      "from": {
+        "name": '4xChange',
+        "email": "4xchange@limitless.rw"
+      },
+      "content": [
+        {
+          "type": "text/html",
+          "value": `<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+          <div style="background-color: ${Colors.primary};padding-top:20px;padding-bottom:30px;">
+             <h1 style="font-size: 24px;color: #fff;text-align: center;font-family: Arial, Helvetica, sans-serif;">4xChange</h1>
+             <div style="width: 90%;margin-left: auto;margin-right: auto;padding: 10px;background-color: #fff;">
+            <p style="font-size: 16px;font-family:Arial, Helvetica, sans-serif;">Hello <b>${fcompany},</b><br/><br/>Your customer just need updates for ${this.state.baseCurrency} available in ${fcompany}<br/> 
+            <i>CLICK <a href='https://expo.io/@nccharles/4xChange' >HERE TO UPDATE ${this.state.baseCurrency}</a></i><br/><br/>
+            
+            <strong>4xchange Team!</strong>
+            </p>
+          </div>
+           </div>`
+        }
+      ]
+    }
+    firebase
+      .database()
+      .ref(`/config`)
+      .once("value")
+      .then(sanpshot => {
+        console.log(sanpshot.val().sgkey)
+
+        fetch('https://api.sendgrid.com/v3/mail/send', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${sanpshot.val().sgkey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        }).then((response) => {
+          this.setState({ response: `${response.status} - ${response.ok} - ${response.statusText}` });
+          console.log(response);
+          ToastAndroid.showWithGravity(
+            "Sent!: We've sent your request to forexbureau",
+            ToastAndroid.LONG,
+            ToastAndroid.BOTTOM
+          );
+        });
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+
   }
   _fetchCurrencies = async (base) => {
     this.setState({
@@ -241,7 +306,7 @@ class Local extends Component {
           renderItem={({ item, index }) => (
             <Card
               onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
-              onPress={() => this.requestUpdate()}
+              onPress={() => this.requestUpdate(item.userPhone, item.companyName)}
               text={item.companyName + '   '}
               text2={parseInt(item.bidPrice) + '   '}
               bidPrice={item.bidPrice + '   '}

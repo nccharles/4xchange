@@ -57,8 +57,7 @@ const WelcomeStack = createStackNavigator({
   Country: { screen: Country },
   TabNavScreen: {
     screen: TabNavScreen,
-    navigationOptions: ({ navigation }) => {
-      const { params } = navigation.state
+    navigationOptions: () => {
       let Title = '4xChange   '
       return {
         headerTitle: Title + '   ',
@@ -91,8 +90,7 @@ const WelcomeStack = createStackNavigator({
 const UserStack = createStackNavigator({
   TabNavScreen: {
     screen: TabNavScreen,
-    navigationOptions: ({ navigation }) => {
-      const { params } = navigation.state
+    navigationOptions: () => {
       let Title = '4xChange   '
       return {
         headerTitle: Title + '   ',

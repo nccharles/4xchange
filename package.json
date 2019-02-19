@@ -64,7 +64,8 @@
     "react-native-searchbar": "^1.15.0",
     "react-native-svg-image": "^2.0.1",
     "react-navigation": "^2.13.0",
-    "react-navigation-tabs": "^1.0.2"
+    "react-navigation-tabs": "^1.0.2",
+    "sendgrid": "^5.2.3"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",
