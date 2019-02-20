@@ -252,6 +252,7 @@ class InfoRegis extends Component {
                 name: "database",
                 color: Colors.snow
               }}
+              keyboardType='numeric'
               containerStyle={styles.input}
               underlineColorAndroid={"transparent"}
               inputStyle={styles.inputStyle}
@@ -281,7 +282,7 @@ class InfoRegis extends Component {
               underlineColorAndroid={'transparent'}
               inputStyle={styles.inputStyle}
               autoCapitalize='none'
-              keyboardType="email-address"
+              keyboardType='email-address'
               autoCorrect={false}
               returnKeyType={"next"}
               onChangeText={(input) => this._handleInput('email', input)}

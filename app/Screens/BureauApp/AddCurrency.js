@@ -120,6 +120,7 @@ class AddCurrency extends Component {
       })
   }
   _handleSaveCurrency = async () => {
+    console.log('done')
     const { newCurrency: { currency, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
     if (_.find(this.state.data, { currency: currency })) {
       ToastAndroid.showWithGravityAndOffset(

@@ -38,7 +38,11 @@ export default class Agreement extends Component {
 
     return (
 
-      <View style={styles.container}>
+      <View
+        onResponderRelease={event => {
+          Keyboard.dismiss();
+        }}
+        style={styles.container}>
         <ScrollView>
           <View>
             <Text style={styles.title}>4xChange Mobile Application TERMS OF USE  </Text>

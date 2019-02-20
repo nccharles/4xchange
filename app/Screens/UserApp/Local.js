@@ -18,7 +18,6 @@ import { userChoice } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-// const sg = require('sendgrid')('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');
 const initailState = {
   data: [],
   loading: true,
@@ -70,7 +69,6 @@ class Local extends Component {
 
   changeBtnBuy = () => {
     this.setState({
-      // buyBackgroundColor: '#3498DB',
       buyBackgroundColor: Colors.dark,
       sellBackgroundColor: 'transparent',
       category: 'Buy   ',
@@ -106,7 +104,7 @@ class Local extends Component {
     })
   }
 
-  // back-end code written by Luc Dev
+  // back-end code
   async componentDidMount() {
     const base = this.state.baseCurrency
     this._fetchCurrencies(base)
@@ -165,6 +163,7 @@ class Local extends Component {
         }
       ]
     }
+    //returning sendGridKey
     firebase
       .database()
       .ref(`/config`)
@@ -236,7 +235,7 @@ class Local extends Component {
       );
     }
   }
-  // end of Luc Dev codes
+  // end of codes
 
   keyExtractor = (item, index) => item.uid
 

@@ -160,41 +160,20 @@ export default class Phone extends Component {
                 Phone: this.state.country.callingCode + this.state.Phone,
                 Code: this.state.Code
             })
-        }).then((response) => response.json()).then(async (responseJsonFromServer) => {
+        }).then((response) => response.json()).then(async () => {
             this.setState({
                 spinner: false,
                 enterCode: true,
                 confirm: this.state.Code
             });
-            try {
-                await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
-                    .then(async () => {
-                        console.log('Code:' + this.state.confirm)
-                        console.log('Phone:' + await AsyncStorage.getItem(userPhone))
-                        this.refs.form.refs.textInput.setNativeProps({ text: '' });
-
-                        setTimeout(() => {
-                            // Alert.alert('Sent!', "We've sent you a verification code", [{
-                            //     text: 'OK',
-                            //     onPress: () => this.refs.form.refs.textInput.focus()
-                            // }]);
-                            ToastAndroid.showWithGravity(
-                                "Sent!: We've sent you a verification code",
-                                ToastAndroid.LONG,
-                                ToastAndroid.BOTTOM
-                            );
-                            () => this.refs.form.refs.textInput.focus()
-                        }, 100);
-                    })
-            } catch (error) {
-                console.log(error.message)
+            setTimeout(() => {
                 ToastAndroid.showWithGravity(
-                    error.message,
-                    ToastAndroid.SHORT,
+                    "Sent!: We've sent you a verification code",
+                    ToastAndroid.LONG,
                     ToastAndroid.BOTTOM
                 );
-            }
-
+                () => this.refs.form.refs.textInput.focus()
+            }, 100);
         }).catch((error) => {
             console.log(error.message);
             this.setState({ spinner: false });
@@ -205,7 +184,8 @@ export default class Phone extends Component {
     _verifyCode = () => {
         let { checked, confirm } = this.state
         this.setState({ spinner: true });
-        console.log('Code:' + this.state.checked)
+        console.log('Code:' + checked)
+
         setTimeout(async () => {
 
             try {
@@ -219,7 +199,7 @@ export default class Phone extends Component {
                 } else {
                     await firebase
                         .database()
-                        .ref(`/infos/${await AsyncStorage.getItem(userPhone)}/businessInfo`)
+                        .ref(`/infos/${this.state.country.callingCode + this.state.Phone}/businessInfo`)
                         .once("value")
                         .then(snapshot => {
                             this.setState({
@@ -240,19 +220,34 @@ export default class Phone extends Component {
                             ToastAndroid.LONG,
                             ToastAndroid.BOTTOM
                         );
-                        await AsyncStorage.setItem(cName, this.state.credentails.companyName)
-                            .then(() => this.props.navigation.navigate("SignedIn"))
+                        try {
+                            await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
+                                .then(async () => {
+                                    await AsyncStorage.setItem(cName, this.state.credentails.companyName)
+                                        .then(() => this.props.navigation.navigate("SignedIn"))
 
+                                })
+                        } catch (error) {
+                            console.log(error.message)
+                            ToastAndroid.showWithGravity(
+                                error.message,
+                                ToastAndroid.SHORT,
+                                ToastAndroid.BOTTOM
+                            );
+                        }
                     } else {
-                        setTimeout(() => {
-                            Alert.alert('Success!', 'You have successfully verified your phone number', [{
-                                text: 'OK',
-                                onPress: () => this.props.navigation.navigate('Agreement')
-                            }]);
+                        setTimeout(async () => {
+                            await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
+                                .then(() => Alert.alert('Success!', 'You have successfully verified your phone number', [{
+                                    text: 'OK',
+                                    onPress: () => this.props.navigation.navigate('Agreement')
+                                }]));
                         }, 100);
                     }
 
+
                 }
+
             } catch (err) {
                 this.setState({ spinner: false });
                 setTimeout(() => {

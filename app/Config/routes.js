@@ -25,7 +25,8 @@ const InfoRegis = createStackNavigator({
   InfoReg: {
     screen: InfoReg,
     navigationOptions: {
-      header: () => null
+      headerTransparent: true,
+      headerTintColor: "#fff"
     }
   },
   Country: {
@@ -38,7 +39,11 @@ const Login = createStackNavigator({
   },
   Agreement: { screen: Agreement },
   InfoRegis: {
-    screen: InfoRegis
+    screen: InfoRegis,
+    navigationOptions: {
+      headerTransparent: true,
+      headerTintColor: "#fff"
+    }
   },
   AdditionalInfo: {
     screen: AdditionalInfo
@@ -61,6 +66,7 @@ const WelcomeStack = createStackNavigator({
       let Title = '4xChange   '
       return {
         headerTitle: Title + '   ',
+        headerLeft: null,
         headerRight: (
           <HeaderBtn />
         ),
@@ -94,6 +100,7 @@ const UserStack = createStackNavigator({
       let Title = '4xChange   '
       return {
         headerTitle: Title + '   ',
+        headerLeft: null,
         headerRight: (
           <HeaderBtn />
         ),

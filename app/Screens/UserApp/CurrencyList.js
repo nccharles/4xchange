@@ -19,7 +19,7 @@ class CurrencyList extends Component {
     const { params } = navigation.state
     return {
       // headerTitle: 'ForExchange',
-      headerTitle: params.handleThis ? params.animation : '4xChange ',
+      headerTitle: params.handleThis ? params.animation : '4xChange   ',
       headerRight: (
         <HeaderBtn
           onPress={() => params.handleThis()}
