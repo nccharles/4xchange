@@ -188,7 +188,7 @@ class AddCurrency extends Component {
         );
       })
       .catch(err => {
-        console.log('erro occured')
+        console.log(`error: ${err}`)
       })
   }
   _handleUpdateCurrency = async () => {

@@ -24,11 +24,6 @@ const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.20003
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const locOptions = { enableHighAccuracy: true, distanceInterval: 3 }
-// const APIKEY = 'AIzaSyAenbry778jeWAEx23EK-5DCoB0i-4NW9g'
-const APIKEY = 'AIzaSyAKkQ1Ja2RPFawSpdEium37ytBZgaA4iAs'
-
-const coordinates = [];
-
 class MapScreen extends Component {
   constructor(props) {
     super(props);
@@ -76,15 +71,16 @@ class MapScreen extends Component {
         })
       }
     })
-
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status === 'granted') {
-      await Expo.Location.setApiKey(APIKEY);
-      const { coords } = await Location.getCurrentPositionAsync({});
-      this.setState({ coords })
-    } else {
-      return alert('Enable to Access your location');
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      return ToastAndroid.showWithGravity(
+        "Enable to Access your location",
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM
+      );
     }
+    const { coords } = await Location.getCurrentPositionAsync({});
+    this.setState({ coords });
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
     });
