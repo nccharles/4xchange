@@ -132,11 +132,6 @@ class CurrencyList extends Component {
       }}
     />
   keyExtractor = (item, index) => index.toString()
-  // renderHeader = () => {
-  //     return (
-
-  //     );
-  // };
   oneScreensWorth = 30
   render() {
     return (
