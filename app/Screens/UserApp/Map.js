@@ -11,7 +11,6 @@ import LocationBank from '../../Assets/MapImage/dollar-spot.png'
 import UserLocation from '../../Assets/MapImage/user.png'
 import logout from '../../Assets/Icons/logout.png'
 import styles from './Style/MapStyle';
-
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 // import { map } from 'rxjs/operator/map';
 import { userChoice } from '../../Config/constants'
