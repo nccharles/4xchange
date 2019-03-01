@@ -7,7 +7,7 @@ import _ from 'lodash'
 import { Ionicons } from '@expo/vector-icons'
 
 import ListItem from '../../Components/List/ListItem'
-import HeaderBtn from '../../Components/Buttons/HeaderBtn'
+import SearchHeader from '../../Components/Buttons/SearchHeader'
 
 import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 import { Colors } from '../../Assets/Themes'
@@ -20,8 +20,9 @@ class CurrencyList extends Component {
     return {
       // headerTitle: 'ForExchange',
       headerTitle: params.handleThis ? params.animation : '4xChange   ',
+      headerLeft: null,
       headerRight: (
-        <HeaderBtn
+        <SearchHeader
           onPress={() => params.handleThis()}
           source={loupe} />
       ),
@@ -71,18 +72,8 @@ class CurrencyList extends Component {
       <SearchBar
         ref={(ref) => this.searchBar = ref}
         data={this.state.data}
+        backgroundColor={Colors.primary}
         handleChangeText={(text) => this.handleSearch(text)}
-        heightAdjust={6}
-        fontSize={16}
-        backCloseSize={15}
-        backButton={
-          <Ionicons
-            name='md-close'
-            size={20}
-            color='gray'
-            style={{ marginTop: -2, marginLeft: 2 }} />
-        }
-        // handleResults={(text)=>this.handleSearch(text)}
         showOnLoad
       />
     )

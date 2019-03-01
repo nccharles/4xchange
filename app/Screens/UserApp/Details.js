@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import {
-  TouchableOpacity, Dimensions, ScrollView,
-  Image, View, Text, Linking, Platform, ActivityIndicator
+  ScrollView, View, Text, Linking, Platform, ActivityIndicator
 } from 'react-native';
-import { Avatar } from 'react-native-elements'
 import SVGImage from 'react-native-svg-image'
 
 import styles from './Style/DetailStyle'
-// import DetailsHeader from '../../Components/Header/DetailsHeader';
-import RoundButton from '../../Components/Buttons/RoundButton'
 import Header from '../../Components/Header/DetailsHeader'
 
-import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
+import { Colors } from '../../Assets/Themes'
 import gps from '../../Assets/Icons/get-directions-button.png'
 
 
@@ -19,8 +15,6 @@ import gps from '../../Assets/Icons/get-directions-button.png'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 
-const screenwidth = Dimensions.get('window').width
-const screenheight = Dimensions.get('window').height
 
 const colors = [
   '#7FB3D5', '#A569BD', '#F7DC6F', '#E74C3C', '#EB9CA8', '#7C878E',
@@ -28,20 +22,6 @@ const colors = [
 ]
 
 export default class Details extends Component {
-
-  // static navigationOptions = ({navigation})=>{
-  //   return{
-  //       headerTitle: 'ForExchange',
-  //       headerStyle: {
-  //           backgroundColor: Colors.primary,
-  //       },
-
-  //       headerTintColor: '#fff',
-  //       headerTitleStyle: {
-  //         fontWeight: 'bold',
-  //       },
-  //   }
-  // };
 
   constructor(props) {
     super(props)
@@ -127,13 +107,6 @@ export default class Details extends Component {
           <View style={styles.avatar}>
             <Text style={styles.avatarTxt}>{userInfo.companyName.substring(0, 2)}</Text>
           </View>
-          {/* <Avatar
-                large
-                rounded
-                title={userInfo.companyName.substring(0, 2)}
-                containerStyle={styles.avatar}
-                activeOpacity={0.7}
-            /> */}
           <View style={styles.titleContainer}>
             <Text
               style={styles.title}>
@@ -178,10 +151,6 @@ export default class Details extends Component {
             <Text>{userInfo.workingDays}</Text>
           </View>
           <View style={styles.separator} />
-          {/* <View style={styles.itemContainer}>
-              <Text style={styles.itemTitle}>Distance :</Text>
-              <Text> 80KM </Text>
-            </View> */}
         </ScrollView>
       </View>
     );

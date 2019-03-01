@@ -1,8 +1,8 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { ApplicationStyles, Metrics, Colors } from '../../../Assets/Themes'
 
 const INPUT_HEIGHT = 48
-const BORDER_RADIUS= 4
+const BORDER_RADIUS = 4
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   row: {
     flex: 1,
-    width: screenwidth -20,
+    width: screenwidth - 20,
     height: 120,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -31,7 +31,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   boldLabel: {
-    flex:1 ,
+    flex: 1,
     fontWeight: 'bold',
     fontSize: 16,
     // alignSelf: 'center',
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     // marginBottom: Metrics.smallMargin
   },
   label: {
-    flex:1 ,
+    flex: 1,
     // textAlign: 'center',
     color: 'grey'
   },
@@ -53,18 +53,21 @@ export default StyleSheet.create({
     borderRadius: 5,
     marginLeft: 10
   },
-  textHead:{
+  textHead: {
     marginLeft: 5,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center'
   },
-  cardContainer:{
-    height: screenheight-5,
-    width: screenwidth-5,
+  cardContainer: {
+    height: screenheight - 5,
+    width: screenwidth - 5,
     backgroundColor: '#3498DB'
   },
-  input:{
+  searchBar: {
+    backgroundColor: Colors.primaryLight
+  },
+  input: {
     height: INPUT_HEIGHT,
     // flex: 1,
     fontSize: 18,
@@ -74,5 +77,5 @@ export default StyleSheet.create({
     borderColor: '#CCD1D1',
     borderRadius: 10
     // borderWidth: 2
-    },
+  },
 })
