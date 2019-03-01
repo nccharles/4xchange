@@ -73,6 +73,9 @@ class CurrencyList extends Component {
         ref={(ref) => this.searchBar = ref}
         data={this.state.data}
         backgroundColor={Colors.primary}
+        textColor='white'
+        iconColor='white'
+        hideX={true}
         handleChangeText={(text) => this.handleSearch(text)}
         showOnLoad
       />
