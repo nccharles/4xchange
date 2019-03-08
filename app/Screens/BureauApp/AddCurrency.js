@@ -394,12 +394,12 @@ class AddCurrency extends Component {
           visible={this.state.AddModal}
           onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
           onPressCurrency={() => this.getCurrency(this.state.baseCurrency)}
-          baseCurrencyBtnTxt={this.state.baseCurrency}
+          baseCurrencyBtnTxt={this.state.baseCurrency + '   '}
           onChangeTextBuy={(value) => this._handleNewCurrencyTextInput('askPrice', value)}
           onChangeTextSell={(value) => this._handleNewCurrencyTextInput('bidPrice', value)}
           onPressCancel={this.handleCancel}
           onPressAction={this._handleSaveCurrency.bind(this)}
-          actionBtnTxt="Save"
+          actionBtnTxt="Save   "
           valueBuy={this.state.newCurrency.askPrice}
           valueSell={this.state.newCurrency.bidPrice}
           icon="download"
@@ -407,14 +407,14 @@ class AddCurrency extends Component {
         <ModalComponent
           visible={this.state.UpdateModal}
           onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
-          baseCurrencyBtnTxt={this.state.currentItem.currency}
+          baseCurrencyBtnTxt={this.state.currentItem.currency + '   '}
           onChangeTextBuy={(value) => this._handleUpdateCurrencyTextInput('askPrice', value)}
           onChangeTextSell={(value) => this._handleUpdateCurrencyTextInput('bidPrice', value)}
           onPressCancel={this.handleCancel}
           onPressAction={this._handleUpdateCurrency.bind(this)}
           valueBuy={this.state.currentItem.askPrice}
           valueSell={this.state.currentItem.bidPrice}
-          actionBtnTxt="Update"
+          actionBtnTxt="Update   "
           icon="refresh-ccw"
         />
         <DialogComponent
@@ -424,7 +424,7 @@ class AddCurrency extends Component {
           // input="892"
           onPress={this.handleDelete}
           onPressCancel={this.handleCancel}
-          label2="Delete"
+          label2="Delete   "
         />
       </View>
     );

@@ -110,15 +110,15 @@ export default class Details extends Component {
           <View style={styles.titleContainer}>
             <Text
               style={styles.title}>
-              {userInfo.companyName}
+              {userInfo.companyName + '   '}
             </Text>
           </View>
           <View style={styles.contactContainer}>
-            <Text style={styles.contacts}>Contacts</Text>
+            <Text style={styles.contacts}>Contacts   </Text>
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Country:</Text>
+            <Text style={styles.itemTitle}>Country:   </Text>
             <Text>{userInfo.countryName}</Text>
             <SVGImage
               style={styles.flag_icon}
@@ -127,27 +127,27 @@ export default class Details extends Component {
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Email:</Text>
+            <Text style={styles.itemTitle}>Email:   </Text>
             <Text>{userInfo.email}</Text>
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Phone:</Text>
+            <Text style={styles.itemTitle}>Phone:   </Text>
             <Text>{userPhone}</Text>
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Address:</Text>
+            <Text style={styles.itemTitle}>Address:   </Text>
             <Text>{userInfo.address}</Text>
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Opening hours:</Text>
+            <Text style={styles.itemTitle}>Opening hours:   </Text>
             <Text>{`${userInfo.openAt} - ${userInfo.closeAt}`}</Text>
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Working Days:</Text>
+            <Text style={styles.itemTitle}>Working Days:   </Text>
             <Text>{userInfo.workingDays}</Text>
           </View>
           <View style={styles.separator} />
