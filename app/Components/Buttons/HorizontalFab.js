@@ -1,11 +1,8 @@
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { Ionicons, Entypo } from '@expo/vector-icons'
 import ActionButton from 'react-native-action-button';
-
-import { styles } from '.';
-
 
 class HorizontalFAB extends Component {
 

@@ -3,8 +3,6 @@ import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import TabNavScreen from "./tabNav";
 import WelcomeScreen from "../Screens/Welcome/Welcome";
 import HeaderBtn from '../Components/Buttons/HeaderBtn'
-// import logout from '../Assets/Icons/logout.png'
-// import { userChoice } from './constants';
 import Local from "../Screens/UserApp/Local";
 import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";

@@ -1,38 +1,22 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import {
-  StyleSheet,
-  Text,
   View,
-  Button,
-  TouchableOpacity,
   FlatList,
-  Image,
-  Animated,
   ActivityIndicator,
   Dimensions,
-  SectionList,
-  Modal,
-  TextInput,
-  YellowBox,
   AsyncStorage,
   ToastAndroid
 } from 'react-native';
-import { Feather, Ionicons } from '@expo/vector-icons'
 import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import logout from '../../Assets/Icons/logout.png'
 import user from '../../Assets/Icons/user.png'
-import add from '../../Assets/Icons/add-list.png'
-
 import AddBtn from '../../Components/Buttons/AddCurrencyBtn'
 import ModalComponent from '../../Components/AddCurrencyModal/modal'
 // import CategoryBtn from '../../Components/ButtonCategory/BtnCategory'
 import Card from '../../Components/Card/BureauCard/Card'
-import InputButton from '../../Components/InputButton/InputButton'
 import DialogComponent from '../../Components/Dialog/Dialog'
 import Header from '../../Components/Header/Header'
-import RoundButton from '../../Components/Buttons/RoundButton'
 
 import styles from './Style/AddCurrencyStyle'
 

@@ -1,33 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, Image } from 'react-native'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import SVGImage from 'react-native-svg-image'
-
-import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 import styles from './styles'
 
 const Card = ({
-    title,
     text,
     onPress,
     onPress1,
-    style,
-    source,
-    text2,
-    text3,
-    baseCurrency,
     equivalent = 0,
-    containerStyle,
     category,
-    leftViewStyle,
     currency,
     bidPrice,
     askPrice,
-    time,
-    onPressIcon,
-    iconStyle
+    time
 }) => (
         <View style={{ flex: 1 }}>
 

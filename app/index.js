@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, AsyncStorage } from 'react-native'
+import { View, ActivityIndicator, AsyncStorage } from 'react-native'
 import * as firebase from 'firebase'
 import PrimaryNav from './Config/routes'
 
 import { Colors } from './Assets/Themes'
 import { userPhone, userChoice } from './Config/constants'
-import { TabHeading } from 'native-base';
 export default class App extends Component {
 	constructor(props) {
 		super(props);

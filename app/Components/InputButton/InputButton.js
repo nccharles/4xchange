@@ -1,7 +1,6 @@
 import React from 'react'
-import {View, Text, TouchableOpacity, TextInput} from 'react-native'
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import PropTypes from 'prop-types'
-import { Ionicons } from '@expo/vector-icons'
 
 import styles from './styles'
 
@@ -9,34 +8,30 @@ const InputWithButton = (props) => {
     const {
         onPress,
         buttonText,
-        editable = true,
         text,
         onChangeText,
-        value,
-        name,
-        BtnTextStyle,
-        BtnStyle} = props
+        value } = props
 
     return (
         <View style={styles.container}>
 
             <TextInput
-            style={styles.input}
-            placeholder={text}
-            autoCapitalize={'none'}
-            returnKeyType={'done'}
-            autoCorrect={false}
-            placeholderTextColor='#99A3A4'
-            underlineColorAndroid='transparent'
-            onChangeText = {onChangeText}
-            value = {value} 
-            {...props}/>
+                style={styles.input}
+                placeholder={text}
+                autoCapitalize={'none'}
+                returnKeyType={'done'}
+                autoCorrect={false}
+                placeholderTextColor='#99A3A4'
+                underlineColorAndroid='transparent'
+                onChangeText={onChangeText}
+                value={value}
+                {...props} />
 
-            <View style={styles.border}/>
+            <View style={styles.border} />
 
             <TouchableOpacity
-                    style={styles.InputButton}
-                    onPress={onPress}>
+                style={styles.InputButton}
+                onPress={onPress}>
                 <Text
                     style={styles.buttonText}
                 >

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {
-  StyleSheet, Text, View, Button, TouchableHighlight, AsyncStorage,
+  StyleSheet, Text, View, AsyncStorage,
   FlatList, Image, Animated, Modal, ActivityIndicator, Dimensions,
   TouchableOpacity, ToastAndroid, Alert
 } from 'react-native';
@@ -131,38 +131,6 @@ class Local extends Component {
 
   };
   Updated = (femail, fcompany) => {
-    const body = {
-      "personalizations": [
-        {
-          "to": [
-            {
-              "email": femail
-            }
-          ],
-          "subject": "Request New Update"
-        }
-      ],
-      "from": {
-        "name": '4xChange',
-        "email": "4xchange@limitless.rw"
-      },
-      "content": [
-        {
-          "type": "text/html",
-          "value": `<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-          <div style="background-color: ${Colors.primary};padding-top:20px;padding-bottom:30px;">
-             <h1 style="font-size: 24px;color: #fff;text-align: center;font-family: Arial, Helvetica, sans-serif;">4xChange</h1>
-             <div style="width: 90%;margin-left: auto;margin-right: auto;padding: 10px;background-color: #fff;">
-            <p style="font-size: 16px;font-family:Arial, Helvetica, sans-serif;">Hello <b>${fcompany},</b><br/><br/>Your customer just need updates for ${this.state.baseCurrency} available in ${fcompany}<br/> 
-            <i>CLICK <a href='https://expo.io/@nccharles/4xChange' >HERE TO UPDATE ${this.state.baseCurrency}</a></i><br/><br/>
-            
-            <strong>4xchange Team!</strong>
-            </p>
-          </div>
-           </div>`
-        }
-      ]
-    }
     //returning sendGridKey
     firebase
       .database()
@@ -170,6 +138,37 @@ class Local extends Component {
       .once("value")
       .then(sanpshot => {
         console.log(sanpshot.val().sgkey)
+        console.log(sanpshot.val().content)
+        const body = {
+          "personalizations": [
+            {
+              "to": [
+                {
+                  "email": femail
+                }
+              ],
+              "subject": "Request New Update"
+            }
+          ],
+          "from": {
+            "name": '4xChange',
+            "email": "4xchange@limitless.rw"
+          },
+          "content": [
+            {
+              "type": "text/html",
+              "value": `<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+          <div style="margin: 0 auto;background-color:${Colors.primary};padding:40px;">
+             <div style="margin: auto;padding: 10px;background-color: #fff;border-radius: 2px;">
+            <p style="font-size: 16px;font-family:Arial, Helvetica, sans-serif;">Hello <b>${fcompany},</b><br/><br/>${sanpshot.val().content}<br/> 
+            <i>Click <a href='${sanpshot.val().link}' >here to update ${this.state.baseCurrency}</a></i><br/><br/>
+            <span>Regards,<br/>4xchange Management</span>
+            </p>
+          </div>
+           </div>`
+            }
+          ]
+        }
 
         fetch('https://api.sendgrid.com/v3/mail/send', {
           method: 'POST',

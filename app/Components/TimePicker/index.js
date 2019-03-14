@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
     Picker,
-    PickerIOS,
     Platform,
     View,
     Text

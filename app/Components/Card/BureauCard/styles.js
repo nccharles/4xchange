@@ -1,14 +1,14 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { ApplicationStyles, Metrics, Colors } from '../../../Assets/Themes'
+import { Metrics, Colors } from '../../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
 export default StyleSheet.create({
-  container:{
+  container: {
     flexDirection: 'row',
-    width: screenwidth -30,
-    height: screenheight/10,
+    width: screenwidth - 30,
+    height: screenheight / 10,
     elevation: 3,
     alignSelf: 'center',
     marginVertical: 8,
@@ -16,12 +16,12 @@ export default StyleSheet.create({
     borderRadius: Metrics.smallMargin
 
   },
-  left:{
-    width: 20, 
-    height: screenheight/10,
+  left: {
+    width: 20,
+    height: screenheight / 10,
     marginVertical: 8,
-    backgroundColor: Colors.primary, 
-    borderRadius: 40, 
+    backgroundColor: Colors.primary,
+    borderRadius: 40,
     marginLeft: -12
   },
   row: {
@@ -33,14 +33,14 @@ export default StyleSheet.create({
     // flex: 2.5, 
     // justifyContent: 'center'
   },
-  category:{
+  category: {
     alignSelf: 'center',
     textAlign: 'center',
     fontWeight: 'bold',
     color: Colors.charcoal,
     fontSize: 20,
     marginLeft: 20
-    },
+  },
   boldLabel: {
     position: 'absolute',
     // top: screenheight/250,
@@ -55,7 +55,7 @@ export default StyleSheet.create({
     color: 'gray',
     fontSize: 14,
   },
-  iconBtn:{
+  iconBtn: {
     position: 'absolute',
     right: 15,
     top: 5
@@ -66,10 +66,10 @@ export default StyleSheet.create({
   },
   updated: {
     position: 'absolute',
-    right: 15, 
-    bottom: 5, 
+    right: 15,
+    bottom: 5,
     fontWeight: '500',
     color: Colors.secondary,
     fontSize: 13
-}
+  }
 })

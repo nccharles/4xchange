@@ -1,16 +1,15 @@
-import React from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
-const styles =  StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        flex: 1, 
+        flex: 1,
         flexDirection: 'row',
-        marginLeft: height * .05, 
+        marginLeft: height * .05,
     },
     picker: {
-        height: 50, 
-        width: 45, 
+        height: 50,
+        width: 45,
         backgroundColor: '#fff'
     },
     separator: {

@@ -6,29 +6,23 @@ import styles from './styles';
 
 const ListItem = ({
   title,
-  subTitle,
-  onPress,
-  checkmark = true,
-  selected = false,
-  visible = true,
-  customIcon = null,
-  iconBackground,
-  }) => (
-  <TouchableHighlight style={styles.row} onPress={onPress}>
-    {/* <View > */}
-    <View style={styles.titleContainer} >
-            <Text style={styles.title}>
-              {title}
-            </Text>
-          </View>
-          <View style={styles.subTitleContainer} >
-            <Text style={styles.subTitle}>
-              {subtitle}
-            </Text>
-          </View>
-    {/* </View> */}
-  </TouchableHighlight>
-);
+  onPress
+}) => (
+    <TouchableHighlight style={styles.row} onPress={onPress}>
+      {/* <View > */}
+      <View style={styles.titleContainer} >
+        <Text style={styles.title}>
+          {title}
+        </Text>
+      </View>
+      <View style={styles.subTitleContainer} >
+        <Text style={styles.subTitle}>
+          {subtitle}
+        </Text>
+      </View>
+      {/* </View> */}
+    </TouchableHighlight>
+  );
 
 ListItem.propTypes = {
   title: PropTypes.string,

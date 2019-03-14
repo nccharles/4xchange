@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {
-  StyleSheet, Text, View, Button, TouchableOpacity,
-  FlatList, Image, Animated, ActivityIndicator, Dimensions,
-  SectionList, Modal, TextInput
+  Text, View, TouchableOpacity, Modal, TextInput
 } from 'react-native';
 // import Dialog from "react-native-dialog";
 import { Feather } from '@expo/vector-icons'
@@ -12,8 +10,6 @@ import { Feather } from '@expo/vector-icons'
 
 import styles from './styles'
 
-const screenwidth = Dimensions.get('window').width
-const screenheight = Dimensions.get('window').height
 
 class ModalComponent extends Component {
   render() {

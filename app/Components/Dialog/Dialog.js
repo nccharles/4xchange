@@ -13,8 +13,6 @@ class DialogComponent extends Component {
       onPressCancel,
       title,
       description,
-      input,
-      onChangeText,
       label2
     } = this.props
 

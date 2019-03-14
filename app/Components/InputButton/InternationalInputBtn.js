@@ -1,50 +1,45 @@
 import React from 'react'
-import {View, Text, TouchableOpacity, TextInput} from 'react-native'
+import { View, Text, TextInput } from 'react-native'
 import PropTypes from 'prop-types'
 
 import styles from './styles'
 
 const InternationalInputButton = (props) => {
     const {
-        onPress, 
-        buttonText, 
-        editable = true, 
-        text, 
-        onChangeText, 
-        value, 
-        name, 
-        BtnTextStyle, 
-        BtnStyle} = props
+        buttonText,
+        text,
+        onChangeText,
+        value } = props
 
     return (
         <View style={styles.container}>
-            
-            <View style={styles.border}/>
 
-            <TextInput  
-            style={styles.input}
-            placeholder={text}
-            autoCapitalize={'none'}
-            returnKeyType={'done'}
-            autoCorrect={false}
-            placeholderTextColor='#99A3A4'
-            underlineColorAndroid='transparent'
-            onChangeText = {onChangeText}
-            value = {value} 
-            {...props}/>
+            <View style={styles.border} />
 
-            <View 
-                    style={styles.buttonContainer}>
-                    {/* // style={BtnStyle}
+            <TextInput
+                style={styles.input}
+                placeholder={text}
+                autoCapitalize={'none'}
+                returnKeyType={'done'}
+                autoCorrect={false}
+                placeholderTextColor='#99A3A4'
+                underlineColorAndroid='transparent'
+                onChangeText={onChangeText}
+                value={value}
+                {...props} />
+
+            <View
+                style={styles.buttonContainer}>
+                {/* // style={BtnStyle}
                     // onPress={onPress}> */}
-                <Text 
+                <Text
                     style={styles.buttonTextInter}
-                    // style={BtnTextStyle}
+                // style={BtnTextStyle}
                 >
                     {buttonText}
                 </Text>
             </View>
-            
+
         </View>
     )
 }

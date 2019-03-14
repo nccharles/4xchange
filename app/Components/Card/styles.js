@@ -1,5 +1,5 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native'
-import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
+import { Dimensions, StyleSheet } from 'react-native'
+import { Colors } from '../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
@@ -8,22 +8,22 @@ export default StyleSheet.create({
   row: {
     flex: 1,
     alignSelf: 'center',
-    width: screenwidth -5,
-    height: screenheight /7.5,
+    width: screenwidth - 5,
+    height: screenheight / 7.5,
     // elevation: 3,
     backgroundColor: Colors.snow,
     marginVertical: 10,
     borderRadius: 5,
     // flexDirection: 'row'
   },
-  left:{
-    width: 20, 
-    backgroundColor: Colors.primary, 
-    borderRadius: 30, 
+  left: {
+    width: 20,
+    backgroundColor: Colors.primary,
+    borderRadius: 30,
     marginLeft: -12
   },
   wrapper: {
-    flex: 1, 
+    flex: 1,
     flexDirection: 'row'
   },
   leftContainer: {
@@ -59,37 +59,37 @@ export default StyleSheet.create({
     bottom: 10
   },
   icon_btn: {
-    position:"absolute",
-    bottom:0,
+    position: "absolute",
+    bottom: 0,
     left: 30
   },
   amount: {
-    fontSize: 16, 
-    color: '#99A3A4', 
-    fontWeight:'bold'
+    fontSize: 16,
+    color: '#99A3A4',
+    fontWeight: 'bold'
   },
-  currencyName:{
-    fontSize: 16, 
-    color: '#99A3A4',  
-    fontWeight:'bold',
+  currencyName: {
+    fontSize: 16,
+    color: '#99A3A4',
+    fontWeight: 'bold',
     marginLeft: 5
   },
-  rightContainer:{
-    flex: 4, 
+  rightContainer: {
+    flex: 4,
     flexDirection: 'column',
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between',
   },
-  rightCategory:{
-    fontSize: 16,  
-    color: Colors.dark, 
-    fontWeight:'bold', 
+  rightCategory: {
+    fontSize: 16,
+    color: Colors.dark,
+    fontWeight: 'bold',
     position: 'absolute',
     right: 15,
     top: 25
   },
   flag_icon: {
-    width: screenwidth/ 12, 
-    height: screenheight /20,
+    width: screenwidth / 12,
+    height: screenheight / 20,
     backgroundColor: 'transparent',
     position: 'absolute',
     right: 15
@@ -97,7 +97,7 @@ export default StyleSheet.create({
     // justifyContent: 'center',
     // marginTop: -2,
     // marginLeft: screenwidth/ 2.5 
-},
+  },
   equivalentContainer: {
     position: 'absolute',
     right: 15,
@@ -106,16 +106,16 @@ export default StyleSheet.create({
   },
   updated: {
     position: 'absolute',
-    right: 15, 
-    bottom: 0, 
+    right: 15,
+    bottom: 0,
     fontWeight: '500',
     color: Colors.secondary,
     fontSize: 12
   },
   parent: {
     flex: 1,
-    width: screenwidth -30,
-    height: screenheight /10,
+    width: screenwidth - 30,
+    height: screenheight / 10,
     flexDirection: 'row',
     backgroundColor: 'white',
     // elevation: 3,
@@ -127,14 +127,14 @@ export default StyleSheet.create({
   },
   imageContainer: {
     borderWidth: 0.5,
-    width: screenwidth/ 6,
-    height: screenheight /17,
+    width: screenwidth / 6,
+    height: screenheight / 17,
     marginLeft: 8,
     justifyContent: 'center',
     alignSelf: 'center'
   },
   leftRectangular: {
-    flex: 1, 
+    flex: 1,
     width: '100%',
     height: '100%',
   },
@@ -173,13 +173,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
   },
-  
+
   separator: {
     flex: 1,
-    height: 1, 
-    width: screenwidth -5,
-    backgroundColor: "#CED0CE", 
+    height: 1,
+    width: screenwidth - 5,
+    backgroundColor: "#CED0CE",
     // margin: 8
   },
-  
+
 });

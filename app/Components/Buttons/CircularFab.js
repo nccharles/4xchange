@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Ionicons, Entypo } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 import ActionButton from 'react-native-circular-action-menu';
 
 import { styles } from '.';

@@ -1,18 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 import {
-  View, Text, Dimensions, Image, TouchableOpacity
+  View, Text, Image, TouchableOpacity
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
 import styles from './styles'
-
-import { Colors } from '../../Assets/Themes'
-import logout from '../../Assets/Icons/logout.png'
-import user from '../../Assets/Icons/user.png'
-
-const screenWidth = Dimensions.get('window').width
-const screenheight = Dimensions.get('window').height
 
 const DetailsHeader = (props) => {
   const { onPress1, onPress2, source } = props

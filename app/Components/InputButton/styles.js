@@ -1,8 +1,8 @@
-import {StyleSheet, Dimensions} from 'react-native'
-import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
+import { StyleSheet, Dimensions } from 'react-native'
+import { Colors } from '../../Assets/Themes'
 
 const INPUT_HEIGHT = 48
-const BORDER_RADIUS= 4
+const BORDER_RADIUS = 4
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
@@ -10,9 +10,9 @@ export default StyleSheet.create({
     // $buttonBackgroundColorBase: '$white',
     // $buttonBackgroundColorModifier: 0.1,
 
-    container:{
+    container: {
         // backgroundColor: '#CCD1D1',
-        width: screenwidth -30,
+        width: screenwidth - 30,
         // height: (screenheight /11)- 10,
         borderRadius: BORDER_RADIUS,
         flexDirection: 'row',
@@ -23,9 +23,9 @@ export default StyleSheet.create({
         // margin: 10,
         // marginHorizontal: 20
     },
-    InputButton:{
-        height: screenheight/16,
-        width: screenwidth /5,
+    InputButton: {
+        height: screenheight / 16,
+        width: screenwidth / 5,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -34,14 +34,14 @@ export default StyleSheet.create({
         backgroundColor: Colors.dark,
         elevation: 10
     },
-      buttonText:{
+    buttonText: {
         fontWeight: '600',
         fontSize: 16,
         paddingHorizontal: 5,
         color: 'white'
     },
-    buttonContainer:{
-        height: screenheight/16,
+    buttonContainer: {
+        height: screenheight / 16,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -51,15 +51,15 @@ export default StyleSheet.create({
         borderWidth: 2,
         borderColor: '#CCD1D1',
     },
-    buttonTextInter:{
+    buttonTextInter: {
         fontWeight: '600',
         fontSize: 18,
         paddingHorizontal: 16,
         color: Colors.primary
     },
-    input:{
+    input: {
         backgroundColor: Colors.snow,
-        height: screenheight/16,
+        height: screenheight / 16,
         flex: 1,
         fontSize: 16,
         paddingHorizontal: 8,
@@ -70,9 +70,9 @@ export default StyleSheet.create({
         borderRadius: 5
         // borderWidth: 2
     },
-    inputInter:{
+    inputInter: {
         backgroundColor: Colors.snow,
-        height: screenheight/16,
+        height: screenheight / 16,
         // width: screenwidth -100,
         flex: 1,
         fontSize: 15,
@@ -83,7 +83,7 @@ export default StyleSheet.create({
         borderColor: '#CCD1D1',
         borderRadius: 10
     },
-    border:{
+    border: {
         height: INPUT_HEIGHT,
         width: StyleSheet.hairlineWidth,
         borderColor: 'black'

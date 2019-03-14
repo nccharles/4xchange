@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Text, Image,
-  StyleSheet, TouchableOpacity
+  View, Text, Image, TouchableOpacity
 } from 'react-native';
-import {Avatar} from 'react-native-elements'
-
 import styles from './styles'
 
 class InternationalCard extends Component {
@@ -22,11 +19,11 @@ class InternationalCard extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}} >
-        <TouchableOpacity style={styles.parent}  onPress={this.props.onPress}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.leftRectangular} resizeMode="stretch" source={this.props.avatar} />
-        </View>
+      <View style={{ flex: 1 }} >
+        <TouchableOpacity style={styles.parent} onPress={this.props.onPress}>
+          <View style={styles.imageContainer}>
+            <Image style={styles.leftRectangular} resizeMode="stretch" source={this.props.avatar} />
+          </View>
           <View style={styles.center}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>
@@ -47,7 +44,7 @@ class InternationalCard extends Component {
             </Text>
           </View>
         </TouchableOpacity>
-        <View style={styles.separator}/>
+        <View style={styles.separator} />
       </View>
     );
   }

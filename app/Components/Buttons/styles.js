@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
+import { Colors } from '../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.dark,
     marginVertical: 20,
-    height: screenheight/16,
+    height: screenheight / 16,
     borderRadius: 5,
-    width: screenwidth -30,
-    alignContent : 'center',
+    width: screenwidth - 30,
+    alignContent: 'center',
     justifyContent: 'center',
     elevation: 3,
     flexDirection: 'row',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight:'bold',
+    fontWeight: 'bold',
     paddingHorizontal: 5
   },
   roundButton: {
@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
     right: 40,
     bottom: 30,
     backgroundColor: Colors.dark,
-    width: screenwidth/5,
-    height: screenwidth/5,
-    borderRadius: screenwidth/5,
+    width: screenwidth / 5,
+    height: screenwidth / 5,
+    borderRadius: screenwidth / 5,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 3
@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
   image: {
     tintColor: 'white',
   },
-  buttonContainer:{
+  buttonContainer: {
     marginBottom: 10,
     flexDirection: 'row',
     borderWidth: 2,
     borderColor: Colors.dark,
     borderRadius: 5,
-    height: screenheight/16,
-    width: screenwidth -30,
+    height: screenheight / 16,
+    width: screenwidth - 30,
     alignSelf: 'center',
     elevation: 3
   },
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   },
   headerImg: {
     tintColor: 'white',
-    width: screenwidth/16,
-    height: screenwidth/16,
+    width: screenwidth / 16,
+    height: screenwidth / 16,
   }
 });
 
