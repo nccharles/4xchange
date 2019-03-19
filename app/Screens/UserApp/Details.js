@@ -105,7 +105,7 @@ export default class Details extends Component {
           source={gps} />
         <ScrollView style={styles.card}>
           <View style={[styles.avatar, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
-            <Text style={styles.avatarTxt}>{userInfo.companyName.substring(0, 2)}</Text>
+            <Text style={styles.avatarTxt}>{userInfo.companyName.substring(0, 2).toUpperCase()}</Text>
           </View>
           <View style={styles.titleContainer}>
             <Text

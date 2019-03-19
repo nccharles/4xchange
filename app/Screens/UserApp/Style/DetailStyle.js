@@ -70,6 +70,6 @@ export default StyleSheet.create({
         // alignSelf: 'center',
         // justifyContent: 'center',
         marginTop: -2,
-        marginLeft: screenwidth / 2.5
+        marginLeft: screenwidth / 2.2
     },
 })
