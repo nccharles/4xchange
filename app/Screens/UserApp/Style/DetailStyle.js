@@ -1,23 +1,23 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { ApplicationStyles, Metrics, Colors } from '../../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
 export default StyleSheet.create({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     card: {},
-    avatar:{
+    avatar: {
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        width: screenwidth/4,
-        height: screenwidth/4,
-        borderRadius: (screenwidth/4) /2,
+        width: screenwidth / 4,
+        height: screenwidth / 4,
+        borderRadius: (screenwidth / 4) / 2,
         backgroundColor: '#BFC9CA',
         marginTop: 20
     },
@@ -28,48 +28,48 @@ export default StyleSheet.create({
         fontWeight: 'bold'
     },
     titleContainer: {
-        flex: 1, 
-        flexDirection:"row", 
-        alignSelf: 'center', 
+        flex: 1,
+        flexDirection: "row",
+        alignSelf: 'center',
         marginVertical: 10
     },
     title: {
-        color: '#3498DB',
+        color: Colors.primary,
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
     },
     contactContainer: {
-        flexDirection:"row",
+        flexDirection: "row",
         marginLeft: 10
     },
     contacts: {
-        fontWeight: 'bold', 
+        fontWeight: 'bold',
         marginRight: 15
     },
     separator: {
         flex: 1,
-        height: 1, 
-        width: screenwidth, 
-        backgroundColor: "#CED0CE", 
+        height: 1,
+        width: screenwidth,
+        backgroundColor: "#CED0CE",
         margin: 8
     },
     itemContainer: {
-        flexDirection:"row", 
+        flexDirection: "row",
         paddingVertical: 10,
         marginLeft: 10
     },
     itemTitle: {
-        fontWeight: '900', 
+        fontWeight: '900',
         marginRight: 15
     },
     flag_icon: {
-        width: screenwidth/ 8, 
-        height: screenheight /25,
+        width: screenwidth / 8,
+        height: screenheight / 25,
         backgroundColor: 'transparent',
         // alignSelf: 'center',
         // justifyContent: 'center',
         marginTop: -2,
-        marginLeft: screenwidth/ 2.5 
+        marginLeft: screenwidth / 2.5
     },
 })
