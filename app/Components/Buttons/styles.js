@@ -29,6 +29,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingHorizontal: 5
   },
+  chatbutton: {
+    width: screenwidth / 6,
+    height: screenwidth / 6,
+    borderRadius: screenwidth / 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    position: 'absolute',
+    bottom: 20,
+    right: 10,
+  },
   roundButton: {
     position: 'absolute',
     right: 40,
