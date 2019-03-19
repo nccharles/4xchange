@@ -51,7 +51,7 @@ export default StyleSheet.create({
         flex: 1,
         height: 1,
         width: screenwidth,
-        backgroundColor: "#CED0CE",
+        backgroundColor: Colors.primary,
         margin: 8
     },
     itemContainer: {
