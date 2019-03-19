@@ -6,7 +6,7 @@ import SVGImage from 'react-native-svg-image'
 
 import styles from './Style/DetailStyle'
 import Header from '../../Components/Header/DetailsHeader'
-
+import ChatBtn from '../../Components/Buttons/BtnChat'
 import { Colors } from '../../Assets/Themes'
 import gps from '../../Assets/Icons/get-directions-button.png'
 
@@ -17,8 +17,8 @@ import _ from 'lodash'
 
 
 const colors = [
-  '#7FB3D5', '#A569BD', '#F7DC6F', '#E74C3C', '#EB9CA8', '#7C878E',
-  '#8A004F', '#000000', '#10069F', '#00a3e1', '#4CC1A1'
+  '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
+  '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
 ]
 
 export default class Details extends Component {
@@ -104,7 +104,7 @@ export default class Details extends Component {
           onPress1={() => this.handlePressDirections()}
           source={gps} />
         <ScrollView style={styles.card}>
-          <View style={styles.avatar}>
+          <View style={[styles.avatar, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
             <Text style={styles.avatarTxt}>{userInfo.companyName.substring(0, 2)}</Text>
           </View>
           <View style={styles.titleContainer}>
@@ -150,8 +150,8 @@ export default class Details extends Component {
             <Text style={styles.itemTitle}>Working Days:   </Text>
             <Text>{userInfo.workingDays}</Text>
           </View>
-          <View style={styles.separator} />
         </ScrollView>
+        <ChatBtn />
       </View>
     );
   }
