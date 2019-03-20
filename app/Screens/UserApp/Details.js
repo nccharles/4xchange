@@ -3,19 +3,17 @@ import {
   ScrollView, View, Text, Linking, Platform, ActivityIndicator
 } from 'react-native';
 import SVGImage from 'react-native-svg-image'
-
 import styles from './Style/DetailStyle'
 import Header from '../../Components/Header/DetailsHeader'
 import ChatBtn from '../../Components/Buttons/BtnChat'
 import { Colors } from '../../Assets/Themes'
 import gps from '../../Assets/Icons/get-directions-button.png'
+import NameDialogComponent from '../../Components/NameModal/Usermodal';
 
 
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-
-
 const colors = [
   '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
   '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
@@ -26,7 +24,10 @@ export default class Details extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      InputDialogVisible: false,
       userPhone: null,
+      chatname: null,
+      inputedValue: '',
       userInfo: {
         phone: '',
         address: '',
@@ -60,7 +61,23 @@ export default class Details extends Component {
     })
     this._getCompanyProfile(userPhone)
   }
-
+  _handleChatNameInput = (value) => {
+    // const chatEnteredName = parseInt(value)
+    console.log(value)
+    if (value) {
+      this.setState({
+        inputedValue: value
+      })
+      return
+    }
+    this.setState({
+      inputedValue: ''
+    })
+  }
+  handleChat = () => {
+    this.setState({ InputDialogVisible: false })
+    this.props.navigation.navigate('Chat', { name: this.state.inputedValue });
+  }
   _getCompanyProfile = async (userPhone) => {
     const that = this
     await firebase.database().ref(`/infos/${userPhone}/publicInfo`)
@@ -151,7 +168,18 @@ export default class Details extends Component {
             <Text>{userInfo.workingDays}</Text>
           </View>
         </ScrollView>
-        <ChatBtn />
+        <ChatBtn onPress={() => this.setState({ InputDialogVisible: true })} />
+        <NameDialogComponent
+          visible={this.state.InputDialogVisible}
+          title="Your Name  "
+          description="Add your name that will show in chat"
+          // input="Charles"
+          onChangeTextName={(value) => this._handleChatNameInput(value)}
+          valueName={this.state.chatname}
+          onPress={this.handleChat}
+          onPressCancel={() => this.setState({ InputDialogVisible: false })}
+          label2="Start Chat   "
+        />
       </View>
     );
   }

@@ -16,6 +16,7 @@ import InfoReg from "../Screens/BureauApp/infoRegis";
 import AdditionalInfo from "../Screens/BureauApp/additionalInfo";
 import Country from "../Screens/BureauApp/countryList";
 import { Colors } from '../Assets/Themes';
+import Chat from '../Screens/UserApp/Chat';
 
 
 // Manifest of possible screens
@@ -89,6 +90,12 @@ const WelcomeStack = createStackNavigator({
     navigationOptions: {
       header: () => null
     }
+  },
+  Chat: {
+    screen: Chat,
+    // navigationOptions: {
+    //   header: () => null
+    // }
   }
 });
 const UserStack = createStackNavigator({
