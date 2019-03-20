@@ -7,7 +7,7 @@ class Chat extends React.Component {
     // 2.
 
     static navigationOptions = ({ navigation }) => {
-        let Title = (navigation.state.params || {}).name || 'Chat!   '
+        let Title = (navigation.state.params || {}).forex || 'Chat!   '
         return {
             headerTitle: Title + '   ',
             headerStyle: {
@@ -23,6 +23,7 @@ class Chat extends React.Component {
     // 3.
     state = {
         messages: [],
+        Customer: this.props.navigation.state.params.customer
     }
     onSend(messages = []) {
         this.setState(previousState => ({
@@ -34,7 +35,7 @@ class Chat extends React.Component {
             messages: [
                 {
                     _id: 1,
-                    text: 'Hello Customer',
+                    text: `Hello ${this.state.Customer}`,
                     createdAt: new Date(),
                     user: {
                         _id: 2,
