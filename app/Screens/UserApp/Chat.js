@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
 import { Colors } from '../../Assets/Themes'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import "prop-types";
-// 1.
+//backend firebase things
+import * as firebase from 'firebase'
+import _ from 'lodash'
 import { GiftedChat } from 'react-native-gifted-chat';
 class Chat extends React.Component {
-    // 2.
 
     static navigationOptions = ({ navigation }) => {
         let Title = (navigation.state.params || {}).forex || 'Chat!   '
@@ -22,7 +23,6 @@ class Chat extends React.Component {
             },
         }
     };
-    // 3.
     state = {
         messages: [],
         Customer: this.props.navigation.state.params.customer
@@ -31,6 +31,7 @@ class Chat extends React.Component {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
         }))
+        console.log(this.state.messages)
     }
     renderCustomView = (props) => {
         if (props.currentMessage.location) {
@@ -119,6 +120,7 @@ class Chat extends React.Component {
                         },
                     ]}
                 />
+                <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={80} />
             </>
         );
     }
