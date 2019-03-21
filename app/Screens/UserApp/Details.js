@@ -76,7 +76,7 @@ export default class Details extends Component {
   }
   handleChat = () => {
     this.setState({ InputDialogVisible: false })
-    this.props.navigation.navigate('Chat', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName });
+    this.props.navigation.navigate('Chat', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userPhone });
   }
   _getCompanyProfile = async (userPhone) => {
     const that = this
