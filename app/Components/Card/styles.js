@@ -138,6 +138,23 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  imageChatContainer: {
+    borderWidth: 0,
+    width: screenwidth / 8,
+    height: screenwidth / 8,
+    borderRadius: screenwidth / 8,
+    marginLeft: 8,
+    justifyContent: 'center',
+    alignSelf: 'center'
+  },
+  leftCircle: {
+    flex: 1,
+    width: screenwidth / 8,
+    height: screenwidth / 8,
+    borderRadius: screenwidth / 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   center: {
     height: '100%',
     flex: 0.90,
@@ -181,5 +198,12 @@ export default StyleSheet.create({
     backgroundColor: "#CED0CE",
     // margin: 8
   },
+  Chatseparator: {
+    flex: 1,
+    height: 1,
+    width: screenwidth - 10,
+    backgroundColor: "#CED0CE",
+    marginLeft: screenwidth / 5
+  }
 
 });

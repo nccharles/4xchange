@@ -173,7 +173,6 @@ export default class Details extends Component {
           visible={this.state.InputDialogVisible}
           title="Your Name  "
           description="Add your name that will show in chat"
-          // input="Charles"
           onChangeTextName={(value) => this._handleChatNameInput(value)}
           valueName={this.state.chatname}
           onPress={this.handleChat}

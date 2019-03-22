@@ -17,7 +17,7 @@ import ModalComponent from '../../Components/AddCurrencyModal/modal'
 import Card from '../../Components/Card/BureauCard/Card'
 import DialogComponent from '../../Components/Dialog/Dialog'
 import Header from '../../Components/Header/Header'
-
+import ChatBtn from '../../Components/Buttons/BtnChat'
 import styles from './Style/AddCurrencyStyle'
 
 //backend imports 
@@ -410,6 +410,7 @@ class AddCurrency extends Component {
           onPressCancel={this.handleCancel}
           label2="Delete   "
         />
+        <ChatBtn onPress={() => this.props.navigation.navigate('Chatlist')} />
       </View>
     );
   }

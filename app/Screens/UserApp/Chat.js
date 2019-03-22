@@ -84,7 +84,6 @@ class Chat extends React.Component {
         this._getAllmessages(forexPhone)
     }
     _getAllmessages = async (forexPhone) => {
-        console.log(await AsyncStorage.getItem(userChoice))
         const that = this
         await firebase.database().ref(`/Chats/${forexPhone}/messages`)
             .once('value').then(snapshot => {

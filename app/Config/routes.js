@@ -17,7 +17,7 @@ import AdditionalInfo from "../Screens/BureauApp/additionalInfo";
 import Country from "../Screens/BureauApp/countryList";
 import { Colors } from '../Assets/Themes';
 import Chat from '../Screens/UserApp/Chat';
-
+import Chatlist from '../Screens/BureauApp/Chatlist'
 
 // Manifest of possible screens
 const InfoRegis = createStackNavigator({
@@ -43,6 +43,12 @@ const Login = createStackNavigator({
       headerTransparent: true,
       headerTintColor: "#fff"
     }
+  },
+  Chatlist: {
+    screen: Chatlist,
+    // navigationOptions: {
+    //   header: () => null
+    // }
   },
   AdditionalInfo: {
     screen: AdditionalInfo
@@ -96,7 +102,8 @@ const WelcomeStack = createStackNavigator({
     // navigationOptions: {
     //   header: () => null
     // }
-  }
+  },
+
 });
 const UserStack = createStackNavigator({
   TabNavScreen: {
@@ -121,6 +128,12 @@ const UserStack = createStackNavigator({
       }
     }
   },
+  Chat: {
+    screen: Chat,
+    // navigationOptions: {
+    //   header: () => null
+    // }
+  },
   Local: { screen: Local },
   CurrencyList: { screen: CurrencyList },
   MapView: { screen: MapView },
@@ -144,6 +157,9 @@ const SignedIn = createStackNavigator({
     navigationOptions: {
       header: () => null
     }
+  },
+  Chatlist: {
+    screen: Chatlist,
   },
   CurrencyList: { screen: CurrencyList },
   Info: { screen: Info }
