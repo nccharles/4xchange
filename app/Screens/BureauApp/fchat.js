@@ -7,11 +7,10 @@ import "prop-types";
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { GiftedChat } from 'react-native-gifted-chat';
-import { userChoice } from '../../Config/constants';
-class Chat extends React.Component {
+class ForexChat extends Component {
 
     static navigationOptions = ({ navigation }) => {
-        let Title = (navigation.state.params || {}).forex || 'Chat!   '
+        let Title = (navigation.state.params || {}).customer || 'Chat!   '
         return {
             headerTitle: Title + '   ',
             headerStyle: {
@@ -30,7 +29,7 @@ class Chat extends React.Component {
         forexPhone: null,
         Customer: null
     }
-    onSend(messages = [], forexPhone) {
+    onSend(messages, forexPhone) {
         console.log(forexPhone)
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
@@ -103,8 +102,8 @@ class Chat extends React.Component {
     }
     get user() {
         return {
-            name: this.props.navigation.state.params.customer,
-            _id: this.props.navigation.state.params.customer,
+            name: this.props.navigation.state.params.forex,
+            _id: this.state.forexPhone,
             timestamp: this.timestamp
         };
     }
@@ -144,6 +143,7 @@ class Chat extends React.Component {
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages, this.state.forexPhone)}
                     renderCustomView={this.renderCustomView}
+                    createdAt={this.timestamp}
                     user={this.user}
                     scrollToBottom={true}
                     isAnimated={true}
@@ -168,4 +168,4 @@ const styles = StyleSheet.create({
         margin: 3,
     },
 });
-export default Chat;
+export default ForexChat;

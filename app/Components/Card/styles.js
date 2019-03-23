@@ -144,16 +144,15 @@ export default StyleSheet.create({
     height: screenwidth / 8,
     borderRadius: screenwidth / 8,
     marginLeft: 8,
+    backgroundColor: '#CED0CE',
     justifyContent: 'center',
     alignSelf: 'center'
   },
   leftCircle: {
-    flex: 1,
-    width: screenwidth / 8,
-    height: screenwidth / 8,
-    borderRadius: screenwidth / 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   center: {
     height: '100%',

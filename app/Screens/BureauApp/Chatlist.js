@@ -19,20 +19,6 @@ import { userPhone, cName } from '../../Config/constants';
 
 const initailState = {
     loading: true,
-    inputedValue: 0,
-    baseCurrency: 'Choose',
-    initialCurrency: null,
-    category: 'Buy or Sell',
-    isBuying: true,
-    DeleteDialogVisible: false,
-    UpdateModal: false,
-    AddModal: false,
-    currentItem: {
-        askPrice: null,
-        bidPrice: null,
-        Currency: null,
-        uid: null,
-    },
     error: null,
     isSubmitting: false,
 }
@@ -48,11 +34,6 @@ class AddCurrency extends Component {
 
             forexPhone: null,
             companyName: null,
-            newCurrency: {
-                currency: null,
-                askPrice: null,
-                bidPrice: null,
-            }
         }
     };
     static navigationOptions = () => {
@@ -88,7 +69,7 @@ class AddCurrency extends Component {
                 this.setState(() => ({
                     loading: false,
                 }))
-                console.log(snapshot.val())
+                console.log(snapshot)
                 if (snapshot.val()) {
                     that.setState(() => ({
                         data: snapshot.val().messages,
@@ -136,8 +117,8 @@ class AddCurrency extends Component {
                                 subtitle={item.text}
                                 hideAvatar={false}
                                 roundAvatar={true}
-                                avatar={{ uri: 'https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/User_No-Frame.png' }}
-                                onPress={() => alert('Hello')}
+                                avatar={item.user.name.substring(0, 1).toUpperCase()}
+                                onPress={() => this.props.navigation.navigate('ForexChat', { customer: item.user.name, forex: this.state.companyName, forexPhone: this.state.forexPhone })}
                                 rightComponentText={this.getTime(item.user.timestamp)}
                             />
                         )}

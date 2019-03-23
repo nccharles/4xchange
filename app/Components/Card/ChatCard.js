@@ -21,8 +21,11 @@ class ChatCard extends Component {
         return (
             <View style={{ flex: 1 }} >
                 <TouchableOpacity style={styles.parent} onPress={this.props.onPress}>
-                    <View style={styles.imageChatContainer}>
+                    {/* <View style={styles.imageChatContainer}>
                         <Image style={styles.leftCircle} resizeMode="stretch" source={this.props.avatar} />
+                    </View> */}
+                    <View style={styles.imageChatContainer}>
+                        <Text style={styles.leftCircle}>{this.props.avatar}</Text>
                     </View>
                     <View style={styles.center}>
                         <View style={styles.titleContainer}>

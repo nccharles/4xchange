@@ -18,7 +18,7 @@ import Country from "../Screens/BureauApp/countryList";
 import { Colors } from '../Assets/Themes';
 import Chat from '../Screens/UserApp/Chat';
 import Chatlist from '../Screens/BureauApp/Chatlist'
-
+import ForexChat from '../Screens/BureauApp/fchat';
 // Manifest of possible screens
 const InfoRegis = createStackNavigator({
   InfoReg: {
@@ -49,6 +49,9 @@ const Login = createStackNavigator({
     // navigationOptions: {
     //   header: () => null
     // }
+  },
+  ForexChat: {
+    screen: ForexChat
   },
   AdditionalInfo: {
     screen: AdditionalInfo
@@ -160,6 +163,9 @@ const SignedIn = createStackNavigator({
   },
   Chatlist: {
     screen: Chatlist,
+  },
+  ForexChat: {
+    screen: ForexChat
   },
   CurrencyList: { screen: CurrencyList },
   Info: { screen: Info }
