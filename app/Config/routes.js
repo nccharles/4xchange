@@ -9,6 +9,7 @@ import Details from "../Screens/UserApp/Details";
 import MapView from "../Screens/UserApp/Map";
 import International from "../Screens/UserApp/International";
 import Loged from "../Screens/BureauApp/Login";
+import userNumber from '../Screens/UserApp/usernumber'
 import Info from "../Screens/BureauApp/Info";
 import Agreement from "../Screens/BureauApp/agreement";
 import AddCurrency from "../Screens/BureauApp/AddCurrency";
@@ -106,7 +107,9 @@ const WelcomeStack = createStackNavigator({
     //   header: () => null
     // }
   },
-
+  userNumber: {
+    screen: userNumber
+  }
 });
 const UserStack = createStackNavigator({
   TabNavScreen: {
@@ -136,6 +139,9 @@ const UserStack = createStackNavigator({
     // navigationOptions: {
     //   header: () => null
     // }
+  },
+  userNumber: {
+    screen: userNumber
   },
   Local: { screen: Local },
   CurrencyList: { screen: CurrencyList },

@@ -4,9 +4,7 @@ import {
     FlatList,
     ActivityIndicator,
     AsyncStorage,
-    ToastAndroid
 } from 'react-native';
-import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import Card from '../../Components/Card/ChatCard'
 import styles from './Style/AddCurrencyStyle'
@@ -64,23 +62,24 @@ class AddCurrency extends Component {
     //backend start
     _getAllmessages = async (forexPhone) => {
         const that = this
-        await firebase.database().ref(`/Chats/${forexPhone}`)
-            .once('value').then(snapshot => {
-                this.setState(() => ({
-                    loading: false,
-                }))
-                console.log(snapshot)
-                if (snapshot.val()) {
-                    that.setState(() => ({
-                        data: snapshot.val().messages,
-                        loading: false,
-                    }))
-                }
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .on('value', snapshot => {
+                firebase.database().ref(`/Chats/${forexPhone}/all/${snapshot.val().customerPhone}/messages`)
+                    .limitToLast(1)
+                    .orderByChild("createdAt")
+                    .on('value', snapshot => {
+                        this.setState(() => ({
+                            loading: false,
+                        }))
+                        if (snapshot.val()) {
+                            that.setState(() => ({
+                                data: snapshot.val(),
+                                loading: false,
+                            }))
+                        }
+                    })
+
             })
-            // console.log(this.state.data)
-            .catch(err => {
-                console.log(err)
-            });
     }
 
     //backend ends
@@ -118,7 +117,7 @@ class AddCurrency extends Component {
                                 hideAvatar={false}
                                 roundAvatar={true}
                                 avatar={item.user.name.substring(0, 1).toUpperCase()}
-                                onPress={() => this.props.navigation.navigate('ForexChat', { customer: item.user.name, forex: this.state.companyName, forexPhone: this.state.forexPhone })}
+                                onPress={() => this.props.navigation.navigate('ForexChat', { customer: item.user.name, cPhone: item.user._id, forex: this.state.companyName, forexPhone: this.state.forexPhone })}
                                 rightComponentText={this.getTime(item.user.timestamp)}
                             />
                         )}

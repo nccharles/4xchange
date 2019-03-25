@@ -7,7 +7,7 @@ import "prop-types";
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { GiftedChat } from 'react-native-gifted-chat';
-import { userChoice } from '../../Config/constants';
+import { chatName, chatNum } from '../../Config/constants';
 class Chat extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
@@ -27,25 +27,42 @@ class Chat extends React.Component {
     state = {
         loading: true,
         messages: [],
+        customerPhone: null,
         forexPhone: null,
         Customer: null
     }
-    onSend(messages = [], forexPhone) {
-        console.log(forexPhone)
+    onSend(messages = [], forexPhone, Customer, customerPhone) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }))
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .orderByChild(`name`)
+            .equalTo(Customer)
+            .once('value').then(snapshot => {
+                console.log(snapshot.val())
+                if (snapshot.val() === null) {
+                    firebase
+                        .database()
+                        .ref(`/Chats/${forexPhone}/Customer`)
+                        .set({
+                            name: Customer,
+                            customerPhone: customerPhone
+                        })
+                        .then(resp => {
+                            console.log(resp)
+                        })
+                }
+            })
+        console.log(this.state.messages)
         firebase
             .database()
-            .ref(`/Chats/${forexPhone}`)
+            .ref(`/Chats/${forexPhone}/all/${customerPhone}`)
             .update({
                 messages: GiftedChat.append(this.state.messages, messages),
             })
             .then(resp => {
                 console.log(resp)
             })
-        // this._getAllmessages(this.props.navigation.state.params.forexPhone)
-        console.log(this.state.messages)
     }
     renderCustomView = (props) => {
         if (props.currentMessage.location) {
@@ -75,36 +92,36 @@ class Chat extends React.Component {
         }
         return null
     }
-    componentWillMount() {
-        const { forexPhone, customer } = this.props.navigation.state.params
+    async componentWillMount() {
+        const Name = await AsyncStorage.getItem(chatName)
+        const Num = await AsyncStorage.getItem(chatNum)
+        const { forexPhone } = this.props.navigation.state.params
         this.setState({
             forexPhone: forexPhone,
-            Customer: customer
+            Customer: Name,
+            customerPhone: Num
         })
-        this._getAllmessages(forexPhone)
+        this._getAllmessages(forexPhone, Num)
     }
-    _getAllmessages = async (forexPhone) => {
+    _getAllmessages = async (forexPhone, customerPhone) => {
         const that = this
-        await firebase.database().ref(`/Chats/${forexPhone}/messages`)
-            .once('value').then(snapshot => {
-                this.setState(() => ({
-                    loading: false,
-                }))
+        await firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
+            .on('value', snapshot => {
                 if (snapshot.val()) {
                     that.setState(() => ({
                         messages: snapshot.val(),
                         loading: false,
                     }))
                 }
+                this.setState(() => ({
+                    loading: false,
+                }))
             })
-            .catch(err => {
-                console.log(err)
-            });
     }
     get user() {
         return {
-            name: this.props.navigation.state.params.customer,
-            _id: this.props.navigation.state.params.customer,
+            name: this.state.Customer,
+            _id: 'c' + this.state.customerPhone,
             timestamp: this.timestamp
         };
     }
@@ -142,7 +159,7 @@ class Chat extends React.Component {
                 )}
                 <GiftedChat
                     messages={this.state.messages}
-                    onSend={messages => this.onSend(messages, this.state.forexPhone)}
+                    onSend={messages => this.onSend(messages, this.state.forexPhone, this.state.Customer, this.state.customerPhone)}
                     renderCustomView={this.renderCustomView}
                     user={this.user}
                     scrollToBottom={true}

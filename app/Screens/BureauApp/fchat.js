@@ -27,24 +27,23 @@ class ForexChat extends Component {
         loading: true,
         messages: [],
         forexPhone: null,
-        Customer: null
+        Customer: null,
+        customerPhone: null
     }
-    onSend(messages, forexPhone) {
-        console.log(forexPhone)
+    onSend(messages = [], forexPhone, customerPhone) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }))
         firebase
             .database()
-            .ref(`/Chats/${forexPhone}`)
+            .ref(`/Chats/${forexPhone}/all/${customerPhone}`)
             .update({
                 messages: GiftedChat.append(this.state.messages, messages),
             })
             .then(resp => {
                 console.log(resp)
             })
-        // this._getAllmessages(this.props.navigation.state.params.forexPhone)
-        console.log(this.state.messages)
+        // this._getAllmessages(forexPhone)
     }
     renderCustomView = (props) => {
         if (props.currentMessage.location) {
@@ -75,35 +74,40 @@ class ForexChat extends Component {
         return null
     }
     componentWillMount() {
-        const { forexPhone, customer } = this.props.navigation.state.params
+        const { forexPhone, customer, cPhone } = this.props.navigation.state.params
+        const customerPhone = cPhone.replace('c', '')
         this.setState({
             forexPhone: forexPhone,
-            Customer: customer
+            Customer: customer,
+            customerPhone: customerPhone
         })
         this._getAllmessages(forexPhone)
     }
     _getAllmessages = async (forexPhone) => {
         const that = this
-        await firebase.database().ref(`/Chats/${forexPhone}/messages`)
-            .once('value').then(snapshot => {
-                this.setState(() => ({
-                    loading: false,
-                }))
-                if (snapshot.val()) {
-                    that.setState(() => ({
-                        messages: snapshot.val(),
-                        loading: false,
-                    }))
-                }
+        await firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .on('value', snapshot => {
+
+                firebase.database().ref(`/Chats/${forexPhone}/all/${snapshot.val().customerPhone}`)
+                    .on('value', snapshot => {
+                        this.setState(() => ({
+                            loading: false,
+                        }))
+                        console.log(snapshot)
+                        if (snapshot.val()) {
+                            that.setState(() => ({
+                                messages: snapshot.val().messages,
+                                loading: false,
+                            }))
+                        }
+                    })
+
             })
-            .catch(err => {
-                console.log(err)
-            });
     }
     get user() {
         return {
             name: this.props.navigation.state.params.forex,
-            _id: this.state.forexPhone,
+            _id: 'f' + this.state.forexPhone,
             timestamp: this.timestamp
         };
     }
@@ -141,9 +145,8 @@ class ForexChat extends Component {
                 )}
                 <GiftedChat
                     messages={this.state.messages}
-                    onSend={messages => this.onSend(messages, this.state.forexPhone)}
+                    onSend={messages => this.onSend(messages, this.state.forexPhone, this.state.customerPhone)}
                     renderCustomView={this.renderCustomView}
-                    createdAt={this.timestamp}
                     user={this.user}
                     scrollToBottom={true}
                     isAnimated={true}

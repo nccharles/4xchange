@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  ScrollView, View, Text, Linking, Platform, ActivityIndicator
+  ScrollView, View, Text, Linking, Platform, AsyncStorage, ActivityIndicator
 } from 'react-native';
 import SVGImage from 'react-native-svg-image'
 import styles from './Style/DetailStyle'
@@ -14,6 +14,7 @@ import NameDialogComponent from '../../Components/NameModal/Usermodal';
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
+import { chatName, chatNum } from '../../Config/constants';
 const colors = [
   '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
   '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
@@ -62,8 +63,6 @@ export default class Details extends Component {
     this._getCompanyProfile(userPhone)
   }
   _handleChatNameInput = (value) => {
-    // const chatEnteredName = parseInt(value)
-    console.log(value)
     if (value) {
       this.setState({
         inputedValue: value
@@ -74,9 +73,18 @@ export default class Details extends Component {
       inputedValue: ''
     })
   }
-  handleChat = () => {
+  handleCustomer = async () => {
+    const chats = await AsyncStorage.getItem(chatNum)
+    if (chats) {
+      this.props.navigation.navigate("Chat", { forex: this.state.userInfo.companyName, forexPhone: this.state.userPhone })
+    } else {
+      this.setState({ InputDialogVisible: true })
+    }
+  }
+  handleChat = async () => {
     this.setState({ InputDialogVisible: false })
-    this.props.navigation.navigate('Chat', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userPhone });
+    await AsyncStorage.setItem(chatName, this.state.inputedValue)
+    this.props.navigation.navigate('userNumber', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userPhone });
   }
   _getCompanyProfile = async (userPhone) => {
     const that = this
@@ -168,7 +176,7 @@ export default class Details extends Component {
             <Text>{userInfo.workingDays}</Text>
           </View>
         </ScrollView>
-        <ChatBtn onPress={() => this.setState({ InputDialogVisible: true })} />
+        <ChatBtn onPress={this.handleCustomer} />
         <NameDialogComponent
           visible={this.state.InputDialogVisible}
           title="Your Name  "
@@ -177,7 +185,7 @@ export default class Details extends Component {
           valueName={this.state.chatname}
           onPress={this.handleChat}
           onPressCancel={() => this.setState({ InputDialogVisible: false })}
-          label2="Start Chat   "
+          label2="Continue   "
         />
       </View>
     );
