@@ -64,18 +64,29 @@ class AddCurrency extends Component {
         const that = this
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .on('value', snapshot => {
+                const { customerPhone, name } = snapshot.val()
                 firebase.database().ref(`/Chats/${forexPhone}/all/${snapshot.val().customerPhone}/messages`)
                     .limitToLast(1)
                     .orderByChild("createdAt")
                     .on('value', snapshot => {
-                        this.setState(() => ({
-                            loading: false,
-                        }))
                         if (snapshot.val()) {
-                            that.setState(() => ({
-                                data: snapshot.val(),
-                                loading: false,
-                            }))
+                            snapshot.forEach((child) => {
+                                console.log(child.key, child.val().user);
+                                that.setState(() => ({
+                                    data: [{
+                                        _id: child.val()._d,
+                                        createdAt: child.val().createdAt,
+                                        text: child.val().text,
+                                        user: {
+                                            _id: customerPhone,
+                                            name: name,
+                                            timestamp: child.val().user.timestamp
+                                        }
+                                    }],
+                                    loading: false,
+                                }))
+                            })
+
                         }
                     })
 
