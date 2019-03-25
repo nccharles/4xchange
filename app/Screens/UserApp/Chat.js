@@ -44,7 +44,7 @@ class Chat extends React.Component {
                     firebase
                         .database()
                         .ref(`/Chats/${forexPhone}/Customer`)
-                        .set({
+                        .push({
                             name: Customer,
                             customerPhone: customerPhone
                         })

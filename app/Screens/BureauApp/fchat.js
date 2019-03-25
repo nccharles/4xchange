@@ -75,34 +75,30 @@ class ForexChat extends Component {
     }
     componentWillMount() {
         const { forexPhone, customer, cPhone } = this.props.navigation.state.params
-        const customerPhone = cPhone.replace('c', '')
+        const customerPhone = cPhone
         this.setState({
             forexPhone: forexPhone,
             Customer: customer,
             customerPhone: customerPhone
         })
-        this._getAllmessages(forexPhone)
+        this._getAllmessages(forexPhone, customerPhone)
     }
-    _getAllmessages = async (forexPhone) => {
+    _getAllmessages = async (forexPhone, customerPhone) => {
         const that = this
-        await firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+        firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}`)
             .on('value', snapshot => {
-
-                firebase.database().ref(`/Chats/${forexPhone}/all/${snapshot.val().customerPhone}`)
-                    .on('value', snapshot => {
-                        this.setState(() => ({
-                            loading: false,
-                        }))
-                        console.log(snapshot)
-                        if (snapshot.val()) {
-                            that.setState(() => ({
-                                messages: snapshot.val().messages,
-                                loading: false,
-                            }))
-                        }
-                    })
-
+                this.setState(() => ({
+                    loading: false,
+                }))
+                console.log(snapshot)
+                if (snapshot.val()) {
+                    that.setState(() => ({
+                        messages: snapshot.val().messages,
+                        loading: false,
+                    }))
+                }
             })
+
     }
     get user() {
         return {
