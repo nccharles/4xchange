@@ -6,23 +6,24 @@ import "prop-types";
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Send } from 'react-native-gifted-chat';
+import ChatsHeader from '../../Components/Header/ChatsHeader';
 class ForexChat extends Component {
 
-    static navigationOptions = ({ navigation }) => {
-        let Title = (navigation.state.params || {}).customer || 'Chat!   '
-        return {
-            headerTitle: Title + '   ',
-            headerStyle: {
-                backgroundColor: Colors.primary,
-            },
+    // static navigationOptions = ({ navigation }) => {
+    //     let Title = (navigation.state.params || {}).customer || 'Customer   '
+    //     return {
+    //         headerTitle: Title + '   ',
+    //         headerStyle: {
+    //             backgroundColor: Colors.primary,
+    //         },
 
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        }
-    };
+    //         headerTintColor: '#fff',
+    //         headerTitleStyle: {
+    //             fontWeight: 'bold',
+    //         },
+    //     }
+    // };
     state = {
         loading: true,
         messages: [],
@@ -100,6 +101,7 @@ class ForexChat extends Component {
             })
 
     }
+
     get user() {
         return {
             name: this.props.navigation.state.params.forex,
@@ -110,6 +112,7 @@ class ForexChat extends Component {
     get timestamp() {
         return firebase.database.ServerValue.TIMESTAMP;
     }
+
     render() {
         const { loading } = this.state
         if (loading) {
@@ -121,6 +124,10 @@ class ForexChat extends Component {
         }
         return (
             <>
+                <ChatsHeader
+                    onPress1={() => this.props.navigation.goBack()}
+                    customer={(this.props.navigation.state.params || {}).customer || 'Customer   '}
+                    status="online" />
                 {this.state.messages.length === 0 && (
                     <View style={[
                         StyleSheet.absoluteFill,
@@ -146,6 +153,7 @@ class ForexChat extends Component {
                     user={this.user}
                     scrollToBottom={true}
                     isAnimated={true}
+
                     parsePatterns={linkStyle => [
                         {
                             pattern: /#(\w+)/,

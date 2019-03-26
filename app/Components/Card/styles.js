@@ -68,6 +68,10 @@ export default StyleSheet.create({
     color: '#99A3A4',
     fontWeight: 'bold'
   },
+  time: {
+    fontSize: 12,
+    color: '#3498db',
+  },
   currencyName: {
     fontSize: 16,
     color: '#99A3A4',

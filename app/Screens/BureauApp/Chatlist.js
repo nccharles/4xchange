@@ -3,8 +3,9 @@ import {
     View,
     FlatList,
     ActivityIndicator,
-    AsyncStorage,
+    AsyncStorage, StyleSheet, Image
 } from 'react-native';
+import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import Card from '../../Components/Card/ChatCard'
 import styles from './Style/AddCurrencyStyle'
@@ -21,7 +22,7 @@ const initailState = {
     isSubmitting: false,
 }
 
-class AddCurrency extends Component {
+class Chatlist extends Component {
 
     constructor(props) {
         super(props);
@@ -70,9 +71,10 @@ class AddCurrency extends Component {
                     firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
                         .limitToLast(1)
                         .orderByChild("createdAt")
-                        .on('value', snapshot => {
+                        .once('value').then(snapshot => {
                             if (snapshot.val()) {
                                 snapshot.forEach((child) => {
+
                                     that.setState(() => ({
                                         data: [...this.state.data, {
                                             _id: child.val()._d,
@@ -116,7 +118,26 @@ class AddCurrency extends Component {
     render() {
         const { loading } = this.state
         return (
+
             <View style={styles.container}>
+                {this.state.data.length === 0 && !loading && (
+                    <View style={[
+                        StyleSheet.absoluteFill,
+                        {
+                            backgroundColor: 'white',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            bottom: 50
+                        }]}>
+                        <Image
+                            source={{ uri: 'https://i.stack.imgur.com/qLdPt.png' }}
+                            style={{
+                                ...StyleSheet.absoluteFillObject,
+                                resizeMode: 'contain'
+                            }}
+                        />
+                    </View>
+                )}
                 {loading ?
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <ActivityIndicator size="large" color={Colors.primary} />
@@ -131,7 +152,7 @@ class AddCurrency extends Component {
                                 roundAvatar={true}
                                 avatar={item.user.name.substring(0, 1).toUpperCase()}
                                 onPress={() => this.props.navigation.navigate('ForexChat', { customer: item.user.name, cPhone: item.user._id, forex: this.state.companyName, forexPhone: this.state.forexPhone })}
-                                rightComponentText={this.getTime(item.user.timestamp)}
+                                rightComponentText={Moment(item.user.timestamp).fromNow() + '   '}
                             />
                         )}
                         keyExtractor={this.keyExtractor}
@@ -143,4 +164,4 @@ class AddCurrency extends Component {
     }
 }
 
-export default AddCurrency
+export default Chatlist

@@ -40,7 +40,7 @@ class ChatCard extends Component {
                         </View>
                     </View>
                     <View style={styles.right} >
-                        <Text style={styles.amount} >
+                        <Text style={styles.time} >
                             {this.props.rightComponentText ? this.props.rightComponentText.toString()
                                 : null
                             }

@@ -8,22 +8,9 @@ import * as firebase from 'firebase'
 import _ from 'lodash'
 import { GiftedChat } from 'react-native-gifted-chat';
 import { chatName, chatNum } from '../../Config/constants';
+import ChatsHeader from '../../Components/Header/ChatsHeader';
 class Chat extends React.Component {
 
-    static navigationOptions = ({ navigation }) => {
-        let Title = (navigation.state.params || {}).forex || 'Chat!   '
-        return {
-            headerTitle: Title + '   ',
-            headerStyle: {
-                backgroundColor: Colors.primary,
-            },
-
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        }
-    };
     state = {
         loading: true,
         messages: [],
@@ -138,7 +125,10 @@ class Chat extends React.Component {
             )
         }
         return (
-            <>
+            <><ChatsHeader
+                onPress1={() => this.props.navigation.goBack()}
+                customer={(this.props.navigation.state.params || {}).forex || 'ForexBureau   '}
+                status="online" />
                 {this.state.messages.length === 0 && (
                     <View style={[
                         StyleSheet.absoluteFill,

@@ -207,7 +207,7 @@ export default class Phone extends Component {
                     );
                     try {
                         await AsyncStorage.setItem(chatNum, this.state.country.callingCode + this.state.Phone)
-                            .then(() => this.props.navigation.navigate("Chat", { forex: this.state.forex, forexPhone: this.state.userPhone }))
+                            .then(() => this.props.navigation.navigate("Chat", { forex: this.state.forex, forexPhone: this.state.forexPhone }))
                     } catch (error) {
                         console.log(error.message)
                         ToastAndroid.showWithGravity(

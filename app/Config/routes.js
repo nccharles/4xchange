@@ -52,7 +52,10 @@ const Login = createStackNavigator({
     // }
   },
   ForexChat: {
-    screen: ForexChat
+    screen: ForexChat,
+    navigationOptions: {
+      header: () => null
+    }
   },
   AdditionalInfo: {
     screen: AdditionalInfo
@@ -103,9 +106,9 @@ const WelcomeStack = createStackNavigator({
   },
   Chat: {
     screen: Chat,
-    // navigationOptions: {
-    //   header: () => null
-    // }
+    navigationOptions: {
+      header: () => null
+    }
   },
   userNumber: {
     screen: userNumber
@@ -136,9 +139,9 @@ const UserStack = createStackNavigator({
   },
   Chat: {
     screen: Chat,
-    // navigationOptions: {
-    //   header: () => null
-    // }
+    navigationOptions: {
+      header: () => null
+    }
   },
   userNumber: {
     screen: userNumber
@@ -171,7 +174,10 @@ const SignedIn = createStackNavigator({
     screen: Chatlist,
   },
   ForexChat: {
-    screen: ForexChat
+    screen: ForexChat,
+    navigationOptions: {
+      header: () => null
+    }
   },
   CurrencyList: { screen: CurrencyList },
   Info: { screen: Info }

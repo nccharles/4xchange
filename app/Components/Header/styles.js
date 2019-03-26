@@ -29,6 +29,20 @@ export default StyleSheet.create({
         position: 'absolute',
         right: 25
     },
+    ChatStatus: {
+        flexDirection: 'column',
+        color: 'white',
+        fontSize: 20,
+        marginLeft: 15
+    },
+    chattitle: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    StatusText: {
+        color: 'white',
+    },
     button: {
         marginRight: 35
     },
