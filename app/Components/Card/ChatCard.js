@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Badge } from 'react-native-elements'
 import {
     View, Text, Image, TouchableOpacity
 } from 'react-native';
@@ -12,6 +13,9 @@ class ChatCard extends Component {
         roundAvatar: PropTypes.bool,
         avatar: Image.propTypes.source,
         title: PropTypes.string,
+        status: PropTypes.string,
+        status1: PropTypes.string,
+        value: PropTypes.number,
         subtitle: PropTypes.string,
         onPress: PropTypes.func,
         rightComponentText: PropTypes.string
@@ -26,7 +30,12 @@ class ChatCard extends Component {
                     </View> */}
                     <View style={styles.imageChatContainer}>
                         <Text style={styles.leftCircle}>{this.props.avatar}</Text>
+                        <Badge
+                            status={this.props.status1}
+                            containerStyle={{ position: 'absolute', top: -2, right: 1 }}
+                        />
                     </View>
+
                     <View style={styles.center}>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>
@@ -47,6 +56,11 @@ class ChatCard extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
+                {this.props.value === 0 ? null : <Badge
+                    value={this.props.value}
+                    status={this.props.status}
+                    containerStyle={styles.message}
+                />}
                 <View style={styles.Chatseparator} />
             </View>
         );

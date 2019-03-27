@@ -31,16 +31,12 @@ class Chat extends React.Component {
             .equalTo(Customer)
             .once('value').then(snapshot => {
                 snapshot.forEach((child) => {
-                    console.log(child.val().countsent)
                     this.setState({
                         customerkey: child.key,
                         sent: child.val().countsent
                     })
                 })
-                console.log(this.state.customerkey)
                 const updateAt = this.timestamp
-                console.log(updateAt)
-                console.log(this.state.sent)
                 if (snapshot.val() === null) {
                     firebase
                         .database()
@@ -55,23 +51,24 @@ class Chat extends React.Component {
                         .then(resp => {
                             console.log(resp)
                         })
+                } else {
+                    let newsent = this.state.sent + 1
+                    firebase
+                        .database()
+                        .ref(`/Chats/${forexPhone}/Customer/${this.state.customerkey}`)
+                        .update({
+                            name: Customer,
+                            customerPhone: customerPhone,
+                            timestamp: updateAt,
+                            countsent: newsent,
+                            unread: 0,
+                        })
+                        .then(resp => {
+                            console.log(resp)
+                        })
                 }
-                let newsent = this.state.sent + 1
-                firebase
-                    .database()
-                    .ref(`/Chats/${forexPhone}/Customer/${this.state.customerkey}`)
-                    .update({
-                        name: Customer,
-                        customerPhone: customerPhone,
-                        timestamp: updateAt,
-                        countsent: newsent,
-                        unread: 0,
-                    })
-                    .then(resp => {
-                        console.log(resp)
-                    })
-
             })
+
         firebase
             .database()
             .ref(`/Chats/${forexPhone}/all/${customerPhone}`)
@@ -120,9 +117,64 @@ class Chat extends React.Component {
             customerPhone: Num
         })
         this._getAllmessages(forexPhone, Num)
+        this._interval = setInterval(() => {
+            this._getStatus(forexPhone, Name, Num)
+        }, 5000);
+
+    }
+    componentWillUnmount() {
+        clearInterval(this._interval);
+    }
+    _getStatus = (forexPhone, Customer, customerPhone) => {
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .orderByChild(`name`)
+            .equalTo(Customer)
+            .once('value').then(snapshot => {
+                snapshot.forEach((child) => {
+                    console.log(child.val().countsent)
+                    this.setState({
+                        customerkey: child.key,
+                        sent: child.val().countsent
+                    })
+                })
+                const updateAt = this.timestamp
+                if (snapshot.val() === null) {
+                    firebase
+                        .database()
+                        .ref(`/Chats/${forexPhone}/Customer`)
+                        .push({
+                            name: Customer,
+                            customerPhone: customerPhone,
+                            timestamp: updateAt,
+                            countsent: this.state.sent,
+                            unread: 0,
+                        })
+                        .then(resp => {
+                            console.log(resp)
+                        })
+                } else {
+                    let newsent = this.state.sent
+                    firebase
+                        .database()
+                        .ref(`/Chats/${forexPhone}/Customer/${this.state.customerkey}`)
+                        .update({
+                            name: this.state.Customer,
+                            customerPhone: customerPhone,
+                            timestamp: updateAt,
+                            countsent: newsent,
+                            unread: 0,
+                        })
+                        .then(resp => {
+                            console.log(resp)
+                        })
+                }
+
+
+            })
     }
     _getAllmessages = async (forexPhone, customerPhone) => {
         const that = this
+
         await firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
             .on('value', snapshot => {
                 if (snapshot.val()) {

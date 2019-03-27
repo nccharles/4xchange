@@ -33,6 +33,7 @@ class Chatlist extends Component {
 
             forexPhone: null,
             companyName: null,
+            customerMessage: 0
         }
     };
 
@@ -59,20 +60,40 @@ class Chatlist extends Component {
         })
         this._getAllCustomers(forexPhone)
 
+        this._countCustomerMessages(forexPhone)
+
     }
-    _getAllCustomers = async (forexPhone) => {
-        const that = this
+
+    _countCustomerMessages = async (forexPhone) => {
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .on('value', snapshot => {
 
                 snapshot.forEach((child) => {
-                    const customerPhone = child.val().customerPhone;
-                    const name = child.val().name
-                    this._getAllmessages(forexPhone, customerPhone, name)
+                    const customerMessage = child.val().countsent;
+                    if (customerMessage) {
+                        this.setState({
+
+                            customerMessage: customerMessage
+                        })
+                    }
                 })
             })
     }
-    _getAllmessages = async (forexPhone, customerPhone, name) => {
+    _getAllCustomers = async (forexPhone) => {
+        const that = this
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .once('value').then(snapshot => {
+
+                snapshot.forEach((child) => {
+                    const customerPhone = child.val().customerPhone;
+                    const name = child.val().name
+                    const msg = child.val().countsent
+                    const lastseen = child.val().timestamp
+                    this._getAllmessages(forexPhone, customerPhone, name, msg, lastseen)
+                })
+            })
+    }
+    _getAllmessages = async (forexPhone, customerPhone, name, msg, lastseen) => {
         const that = this
         firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
             .limitToLast(1)
@@ -84,11 +105,13 @@ class Chatlist extends Component {
                         that.setState(() => ({
                             data: [...this.state.data, {
                                 _id: child.val()._d,
+                                count: msg,
                                 createdAt: child.val().createdAt,
                                 text: child.val().text,
                                 user: {
                                     _id: customerPhone,
                                     name: name,
+                                    lastseen: lastseen,
                                     timestamp: child.val().user.timestamp
                                 }
                             }],
@@ -110,7 +133,10 @@ class Chatlist extends Component {
     openModal = () => {
         alert('ok')
     }
-
+    getStatus(lastseen) {
+        const status = new Date().valueOf() - lastseen
+        return status <= 5000 ? 'success' : 'error'
+    }
     render() {
         const { loading } = this.state
         return (
@@ -149,6 +175,9 @@ class Chatlist extends Component {
                                 avatar={item.user.name.substring(0, 1).toUpperCase()}
                                 onPress={() => this.props.navigation.navigate('ForexChat', { customer: item.user.name, cPhone: item.user._id, forex: this.state.companyName, forexPhone: this.state.forexPhone })}
                                 rightComponentText={Moment(item.user.timestamp).fromNow() + '   '}
+                                value={item.count}
+                                status={item.count === 0 ? "" : "success"}
+                                status1={this.getStatus(item.user.lastseen)}
                             />
                         )}
                         keyExtractor={this.keyExtractor}

@@ -65,6 +65,7 @@ class AddCurrency extends Component {
       isLoading: true,
       userPhone: null,
       companyName: null,
+      customerMessage: 0,
       newCurrency: {
         currency: null,
         askPrice: null,
@@ -74,7 +75,7 @@ class AddCurrency extends Component {
   };
 
   async componentWillMount() {
-    const base = this.state.baseCurrency
+    this.setState({ customerMessage: null })
     const currentUser = await AsyncStorage.getItem(userPhone)
     console.log(currentUser)
     this.setState({
@@ -83,9 +84,24 @@ class AddCurrency extends Component {
       userPhone: currentUser
     })
     this._getUserCurrencies()
+    this._getAllCustomers(currentUser)
+
   }
 
-  //backend start
+  _getAllCustomers = async (forexPhone) => {
+    firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+      .on('value', snapshot => {
+
+        snapshot.forEach((child) => {
+          const customerMessage = child.val().countsent;
+          if (customerMessage) {
+            this.setState({
+              customerMessage: customerMessage
+            })
+          }
+        })
+      })
+  }
   _getUserCurrencies = async () => {
     const { userPhone } = this.state
     const that = this
@@ -410,7 +426,7 @@ class AddCurrency extends Component {
           onPressCancel={this.handleCancel}
           label2="Delete   "
         />
-        <ChatBtn onPress={() => this.props.navigation.navigate('Chatlist')} />
+        <ChatBtn onPress={() => this.props.navigation.navigate('Chatlist')} value={this.state.customerMessage === 0 ? '' : "new+"} status="success" />
       </View>
     );
   }

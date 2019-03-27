@@ -193,7 +193,11 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
   },
-
+  message: {
+    position: 'absolute',
+    right: screenwidth / (screenwidth / 30),
+    bottom: 4,
+  },
   separator: {
     flex: 1,
     height: 1,
