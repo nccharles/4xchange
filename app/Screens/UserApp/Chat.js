@@ -10,7 +10,6 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
 class Chat extends React.Component {
-
     state = {
         loading: true,
         messages: [],
