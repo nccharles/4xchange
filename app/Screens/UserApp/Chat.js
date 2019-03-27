@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Image, Dimensions, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
 import { Colors } from '../../Assets/Themes'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import "prop-types";
@@ -9,13 +9,18 @@ import _ from 'lodash'
 import { GiftedChat } from 'react-native-gifted-chat';
 import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
+const screenwidth = Dimensions.get('window').width
+console.log(screenwidth)
 class Chat extends React.Component {
     state = {
         loading: true,
         messages: [],
         customerPhone: null,
         forexPhone: null,
-        Customer: null
+        Customer: null,
+        customerkey: null,
+        sent: 0
+
     }
     onSend(messages = [], forexPhone, Customer, customerPhone) {
         this.setState(previousState => ({
@@ -25,21 +30,48 @@ class Chat extends React.Component {
             .orderByChild(`name`)
             .equalTo(Customer)
             .once('value').then(snapshot => {
-                console.log(snapshot.val())
+                snapshot.forEach((child) => {
+                    console.log(child.val().countsent)
+                    this.setState({
+                        customerkey: child.key,
+                        sent: child.val().countsent
+                    })
+                })
+                console.log(this.state.customerkey)
+                const updateAt = this.timestamp
+                console.log(updateAt)
+                console.log(this.state.sent)
                 if (snapshot.val() === null) {
                     firebase
                         .database()
                         .ref(`/Chats/${forexPhone}/Customer`)
                         .push({
                             name: Customer,
-                            customerPhone: customerPhone
+                            customerPhone: customerPhone,
+                            timestamp: updateAt,
+                            countsent: this.state.sent,
+                            unread: 0,
                         })
                         .then(resp => {
                             console.log(resp)
                         })
                 }
+                let newsent = this.state.sent + 1
+                firebase
+                    .database()
+                    .ref(`/Chats/${forexPhone}/Customer/${this.state.customerkey}`)
+                    .update({
+                        name: Customer,
+                        customerPhone: customerPhone,
+                        timestamp: updateAt,
+                        countsent: newsent,
+                        unread: 0,
+                    })
+                    .then(resp => {
+                        console.log(resp)
+                    })
+
             })
-        console.log(this.state.messages)
         firebase
             .database()
             .ref(`/Chats/${forexPhone}/all/${customerPhone}`)
@@ -161,7 +193,7 @@ class Chat extends React.Component {
                         },
                     ]}
                 />
-                <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={80} />
+                <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={screenwidth / 24} />
             </>
         );
     }
