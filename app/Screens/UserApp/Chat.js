@@ -229,7 +229,7 @@ class Chat extends React.Component {
             <><ChatsHeader
                 onPress1={() => this.props.navigation.goBack()}
                 customer={(this.props.navigation.state.params || {}).forex || 'ForexBureau   '}
-                status={this.getLastseen(this.state.lastseen) === 'offline' ? (this.state.lastseen === 0 ? '' : "last seen " + Moment(this.state.lastseen).fromNow() + '   ') : "online   "} />
+                status={(this.state.lastseen === 0 ? '' : (this.getLastseen(this.state.lastseen) === 'offline' ? "last seen " + Moment(this.state.lastseen).fromNow() + '   ' : "online  "))} />
                 {this.state.messages.length === 0 && (
                     <View style={[
                         StyleSheet.absoluteFill,
