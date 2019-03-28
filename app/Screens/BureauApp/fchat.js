@@ -1,40 +1,60 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Image, Dimensions, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { Colors } from '../../Assets/Themes'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import Moment from 'moment'
 import "prop-types";
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { GiftedChat, Send } from 'react-native-gifted-chat';
+import { GiftedChat } from 'react-native-gifted-chat';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
+const screenwidth = Dimensions.get('window').width
 class ForexChat extends Component {
-
-    // static navigationOptions = ({ navigation }) => {
-    //     let Title = (navigation.state.params || {}).customer || 'Customer   '
-    //     return {
-    //         headerTitle: Title + '   ',
-    //         headerStyle: {
-    //             backgroundColor: Colors.primary,
-    //         },
-
-    //         headerTintColor: '#fff',
-    //         headerTitleStyle: {
-    //             fontWeight: 'bold',
-    //         },
-    //     }
-    // };
     state = {
         loading: true,
         messages: [],
+        lastseen: null,
         forexPhone: null,
         Customer: null,
-        customerPhone: null
+        customerPhone: null,
+        customerkey: null,
+        unread: 0
     }
     onSend(messages = [], forexPhone, customerPhone) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }))
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .orderByChild(`customerPhone`)
+            .equalTo(customerPhone)
+            .once('value').then(snapshot => {
+                snapshot.forEach((child) => {
+                    this.setState({
+                        customerkey: child.key,
+                        unread: child.val().unread
+                    })
+                })
+                let newunread = this.state.unread + 1
+                firebase
+                    .database()
+                    .ref(`/Chats/${forexPhone}/Customer/${this.state.customerkey}`)
+                    .update({
+                        customerPhone: customerPhone,
+                        countsent: 0,
+                        unread: newunread,
+                    })
+                    .then(resp => {
+                        console.log(resp)
+                    })
+
+            })
+        firebase
+            .database()
+            .ref(`/Chats/${forexPhone}`)
+            .update({
+                timestamp: this.timestamp
+            })
         firebase
             .database()
             .ref(`/Chats/${forexPhone}/all/${customerPhone}`)
@@ -44,7 +64,6 @@ class ForexChat extends Component {
             .then(resp => {
                 console.log(resp)
             })
-        // this._getAllmessages(forexPhone)
     }
     renderCustomView = (props) => {
         if (props.currentMessage.location) {
@@ -83,6 +102,27 @@ class ForexChat extends Component {
             customerPhone: customerPhone
         })
         this._getAllmessages(forexPhone, customerPhone)
+        this._getCustomerLastseen(forexPhone, customerPhone)
+    }
+
+    _getCustomerLastseen = async (forexPhone, customerPhone) => {
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .orderByChild(`customerPhone`)
+            .equalTo(customerPhone)
+            .on('value', snapshot => {
+                snapshot.forEach((child) => {
+                    const lastseen = child.val().timestamp;
+                    if (lastseen) {
+                        this.setState({
+                            lastseen: lastseen
+                        })
+                    }
+                })
+            })
+    }
+    getLastseen(lastseen) {
+        const status = this.timestamp - lastseen
+        return status <= 60000 ? 'online' : 'offline'
     }
     _getAllmessages = async (forexPhone, customerPhone) => {
         const that = this
@@ -110,7 +150,7 @@ class ForexChat extends Component {
         };
     }
     get timestamp() {
-        return firebase.database.ServerValue.TIMESTAMP;
+        return new Date().valueOf();
     }
 
     render() {
@@ -127,7 +167,7 @@ class ForexChat extends Component {
                 <ChatsHeader
                     onPress1={() => this.props.navigation.goBack()}
                     customer={(this.props.navigation.state.params || {}).customer || 'Customer   '}
-                    status="online" />
+                    status={this.getLastseen(this.state.lastseen) === 'offline' ? "last seen " + Moment(this.state.lastseen).fromNow() + '   ' : "online   "} />
                 {this.state.messages.length === 0 && (
                     <View style={[
                         StyleSheet.absoluteFill,
@@ -162,7 +202,7 @@ class ForexChat extends Component {
                         },
                     ]}
                 />
-                <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={80} />
+                <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={screenwidth / 24} />
             </>
         );
     }

@@ -33,7 +33,9 @@ export default StyleSheet.create({
         flexDirection: 'column',
         color: 'white',
         fontSize: 20,
-        marginLeft: 15
+        marginLeft: 15,
+        top: -2,
+        marginBottom: 6,
     },
     chattitle: {
         color: 'white',

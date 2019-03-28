@@ -114,7 +114,7 @@ class MapScreen extends Component {
           >
             {forexCoords.map((marker, key) => {
               return <MapView.Marker
-                // onPress={() => this.props.navigation.navigate('Details', { userPhone: marker.userPhone })}
+                onPress={() => this.props.navigation.navigate('Details', { userPhone: marker.userPhone })}
                 coordinate={{
                   latitude: marker.latitude,
                   longitude: marker.longitude

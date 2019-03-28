@@ -176,7 +176,7 @@ export default class Details extends Component {
             <Text>{userInfo.workingDays}</Text>
           </View>
         </ScrollView>
-        <ChatBtn onPress={this.handleCustomer} value="99+" status="error" />
+        <ChatBtn onPress={this.handleCustomer} />
         <NameDialogComponent
           visible={this.state.InputDialogVisible}
           title="Your Name  "

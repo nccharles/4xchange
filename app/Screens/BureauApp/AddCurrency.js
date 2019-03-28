@@ -426,7 +426,7 @@ class AddCurrency extends Component {
           onPressCancel={this.handleCancel}
           label2="Delete   "
         />
-        <ChatBtn onPress={() => this.props.navigation.navigate('Chatlist')} value={this.state.customerMessage === 0 ? '' : "new+"} status="success" />
+        <ChatBtn onPress={() => this.props.navigation.navigate('Chatlist')} />
       </View>
     );
   }

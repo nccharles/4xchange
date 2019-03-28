@@ -21,11 +21,7 @@ class ChatButton extends Component {
                     name="message-circle"
                     size={30}
                     color="white" />
-                {value === 0 ? null : <Badge
-                    value={value}
-                    status={status}
-                    containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-                />}
+
             </TouchableOpacity>
         )
     }

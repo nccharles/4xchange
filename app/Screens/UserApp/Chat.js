@@ -3,6 +3,7 @@ import { View, StyleSheet, Image, Dimensions, KeyboardAvoidingView, AsyncStorage
 import { Colors } from '../../Assets/Themes'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import "prop-types";
+import Moment from 'moment'
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
@@ -10,7 +11,6 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
 const screenwidth = Dimensions.get('window').width
-console.log(screenwidth)
 class Chat extends React.Component {
     state = {
         loading: true,
@@ -19,7 +19,8 @@ class Chat extends React.Component {
         forexPhone: null,
         Customer: null,
         customerkey: null,
-        sent: 0
+        sent: 0,
+        lastseen: 0
 
     }
     onSend(messages = [], forexPhone, Customer, customerPhone) {
@@ -27,8 +28,8 @@ class Chat extends React.Component {
             messages: GiftedChat.append(previousState.messages, messages)
         }))
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
-            .orderByChild(`name`)
-            .equalTo(Customer)
+            .orderByChild(`customerPhone`)
+            .equalTo(customerPhone)
             .once('value').then(snapshot => {
                 snapshot.forEach((child) => {
                     this.setState({
@@ -79,6 +80,7 @@ class Chat extends React.Component {
                 console.log(resp)
             })
     }
+
     renderCustomView = (props) => {
         if (props.currentMessage.location) {
             return (
@@ -116,19 +118,35 @@ class Chat extends React.Component {
             Customer: Name,
             customerPhone: Num
         })
+        this._getForexLastseen(forexPhone)
         this._getAllmessages(forexPhone, Num)
         this._interval = setInterval(() => {
             this._getStatus(forexPhone, Name, Num)
         }, 5000);
 
     }
+
+    _getForexLastseen = async (forexPhone) => {
+        firebase.database().ref(`/Chats/${forexPhone}/timestamp`)
+            .on('value', snapshot => {
+                if (snapshot.val() != null) {
+                    this.setState({
+                        lastseen: snapshot.val()
+                    })
+                }
+            })
+    }
+    getLastseen(lastseen) {
+        const status = this.timestamp - lastseen
+        return status <= 59000 ? 'online' : 'offline'
+    }
     componentWillUnmount() {
         clearInterval(this._interval);
     }
     _getStatus = (forexPhone, Customer, customerPhone) => {
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
-            .orderByChild(`name`)
-            .equalTo(Customer)
+            .orderByChild(`customerPhone`)
+            .equalTo(customerPhone)
             .once('value').then(snapshot => {
                 snapshot.forEach((child) => {
                     console.log(child.val().countsent)
@@ -211,7 +229,7 @@ class Chat extends React.Component {
             <><ChatsHeader
                 onPress1={() => this.props.navigation.goBack()}
                 customer={(this.props.navigation.state.params || {}).forex || 'ForexBureau   '}
-                status="online" />
+                status={this.getLastseen(this.state.lastseen) === 'offline' ? (this.state.lastseen === 0 ? '' : "last seen " + Moment(this.state.lastseen).fromNow() + '   ') : "online   "} />
                 {this.state.messages.length === 0 && (
                     <View style={[
                         StyleSheet.absoluteFill,

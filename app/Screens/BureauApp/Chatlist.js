@@ -80,7 +80,9 @@ class Chatlist extends Component {
             })
     }
     _getAllCustomers = async (forexPhone) => {
-        const that = this
+        this.setState({
+            data: [],
+        })
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .once('value').then(snapshot => {
 
@@ -135,7 +137,7 @@ class Chatlist extends Component {
     }
     getStatus(lastseen) {
         const status = new Date().valueOf() - lastseen
-        return status <= 5000 ? 'success' : 'error'
+        return status <= 60000 ? 'success' : 'error'
     }
     render() {
         const { loading } = this.state
@@ -176,7 +178,7 @@ class Chatlist extends Component {
                                 onPress={() => this.props.navigation.navigate('ForexChat', { customer: item.user.name, cPhone: item.user._id, forex: this.state.companyName, forexPhone: this.state.forexPhone })}
                                 rightComponentText={Moment(item.user.timestamp).fromNow() + '   '}
                                 value={item.count}
-                                status={item.count === 0 ? "" : "success"}
+                                status="success"
                                 status1={this.getStatus(item.user.lastseen)}
                             />
                         )}
