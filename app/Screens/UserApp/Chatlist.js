@@ -90,6 +90,17 @@ class Chatlist extends Component {
             })
         }
     }
+    _handleChatNameInput = (value) => {
+        if (value) {
+            this.setState({
+                inputedValue: value
+            })
+            return
+        }
+        this.setState({
+            inputedValue: ''
+        })
+    }
     handleChat = async () => {
         this.setState({ InputDialogVisible: false })
         await AsyncStorage.setItem(chatName, this.state.inputedValue)

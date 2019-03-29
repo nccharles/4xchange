@@ -131,7 +131,7 @@ class Chat extends React.Component {
             .on('value', snapshot => {
                 if (snapshot.val() != null) {
                     this.setState({
-                        lastseen: snapshot.val()
+                        lastseen: snapshot.val().timestamp
                     })
                 }
             })
@@ -228,7 +228,7 @@ class Chat extends React.Component {
         return (
             <><ChatsHeader
                 onPress1={() => this.props.navigation.goBack()}
-                customer={(this.props.navigation.state.params || {}).forex || 'ForexBureau   '}
+                customer={(this.props.navigation.state.params || {}).forex + '   ' || 'ForexBureau   '}
                 status={(this.state.lastseen === 0 ? '' : (this.getLastseen(this.state.lastseen) === 'offline' ? "last seen " + Moment(this.state.lastseen).fromNow() + '   ' : "online  "))} />
                 {this.state.messages.length === 0 && (
                     <View style={[
