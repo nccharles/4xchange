@@ -153,7 +153,8 @@ class Signup extends Component {
         longitude,
         countryName,
         flag,
-        completed: true
+        completed: true,
+        timestamp: this.timestamp
       })
       .then(response => {
         ToastAndroid.showWithGravityAndOffset(
@@ -176,7 +177,9 @@ class Signup extends Component {
       });
   };
   //backend end
-
+  get timestamp() {
+    return new Date().valueOf();
+  }
   _timePicker = async key => {
     try {
       const { action, hour, minute } = await TimePickerAndroid.open({

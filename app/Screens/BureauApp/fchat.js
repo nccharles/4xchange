@@ -45,13 +45,13 @@ class ForexChat extends Component {
                         unread: newunread,
                     })
                     .then(resp => {
-                        console.log(resp)
+                        console.log("Done")
                     })
 
             })
         firebase
             .database()
-            .ref(`/Chats/${forexPhone}`)
+            .ref(`/infos/${forexPhone}/publicInfo`)
             .update({
                 timestamp: this.timestamp
             })
@@ -62,7 +62,7 @@ class ForexChat extends Component {
                 messages: GiftedChat.append(this.state.messages, messages),
             })
             .then(resp => {
-                console.log(resp)
+                console.log("Done")
             })
     }
     renderCustomView = (props) => {

@@ -5,7 +5,10 @@ import {
     View, Text, Image, TouchableOpacity
 } from 'react-native';
 import styles from './styles'
-
+const colors = [
+    '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
+    '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
+]
 class ChatCard extends Component {
 
     static propTypes = {
@@ -25,7 +28,7 @@ class ChatCard extends Component {
         return (
             <View style={{ flex: 1 }} >
                 <TouchableOpacity style={styles.parent} onPress={this.props.onPress}>
-                    <View style={styles.imageChatContainer}>
+                    <View style={[styles.imageChatContainer, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
                         <Text style={styles.leftCircle}>{this.props.avatar}</Text>
                         <Badge
                             status={this.props.status1}

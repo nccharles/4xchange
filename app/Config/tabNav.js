@@ -5,9 +5,11 @@ import { Colors } from '../Assets/Themes'
 import MapView from '../Screens/UserApp/Map'
 import International from '../Screens/UserApp/International'
 import Local from '../Screens/UserApp/Local'
+import Chats from '../Screens/UserApp/Chatlist'
 import location from '../Assets/TabImage/location-map-orientation.png'
 import listBureaus from '../Assets/TabImage/bank-512.png'
 import globe from '../Assets/TabImage/business.png'
+import chatforex from '../Assets/TabImage/chat.png'
 const screenheight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
@@ -17,6 +19,7 @@ const TabNavigationScreen = TabNavigator({
   Local: { screen: Local },
   MapView: { screen: MapView },
   International: { screen: International },
+  Chats: { screen: Chats },
 },
   {
     navigationOptions: ({ navigation }) => ({
@@ -25,15 +28,18 @@ const TabNavigationScreen = TabNavigator({
         let iconName
         if (routeName === 'Local') {
           iconName = listBureaus
-          label = 'Local'
+          label = 'LOCAL'
         }
         else if (routeName === 'MapView') {
           iconName = location
-          label = 'Locate'
+          label = 'LOCATE'
         }
         else if (routeName === 'International') {
           iconName = globe
-          label = 'Global'
+          label = 'GLOBAL'
+        } else if (routeName === 'Chats') {
+          iconName = chatforex
+          label = 'CHATS'
         }
 
         return (

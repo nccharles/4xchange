@@ -84,7 +84,7 @@ export default class Details extends Component {
   handleChat = async () => {
     this.setState({ InputDialogVisible: false })
     await AsyncStorage.setItem(chatName, this.state.inputedValue)
-    this.props.navigation.navigate('userNumber', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userPhone });
+    this.props.navigation.navigate('userNumber', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userInfo.phone });
   }
   _getCompanyProfile = async (userPhone) => {
     const that = this

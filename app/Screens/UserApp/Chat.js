@@ -50,7 +50,7 @@ class Chat extends React.Component {
                             unread: 0,
                         })
                         .then(resp => {
-                            console.log(resp)
+                            console.log('Done')
                         })
                 } else {
                     let newsent = this.state.sent + 1
@@ -65,7 +65,7 @@ class Chat extends React.Component {
                             unread: 0,
                         })
                         .then(resp => {
-                            console.log(resp)
+                            console.log('Done')
                         })
                 }
             })
@@ -77,7 +77,7 @@ class Chat extends React.Component {
                 messages: GiftedChat.append(this.state.messages, messages),
             })
             .then(resp => {
-                console.log(resp)
+                console.log('Done')
             })
     }
 
@@ -127,7 +127,7 @@ class Chat extends React.Component {
     }
 
     _getForexLastseen = async (forexPhone) => {
-        firebase.database().ref(`/Chats/${forexPhone}/timestamp`)
+        firebase.database().ref(`/infos/${forexPhone}/publicInfo`)
             .on('value', snapshot => {
                 if (snapshot.val() != null) {
                     this.setState({
@@ -168,7 +168,7 @@ class Chat extends React.Component {
                             unread: 0,
                         })
                         .then(resp => {
-                            console.log(resp)
+                            console.log('Done')
                         })
                 } else {
                     let newsent = this.state.sent
@@ -183,7 +183,7 @@ class Chat extends React.Component {
                             unread: 0,
                         })
                         .then(resp => {
-                            console.log(resp)
+                            console.log('Done')
                         })
                 }
 
