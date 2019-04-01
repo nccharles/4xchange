@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Dimensions, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { Colors } from '../../Assets/Themes'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { MaterialIcons } from '@expo/vector-icons'
 import Moment from 'moment'
 import "prop-types";
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Send, Bubble, SystemMessage } from 'react-native-gifted-chat';
+import CustomActions from '../../Components/Customs/Actions';
+import CustomView from '../../Components/Actions/CustomView';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
 const screenwidth = Dimensions.get('window').width
 class ForexChat extends Component {
-    state = {
-        loading: true,
-        messages: [],
-        lastseen: null,
-        forexPhone: null,
-        Customer: null,
-        customerPhone: null,
-        customerkey: null,
-        unread: 0
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            messages: [],
+            lastseen: null,
+            forexPhone: null,
+            Customer: null,
+            customerPhone: null,
+            customerkey: null,
+            unread: 0
+        }
+        this._isMounted = false;
+        this.onSend = this.onSend.bind(this);
+        this.renderCustomActions = this.renderCustomActions.bind(this);
+        this.renderBubble = this.renderBubble.bind(this);
+        this.renderSystemMessage = this.renderSystemMessage.bind(this);
+        this.onLoadEarlier = this.onLoadEarlier.bind(this);
+
+        this._isAlright = null;
     }
     onSend(messages = [], forexPhone, customerPhone) {
         this.setState(previousState => ({
@@ -65,35 +79,23 @@ class ForexChat extends Component {
                 console.log("Done")
             })
     }
-    renderCustomView = (props) => {
-        if (props.currentMessage.location) {
-            return (
-                <View style={props.containerStyle}>
-                    <MapView
-                        provider={PROVIDER_GOOGLE}
-                        style={[styles.mapView]}
-                        region={{
-                            latitude: props.currentMessage.location.latitude,
-                            longitude: props.currentMessage.location.longitude,
-                            latitudeDelta: 0.1,
-                            longitudeDelta: 0.1,
-                        }}
-                        scrollEnabled={false}
-                        zoomEnabled={false}
-                    >
-                        <MapView.Marker
-                            coordinate={{
-                                latitude: props.currentMessage.location.latitude,
-                                longitude: props.currentMessage.location.longitude
-                            }}
-                        />
-                    </MapView>
+    renderSend(props) {
+        return (
+            <Send
+                {...props}
+            >
+
+                <View style={{ marginRight: 10, marginBottom: 5 }}>
+                    <MaterialIcons
+                        name="send"
+                        size={30}
+                        color={Colors.primary} />
                 </View>
-            );
-        }
-        return null
+            </Send>
+        );
     }
     componentWillMount() {
+        this._isMounted = true;
         const { forexPhone, customer, cPhone } = this.props.navigation.state.params
         const customerPhone = cPhone
         this.setState({
@@ -152,7 +154,82 @@ class ForexChat extends Component {
     get timestamp() {
         return new Date().valueOf();
     }
+    onLoadEarlier() {
+        this.setState((previousState) => {
+            return {
+                isLoadingEarlier: true,
+            };
+        });
 
+        setTimeout(() => {
+            if (this._isMounted === true) {
+                this.setState((previousState) => {
+                    return {
+                        messages: GiftedChat.prepend(previousState.messages, this.state.messages),
+                        loadEarlier: false,
+                        isLoadingEarlier: false,
+                    };
+                });
+            }
+        }, 1000); // simulating network
+    }
+    renderCustomActions(props) {
+        if (Platform.OS === 'ios') {
+            return (
+                <CustomActions
+                    {...props}
+                />
+            );
+        }
+        const options = {
+            'Action 1': (props) => {
+                alert('option 1');
+            },
+            'Action 2': (props) => {
+                alert('option 2');
+            },
+            'Cancel': () => { },
+        };
+        return (
+            <CustomActions
+                {...props}
+            />
+        );
+    }
+
+    renderBubble(props) {
+        return (
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    left: {
+                        backgroundColor: '#f0f0f0',
+                    }
+                }}
+            />
+        );
+    }
+
+    renderSystemMessage(props) {
+        return (
+            <SystemMessage
+                {...props}
+                containerStyle={{
+                    marginBottom: 15,
+                }}
+                textStyle={{
+                    fontSize: 14,
+                }}
+            />
+        );
+    }
+    renderCustomView(props) {
+        return (
+            <CustomView
+                {...props}
+            />
+        );
+    }
     render() {
         const { loading } = this.state
         if (loading) {
@@ -193,7 +270,10 @@ class ForexChat extends Component {
                     user={this.user}
                     scrollToBottom={true}
                     isAnimated={true}
-
+                    renderSend={this.renderSend}
+                    loadEarlier={this.state.loadEarlier}
+                    onLoadEarlier={this.onLoadEarlier}
+                    isLoadingEarlier={this.state.isLoadingEarlier}
                     parsePatterns={linkStyle => [
                         {
                             pattern: /#(\w+)/,
@@ -201,6 +281,10 @@ class ForexChat extends Component {
                             onPress: props => alert(`press on ${props}`),
                         },
                     ]}
+                    renderActions={this.renderCustomActions}
+                    renderBubble={this.renderBubble}
+                    renderSystemMessage={this.renderSystemMessage}
+                    renderCustomView={this.renderCustomView}
                 />
                 <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={screenwidth / 24} />
             </>

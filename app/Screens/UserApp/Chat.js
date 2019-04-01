@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Dimensions, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
 import { Colors } from '../../Assets/Themes'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import "prop-types";
@@ -7,21 +7,37 @@ import Moment from 'moment'
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { GiftedChat } from 'react-native-gifted-chat';
+import { MaterialIcons } from '@expo/vector-icons'
+import { GiftedChat, Send, Actions, Bubble, SystemMessage } from 'react-native-gifted-chat';
 import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
+import CustomActions from '../../Components/Customs/Actions';
+import CustomView from '../../Components/Actions/CustomView';
 const screenwidth = Dimensions.get('window').width
-class Chat extends React.Component {
-    state = {
-        loading: true,
-        messages: [],
-        customerPhone: null,
-        forexPhone: null,
-        Customer: null,
-        customerkey: null,
-        sent: 0,
-        lastseen: 0
+class Chat extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            messages: [],
+            customerPhone: null,
+            forexPhone: null,
+            Customer: null,
+            customerkey: null,
+            loadEarlier: true,
+            isLoadingEarlier: false,
+            sent: 0,
+            lastseen: 0
 
+        }
+        this._isMounted = false;
+        this.onSend = this.onSend.bind(this);
+        this.renderCustomActions = this.renderCustomActions.bind(this);
+        this.renderBubble = this.renderBubble.bind(this);
+        this.renderSystemMessage = this.renderSystemMessage.bind(this);
+        this.onLoadEarlier = this.onLoadEarlier.bind(this);
+
+        this._isAlright = null;
     }
     onSend(messages = [], forexPhone, Customer, customerPhone) {
         this.setState(previousState => ({
@@ -80,36 +96,24 @@ class Chat extends React.Component {
                 console.log('Done')
             })
     }
+    renderSend(props) {
+        return (
+            <Send
+                {...props}
+            >
 
-    renderCustomView = (props) => {
-        if (props.currentMessage.location) {
-            return (
-                <View style={props.containerStyle}>
-                    <MapView
-                        provider={PROVIDER_GOOGLE}
-                        style={[styles.mapView]}
-                        region={{
-                            latitude: props.currentMessage.location.latitude,
-                            longitude: props.currentMessage.location.longitude,
-                            latitudeDelta: 0.1,
-                            longitudeDelta: 0.1,
-                        }}
-                        scrollEnabled={false}
-                        zoomEnabled={false}
-                    >
-                        <MapView.Marker
-                            coordinate={{
-                                latitude: props.currentMessage.location.latitude,
-                                longitude: props.currentMessage.location.longitude
-                            }}
-                        />
-                    </MapView>
+                <View style={{ marginRight: 10, marginBottom: 5 }}>
+                    <MaterialIcons
+                        name="send"
+                        size={30}
+                        color={Colors.primary} />
                 </View>
-            );
-        }
-        return null
+            </Send>
+        );
     }
+
     async componentWillMount() {
+        this._isMounted = true;
         const Name = await AsyncStorage.getItem(chatName)
         const Num = await AsyncStorage.getItem(chatNum)
         const { forexPhone } = this.props.navigation.state.params
@@ -141,7 +145,77 @@ class Chat extends React.Component {
         return status <= 59000 ? 'online' : 'offline'
     }
     componentWillUnmount() {
+        this._isMounted = false;
         clearInterval(this._interval);
+    }
+    onLoadEarlier() {
+        this.setState((previousState) => {
+            return {
+                isLoadingEarlier: true,
+            };
+        });
+
+        setTimeout(() => {
+            if (this._isMounted === true) {
+                this.setState((previousState) => {
+                    return {
+                        messages: GiftedChat.prepend(previousState.messages, this.state.messages),
+                        loadEarlier: false,
+                        isLoadingEarlier: false,
+                    };
+                });
+            }
+        }, 1000); // simulating network
+    }
+    renderCustomActions(props) {
+        if (Platform.OS === 'ios') {
+            return (
+                <CustomActions
+                    {...props}
+                />
+            );
+        }
+        const options = {
+            'Action 1': (props) => {
+                alert('option 1');
+            },
+            'Action 2': (props) => {
+                alert('option 2');
+            },
+            'Cancel': () => { },
+        };
+        return (
+            <CustomActions
+                {...props}
+            />
+        );
+    }
+
+    renderBubble(props) {
+        return (
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    left: {
+                        backgroundColor: '#f0f0f0',
+                    }
+                }}
+            />
+        );
+    }
+
+    renderSystemMessage(props) {
+        return (
+            <SystemMessage
+                {...props}
+                containerStyle={{
+                    marginBottom: 15,
+                }}
+                textStyle={{
+                    fontSize: 14,
+                }}
+            />
+        );
     }
     _getStatus = (forexPhone, Customer, customerPhone) => {
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
@@ -216,6 +290,13 @@ class Chat extends React.Component {
     get timestamp() {
         return firebase.database.ServerValue.TIMESTAMP;
     }
+    renderCustomView(props) {
+        return (
+            <CustomView
+                {...props}
+            />
+        );
+    }
     render() {
         const { loading } = this.state
         if (loading) {
@@ -251,10 +332,14 @@ class Chat extends React.Component {
                 <GiftedChat
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages, this.state.forexPhone, this.state.Customer, this.state.customerPhone)}
-                    renderCustomView={this.renderCustomView}
                     user={this.user}
                     scrollToBottom={true}
                     isAnimated={true}
+                    // onLongPress={(messages) => this.onLongPress(messages)}
+                    renderSend={this.renderSend}
+                    loadEarlier={this.state.loadEarlier}
+                    onLoadEarlier={this.onLoadEarlier}
+                    isLoadingEarlier={this.state.isLoadingEarlier}
                     parsePatterns={linkStyle => [
                         {
                             pattern: /#(\w+)/,
@@ -262,6 +347,10 @@ class Chat extends React.Component {
                             onPress: props => alert(`press on ${props}`),
                         },
                     ]}
+                    renderActions={this.renderCustomActions}
+                    renderBubble={this.renderBubble}
+                    renderSystemMessage={this.renderSystemMessage}
+                    renderCustomView={this.renderCustomView}
                 />
                 <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={screenwidth / 24} />
             </>
