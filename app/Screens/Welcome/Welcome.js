@@ -8,15 +8,20 @@ import {
     ToastAndroid
 } from 'react-native';
 import styles from './styles'
-import { userChoice } from '../../Config/constants'
+import { userPhone, userChoice } from '../../Config/constants'
 // import money from '../../Assets/Background/money.jpg'
-
+import * as firebase from 'firebase'
 export default class Home extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            showAlert: false
+            showAlert: false,
+            signedIn: false,
+            checkedSignIn: false,
+            userSignedIn: false,
+            userViewConformed: false,
+            initialRouter: 'WelcomeStack'
         }
     }
 
@@ -35,6 +40,43 @@ export default class Home extends React.Component {
             showAlert: false
         });
     };
+    _handleForex = async () => {
+        const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
+        console.log(retrieveduserPhone)
+        if (retrieveduserPhone) {
+            try {
+                await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
+                    .then(snapshot => {
+                        const { completed } = snapshot.val()
+                        if (completed) {
+                            this.setState({
+                                signedIn: true,
+                                checkedSignIn: true,
+                                initialRouter: 'SignedIn'
+                            })
+                            this.props.navigation.navigate('SignedIn')
+                        } else {
+                            this.setState({
+                                signedIn: true,
+                                checkedSignIn: true,
+                                initialRouter: 'InfoRegis'
+                            })
+                            this.props.navigation.navigate('InfoRegis')
+                        }
+                    }).catch(error => {
+                        this.setState({
+                            signedIn: true,
+                            checkedSignIn: true,
+                            initialRouter: 'InfoRegis'
+                        })
+                        this.props.navigation.navigate('InfoRegis')
+                    })
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
+
+    }
     _handleUser = async () => {
         try {
             await AsyncStorage.setItem(userChoice, 'true').then(() => {
@@ -67,7 +109,7 @@ export default class Home extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => this.props.navigation.navigate('Login')}
+                        onPress={this._handleForex.bind(this)}
                     >
                         <Text style={styles.buttonText}> Manage a Forex </Text>
                     </TouchableOpacity>

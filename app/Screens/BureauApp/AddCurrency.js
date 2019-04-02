@@ -23,7 +23,7 @@ import styles from './Style/AddCurrencyStyle'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { userPhone, cName } from '../../Config/constants';
+import { userPhone, cName, chatNum, chatName } from '../../Config/constants';
 // YellowBox.ignoreWarnings(['Setting a timer']);
 // const _console = _.clone(console);
 // console.log = message => {
@@ -227,7 +227,8 @@ class AddCurrency extends Component {
 
   _handleSignOut = async () => {
     try {
-      await AsyncStorage.setItem(userPhone, '').then(() => {
+      await AsyncStorage.setItem(chatName, this.state.companyName)
+      await AsyncStorage.setItem(chatNum, this.state.userPhone).then(() => {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
