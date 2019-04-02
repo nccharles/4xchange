@@ -96,7 +96,7 @@ export default class CustomActions extends React.Component {
 
                     const images = this.getImages().map((image) => {
                         return {
-                            image: image.uri,
+                            image: { uri: 'data:image/jpeg;base64,' + image.uri },
                         };
                     });
                     this.props.onSend(images);
