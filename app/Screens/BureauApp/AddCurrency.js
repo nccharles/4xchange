@@ -3,7 +3,6 @@ import {
   View,
   FlatList,
   ActivityIndicator,
-  Dimensions,
   AsyncStorage,
   ToastAndroid
 } from 'react-native';
@@ -24,16 +23,6 @@ import styles from './Style/AddCurrencyStyle'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { userPhone, cName, chatNum, chatName } from '../../Config/constants';
-// YellowBox.ignoreWarnings(['Setting a timer']);
-// const _console = _.clone(console);
-// console.log = message => {
-//   if (message.indexOf('Setting a timer') <= -1) {
-//     _console.log(message);
-//   }
-// };
-//back end done
-const screenwidth = Dimensions.get('window').width
-const screenheight = Dimensions.get('window').height
 
 const initailState = {
   loading: true,

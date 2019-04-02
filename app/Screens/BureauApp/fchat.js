@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import { Colors } from '../../Assets/Themes'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { MaterialIcons } from '@expo/vector-icons'
 import Moment from 'moment'
 import "prop-types";
@@ -10,7 +9,7 @@ import * as firebase from 'firebase'
 import _ from 'lodash'
 import { GiftedChat, Send, Bubble, SystemMessage } from 'react-native-gifted-chat';
 import CustomActions from '../../Components/Customs/Actions';
-import CustomView from '../../Components/Actions/CustomView';
+import CustomView from '../../Components/Customs/CustomView';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
 const screenwidth = Dimensions.get('window').width
 class ForexChat extends Component {
@@ -203,7 +202,10 @@ class ForexChat extends Component {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: '#f0f0f0',
+                        backgroundColor: Colors.silver,
+                    },
+                    right: {
+                        backgroundColor: Colors.primary,
                     }
                 }}
             />

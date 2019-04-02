@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Dimensions, Platform, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
 import { Colors } from '../../Assets/Themes'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import "prop-types";
 import Moment from 'moment'
 //backend firebase things
@@ -12,7 +11,7 @@ import { GiftedChat, Send, Actions, Bubble, SystemMessage } from 'react-native-g
 import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
 import CustomActions from '../../Components/Customs/Actions';
-import CustomView from '../../Components/Actions/CustomView';
+import CustomView from '../../Components/Customs/CustomView';
 const screenwidth = Dimensions.get('window').width
 class Chat extends Component {
     constructor(props) {
@@ -197,7 +196,10 @@ class Chat extends Component {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: '#f0f0f0',
+                        backgroundColor: Colors.silver,
+                    },
+                    right: {
+                        backgroundColor: Colors.primary,
                     }
                 }}
             />

@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     borderRadius: screenwidth / 6,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.primary,
     position: 'absolute',
     bottom: 20,
     right: 10,
@@ -66,6 +65,12 @@ const styles = StyleSheet.create({
     width: screenwidth - 30,
     alignSelf: 'center',
     elevation: 3
+  },
+  gradient: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5
   },
   headerBtn: {
     marginRight: 20
