@@ -23,8 +23,8 @@ class Chat extends Component {
             forexPhone: null,
             Customer: null,
             customerkey: null,
-            loadEarlier: true,
-            isLoadingEarlier: false,
+            // loadEarlier: true,
+            // isLoadingEarlier: false,
             sent: 0,
             lastseen: 0
 

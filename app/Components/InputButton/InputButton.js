@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import PropTypes from 'prop-types'
-
+import { LinearGradient } from "expo";
 import styles from './styles'
+import { Colors } from '../../Assets/Themes';
 
 const InputWithButton = (props) => {
     const {
@@ -28,16 +29,21 @@ const InputWithButton = (props) => {
                 {...props} />
 
             <View style={styles.border} />
-
-            <TouchableOpacity
+            <LinearGradient
+                colors={Colors.gradientColors}
+                start={{ x: 1.0, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
                 style={styles.InputButton}
-                onPress={onPress}>
-                <Text
-                    style={styles.buttonText}
-                >
-                    {buttonText}
-                </Text>
-            </TouchableOpacity>
+            >
+                <TouchableOpacity
+                    onPress={onPress}>
+                    <Text
+                        style={styles.buttonText}
+                    >
+                        {buttonText}
+                    </Text>
+                </TouchableOpacity>
+            </LinearGradient>
         </View>
     )
 }

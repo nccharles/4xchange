@@ -7,7 +7,7 @@ import "prop-types";
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { GiftedChat, Send, Bubble, SystemMessage } from 'react-native-gifted-chat';
+import { GiftedChat, Send, Bubble, InputToolbar, SystemMessage } from 'react-native-gifted-chat';
 import CustomActions from '../../Components/Customs/Actions';
 import CustomView from '../../Components/Customs/CustomView';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
@@ -23,7 +23,9 @@ class ForexChat extends Component {
             Customer: null,
             customerPhone: null,
             customerkey: null,
-            unread: 0
+            unread: 0,
+            // loadEarlier: true,
+            // isLoadingEarlier: false,
         }
         this._isMounted = false;
         this.onSend = this.onSend.bind(this);
@@ -123,7 +125,7 @@ class ForexChat extends Component {
     }
     getLastseen(lastseen) {
         const status = this.timestamp - lastseen
-        return status <= 60000 ? 'online' : 'offline'
+        return status <= 59000 ? 'online' : 'offline'
     }
     _getAllmessages = async (forexPhone, customerPhone) => {
         const that = this
@@ -232,6 +234,10 @@ class ForexChat extends Component {
             />
         );
     }
+    renderInputToolbar(props) {
+        //Add the extra styles via containerStyle
+        return <InputToolbar {...props} containerStyle={{ borderTopColor: Colors.primary, }} />
+    }
     render() {
         const { loading } = this.state
         if (loading) {
@@ -280,9 +286,10 @@ class ForexChat extends Component {
                         {
                             pattern: /#(\w+)/,
                             style: { ...linkStyle, color: 'lightgreen' },
-                            onPress: props => alert(`press on ${props}`),
+                            onPress: props => alert(props),
                         },
                     ]}
+                    renderInputToolbar={this.renderInputToolbar}
                     renderActions={this.renderCustomActions}
                     renderBubble={this.renderBubble}
                     renderSystemMessage={this.renderSystemMessage}
@@ -293,12 +300,5 @@ class ForexChat extends Component {
         );
     }
 }
-const styles = StyleSheet.create({
-    mapView: {
-        width: 150,
-        height: 100,
-        borderRadius: 13,
-        margin: 3,
-    },
-});
+
 export default ForexChat;

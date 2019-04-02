@@ -17,7 +17,6 @@ class Category extends Component {
             Buy
             </Text>
         </TouchableHighlight>
-        {/* <View style={{width: 2, backgroundColor: '#3498DB'}}/> */}
         <TouchableHighlight
           onPress={onPressSell}
           style={btnSellStyle}>
