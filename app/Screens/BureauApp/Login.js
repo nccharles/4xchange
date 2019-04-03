@@ -18,7 +18,8 @@ import {
 import Spinner from 'react-native-loading-spinner-overlay';
 import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
-import { Colors } from '../../Assets/Themes'
+import { LinearGradient } from "expo";
+import { Colors } from '../../Assets/Themes';
 import { userPhone, cName } from '../../Config/constants'
 //backend imports 
 import * as firebase from 'firebase'
@@ -387,11 +388,16 @@ export default class Phone extends Component {
                                     onSubmitEditing={this._getSubmitAction} />
 
                             </View>
-
-                            <TouchableOpacity style={styles.button} onPress={this._getSubmitAction}>
-                                <Text style={styles.buttonText}>{buttonText}</Text>
-                            </TouchableOpacity>
-
+                            <LinearGradient
+                                colors={Colors.gradientColors}
+                                start={{ x: 1.0, y: 0.5 }}
+                                end={{ x: 0, y: 0.5 }}
+                                style={styles.button}
+                            >
+                                <TouchableOpacity onPress={this._getSubmitAction}>
+                                    <Text style={styles.buttonText}>{buttonText}</Text>
+                                </TouchableOpacity>
+                            </LinearGradient>
                             {this._renderFooter()}
 
                         </Form>

@@ -7,7 +7,9 @@ import {
     AsyncStorage,
     ToastAndroid
 } from 'react-native';
+import { LinearGradient } from "expo";
 import styles from './styles'
+import { Colors } from '../../Assets/Themes';
 import { userPhone, userChoice } from '../../Config/constants'
 // import money from '../../Assets/Background/money.jpg'
 import * as firebase from 'firebase'
@@ -74,6 +76,8 @@ export default class Home extends React.Component {
             } catch (error) {
                 console.log(error.message)
             }
+        } else {
+            this.props.navigation.navigate('Login')
         }
 
     }
@@ -101,18 +105,30 @@ export default class Home extends React.Component {
                         style={styles.image} />
                 </View>
                 <View style={styles.content}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this._handleUser.bind(this)}
+                    <LinearGradient
+                        colors={Colors.gradientColors}
+                        start={{ x: 1.0, y: 0.5 }}
+                        end={{ x: 0, y: 0.5 }}
+                        style={styles.topbutton}
                     >
-                        <Text style={styles.buttonText}> Locate Forex </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this._handleForex.bind(this)}
+                        <TouchableOpacity
+                            onPress={this._handleUser.bind(this)}
+                        >
+                            <Text style={styles.buttonText}> Locate Forex </Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={Colors.gradientColors}
+                        start={{ x: 1.0, y: 0.5 }}
+                        end={{ x: 0, y: 0.5 }}
+                        style={styles.bottombutton}
                     >
-                        <Text style={styles.buttonText}> Manage a Forex </Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={this._handleForex.bind(this)}
+                        >
+                            <Text style={styles.buttonText}> Manage a Forex </Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
                 </View>
             </View>
         )
