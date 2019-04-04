@@ -119,7 +119,7 @@ export default class Phone extends Component {
         };
     }
     static navigationOptions = ({ navigation }) => {
-        let Title = (navigation.state.params || {}).forex || 'Chat!   '
+        let Title = (navigation.state.params || {}).forex + '   ' || 'Chat!   '
         return {
             headerTitle: Title + '   ',
             headerStyle: {

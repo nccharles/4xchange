@@ -8,7 +8,7 @@ export default StyleSheet.create({
 
     input: {
         height: 40,
-        borderBottomWidth: 2,
+        borderBottomWidth: Platform.OS === 'ios' ? 0 : 2,
         borderBottomColor: Colors.primary,
         width: screenwidth - 70,
         paddingHorizontal: 10,
