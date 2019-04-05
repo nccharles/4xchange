@@ -13,6 +13,7 @@ import { Colors } from '../../Assets/Themes';
 import { userPhone, userChoice } from '../../Config/constants'
 // import money from '../../Assets/Background/money.jpg'
 import * as firebase from 'firebase'
+import { registerForPushNotificationsAsync } from '../../Config/notice';
 export default class Home extends React.Component {
 
     constructor(props) {
@@ -44,7 +45,7 @@ export default class Home extends React.Component {
     };
     _handleForex = async () => {
         const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
-        console.log(retrieveduserPhone)
+        registerForPushNotificationsAsync();
         if (retrieveduserPhone) {
             try {
                 await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
@@ -82,8 +83,10 @@ export default class Home extends React.Component {
 
     }
     _handleUser = async () => {
+
         try {
             await AsyncStorage.setItem(userChoice, 'true').then(() => {
+                registerForPushNotificationsAsync();
                 this.props.navigation.navigate('TabNavScreen')
             })
             // console.log(value)

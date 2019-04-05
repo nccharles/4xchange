@@ -14,6 +14,7 @@ import styles from './Style/AddCurrencyStyle'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { userPhone, cName } from '../../Config/constants';
+import { registerForPushNotificationsAsync } from '../../Config/notice';
 //back end done
 
 const initialState = {
@@ -53,6 +54,7 @@ class Chatlist extends Component {
     };
 
     async componentWillMount() {
+
         const forexPhone = await AsyncStorage.getItem(userPhone)
         this.setState({
             companyName: await AsyncStorage.getItem(cName),
@@ -61,7 +63,7 @@ class Chatlist extends Component {
         this._getAllCustomers(forexPhone)
 
         this._countCustomerMessages(forexPhone)
-
+        registerForPushNotificationsAsync()
     }
 
     _countCustomerMessages = async (forexPhone) => {

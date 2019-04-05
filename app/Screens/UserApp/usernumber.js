@@ -23,6 +23,7 @@ import { Colors } from '../../Assets/Themes';
 import { chatNum } from '../../Config/constants'
 //backend imports 
 import _ from 'lodash'
+import { registerForPushNotificationsAsync } from '../../Config/notice';
 //back end done
 const MAX_LENGTH_CODE = 6;
 const MAX_LENGTH_NUMBER = 9;
@@ -207,8 +208,12 @@ export default class Phone extends Component {
                         ToastAndroid.BOTTOM
                     );
                     try {
+
                         await AsyncStorage.setItem(chatNum, this.state.country.callingCode + this.state.Phone)
-                            .then(() => this.props.navigation.navigate("Chat", { forex: this.state.forex, forexPhone: this.state.forexPhone }))
+                            .then(() => {
+                                registerForPushNotificationsAsync()
+                                this.props.navigation.navigate("Chat", { forex: this.state.forex, forexPhone: this.state.forexPhone })
+                            })
                     } catch (error) {
                         console.log(error.message)
                         ToastAndroid.showWithGravity(

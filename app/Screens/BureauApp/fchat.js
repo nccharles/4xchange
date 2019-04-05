@@ -11,6 +11,7 @@ import { GiftedChat, Send, Bubble, InputToolbar, SystemMessage } from 'react-nat
 import CustomActions from '../../Components/Customs/Actions';
 import CustomView from '../../Components/Customs/CustomView';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
+import { registerForPushNotificationsAsync, sendPushNotification } from '../../Config/notice';
 const screenwidth = Dimensions.get('window').width
 class ForexChat extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class ForexChat extends Component {
         this._isAlright = null;
     }
     onSend(messages = [], forexPhone, customerPhone) {
+        sendPushNotification("Forex", customerPhone, body = 'Please read new mesage!')
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }))

@@ -18,7 +18,8 @@
       "backgroundColor": "#006442"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_ERROR_RECOVERY"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -29,6 +30,12 @@
       "config": {
         "googleMapsApiKey": "AIzaSyCy6H2ah8PtVYEl6gsbYNGaTCTiZsgPttw"
       }
+    },
+    "notification": {
+      "icon": "./app/Assets/Logo/notify.png",
+      "color": "#006442",
+      "androidMode": "collapse",
+      "androidCollapsedTitle": "#{unread_notifications} new messages"
     },
     "android": {
       "package": "com.limitlessafricanapps.i4xChange",

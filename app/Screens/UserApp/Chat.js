@@ -12,6 +12,7 @@ import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
 import CustomActions from '../../Components/Customs/Actions';
 import CustomView from '../../Components/Customs/CustomView';
+import { sendPushNotification } from '../../Config/notice';
 const screenwidth = Dimensions.get('window').width
 class Chat extends Component {
     constructor(props) {
@@ -39,9 +40,11 @@ class Chat extends Component {
         this._isAlright = null;
     }
     onSend(messages = [], forexPhone, Customer, customerPhone) {
+        sendPushNotification(Customer, forexPhone, body = 'Please read new mesage!')
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }))
+        console.log("message" + messages)
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .orderByChild(`customerPhone`)
             .equalTo(customerPhone)
