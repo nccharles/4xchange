@@ -18,6 +18,7 @@ import { userChoice } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
+import { sendPushNotification } from '../../Config/notice';
 const initailState = {
   data: [],
   loading: true,
@@ -122,7 +123,7 @@ class Local extends Component {
         console.log(sanpshot.val().email)
         Alert.alert('Update!', `Do you want to request for update ${this.state.baseCurrency}?`, [{
           text: 'Yes',
-          onPress: () => this.Updated(sanpshot.val().email, Company)
+          onPress: () => this.Updated(User, sanpshot.val().email, Company)
         }]);
       })
       .catch(error => {
@@ -130,7 +131,7 @@ class Local extends Component {
       });
 
   };
-  Updated = (femail, fcompany) => {
+  Updated = (companyPhone, femail, fcompany) => {
     //returning sendGridKey
     firebase
       .database()
@@ -139,6 +140,7 @@ class Local extends Component {
       .then(sanpshot => {
         console.log(sanpshot.val().sgkey)
         console.log(sanpshot.val().content)
+        sendPushNotification('Customer', companyPhone, sanpshot.val().content)
         const body = {
           "personalizations": [
             {

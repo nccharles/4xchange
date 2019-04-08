@@ -23,6 +23,7 @@ import styles from './Style/AddCurrencyStyle'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { userPhone, cName, chatNum, chatName } from '../../Config/constants';
+import { registerForPushNotificationsAsync } from '../../Config/notice';
 
 const initailState = {
   loading: true,
@@ -74,7 +75,7 @@ class AddCurrency extends Component {
     })
     this._getUserCurrencies()
     this._getAllCustomers(currentUser)
-
+    registerForPushNotificationsAsync()
   }
 
   _getAllCustomers = async (forexPhone) => {

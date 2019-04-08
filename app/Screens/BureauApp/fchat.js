@@ -38,7 +38,7 @@ class ForexChat extends Component {
         this._isAlright = null;
     }
     onSend(messages = [], forexPhone, customerPhone) {
-        sendPushNotification("Forex", customerPhone, body = 'Please read new mesage!')
+
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages)
         }))
@@ -81,6 +81,11 @@ class ForexChat extends Component {
             .then(resp => {
                 console.log("Done")
             })
+        messages.forEach(child => {
+            console.log("message" + child.text)
+            sendPushNotification(child.user.name, customerPhone, child.text)
+        })
+
     }
     renderSend(props) {
         return (
@@ -136,7 +141,6 @@ class ForexChat extends Component {
                 this.setState(() => ({
                     loading: false,
                 }))
-                console.log(snapshot)
                 if (snapshot.val()) {
                     that.setState(() => ({
                         messages: snapshot.val().messages,
