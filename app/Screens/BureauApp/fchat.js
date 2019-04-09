@@ -39,9 +39,6 @@ class ForexChat extends Component {
     }
     onSend(messages = [], forexPhone, customerPhone) {
 
-        this.setState(previousState => ({
-            messages: GiftedChat.append(previousState.messages, messages)
-        }))
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .orderByChild(`customerPhone`)
             .equalTo(customerPhone)
@@ -81,6 +78,9 @@ class ForexChat extends Component {
             .then(resp => {
                 console.log("Done")
             })
+        this.setState(previousState => ({
+            messages: GiftedChat.append(previousState.messages, messages)
+        }))
         messages.forEach(child => {
             console.log("message" + child.text)
             sendPushNotification(child.user.name, customerPhone, child.text)

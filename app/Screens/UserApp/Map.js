@@ -60,8 +60,10 @@ class MapScreen extends Component {
     const that = this
     await firebase.database().ref('/infos/').once('value').then(snapshot => {
       const coordinates = _.map(snapshot.val(), (val, uid) => {
-        // return { latitude: val.info.latitude, longitude: val.info.longitude, uid }
-        return { ...val.publicInfo, uid }
+        if (val.publicInfo.latitude && val.publicInfo.latitude) {
+          return { ...val.publicInfo, uid }
+        }
+
       })
       if (coordinates) {
         that.setState({
