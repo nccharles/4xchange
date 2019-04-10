@@ -8,9 +8,9 @@ import {
   Image,
   Platform,
   Picker,
-  ToastAndroid,
   TimePickerAndroid
 } from "react-native";
+import Toast, { DURATION } from 'react-native-easy-toast'
 import { Location, Permissions } from "expo";
 import { Icon, Button, Input } from "react-native-elements";
 import styles from "./Style/SignupStyles";
@@ -157,16 +157,11 @@ class Signup extends Component {
         timestamp: this.timestamp
       })
       .then(response => {
-        ToastAndroid.showWithGravityAndOffset(
-          "Information saved!",
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-          25,
-          50
-        );
-        that.props.navigation.navigate("SignedIn");
-        that.setState({
-          isSubmitting: false
+        this.refs.toast.show("Information saved!", () => {
+          that.props.navigation.navigate("SignedIn");
+          that.setState({
+            isSubmitting: false
+          });
         });
       })
       .catch(err => {
@@ -312,6 +307,14 @@ class Signup extends Component {
               activityIndicatorStyle={{ color: "white" }}
             />
           </ScrollView>
+          <Toast ref="toast"
+            style={{ backgroundColor: Colors.primary }}
+            position='bottom'
+            positionValue={200}
+            fadeInDuration={750}
+            fadeOutDuration={1000}
+            opacity={0.8}
+            textStyle={{ color: '#fff' }} />
         </KeyboardAvoidingView>
       </View>
     );

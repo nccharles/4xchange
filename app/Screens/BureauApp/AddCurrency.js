@@ -4,8 +4,8 @@ import {
   FlatList,
   ActivityIndicator,
   AsyncStorage,
-  ToastAndroid
 } from 'react-native';
+import Toast, { DURATION } from 'react-native-easy-toast'
 import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import logout from '../../Assets/Icons/logout.png'
@@ -113,13 +113,7 @@ class AddCurrency extends Component {
     console.log('done')
     const { newCurrency: { currency, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
     if (_.find(this.state.data, { currency: currency })) {
-      ToastAndroid.showWithGravityAndOffset(
-        `${currency} already exist!!!`,
-        ToastAndroid.LONG,
-        ToastAndroid.BOTTOM,
-        25,
-        50
-      );
+      this.refs.toast.show(`${currency} already exist!!!`);
       this.setState(state => ({
         ...initailState,
         newCurrency: {
@@ -169,13 +163,7 @@ class AddCurrency extends Component {
             currency: '',
           },
         }))
-        ToastAndroid.showWithGravityAndOffset(
-          'Currency added!',
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-          25,
-          50
-        );
+        this.refs.toast.show('Currency added!');
       })
       .catch(err => {
         console.log(`error: ${err}`)
@@ -202,13 +190,7 @@ class AddCurrency extends Component {
         that.setState({
           ...initailState,
         })
-        ToastAndroid.showWithGravityAndOffset(
-          'Currency updated!',
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-          25,
-          50
-        );
+        this.refs.toast.show('Currency updated!');
       })
       .catch(err => {
         console.log(err.message)
@@ -222,11 +204,7 @@ class AddCurrency extends Component {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
-      ToastAndroid.showWithGravity(
-        error.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM
-      );
+      this.refs.toast.show(error.message);
     }
   }
   //backend ends
@@ -277,13 +255,7 @@ class AddCurrency extends Component {
     firebase.database().ref(`currencies/${currentItem.uid}`)
       .set(null)
       .then(response => {
-        ToastAndroid.showWithGravityAndOffset(
-          'Currency deleted!',
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-          25,
-          50
-        );
+        this.refs.toast.show('Currency deleted!');
       })
       .catch(err => {
         console.log(err)
@@ -418,6 +390,14 @@ class AddCurrency extends Component {
           label2="Delete   "
         />
         <ChatBtn onPress={() => this.props.navigation.navigate('Chatlist')} />
+        <Toast ref="toast"
+          style={{ backgroundColor: Colors.primary }}
+          position='bottom'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{ color: '#fff' }} />
       </View>
     );
   }
