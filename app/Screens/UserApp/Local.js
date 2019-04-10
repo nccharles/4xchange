@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import {
   StyleSheet, Text, View, AsyncStorage,
   FlatList, Image, Animated, Modal, ActivityIndicator, Dimensions,
-  TouchableOpacity, ToastAndroid, Alert
+  TouchableOpacity, Alert
 } from 'react-native';
+import Toast, { DURATION } from 'react-native-easy-toast'
 import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import logout from '../../Assets/Icons/logout.png'
@@ -120,7 +121,6 @@ class Local extends Component {
       .ref(`/infos/${User}/businessInfo`)
       .once("value")
       .then(sanpshot => {
-        console.log(sanpshot.val().email)
         Alert.alert('Update!', `Do you want to request for update ${this.state.baseCurrency}?`, [{
           text: 'Yes',
           onPress: () => this.Updated(User, sanpshot.val().email, Company)
@@ -138,8 +138,6 @@ class Local extends Component {
       .ref(`/config`)
       .once("value")
       .then(sanpshot => {
-        console.log(sanpshot.val().sgkey)
-        console.log(sanpshot.val().content)
         sendPushNotification('Customer', companyPhone, sanpshot.val().content)
         const body = {
           "personalizations": [
@@ -281,12 +279,7 @@ class Local extends Component {
           body: JSON.stringify(body),
         }).then((response) => {
           this.setState({ response: `${response.status} - ${response.ok} - ${response.statusText}` });
-          console.log(response);
-          ToastAndroid.showWithGravity(
-            "Sent!: We've sent your request to forexbureau",
-            ToastAndroid.LONG,
-            ToastAndroid.BOTTOM
-          );
+          this.refs.toast.show("Sent!: We've sent your request to forexbureau");
         });
       })
       .catch(error => {
@@ -329,11 +322,7 @@ class Local extends Component {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
-      ToastAndroid.showWithGravity(
-        'Error: faild to peform action',
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM
-      );
+      this.refs.toast.show("Error: faild to peform action");
     }
   }
   // end of codes
@@ -426,6 +415,14 @@ class Local extends Component {
           ListEmptyComponent={this.renderEmpty}
         // ItemSeparatorComponent={this.renderSeparator}
         />
+        <Toast ref="toast"
+          style={{ backgroundColor: Colors.primary }}
+          position='bottom'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{ color: '#fff' }} />
       </View>
     );
   }

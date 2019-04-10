@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, FlatList, ActivityIndicator, ToastAndroid, AsyncStorage
+  View, FlatList, ActivityIndicator, AsyncStorage
 } from 'react-native';
 import { userChoice } from '../../Config/constants'
 
@@ -9,7 +9,7 @@ import { Colors } from '../../Assets/Themes'
 import Card from '../../Components/Card/InternationalCard'
 import InputButton from '../../Components/InputButton/InputButton'
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
-
+import Toast, { DURATION } from 'react-native-easy-toast'
 import {
   currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url
 } from '../../Assets/resources/data';
@@ -113,11 +113,7 @@ class International extends Component {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
-      ToastAndroid.showWithGravity(
-        'Error: faild to peform action',
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM
-      );
+      this.refs.toast.show("Error: faild to peform action");
     }
   }
 
@@ -160,6 +156,14 @@ class International extends Component {
           onEndReachedThreshold={30}
         />
         <LastConverted lastUpdated={this.state.date} />
+        <Toast ref="toast"
+          style={{ backgroundColor: Colors.primary }}
+          position='bottom'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{ color: '#fff' }} />
       </View>
     );
   }

@@ -5,9 +5,9 @@ import {
     TouchableOpacity,
     Text,
     AsyncStorage,
-    ToastAndroid
 } from 'react-native';
 import { LinearGradient } from "expo";
+import Toast, { DURATION } from 'react-native-easy-toast'
 import styles from './styles'
 import { Colors } from '../../Assets/Themes';
 import { userPhone, userChoice } from '../../Config/constants'
@@ -91,12 +91,8 @@ export default class Home extends React.Component {
             })
             // console.log(value)
         } catch (error) {
-            // ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
-            ToastAndroid.showWithGravity(
-                'Error: faild to remember your choice',
-                ToastAndroid.SHORT,
-                ToastAndroid.BOTTOM
-            );
+
+            this.refs.toast.show("Error: faild to remember your choice");
         }
     }
     render() {
@@ -132,6 +128,14 @@ export default class Home extends React.Component {
                             <Text style={styles.buttonText}> Manage a Forex </Text>
                         </TouchableOpacity>
                     </LinearGradient>
+                    <Toast ref="toast"
+                        style={{ backgroundColor: Colors.primary }}
+                        position='bottom'
+                        positionValue={200}
+                        fadeInDuration={750}
+                        fadeOutDuration={1000}
+                        opacity={0.8}
+                        textStyle={{ color: '#fff' }} />
                 </View>
             </View>
         )

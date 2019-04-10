@@ -4,6 +4,7 @@ import {
     FlatList,
     ActivityIndicator, AsyncStorage, StyleSheet, Image
 } from 'react-native';
+import Toast, { DURATION } from 'react-native-easy-toast'
 import { Colors } from '../../Assets/Themes'
 import Card from '../../Components/Card/ChatCard'
 import styles from '../BureauApp/Style/AddCurrencyStyle'
@@ -102,9 +103,14 @@ class Chatlist extends Component {
         })
     }
     handleChat = async () => {
+        if (this.state.inputedValue.length <= 2) {
+            this.refs.toast.show('Name must be atleast 3 characters');
+            return
+        }
         this.setState({ InputDialogVisible: false })
         await AsyncStorage.setItem(chatName, this.state.inputedValue)
         this.props.navigation.navigate('userNumber', { customer: this.state.inputedValue, forex: this.state.companyName, forexPhone: this.state.phone });
+
     }
     getStatus(lastseen) {
         const status = new Date().valueOf() - lastseen
@@ -166,6 +172,14 @@ class Chatlist extends Component {
                     onPressCancel={() => this.setState({ InputDialogVisible: false })}
                     label2="Continue   "
                 />
+                <Toast ref="toast"
+                    style={{ backgroundColor: Colors.primary }}
+                    position='bottom'
+                    positionValue={200}
+                    fadeInDuration={750}
+                    fadeOutDuration={1000}
+                    opacity={0.8}
+                    textStyle={{ color: '#fff' }} />
             </View>
         );
     }

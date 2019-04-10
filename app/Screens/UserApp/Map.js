@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Image, ToastAndroid, AsyncStorage,
+  Image, AsyncStorage,
   Platform, Text, View, StyleSheet, Dimensions
 } from 'react-native'
+import Toast, { DURATION } from 'react-native-easy-toast'
 import { Location, Permissions, MapView } from 'expo';
-import MapViewDirections from 'react-native-maps-directions'
-
 import { ApplicationStyles, Metrics, Colors } from '../../Assets/Themes'
 import LocationBank from '../../Assets/MapImage/dollar-spot.png'
 import UserLocation from '../../Assets/MapImage/user.png'
@@ -74,11 +73,7 @@ class MapScreen extends Component {
     })
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
-      return ToastAndroid.showWithGravity(
-        "Enable to Access your location",
-        ToastAndroid.LONG,
-        ToastAndroid.BOTTOM
-      );
+      this.refs.toast.show('Enable to Access your location');
     }
     const { coords } = await Location.getCurrentPositionAsync({});
     this.setState({ coords });
@@ -92,11 +87,8 @@ class MapScreen extends Component {
         this.props.navigation.navigate('WelcomeScreen')
       });
     } catch (error) {
-      ToastAndroid.showWithGravity(
-        'Error: faild to peform action',
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM
-      );
+      this.refs.toast.show('Error: faild to peform action');
+
     }
   }
 
@@ -129,6 +121,14 @@ class MapScreen extends Component {
               title={"Here you are!."} pinColor={"green"} image={UserLocation} />
           </MapView>
         }
+        <Toast ref="toast"
+          style={{ backgroundColor: Colors.primary }}
+          position='bottom'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{ color: '#fff' }} />
       </View>
     );
   }

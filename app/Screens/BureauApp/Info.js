@@ -9,24 +9,21 @@ import {
     Platform,
     Picker,
     PickerIOS,
-    ToastAndroid,
+    DatePickerIOS,
     AsyncStorage,
     TimePickerAndroid
 } from 'react-native'
+import Toast, { DURATION } from 'react-native-easy-toast'
 import {
     Input,
     Button,
     Icon
 } from 'react-native-elements'
 import {
-    Constants,
     Location,
     Permissions
 } from 'expo';
-import AwesomeAlert from 'react-native-awesome-alerts'
-import DateTimePicker from 'react-native-modal-datetime-picker';
 import styles from './Style/Infostyles'
-import TimePicker from '../../Components/TimePicker'
 import open from '../../Assets/Icons/open-sign.png'
 import close from '../../Assets/Icons/closed.png'
 import { Colors } from '../../Assets/Themes'
@@ -132,7 +129,6 @@ class Info extends Component {
                 longitude,
             }
         }));
-        //console.log(latitude, longitude)
     }
 
     _handleInfoSave = async () => {
@@ -159,14 +155,9 @@ class Info extends Component {
                 this.setState({
                     isSubmitting: false,
                 })
-                ToastAndroid.showWithGravityAndOffset(
-                    'Information saved!',
-                    ToastAndroid.LONG,
-                    ToastAndroid.BOTTOM,
-                    25,
-                    50
-                );
-                this.props.navigation.goBack(null)
+                this.refs.toast.show("Information saved!", () => {
+                    this.props.navigation.goBack(null)
+                });
             })
             .catch(err => {
                 console.log(err)
@@ -175,20 +166,15 @@ class Info extends Component {
                 })
             })
     }
-    //end of backend codes
-    // hideAlert = () => {
-    //     this.setState({
-    //         showAlert: false
-    //     });
-    // };
     _timePicker = async (key) => {
+        const pick = Platform.OS === 'ios' ? DatePickerIOS : TimePickerAndroid
         try {
-            const { action, hour, minute } = await TimePickerAndroid.open({
+            const { action, hour, minute } = await pick.open({
                 hour: 12,
                 minute: 0,
                 is24Hour: true, // Will display '2 PM'
             });
-            if (action !== TimePickerAndroid.dismissedAction) {
+            if (action !== pick.dismissedAction) {
                 this.setState(state => ({
                     info: {
                         ...state.info,
@@ -290,7 +276,16 @@ class Info extends Component {
                             </Text>
                         </View>
                         {(Platform.OS === 'ios') ?
-                            <Text>IOS</Text>
+                            <PickerIOS
+                                mode="dropdown"
+                                selectedValue={workingDays}
+                                style={styles.picker}
+                                onValueChange={(itemValue, itemIndex) => this._handleTextInput('workingDays', itemValue)}>
+                                <PickerIOS.Item label="Monday to Friday" value="Monday to Friday" />
+                                <PickerIOS.Item label="Sunday to Firday" value="Sunday to Friday" />
+                                <PickerIOS.Item label="Monday to Saturday" value="Monday to Saturday" />
+                                <PickerIOS.Item label="Whole week" value="Whole week" />
+                            </PickerIOS>
                             :
                             <Picker
                                 mode="dropdown"
@@ -310,6 +305,14 @@ class Info extends Component {
                             buttonStyle={styles.button}
                         />
                     </ScrollView>
+                    <Toast ref="toast"
+                        style={{ backgroundColor: Colors.primary }}
+                        position='bottom'
+                        positionValue={200}
+                        fadeInDuration={750}
+                        fadeOutDuration={1000}
+                        opacity={0.8}
+                        textStyle={{ color: '#fff' }} />
                 </KeyboardAvoidingView>
             </View>
         )

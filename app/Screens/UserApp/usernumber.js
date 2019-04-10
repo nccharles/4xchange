@@ -12,9 +12,8 @@ import {
     Platform,
     AsyncStorage,
     Alert,
-    YellowBox,
-    ToastAndroid
 } from 'react-native';
+import Toast, { DURATION } from 'react-native-easy-toast'
 import Spinner from 'react-native-loading-spinner-overlay';
 import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
@@ -142,11 +141,8 @@ export default class Phone extends Component {
     }
     _getCode = () => {
         if (this.state.Phone.length !== MAX_LENGTH_NUMBER) {
-            ToastAndroid.showWithGravity(
-                'Please add a valid number',
-                ToastAndroid.SHORT,
-                ToastAndroid.BOTTOM
-            );
+            this.refs.toast.show('Please add a valid number');
+
             return;
         }
 
@@ -169,16 +165,17 @@ export default class Phone extends Component {
                 confirm: this.state.Code
             });
             setTimeout(() => {
-                ToastAndroid.showWithGravity(
-                    "Sent!: We've sent you a verification code",
-                    ToastAndroid.LONG,
-                    ToastAndroid.BOTTOM
-                );
-                () => this.refs.form.refs.textInput.focus()
+                this.refs.toast.show("Sent!: We've sent you a verification code", () => {
+                    () => this.refs.form.refs.textInput.focus()
+                });
+
             }, 100);
         }).catch((error) => {
-            console.log(error.message);
-            this.setState({ spinner: false });
+            this.refs.toast.show(error.message, () => {
+                this.setState({ spinner: false });
+            });
+
+
         });
 
     }
@@ -201,11 +198,7 @@ export default class Phone extends Component {
                 } else {
                     this.refs.form.refs.textInput.blur();
                     this.setState({ spinner: false });
-                    ToastAndroid.showWithGravity(
-                        "You have successfully verified your phone number",
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM
-                    );
+                    this.refs.toast.show("You have successfully verified your phone number");
                     try {
 
                         await AsyncStorage.setItem(chatNum, this.state.country.callingCode + this.state.Phone)
@@ -213,12 +206,10 @@ export default class Phone extends Component {
                                 this.props.navigation.navigate("Chat", { forex: this.state.forex, forexPhone: this.state.forexPhone })
                             })
                     } catch (error) {
-                        console.log(error.message)
-                        ToastAndroid.showWithGravity(
-                            error.message,
-                            ToastAndroid.SHORT,
-                            ToastAndroid.BOTTOM
-                        );
+                        this.refs.toast.show(error.message, () => {
+                            this.setState({ spinner: false });
+                        });
+
                     }
                 }
 
@@ -354,7 +345,7 @@ export default class Phone extends Component {
                                     keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'}
                                     style={[styles.textInput, textStyle]}
                                     returnKeyType='go'
-                                    autoFocus
+                                    autoFocus={true}
                                     placeholderTextColor={brandColor}
                                     selectionColor={brandColor}
                                     maxLength={this.state.enterCode ? MAX_LENGTH_CODE : MAX_LENGTH_NUMBER}
@@ -381,6 +372,14 @@ export default class Phone extends Component {
                             textStyle={{ color: Colors.primary }} />
 
                     </ScrollView>
+                    <Toast ref="toast"
+                        style={{ backgroundColor: Colors.primary }}
+                        position='bottom'
+                        positionValue={200}
+                        fadeInDuration={750}
+                        fadeOutDuration={1000}
+                        opacity={0.8}
+                        textStyle={{ color: '#fff' }} />
                 </KeyboardAvoidingView>
             </View>
         );

@@ -32,6 +32,7 @@ class DialogNameComponent extends Component {
                         autoCapitalize={'none'}
                         returnKeyType={'done'}
                         autoCorrect={false}
+                        autoFocus={true}
                         placeholderTextColor='#99A3A4'
                         underlineColorAndroid='transparent'
                         onChangeText={onChangeTextName}

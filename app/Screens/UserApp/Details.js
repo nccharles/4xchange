@@ -9,7 +9,7 @@ import ChatBtn from '../../Components/Buttons/BtnChat'
 import { Colors } from '../../Assets/Themes'
 import gps from '../../Assets/Icons/get-directions-button.png'
 import NameDialogComponent from '../../Components/NameModal/Usermodal';
-
+import Toast, { DURATION } from 'react-native-easy-toast'
 
 //backend firebase things
 import * as firebase from 'firebase'
@@ -82,9 +82,14 @@ export default class Details extends Component {
     }
   }
   handleChat = async () => {
+    if (this.state.inputedValue.length <= 2) {
+      this.refs.toast.show('Name must be atleast 3 characters');
+      return
+    }
     this.setState({ InputDialogVisible: false })
     await AsyncStorage.setItem(chatName, this.state.inputedValue)
     this.props.navigation.navigate('userNumber', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userInfo.phone });
+
   }
   _getCompanyProfile = async (userPhone) => {
     const that = this
@@ -187,6 +192,14 @@ export default class Details extends Component {
           onPressCancel={() => this.setState({ InputDialogVisible: false })}
           label2="Continue   "
         />
+        <Toast ref="toast"
+          style={{ backgroundColor: Colors.primary }}
+          position='bottom'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{ color: '#fff' }} />
       </View>
     );
   }
