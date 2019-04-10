@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "1.2.4",
+    "version": "1.2.5",
     "orientation": "portrait",
     "primaryColor": "#006442",
     "icon": "./app/Assets/Logo/icon.png",
@@ -39,7 +39,7 @@
     },
     "android": {
       "package": "com.limitlessafricanapps.i4xChange",
-      "versionCode": 9,
+      "versionCode": 10,
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",

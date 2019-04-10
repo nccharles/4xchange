@@ -290,6 +290,7 @@ export default class Phone extends Component {
     _renderCallingCode = () => {
 
         if (this.state.enterCode)
+
             return (
                 <View />
             );
