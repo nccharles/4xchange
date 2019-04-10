@@ -361,7 +361,9 @@ class Chat extends Component {
                     renderSystemMessage={this.renderSystemMessage}
                     renderCustomView={this.renderCustomView}
                 />
-                <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={screenwidth / 24} />
+                {Platform.OS === 'android' &&
+                    <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={screenwidth / 24} />}
+
             </>
         );
     }
