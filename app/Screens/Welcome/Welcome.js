@@ -5,8 +5,9 @@ import {
     TouchableOpacity,
     Text,
     AsyncStorage,
+    Platform
 } from 'react-native';
-import { LinearGradient } from "expo";
+import { Icon, LinearGradient } from 'expo';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import styles from './styles'
 import { Colors } from '../../Assets/Themes';
@@ -14,6 +15,7 @@ import { userPhone, userChoice } from '../../Config/constants'
 // import money from '../../Assets/Background/money.jpg'
 import * as firebase from 'firebase'
 import { registerForPushNotificationsAsync } from '../../Config/notice';
+import Swiper from '../../Components/Swiper/Swiper';
 export default class Home extends React.Component {
 
     constructor(props) {
@@ -97,47 +99,41 @@ export default class Home extends React.Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Image
-                        source={require('../../Assets/Logo/title.png')}
-                        style={styles.image} />
-                </View>
-                <View style={styles.content}>
-                    <LinearGradient
-                        colors={Colors.gradientColors}
-                        start={{ x: 1.0, y: 0.5 }}
-                        end={{ x: 0, y: 0.5 }}
-                        style={styles.topbutton}
-                    >
-                        <TouchableOpacity
-                            onPress={this._handleUser.bind(this)}
-                        >
-                            <Text style={styles.buttonText}> Locate Forex </Text>
-                        </TouchableOpacity>
-                    </LinearGradient>
-                    <LinearGradient
-                        colors={Colors.gradientColors}
-                        start={{ x: 1.0, y: 0.5 }}
-                        end={{ x: 0, y: 0.5 }}
-                        style={styles.bottombutton}
-                    >
-                        <TouchableOpacity
-                            onPress={this._handleForex.bind(this)}
-                        >
-                            <Text style={styles.buttonText}> Manage a Forex </Text>
-                        </TouchableOpacity>
-                    </LinearGradient>
-                    <Toast ref="toast"
-                        style={{ backgroundColor: Colors.primary }}
-                        position='bottom'
-                        positionValue={200}
-                        fadeInDuration={750}
-                        fadeOutDuration={1000}
-                        opacity={0.8}
-                        textStyle={{ color: '#fff' }} />
-                </View>
-            </View>
+            <Swiper handleThis={this._handleUser.bind(this)}>
+                {/* First screen */}
+                <LinearGradient
+                    colors={Colors.gradientColors}
+                    start={{ x: 0.5, y: 1.0 }}
+                    end={{ x: 1.0, y: 0 }}
+                    style={styles.slide}
+                >
+                    <Icon.Ionicons name={Platform.OS === 'ios' ? "ios-cash" : 'logo-usd'} size={100} color={'#FFFFFF'} />
+                    <Text style={styles.header}>Welcome</Text>
+                    <Text style={styles.text}>The easiest way to find, locate and exchange foreign currencies</Text>
+                </LinearGradient>
+                {/* Second screen */}
+                <LinearGradient
+                    colors={Colors.gradientColors}
+                    start={{ x: 0.5, y: 1.0 }}
+                    end={{ x: 1.0, y: 0 }}
+                    style={styles.slide}
+                >
+                    <Icon.Ionicons name={Platform.OS === 'ios' ? "ios-pin" : 'md-pin'} size={100} color={'#FFFFFF'} />
+                    <Text style={styles.header}>Locate</Text>
+                    <Text style={styles.text}>Find a forex bureau near your location Best Currency exchange today</Text>
+                </LinearGradient>
+                {/* Third screen */}
+                <LinearGradient
+                    colors={Colors.gradientColors}
+                    start={{ x: 0.5, y: 1.0 }}
+                    end={{ x: 1.0, y: 0 }}
+                    style={styles.slide}
+                >
+                    <Icon.Ionicons name={Platform.OS === 'ios' ? "ios-chatboxes" : 'md-chatboxes'} size={100} color={'#FFFFFF'} />
+                    <Text style={styles.header}>Chats</Text>
+                    <Text style={styles.text}>Update/publish your currency on our Online public billboard Get Chats and contacted by clients</Text>
+                </LinearGradient>
+            </Swiper>
         )
     }
 }

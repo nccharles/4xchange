@@ -28,16 +28,19 @@ export const registerForPushNotificationsAsync = async () => {
     // Get the token that uniquely identifies this device
     let token = await Notifications.getExpoPushTokenAsync();
     await AsyncStorage.setItem(ExpoPushToken, token)
-    let CurrentuserToken = token
-    firebase
-        .database()
-        .ref(`/pushToken/${CurrentuserChatNum ? CurrentuserChatNum : CurrentuserPhone}`)
-        .update({
-            token: CurrentuserToken,
-        })
-        .then(resp => {
-            console.log('Done')
-        })
+    if (CurrentuserChatNum || CurrentuserPhone) {
+        let CurrentuserToken = token
+        firebase
+            .database()
+            .ref(`/pushToken/${CurrentuserChatNum ? CurrentuserChatNum : CurrentuserPhone}`)
+            .update({
+                token: CurrentuserToken,
+            })
+            .then(resp => {
+                console.log('Done')
+            })
+    }
+
 }
 export const sendPushNotification = async (sender, phone, body) => {
     if (phone) {

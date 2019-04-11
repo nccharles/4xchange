@@ -74,7 +74,27 @@ const styles = StyleSheet.create({
         marginVertical: 50,
         marginLeft: 20,
         elevation: 10
-    }
+    },
+    //Swiper
+    slide: {
+        flex: 1,                    // Take up all screen
+        justifyContent: 'center',   // Center vertically
+        alignItems: 'center',       // Center horizontally
+    },
+    // Header styles
+    header: {
+        color: '#FFFFFF',
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginVertical: 15,
+    },
+    // Text below header
+    text: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        marginHorizontal: 40,
+        textAlign: 'center',
+    },
 });
 
 export default styles
