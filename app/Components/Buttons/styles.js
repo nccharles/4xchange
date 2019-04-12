@@ -58,13 +58,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 10,
     flexDirection: 'row',
-    borderWidth: 2,
-    borderColor: Colors.dark,
     borderRadius: 5,
     height: screenheight / 16,
     width: screenwidth - 30,
     alignSelf: 'center',
-    elevation: 3
+    elevation: 1
   },
   gradient: {
     flex: 1,

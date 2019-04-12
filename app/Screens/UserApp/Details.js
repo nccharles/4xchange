@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  ScrollView, View, Text, Linking, Platform, AsyncStorage, ActivityIndicator
+  ScrollView, Share, View, Text, Linking, TouchableOpacity, Platform, AsyncStorage, ActivityIndicator
 } from 'react-native';
 import SVGImage from 'react-native-svg-image'
 import styles from './Style/DetailStyle'
@@ -101,6 +101,27 @@ export default class Details extends Component {
     this.props.navigation.navigate('userNumber', { customer: this.state.inputedValue, forex: this.state.userInfo.companyName, forexPhone: this.state.userInfo.phone });
 
   }
+  onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          `4xChange | The best currency rate deal on https://play.google.com/store/apps/details?id=com.limitlessafricanapps.i4xChange`,
+      })
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      this.refs.toast.show(error.message);
+    }
+  };
+
   _getCompanyProfile = async (userPhone) => {
     const that = this
     await firebase.database().ref(`/infos/${userPhone}/publicInfo`)
@@ -185,6 +206,14 @@ export default class Details extends Component {
               <Text style={styles.info}>{userInfo.workingDays}</Text>
             </View>
           </View>
+          <View style={styles.separator} />
+          <TouchableOpacity onPress={this.onShare} style={styles.itemContainer}>
+            <Icon.MaterialIcons name="share" color={Colors.primary} size={23} />
+            <View style={styles.infocontent}>
+              <Text style={styles.infoTitle}>Share   </Text>
+              <Text style={styles.info}>Share to your friends  </Text>
+            </View>
+          </TouchableOpacity>
         </ScrollView>
         <ChatBtn onPress={this.handleCustomer} />
         <NameDialogComponent

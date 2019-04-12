@@ -367,8 +367,8 @@ class Local extends Component {
             }}
             buyTextStyle={{
               color: this.state.buyTextColor,
-              fontSize: 16,
-              fontWeight: 'bold',
+              fontSize: 12,
+              fontWeight: '300',
               textAlign: 'center'
             }}
             btnSellStyle={{
@@ -382,8 +382,8 @@ class Local extends Component {
             }}
             sellTextStyle={{
               color: this.state.sellTextColor,
-              fontSize: 16,
-              fontWeight: 'bold',
+              fontSize: 12,
+              fontWeight: '300',
               textAlign: 'center'
             }} />
         </View>
