@@ -71,6 +71,9 @@ const WelcomeStack = createStackNavigator({
   Login: {
     screen: Loged,
   },
+  Settings: {
+    screen: Profile
+  },
   Country: { screen: Country },
   TabNavScreen: {
     screen: TabNavScreen,
@@ -105,9 +108,6 @@ const UserStack = createStackNavigator({
       header: () => null
     }
   },
-  Settings: {
-    screen: Profile
-  },
   Chat: {
     screen: Chat,
     navigationOptions: {
@@ -135,9 +135,6 @@ const UserStack = createStackNavigator({
   }
 });
 const SignedIn = createStackNavigator({
-  Settings: {
-    screen: Profile
-  },
   AddCurrency: {
     screen: AddCurrency,
     navigationOptions: {
