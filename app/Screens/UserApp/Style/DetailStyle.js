@@ -10,66 +10,75 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    card: {},
     avatar: {
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        width: screenwidth / 4,
-        height: screenwidth / 4,
-        borderRadius: (screenwidth / 4) / 2,
-        backgroundColor: '#BFC9CA',
-        marginTop: 20
+        width: screenwidth / 6,
+        height: screenwidth / 6,
+        borderRadius: (screenwidth / 6) / 2,
     },
     avatarTxt: {
         fontSize: 20,
         color: 'white',
-        textAlign: 'center',
         fontWeight: 'bold'
+
     },
     titleContainer: {
         flex: 1,
-        flexDirection: "row",
+        flexDirection: "column",
         alignSelf: 'center',
-        marginVertical: 10
+        marginVertical: 20,
+        justifyContent: 'space-between',
+        marginLeft: 10
+    },
+    header: {
+        flexDirection: "row",
+        marginLeft: 10,
+        marginTop: 2,
+        justifyContent: 'space-between'
     },
     title: {
-        color: Colors.primary,
+        color: Colors.primaryLight,
         fontSize: 20,
         fontWeight: 'bold',
-        textAlign: 'center'
+        paddingTop: 20,
     },
     contactContainer: {
         flexDirection: "row",
-        marginLeft: 10
+        marginLeft: 10,
+        justifyContent: 'space-between'
     },
     contacts: {
         fontWeight: 'bold',
-        marginRight: 15
+        marginRight: 15,
     },
     separator: {
         flex: 1,
-        height: 1,
+        height: 0.5,
         width: screenwidth,
-        backgroundColor: Colors.primary,
+        backgroundColor: "gray",
         margin: 8
     },
     itemContainer: {
         flexDirection: "row",
-        paddingVertical: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        paddingVertical: 20
+    },
+    infocontent: {
+        marginLeft: 20
     },
     itemTitle: {
         fontWeight: '900',
-        marginRight: 15
+        paddingVertical: 15,
+        color: Colors.coal,
     },
-    flag_icon: {
-        width: screenwidth / 8,
-        height: screenheight / 25,
-        backgroundColor: 'transparent',
-        // alignSelf: 'center',
-        // justifyContent: 'center',
-        marginTop: -2,
-        marginLeft: screenwidth / 2.2
+    infoTitle: {
+        fontWeight: '900',
+        color: Colors.coal,
     },
+    info: {
+        fontWeight: '600',
+        color: Colors.charcoal,
+    }
 })

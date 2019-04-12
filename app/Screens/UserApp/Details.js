@@ -15,6 +15,7 @@ import Toast, { DURATION } from 'react-native-easy-toast'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { chatName, chatNum } from '../../Config/constants';
+import { Icon } from 'expo';
 const colors = [
   '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
   '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
@@ -42,18 +43,27 @@ export default class Details extends Component {
         countryName: 'Rwanda',
         flag: 'https://restcountries.eu/data/rwa.svg',
       },
+      locate: true,
       loading: true,
       error: false,
     }
   }
   handlePressDirections = () => {
-    let daddr = encodeURIComponent(`${this.state.company}`);
-
-    if (Platform.OS === 'ios') {
-      Linking.openURL(`http://maps.apple.com/?daddr=${daddr}`);
-    } else {
-      Linking.openURL(`http://maps.google.com/?daddr=${daddr}`);
+    if (!this.state.userInfo.latitude && !this.state.userInfo.longitude) {
+      this.refs.toast.show('Enable to open map');
+      return
     }
+    const url = Platform.select({
+      ios: `http://maps.apple.com/?ll=${this.state.userInfo.latitude},${this.state.userInfo.longitude}`,
+      android: `http://maps.google.com/?q=${this.state.userInfo.latitude},${this.state.userInfo.longitude}`
+    });
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    }).catch(err => {
+      this.refs.toast.show(err.message);
+    });
   };
   componentDidMount() {
     const { userPhone } = this.props.navigation.state.params
@@ -132,53 +142,48 @@ export default class Details extends Component {
         <Header
           onPress2={() => this.props.navigation.goBack()}
           onPress1={() => this.handlePressDirections()}
-          source={gps} />
+          source={this.state.userInfo.latitude ? gps : ''} />
         <ScrollView style={styles.card}>
-          <View style={[styles.avatar, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
-            <Text style={styles.avatarTxt}>{userInfo.companyName.substring(0, 2).toUpperCase()}</Text>
-          </View>
-          <View style={styles.titleContainer}>
-            <Text
-              style={styles.title}>
-              {userInfo.companyName + '   '}
-            </Text>
-          </View>
-          <View style={styles.contactContainer}>
-            <Text style={styles.contacts}>Contacts   </Text>
-          </View>
-          <View style={styles.separator} />
-          <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Country:   </Text>
-            <Text>{userInfo.countryName}</Text>
-            <SVGImage
-              style={styles.flag_icon}
-              source={{ uri: userInfo.flag }}
-            />
+          <View style={styles.header}>
+            <View style={[styles.avatar, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
+              <Text style={styles.avatarTxt}>{userInfo.companyName.substring(0, 2).toUpperCase()}</Text>
+            </View>
+            <View style={styles.titleContainer}>
+              <Text
+                style={styles.title}>
+                {userInfo.companyName + '   '}
+              </Text>
+              <Text style={styles.itemTitle}>Information  </Text>
+            </View>
           </View>
           <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Email:   </Text>
-            <Text>{userInfo.email}</Text>
+            <Icon.MaterialIcons name="location-city" color={Colors.primary} size={23} />
+            <View style={styles.infocontent}>
+              <Text style={styles.infoTitle}>Country  </Text>
+              <Text style={styles.info}>{userInfo.countryName}</Text>
+            </View>
           </View>
-          <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Phone:   </Text>
-            <Text>{userPhone}</Text>
+            <Icon.Entypo name="address" color={Colors.primary} size={23} />
+            <View style={styles.infocontent}>
+              <Text style={styles.infoTitle}>Address  </Text>
+              <Text style={styles.info}>{userInfo.address}</Text>
+            </View>
           </View>
-          <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Address:   </Text>
-            <Text>{userInfo.address}</Text>
+            <Icon.MaterialCommunityIcons name="calendar-clock" color={Colors.primary} size={23} />
+            <View style={styles.infocontent}>
+              <Text style={styles.infoTitle}>Opening hours  </Text>
+              <Text style={styles.info}>{`${userInfo.openAt} - ${userInfo.closeAt}`}</Text>
+            </View>
           </View>
-          <View style={styles.separator} />
           <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Opening hours:   </Text>
-            <Text>{`${userInfo.openAt} - ${userInfo.closeAt}`}</Text>
-          </View>
-          <View style={styles.separator} />
-          <View style={styles.itemContainer}>
-            <Text style={styles.itemTitle}>Working Days:   </Text>
-            <Text>{userInfo.workingDays}</Text>
+            <Icon.MaterialCommunityIcons name="calendar-check" color={Colors.primary} size={23} />
+            <View style={styles.infocontent}>
+              <Text style={styles.infoTitle}>Working Days  </Text>
+              <Text style={styles.info}>{userInfo.workingDays}</Text>
+            </View>
           </View>
         </ScrollView>
         <ChatBtn onPress={this.handleCustomer} />

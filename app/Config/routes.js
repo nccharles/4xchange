@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import TabNavScreen from "./tabNav";
 import WelcomeScreen from "../Screens/Welcome/Welcome";
-import HeaderBtn from '../Components/Buttons/HeaderBtn'
+import Profile from '../Screens/UserApp/profile'
 import Local from "../Screens/UserApp/Local";
 import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";
@@ -74,24 +74,8 @@ const WelcomeStack = createStackNavigator({
   Country: { screen: Country },
   TabNavScreen: {
     screen: TabNavScreen,
-    navigationOptions: () => {
-      let Title = '4xChange   '
-      return {
-        headerTitle: Title + '   ',
-        headerLeft: null,
-        headerRight: (
-          <HeaderBtn />
-        ),
-        headerStyle: {
-          backgroundColor: Colors.primary,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 20,
-          marginLeft: 15,
-        },
-      }
+    navigationOptions: {
+      header: () => null
     }
   },
   Local: { screen: Local },
@@ -117,25 +101,12 @@ const WelcomeStack = createStackNavigator({
 const UserStack = createStackNavigator({
   TabNavScreen: {
     screen: TabNavScreen,
-    navigationOptions: () => {
-      let Title = '4xChange   '
-      return {
-        headerTitle: Title + '   ',
-        headerLeft: null,
-        headerRight: (
-          <HeaderBtn />
-        ),
-        headerStyle: {
-          backgroundColor: Colors.primary,
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: 20,
-          marginLeft: 15,
-        },
-      }
+    navigationOptions: {
+      header: () => null
     }
+  },
+  Settings: {
+    screen: Profile
   },
   Chat: {
     screen: Chat,
@@ -164,6 +135,9 @@ const UserStack = createStackNavigator({
   }
 });
 const SignedIn = createStackNavigator({
+  Settings: {
+    screen: Profile
+  },
   AddCurrency: {
     screen: AddCurrency,
     navigationOptions: {
