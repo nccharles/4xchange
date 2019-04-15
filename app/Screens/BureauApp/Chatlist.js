@@ -105,7 +105,6 @@ class Chatlist extends Component {
             .once('value').then(snapshot => {
                 if (snapshot.val()) {
                     snapshot.forEach((child) => {
-
                         that.setState(() => ({
                             data: [...this.state.data, {
                                 _id: child.val()._d,

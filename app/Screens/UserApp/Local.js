@@ -296,7 +296,6 @@ class Local extends Component {
       .orderByChild('currency')
       .equalTo(base)
       .on('value', snapshot => {
-        // console.log(snapshot)
         const usersData = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
         })
