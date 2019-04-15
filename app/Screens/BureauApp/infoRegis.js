@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
   Text,
   Image,
+
   Dimensions, AsyncStorage
 
 } from "react-native";
+import { LinearGradient } from 'expo';
 import { Button, Input } from "react-native-elements";
 import AwesomeAlert from "react-native-awesome-alerts";
 import SVGImage from "react-native-svg-image";
@@ -213,7 +215,7 @@ class InfoRegis extends Component {
         }}
         style={styles.container}
       >
-        <Text style={styles.logo}>4xChange   </Text>
+        <Text style={styles.logo}>About Company   </Text>
         <KeyboardAvoidingView
           behavior="padding"
           style={{ flex: 1 }}
@@ -262,19 +264,6 @@ class InfoRegis extends Component {
               onChangeText={input => this._handleInput("tinNumber", input)}
               value={this.state.credentails.tinNumber}
             />
-            {/* <Text style={styles.texterr}>{this.state.errs.tinNumber}</Text> */}
-            {/* <Input
-                            placeholder='Licence number'
-                            leftIcon={{ type: 'font-awesome', name: 'drivers-license-o', color: Colors.snow }}
-                            containerStyle={styles.input}
-                            underlineColorAndroid={'transparent'}
-                            inputStyle={styles.inputStyle}
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            returnKeyType={"next"}
-                            onChangeText={(input) => this._handleInput('licenceNumber', input)}
-                            value={this.state.credentails.licenceNumber}
-                        /> */}
             <Input
               placeholder='Email'
               leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
@@ -289,20 +278,26 @@ class InfoRegis extends Component {
               value={this.state.credentails.email}
               editable={true}
             />
-            <Button
-              onPress={this._handleSignUp.bind(this)}
-              title="Add   "
-              icon={{
-                type: "material-community",
-                name: "account-plus-outline",
-                color: "#fff"
-              }}
-              buttonStyle={styles.button}
-              loading={this.state.isSubmitting}
-              disabled={this.state.isSubmitting}
-              disabledStyle={styles.button}
-              activityIndicatorStyle={{ color: "white" }}
-            />
+            <LinearGradient
+              colors={Colors.gradientColors}
+              start={{ x: 1.0, y: 0.5 }}
+              end={{ x: 0, y: 0.5 }}
+              style={styles.button}
+            >
+              <Button
+                onPress={this._handleSignUp.bind(this)}
+                title="Add   "
+                icon={{
+                  type: "material-community",
+                  name: "account-plus-outline",
+                  color: "#fff"
+                }}
+                loading={this.state.isSubmitting}
+                disabled={this.state.isSubmitting}
+                disabledStyle={styles.button}
+                activityIndicatorStyle={{ color: "white" }}
+              />
+            </LinearGradient>
           </ScrollView>
         </KeyboardAvoidingView>
         <AwesomeAlert

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
     StyleSheet,
     Text,
@@ -13,7 +12,7 @@ import {
     AsyncStorage,
     Alert,
 } from 'react-native';
-import Toast, { DURATION } from 'react-native-easy-toast'
+import Toast from 'react-native-easy-toast'
 import Spinner from 'react-native-loading-spinner-overlay';
 import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
@@ -125,7 +124,7 @@ export default class Phone extends Component {
         };
     }
     static navigationOptions = ({ navigation }) => {
-        let Title = '4xChange   '
+        let Title = 'Phone Number'
         return {
             headerTitle: Title + '   ',
             headerStyle: {
@@ -145,6 +144,18 @@ export default class Phone extends Component {
         }
 
         this.setState({ spinner: true });
+        if (__DEV__) {
+            this.setState({
+                spinner: false,
+                enterCode: true,
+                confirm: this.state.Code,
+                checked: this.state.Code
+            });
+            setTimeout(() => {
+                this.refs.toast.show("Sent!: We've sent you a verification code");
+            }, 100);
+            return
+        }
         fetch('https://forexchange-sms.herokuapp.com/Auth', {
             method: 'POST',
             headers:
@@ -225,10 +236,7 @@ export default class Phone extends Component {
                     } else {
                         setTimeout(async () => {
                             await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
-                                .then(() => Alert.alert('Success!', 'You have successfully verified your phone number', [{
-                                    text: 'OK',
-                                    onPress: () => this.props.navigation.navigate('Agreement')
-                                }]));
+                                .then(() => this.props.navigation.navigate('Agreement'));
                         }, 100);
                     }
 
@@ -238,7 +246,7 @@ export default class Phone extends Component {
             } catch (err) {
                 this.setState({ spinner: false });
                 setTimeout(() => {
-                    Alert.alert('Oops!', err.message);
+                    this.refs.toast.show(err.message);
                 }, 100);
             }
 
@@ -325,7 +333,6 @@ export default class Phone extends Component {
     }
 
     render() {
-
         let headerText = `What's your ${this.state.enterCode ? 'verification code  ' : 'phone number'}?`
         let buttonText = this.state.enterCode ? 'Verify code  ' : 'Continue  ';
         let textStyle = this.state.enterCode ? {
@@ -363,7 +370,7 @@ export default class Phone extends Component {
                                     autoCapitalize={'none'}
                                     autoCorrect={false}
                                     onChangeText={this._onChangeText}
-                                    placeholder={this.state.enterCode ? '_ _ _ _ _ _' : 'Phone Number'}
+                                    placeholder={this.state.enterCode ? (__DEV__ ? `${this.state.confirm}` : '_ _ _ _ _ _') : 'Phone Number'}
                                     keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'}
                                     style={[styles.textInput, textStyle]}
                                     returnKeyType='go'

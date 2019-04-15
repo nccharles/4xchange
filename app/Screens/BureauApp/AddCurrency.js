@@ -382,7 +382,7 @@ class AddCurrency extends Component {
         />
         <DialogComponent
           visible={this.state.DeleteDialogVisible}
-          title="Account delete"
+          title="Currency delete"
           description="Are you sure you want to delete this currency?"
           // input="892"
           onPress={this.handleDelete}

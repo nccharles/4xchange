@@ -13,15 +13,13 @@ import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 import { Colors } from '../../Assets/Themes'
 import loupe from '../../Assets/Icons/magnifier.png'
-
 const TEMP_CURRENT_CURRENCY = 'CAD';
 
 class CurrencyList extends Component {
 
   static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state
     return {
-      headerTitle: '4xChange   ',
+      headerTitle: 'Select a country   ',
       headerStyle: {
         backgroundColor: Colors.primary,
       },
@@ -29,6 +27,7 @@ class CurrencyList extends Component {
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
       },
     }
   };
@@ -49,7 +48,6 @@ class CurrencyList extends Component {
   }
   onEnd() {
     if (this.state.dataloaded) {
-      alert("hi");
       this.setState({ dataloaded: false });
     }
   }
@@ -113,7 +111,7 @@ class CurrencyList extends Component {
       <View style={{ flex: 1, marginTop: 5 }}>
         <StatusBar translucent={false} barStyle="default" />
         <FlatList
-          data={this.state.dataSource}
+          data={this.state.data}
           renderItem={({ item }) => (
             <ListItem
               title={item.name}

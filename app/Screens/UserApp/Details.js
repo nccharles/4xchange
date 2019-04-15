@@ -17,7 +17,7 @@ import _ from 'lodash'
 import { chatName, chatNum } from '../../Config/constants';
 import { Icon } from 'expo';
 const colors = [
-  '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
+  '#7FB3D5', '#006442', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
   '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
 ]
 

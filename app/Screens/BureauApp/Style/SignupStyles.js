@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
-import {Colors} from '../../../Assets/Themes'
+import { Colors } from '../../../Assets/Themes'
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,20 +19,20 @@ const styles = StyleSheet.create({
         // marginBottom: height * .05,
     },
     input: {
-        backgroundColor: Colors.primaryLight,
+        backgroundColor: Colors.windowTint,
         borderRadius: 5,
         marginTop: height * .05,
         alignSelf: 'center',
-        height: height/16,
-        width: width -50,
+        height: height / 16,
+        width: width - 50,
     },
     button: {
         backgroundColor: Colors.dark,
         marginTop: height * .05,
-        width: width -50,
-        height: height/14,
+        width: width - 50,
+        height: height / 14,
         borderRadius: 5,
-        alignContent : 'center',
+        alignContent: 'center',
         justifyContent: 'center',
         elevation: 3,
         flexDirection: 'row',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     inputStyle: {
-        color: '#fff', 
+        color: '#fff',
         textDecorationLine: 'none',
     },
     texterr: {
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
         marginLeft: width * .07,
     },
     ilabel: {
-        marginLeft: height * .05, 
-        flex: 1, 
+        marginLeft: height * .05,
+        flex: 1,
         flexDirection: 'row',
         marginTop: height * .04,
     },
@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
         color: Colors.snow
     },
     flag_icon: {
-        width: width/ 8, 
-        height: height /25,
+        width: width / 8,
+        height: height / 25,
         backgroundColor: 'transparent',
         // alignSelf: 'center',
         // justifyContent: 'center',
         marginTop: 7,
-        marginLeft: 12 
+        marginLeft: 12
     },
     country_text: {
         color: 'white',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         // marginRight: (screenwidth/ 3),
         // marginLeft: screenwidth/ 6,
-        textAlign: 'center' 
+        textAlign: 'center'
     },
 });
 export default styles;

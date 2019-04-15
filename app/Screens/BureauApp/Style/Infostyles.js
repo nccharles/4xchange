@@ -15,10 +15,8 @@ const styles = StyleSheet.create({
         fontSize: 40,
         marginTop: height * .2,
         marginLeft: width * .05,
-        // marginBottom: height * .05,
     },
     input: {
-        // backgroundColor: '#e3562e',
         borderRadius: 5,
         marginTop: height * .05,
         marginLeft: width * .05,
@@ -69,8 +67,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     ilabel: {
-        marginLeft: height * .05, 
-        flex: 1, 
+        marginLeft: height * .05,
+        flex: 1,
         flexDirection: 'row',
         marginTop: height * .04,
     },

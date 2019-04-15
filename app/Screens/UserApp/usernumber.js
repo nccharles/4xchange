@@ -147,6 +147,18 @@ export default class Phone extends Component {
         }
 
         this.setState({ spinner: true });
+        if (__DEV__) {
+            this.setState({
+                spinner: false,
+                enterCode: true,
+                confirm: this.state.Code,
+                checked: this.state.Code
+            });
+            setTimeout(() => {
+                this.refs.toast.show("Sent!: We've sent you a verification code");
+            }, 100);
+            return
+        }
         fetch('https://forexchange-sms.herokuapp.com/Auth', {
             method: 'POST',
             headers:
@@ -342,7 +354,7 @@ export default class Phone extends Component {
                                     autoCapitalize={'none'}
                                     autoCorrect={false}
                                     onChangeText={this._onChangeText}
-                                    placeholder={this.state.enterCode ? '_ _ _ _ _ _' : 'Phone Number'}
+                                    placeholder={this.state.enterCode ? (__DEV__ ? `${this.state.confirm}` : '_ _ _ _ _ _') : 'Phone Number'}
                                     keyboardType={Platform.OS === 'ios' ? 'number-pad' : 'numeric'}
                                     style={[styles.textInput, textStyle]}
                                     returnKeyType='go'

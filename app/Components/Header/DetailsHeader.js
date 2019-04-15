@@ -24,7 +24,7 @@ const DetailsHeader = (props) => {
             size={25}
             color='white' />
         </TouchableOpacity>
-        <Text style={styles.title}>4xChange   </Text>
+        <Text style={styles.title}>Details   </Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={onPress1}>

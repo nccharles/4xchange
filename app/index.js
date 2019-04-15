@@ -32,57 +32,72 @@ export default class App extends Component {
 		const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
 		const retrieveduserChoice = await AsyncStorage.getItem(userChoice);
 		console.log(retrieveduserPhone)
-		if (retrieveduserPhone) {
-			try {
-				await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
-					.then(snapshot => {
-						const { completed } = snapshot.val()
-						if (completed) {
-							this.setState({
-								signedIn: true,
-								checkedSignIn: true,
-								initialRouter: 'SignedIn'
-							})
-						} else {
-							this.setState({
-								signedIn: true,
-								checkedSignIn: true,
-								initialRouter: 'InfoRegis'
-							})
-						}
-					}).catch(error => {
-						this.setState({
-							signedIn: true,
-							checkedSignIn: true,
-							initialRouter: 'InfoRegis'
-						})
-					})
-			} catch (error) {
-				console.log(error.message)
-			}
+		if (retrieveduserChoice === 'true') {
+			this.setState({
+				userViewConformed: true,
+				checkedSignIn: true,
+				signedIn: false,
+				initialRouter: 'WelcomeStack'
+			})
+
 		} else {
-			try {
-				if (retrieveduserChoice === 'true') {
-					this.setState({
-						userViewConformed: true,
-						checkedSignIn: true,
-						signedIn: false,
-						initialRouter: 'UserStack'
-					})
-
-				} else {
-					this.setState({
-						checkedSignIn: true,
-						signedIn: false,
-						initialRouter: 'WelcomeStack'
-					})
-				}
-			} catch (error) {
-				// Error retrieving data
-				console.log(error.message)
-			}
-
+			this.setState({
+				checkedSignIn: true,
+				signedIn: false,
+				initialRouter: 'Intro'
+			})
 		}
+		// if (retrieveduserPhone) {
+		// 	try {
+		// 		await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
+		// 			.then(snapshot => {
+		// 				const { completed } = snapshot.val()
+		// 				if (completed) {
+		// 					this.setState({
+		// 						signedIn: true,
+		// 						checkedSignIn: true,
+		// 						initialRouter: 'SignedIn'
+		// 					})
+		// 				} else {
+		// 					this.setState({
+		// 						signedIn: true,
+		// 						checkedSignIn: true,
+		// 						initialRouter: 'InfoRegis'
+		// 					})
+		// 				}
+		// 			}).catch(error => {
+		// 				this.setState({
+		// 					signedIn: true,
+		// 					checkedSignIn: true,
+		// 					initialRouter: 'InfoRegis'
+		// 				})
+		// 			})
+		// 	} catch (error) {
+		// 		console.log(error.message)
+		// 	}
+		// } else {
+		// 	try {
+		// 		if (retrieveduserChoice === 'true') {
+		// 			this.setState({
+		// 				userViewConformed: true,
+		// 				checkedSignIn: true,
+		// 				signedIn: false,
+		// 				initialRouter: 'WelcomeStack'
+		// 			})
+
+		// 		} else {
+		// 			this.setState({
+		// 				checkedSignIn: true,
+		// 				signedIn: false,
+		// 				initialRouter: 'WelcomeStack'
+		// 			})
+		// 		}
+		// 	} catch (error) {
+		// 		// Error retrieving data
+		// 		console.log(error.message)
+		// 	}
+
+		// }
 
 
 	}

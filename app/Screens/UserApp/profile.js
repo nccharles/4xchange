@@ -9,8 +9,8 @@ import * as firebase from 'firebase'
 import { Icon } from 'expo';
 import { userPhone } from '../../Config/constants';
 const colors = [
-    '#7FB3D5', '#10ac84', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
-    '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
+    '#7FB3D5', '#006442', '#B53471', '#5758BB', '#EB9CA8',
+    '#8A004F', '#48dbfb', '#1dd1a1', '#00a3e1', '#9980FA'
 ]
 
 export default class Details extends Component {
@@ -75,9 +75,9 @@ export default class Details extends Component {
                             this.setState({
                                 signedIn: true,
                                 checkedSignIn: true,
-                                initialRouter: 'SignedIn'
+                                initialRouter: 'AddCurrency'
                             })
-                            this.props.navigation.navigate('SignedIn')
+                            this.props.navigation.navigate('AddCurrency')
                         } else {
                             this.setState({
                                 signedIn: true,
@@ -98,6 +98,7 @@ export default class Details extends Component {
                 this.refs.toast.show(error.message)
             }
         } else {
+            console.log('Login')
             this.props.navigation.navigate('Login')
         }
 

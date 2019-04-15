@@ -16,18 +16,39 @@ import AddCurrency from "../Screens/BureauApp/AddCurrency";
 import InfoReg from "../Screens/BureauApp/infoRegis";
 import AdditionalInfo from "../Screens/BureauApp/additionalInfo";
 import Country from "../Screens/BureauApp/countryList";
-import { Colors } from '../Assets/Themes';
 import Chat from '../Screens/UserApp/Chat';
 import Chatlist from '../Screens/BureauApp/Chatlist'
 import ForexChat from '../Screens/BureauApp/fchat';
 // Manifest of possible screens
+const Intro = createSwitchNavigator({
+  WelcomeScreen: {
+    screen: WelcomeScreen,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  TabNavScreen: {
+    screen: TabNavScreen,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+})
+const userNumberInfo = createSwitchNavigator({
+  userNumber: {
+    screen: userNumber
+  },
+  Chat: {
+    screen: Chat,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+
+})
 const InfoRegis = createStackNavigator({
   InfoReg: {
     screen: InfoReg,
-    navigationOptions: {
-      headerTransparent: true,
-      headerTintColor: "#fff"
-    }
   },
   Country: {
     screen: Country
@@ -45,11 +66,9 @@ const Login = createStackNavigator({
       headerTintColor: "#fff"
     }
   },
+  Country: { screen: Country },
   Chatlist: {
     screen: Chatlist,
-    // navigationOptions: {
-    //   header: () => null
-    // }
   },
   ForexChat: {
     screen: ForexChat,
@@ -62,78 +81,64 @@ const Login = createStackNavigator({
   },
 });
 const WelcomeStack = createStackNavigator({
-  WelcomeScreen: {
-    screen: WelcomeScreen,
+  TabNavScreen: {
+    screen: TabNavScreen,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  AddCurrency: {
+    screen: AddCurrency,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  Chatlist: {
+    screen: Chatlist,
+  },
+  ForexChat: {
+    screen: ForexChat,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  CurrencyList: { screen: CurrencyList },
+  Info: { screen: Info },
+  Settings: {
+    screen: Profile
+  },
+  Country: { screen: Country },
+  Local: { screen: Local },
+  MapView: { screen: MapView },
+  International: { screen: International },
+  CurrencyList: { screen: CurrencyList },
+  Details: {
+    screen: Details,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  Chat: {
+    screen: Chat,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  userNumber: {
+    screen: userNumberInfo,
     navigationOptions: {
       header: () => null
     }
   },
   Login: {
-    screen: Loged,
-  },
-  Settings: {
-    screen: Profile
-  },
-  Country: { screen: Country },
-  TabNavScreen: {
-    screen: TabNavScreen,
+    screen: Login,
     navigationOptions: {
       header: () => null
     }
   },
-  Local: { screen: Local },
-  MapView: { screen: MapView },
-  International: { screen: International },
-  CurrencyList: { screen: CurrencyList },
-  Details: {
-    screen: Details,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  Chat: {
-    screen: Chat,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  userNumber: {
-    screen: userNumber
-  }
+
 });
-const UserStack = createStackNavigator({
-  TabNavScreen: {
-    screen: TabNavScreen,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  Chat: {
-    screen: Chat,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  userNumber: {
-    screen: userNumber
-  },
-  Local: { screen: Local },
-  CurrencyList: { screen: CurrencyList },
-  MapView: { screen: MapView },
-  International: { screen: International },
-  Details: {
-    screen: Details,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  WelcomeScreen: {
-    screen: WelcomeScreen,
-    navigationOptions: {
-      header: () => null
-    }
-  }
-});
+
 const SignedIn = createStackNavigator({
   AddCurrency: {
     screen: AddCurrency,
@@ -157,18 +162,15 @@ const SignedIn = createStackNavigator({
 export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
   return createSwitchNavigator(
     {
+      Intro: {
+        screen: Intro
+      },
       SignedIn: {
         screen: SignedIn
       },
 
       WelcomeStack: {
         screen: WelcomeStack,
-      },
-      UserStack: {
-        screen: UserStack
-      },
-      Login: {
-        screen: Login
       },
       AdditionalInfo: {
         screen: AdditionalInfo
