@@ -53,6 +53,7 @@ export default class App extends React.Component {
                 ...Icon.Ionicons.font,
                 'Lucida-Grande': require('./app/Assets/fonts/LucidaGrande.ttf'),
                 'Lucida-Grande-Bold': require('./app/Assets/fonts/LucidaGrandeBold.ttf'),
+                'space-mono': require('./app/Assets/fonts/SpaceMono-Regular.ttf')
             }),
         ]);
     };

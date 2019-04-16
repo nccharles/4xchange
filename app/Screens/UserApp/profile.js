@@ -9,7 +9,7 @@ import * as firebase from 'firebase'
 import { Icon } from 'expo';
 import { userPhone } from '../../Config/constants';
 const colors = [
-    '#7FB3D5', '#006442', '#B53471', '#5758BB', '#EB9CA8',
+    '#7FB3D5', '#227093', '#B53471', '#5758BB', '#EB9CA8',
     '#8A004F', '#48dbfb', '#1dd1a1', '#00a3e1', '#9980FA'
 ]
 

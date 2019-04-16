@@ -53,15 +53,14 @@ class Chatlist extends Component {
         }
     };
 
-    async componentWillMount() {
+    async componentDidMount() {
 
         const forexPhone = await AsyncStorage.getItem(userPhone)
         this.setState({
             companyName: await AsyncStorage.getItem(cName),
             forexPhone: forexPhone
         })
-        this._getAllCustomers(forexPhone)
-
+        this._getAllmessages(forexPhone)
         this._countCustomerMessages(forexPhone)
         registerForPushNotificationsAsync()
     }
@@ -81,49 +80,51 @@ class Chatlist extends Component {
                 })
             })
     }
-    _getAllCustomers = async (forexPhone) => {
-        this.setState({
-            data: [],
-        })
-        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
-            .once('value').then(snapshot => {
 
+    _getAllmessages = async (forexPhone) => {
+        const that = this
+
+        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
+            .orderByChild("unread")
+            .on('value', snapshot => {
+                let listData = []
                 snapshot.forEach((child) => {
                     const customerPhone = child.val().customerPhone;
                     const name = child.val().name
                     const msg = child.val().countsent
                     const lastseen = child.val().timestamp
-                    this._getAllmessages(forexPhone, customerPhone, name, msg, lastseen)
-                })
-            })
-    }
-    _getAllmessages = async (forexPhone, customerPhone, name, msg, lastseen) => {
-        const that = this
-        firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
-            .limitToLast(1)
-            .orderByChild("createdAt")
-            .once('value').then(snapshot => {
-                if (snapshot.val()) {
-                    snapshot.forEach((child) => {
-                        that.setState(() => ({
-                            data: [...this.state.data, {
-                                _id: child.val()._d,
-                                count: msg,
-                                createdAt: child.val().createdAt,
-                                text: child.val().text,
-                                user: {
-                                    _id: customerPhone,
-                                    name: name,
-                                    lastseen: lastseen,
-                                    timestamp: child.val().user.timestamp
-                                }
-                            }],
-                            loading: false,
-                        }))
-                    })
+                    firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
+                        .limitToLast(1)
+                        .orderByChild("createdAt")
+                        .on('value', snapshot => {
+                            if (snapshot.val()) {
+                                snapshot.forEach((child) => {
+                                    listData = [...listData, {
+                                        _id: child.val()._d,
+                                        count: msg,
+                                        createdAt: child.val().createdAt,
+                                        text: child.val().text,
+                                        user: {
+                                            _id: customerPhone,
+                                            name: name,
+                                            lastseen: lastseen,
+                                            timestamp: child.val().user.timestamp
+                                        }
+                                    }]
 
-                }
-            })
+                                })
+
+
+                            }
+                            that.setState(() => ({
+                                data: [...listData],
+                                loading: false,
+                            }))
+                        })
+                })
+
+            }
+            )
 
 
     }

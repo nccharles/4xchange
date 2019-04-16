@@ -66,19 +66,24 @@ export default StyleSheet.create({
         paddingVertical: 20
     },
     infocontent: {
-        marginLeft: 20
+        marginLeft: 20,
+        fontFamily: 'space-mono',
+
     },
     itemTitle: {
         fontWeight: '900',
         paddingVertical: 15,
         color: Colors.coal,
+        fontFamily: 'space-mono',
     },
     infoTitle: {
         fontWeight: '900',
         color: Colors.coal,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     info: {
         fontWeight: '600',
         color: Colors.charcoal,
+        fontFamily: 'space-mono',
     }
 })

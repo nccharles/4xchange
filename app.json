@@ -11,11 +11,11 @@
     ],
     "version": "1.2.5",
     "orientation": "portrait",
-    "primaryColor": "#006442",
+    "primaryColor": "#227093",
     "icon": "./app/Assets/Logo/icon.png",
     "splash": {
-      "image": "./app/Assets/Logo/mylogo.png",
-      "backgroundColor": "#006442"
+      "image": "./app/Assets/Logo/splash.png",
+      "backgroundColor": "#227093"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -33,7 +33,7 @@
     },
     "notification": {
       "icon": "./app/Assets/Logo/notify.png",
-      "color": "#006442",
+      "color": "#227093",
       "androidMode": "collapse",
       "androidCollapsedTitle": "#{unread_notifications} new messages"
     },
