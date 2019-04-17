@@ -1,4 +1,4 @@
-import {Dimensions, Platform, StyleSheet} from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { ApplicationStyles, Metrics, Colors } from '../../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
@@ -12,7 +12,7 @@ export default StyleSheet.create({
   },
   row: {
     flex: 1,
-    width: screenwidth -20,
+    width: screenwidth - 20,
     height: 90,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -31,7 +31,7 @@ export default StyleSheet.create({
     paddingVertical: 2,
     fontWeight: 'bold',
     fontSize: 16,
-    color: Colors.charcoal,
+    color: Colors.primaryGray,
   },
   label: {
     paddingVertical: 5,
@@ -48,19 +48,19 @@ export default StyleSheet.create({
     borderRadius: 5,
     marginLeft: 10
   },
-  textHead:{
+  textHead: {
     marginLeft: 5,
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center'
   },
-  cardContainer:{
-    height: screenheight-5,
-    width: screenwidth-5,
+  cardContainer: {
+    height: screenheight - 5,
+    width: screenwidth - 5,
     backgroundColor: '#3498DB'
   },
-  buttonContainer:{
-    marginVertical: 20, 
+  buttonContainer: {
+    marginVertical: 20,
     // marginLeft: 20, 
     flexDirection: 'row',
     borderWidth: 2,
@@ -71,5 +71,5 @@ export default StyleSheet.create({
     // paddingHorizontal: 35,
     alignSelf: 'center'
   },
-  
+
 })

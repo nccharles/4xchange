@@ -31,7 +31,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5,
         // backgroundColor: '#3498DB',
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         elevation: 10
     },
     buttonText: {

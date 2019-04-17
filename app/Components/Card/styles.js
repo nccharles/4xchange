@@ -40,7 +40,7 @@ export default StyleSheet.create({
     top: 8,
     fontWeight: 'bold',
     fontSize: 16,
-    color: Colors.charcoal,
+    color: Colors.primaryGray,
   },
   label: {
     fontWeight: '500',
@@ -85,7 +85,7 @@ export default StyleSheet.create({
   },
   rightCategory: {
     fontSize: 16,
-    color: Colors.dark,
+    color: Colors.primaryDark,
     fontWeight: 'bold',
     position: 'absolute',
     right: 15,

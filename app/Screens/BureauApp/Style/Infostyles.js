@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
     },
     button: {
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         borderRadius: 5,
         marginTop: 20,
         marginLeft: width * .05,

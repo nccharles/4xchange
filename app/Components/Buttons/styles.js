@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
-    backgroundColor: Colors.dark,
+    backgroundColor: Colors.primaryDark,
     marginVertical: 20,
     height: screenheight / 16,
     borderRadius: 5,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 40,
     bottom: 30,
-    backgroundColor: Colors.dark,
+    backgroundColor: Colors.primaryDark,
     width: screenwidth / 5,
     height: screenwidth / 5,
     borderRadius: screenwidth / 5,

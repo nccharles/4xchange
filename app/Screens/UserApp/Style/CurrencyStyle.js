@@ -35,7 +35,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     // alignSelf: 'center',
-    color: Colors.charcoal,
+    color: Colors.primaryGray,
     // textAlign: 'center',
     // marginBottom: Metrics.smallMargin
   },

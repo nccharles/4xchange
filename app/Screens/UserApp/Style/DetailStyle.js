@@ -73,17 +73,17 @@ export default StyleSheet.create({
     itemTitle: {
         fontWeight: '900',
         paddingVertical: 15,
-        color: Colors.coal,
+        color: Colors.darkGray,
         fontFamily: 'space-mono',
     },
     infoTitle: {
         fontWeight: '900',
-        color: Colors.coal,
+        color: Colors.darkGray,
         fontFamily: 'Lucida-Grande-Bold',
     },
     info: {
         fontWeight: '600',
-        color: Colors.charcoal,
+        color: Colors.primaryGray,
         fontFamily: 'space-mono',
     }
 })

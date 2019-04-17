@@ -10,7 +10,7 @@ export default StyleSheet.create({
         marginTop: 100
     },
     currencyBtn: {
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         width: 100,
         height: 40,
         alignItems: 'center',
@@ -42,7 +42,7 @@ export default StyleSheet.create({
       },
       button: {
         flexDirection: 'row',
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         width: screenwidth/2.5,
         height: 40,
         borderRadius: 5,
@@ -59,7 +59,7 @@ export default StyleSheet.create({
     },
     button2: {
         flexDirection: 'row',
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         width: screenwidth/2.5,
         height: 40,
         borderRadius: 5,

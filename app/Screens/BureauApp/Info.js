@@ -203,7 +203,7 @@ class Info extends Component {
                     <ScrollView>
                         <Input
                             placeholder='Company name'
-                            leftIcon={{ type: 'material-community', name: 'city', color: Colors.dark }}
+                            leftIcon={{ type: 'material-community', name: 'city', color: Colors.primaryDark }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -228,7 +228,7 @@ class Info extends Component {
                         />
                         <Input
                             placeholder='Detail address, eg: Chic no 230'
-                            leftIcon={{ type: 'simple-line-icon', name: 'directions', color: Colors.dark }}
+                            leftIcon={{ type: 'simple-line-icon', name: 'directions', color: Colors.primaryDark }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -240,7 +240,7 @@ class Info extends Component {
                         <TouchableOpacity onPress={() => this._timePicker('openAt')}>
                             <Input
                                 placeholder='Open at'
-                                leftIcon={<Image source={open} style={{ width: 30, height: 30, tintColor: Colors.dark }} />}
+                                leftIcon={<Image source={open} style={{ width: 30, height: 30, tintColor: Colors.primaryDark }} />}
                                 containerStyle={styles.input}
                                 underlineColorAndroid={'transparent'}
                                 inputStyle={styles.inputStyle}
@@ -254,7 +254,7 @@ class Info extends Component {
                         <TouchableOpacity onPress={() => this._timePicker('closeAt')}>
                             <Input
                                 placeholder='Closed at'
-                                leftIcon={<Image source={close} style={{ width: 30, height: 30, tintColor: Colors.dark }} />}
+                                leftIcon={<Image source={close} style={{ width: 30, height: 30, tintColor: Colors.primaryDark }} />}
                                 containerStyle={styles.input}
                                 underlineColorAndroid={'transparent'}
                                 inputStyle={styles.inputStyle}
@@ -269,7 +269,7 @@ class Info extends Component {
                             <Icon
                                 name='calendar'
                                 type='simple-line-icon'
-                                color={Colors.dark}
+                                color={Colors.primaryDark}
                             />
                             <Text style={styles.label}>
                                 Working days

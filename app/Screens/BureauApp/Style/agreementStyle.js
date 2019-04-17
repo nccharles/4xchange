@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.snow,
     },
     button: {
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         marginBottom: height * .05,
         width: width -50,
         height: height/14,

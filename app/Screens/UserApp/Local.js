@@ -27,9 +27,9 @@ const initailState = {
   baseCurrency: 'USD',
   initialCurrency: null,
   buyBackgroundColor: 'transparent',
-  buyTextColor: Colors.dark,
+  buyTextColor: Colors.primaryDark,
   sellBackgroundColor: 'transparent',
-  sellTextColor: Colors.dark,
+  sellTextColor: Colors.primaryDark,
   category: 'Buy',
   isBuying: true,
   userData: [],
@@ -71,11 +71,11 @@ class Local extends Component {
 
   changeBtnBuy = () => {
     this.setState({
-      buyBackgroundColor: Colors.dark,
+      buyBackgroundColor: Colors.primaryDark,
       sellBackgroundColor: 'transparent',
       category: 'Buy   ',
       buyTextColor: 'white',
-      sellTextColor: Colors.dark,
+      sellTextColor: Colors.primaryDark,
       initialCurrency: 'RWF',
       isBuying: true
     })
@@ -83,11 +83,11 @@ class Local extends Component {
 
   changeBtnSell = () => {
     this.setState({
-      sellBackgroundColor: Colors.dark,
+      sellBackgroundColor: Colors.primaryDark,
       buyBackgroundColor: 'transparent',
       category: 'Sell   ',
       sellTextColor: 'white',
-      buyTextColor: Colors.dark,
+      buyTextColor: Colors.primaryDark,
       initialCurrency: this.state.baseCurrency,
       isBuying: false,
     })

@@ -311,7 +311,7 @@ class InfoRegis extends Component {
           showConfirmButton={true}
           cancelText="No, cancel"
           confirmText="Ok got it"
-          confirmButtonColor={Colors.dark}
+          confirmButtonColor={Colors.primaryDark}
           onConfirmPressed={() => {
             this.hideAlert();
           }}

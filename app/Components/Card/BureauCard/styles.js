@@ -37,7 +37,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
     fontWeight: 'bold',
-    color: Colors.charcoal,
+    color: Colors.primaryGray,
     fontSize: 20,
     marginLeft: 20
   },
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     // top: 3,
     fontWeight: 'bold',
     fontSize: 16,
-    color: Colors.charcoal,
+    color: Colors.primaryGray,
   },
   label: {
     fontWeight: '500',

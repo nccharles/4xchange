@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         width: width - 50,
     },
     button: {
-        backgroundColor: Colors.dark,
+        backgroundColor: Colors.primaryDark,
         marginTop: height * .05,
         width: width - 50,
         height: height / 14,

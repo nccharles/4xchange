@@ -51,7 +51,7 @@ export default class TabNavigationScreen extends React.Component {
         tabBarBackgroundColor={Colors.primary}
         tabBarActiveTextColor="#fff"
         tabBarUnderlineStyle={{ backgroundColor: '#fff' }}
-        tabBarInactiveTextColor={Colors.steel}
+        tabBarInactiveTextColor={Colors.lightGray}
       >
         <Local tabLabel='LOCAL' {...this.props} />
         <MapView tabLabel='LOCATE' {...this.props} />
