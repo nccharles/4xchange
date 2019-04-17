@@ -84,6 +84,6 @@ export default StyleSheet.create({
     info: {
         fontWeight: '600',
         color: Colors.primaryGray,
-        fontFamily: 'space-mono',
+        fontFamily: 'Lucida-Grande',
     }
 })
