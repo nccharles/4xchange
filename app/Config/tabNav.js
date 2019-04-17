@@ -1,16 +1,18 @@
 import React from 'react'
-import { Image, View, Dimensions, StyleSheet, Text, AsyncStorage } from 'react-native'
+import { Image, View, Dimensions, StyleSheet, TouchableOpacity, Text, AsyncStorage } from 'react-native'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
 import { Colors } from '../Assets/Themes'
 import MapView from '../Screens/UserApp/Map'
 import International from '../Screens/UserApp/International'
 import Local from '../Screens/UserApp/Local'
 import { Icon } from 'expo';
+import Toast from 'react-native-easy-toast'
 import Chats from '../Screens/UserApp/Chatlist'
 import BureauChats from '../Screens/BureauApp/Chatlist'
 import more from '../Assets/Icons/more.png'
 import OptionsMenu from "react-native-options-menu";
 import { userPhone } from './constants';
+import * as firebase from 'firebase'
 const screenWidth = Dimensions.get('window').width
 export default class TabNavigationScreen extends React.Component {
   constructor(props) {
@@ -23,6 +25,32 @@ export default class TabNavigationScreen extends React.Component {
   Settings = () => {
     this.props.navigation.navigate('Settings')
     // console.log('Settings')
+  }
+  _handleForex = async () => {
+    const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
+    if (retrieveduserPhone) {
+      try {
+        await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
+          .then(snapshot => {
+            const { completed } = snapshot.val()
+            if (completed) {
+
+              this.props.navigation.navigate('AddCurrency')
+            } else {
+
+              this.props.navigation.navigate('InfoRegis')
+            }
+          }).catch(error => {
+            this.props.navigation.navigate('InfoRegis')
+          })
+      } catch (error) {
+        this.refs.toast.show(error.message)
+      }
+    } else {
+      console.log('Login')
+      this.props.navigation.navigate('Login')
+    }
+
   }
   componentDidMount = async () => {
     const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
@@ -37,7 +65,9 @@ export default class TabNavigationScreen extends React.Component {
       <View style={styles.topBit}>
         <Text style={styles.logo}>4xChange</Text>
         <View style={styles.row}>
-          <Icon.Entypo name="add-to-list" color='#fff' size={23} style={{ padding: 20 }} />
+          <TouchableOpacity onPress={this._handleForex.bind(this)} >
+            <Icon.Entypo name="add-to-list" color='#fff' size={23} style={{ padding: 20 }} />
+          </TouchableOpacity>
           <OptionsMenu
             button={more}
             buttonStyle={{ width: screenWidth / 18, height: screenWidth / 18, margin: 20, marginBottom: -1, resizeMode: "contain" }}
@@ -58,6 +88,14 @@ export default class TabNavigationScreen extends React.Component {
         <International tabLabel='GLOBAL' {...this.props} />
         {this.state.userPhone ? <BureauChats tabLabel='CHATS' {...this.props} /> : <Chats tabLabel='CHATS' {...this.props} />}
       </ScrollableTabView>
+      <Toast ref="toast"
+        style={{ backgroundColor: Colors.primary }}
+        position='bottom'
+        positionValue={200}
+        fadeInDuration={750}
+        fadeOutDuration={1000}
+        opacity={0.8}
+        textStyle={{ color: '#fff' }} />
     </View>;
   }
 }

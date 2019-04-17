@@ -13,7 +13,7 @@ const colors = [
     '#8A004F', '#48dbfb', '#1dd1a1', '#00a3e1', '#9980FA'
 ]
 
-export default class Profile extends Component {
+export default class Settings extends Component {
 
     constructor(props) {
         super(props)
@@ -26,7 +26,7 @@ export default class Profile extends Component {
         }
     }
     static navigationOptions = ({ navigation }) => {
-        let Title = 'Profile   '
+        let Title = 'Settings   '
         return {
             headerTitle: Title + '   ',
             headerStyle: {
@@ -116,40 +116,7 @@ export default class Profile extends Component {
 
             <View style={styles.container}>
                 <ScrollView style={styles.card}>
-                    <View style={styles.header}>
-                        <View style={[styles.avatar, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
-                            <Icon.MaterialCommunityIcons name="information-variant" color="#fff" size={30} />
-                        </View>
-                        <View style={styles.titleContainer}>
-                            <Text
-                                style={styles.title}>
-                                Manage
-                            </Text>
-                            <Text style={styles.itemTitle}>Information  </Text>
-                        </View>
-                    </View>
-                    <View style={styles.separator} />
-                    <View style={styles.itemContainer}>
-                        <Icon.MaterialIcons name="location-city" color={Colors.primary} size={23} />
-                        <View style={styles.infocontent}>
-                            <Text style={styles.infoTitle}>Country  </Text>
-                            <Text style={styles.info}>Rwanda   </Text>
-                        </View>
-                    </View>
-                    <View style={styles.itemContainer}>
-                        <Icon.Entypo name="address" color={Colors.primary} size={23} />
-                        <View style={styles.infocontent}>
-                            <Text style={styles.infoTitle}>Address  </Text>
-                            <Text style={styles.info}>KK 15 RD</Text>
-                        </View>
-                    </View>
-                    <View style={styles.itemContainer}>
-                        <Icon.MaterialCommunityIcons name="calendar-clock" color={Colors.primary} size={23} />
-                        <View style={styles.infocontent}>
-                            <Text style={styles.infoTitle}>Opening hours  </Text>
-                            <Text style={styles.info}> 3:00</Text>
-                        </View>
-                    </View>
+
                     <TouchableOpacity onPress={this._handleForex.bind(this)} style={styles.itemContainer}>
                         <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-switch' : 'md-switch'} color={Colors.primary} size={23} />
                         <View style={styles.infocontent}>
@@ -157,12 +124,19 @@ export default class Profile extends Component {
                             <Text style={styles.info}>Manage your forex,add currencies</Text>
                         </View>
                     </TouchableOpacity>
+                    <View style={styles.itemContainer}>
+                        <Icon.MaterialIcons name="help-outline" color={Colors.primary} size={23} />
+                        <View style={styles.infocontent}>
+                            <Text style={styles.infoTitle}>Help</Text>
+                            <Text style={styles.info}> FAQ,contact us,privacy policy</Text>
+                        </View>
+                    </View>
                     <View style={styles.separator} />
                     <TouchableOpacity onPress={this.onShare} style={styles.itemContainer}>
                         <Icon.MaterialIcons name="share" color={Colors.primary} size={23} />
                         <View style={styles.infocontent}>
                             <Text style={styles.infoTitle}>Share   </Text>
-                            <Text style={styles.info}>Let your friends know the best currency rate  </Text>
+                            <Text style={styles.info}>Share with your friends  </Text>
                         </View>
                     </TouchableOpacity>
                 </ScrollView>

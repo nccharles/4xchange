@@ -1,32 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {
-  View, Text, Image, TouchableOpacity
+  View, Text, Image, TouchableOpacity, Platform, Dimensions
 } from 'react-native';
-
+import { MaterialIcons, Ionicons } from '@expo/vector-icons'
+import more from '../../Assets/Icons/more.png'
+import OptionsMenu from "react-native-options-menu";
 import styles from './styles'
-
-
+import { Colors } from '../../Assets/Themes';
+const screenWidth = Dimensions.get('window').width
 const Header = (props) => {
-  const { onPress1, onPress2, source1, source2 } = props
+  const { onPress1, Add, Update, forex } = props
 
   return (
-    <View style={styles.container}>
+    <View style={styles.forex}>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>4xChange    </Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={onPress1}
-            style={styles.button}>
-            <Image
-              source={source1}
-              style={styles.image1} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onPress2}>
-            <Image
-              source={source2}
-              style={styles.image2} />
-          </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onPress1}
+          style={{
+            marginHorizontal: 10,
+            marginTop: 2
+          }}>
+          <MaterialIcons
+            name='arrow-back'
+            size={25}
+            color='white' />
+        </TouchableOpacity>
+        <Text style={styles.forexTitle}>{forex}</Text>
+        <View style={styles.forexInfo}>
+          <MaterialIcons
+            name='notifications'
+            size={25}
+            color={Colors.primary} />
+          <OptionsMenu
+            button={more}
+            buttonStyle={styles.forexOptions}
+            destructiveIndex={1}
+            options={["Add Currency", "Update Info"]}
+            actions={[Add, Update]} />
         </View>
       </View>
     </View>
@@ -35,9 +46,9 @@ const Header = (props) => {
 
 Header.propTypes = {
   onPress1: PropTypes.func,
-  onPress2: PropTypes.func,
-  source1: PropTypes.any,
-  source2: PropTypes.any
+  Add: PropTypes.func,
+  Update: PropTypes.func,
+  forex: PropTypes.string,
 }
 
 export default Header;

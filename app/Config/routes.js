@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator, createSwitchNavigator } from "react-navigation";
 import TabNavScreen from "./tabNav";
 import WelcomeScreen from "../Screens/Welcome/Welcome";
-import Profile from '../Screens/UserApp/profile'
+import Settingscreen from '../Screens/UserApp/Settings'
 import Local from "../Screens/UserApp/Local";
 import CurrencyList from "../Screens/UserApp/CurrencyList";
 import Details from "../Screens/UserApp/Details";
@@ -105,7 +105,7 @@ const WelcomeStack = createStackNavigator({
   CurrencyList: { screen: CurrencyList },
   Info: { screen: Info },
   Settings: {
-    screen: Profile
+    screen: Settingscreen
   },
   Country: { screen: Country },
   Local: { screen: Local },

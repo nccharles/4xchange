@@ -148,6 +148,7 @@ class Chat extends Component {
     }
     getLastseen(lastseen) {
         const status = this.timestamp - lastseen
+        console.log(status)
         return status <= 59000 ? 'online' : 'offline'
     }
     componentWillUnmount() {
@@ -203,10 +204,12 @@ class Chat extends Component {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: Colors.silver,
+                        backgroundColor: Colors.lightGray,
+                        fontFamily: 'Lucida-Grande',
                     },
                     right: {
                         backgroundColor: Colors.primary,
+                        fontFamily: 'Lucida-Grande',
                     }
                 }}
             />
@@ -319,7 +322,7 @@ class Chat extends Component {
             <><ChatsHeader
                 onPress1={() => this.props.navigation.goBack()}
                 customer={(this.props.navigation.state.params || {}).forex + '   ' || 'ForexBureau   '}
-                status={(this.state.lastseen === 0 ? '' : (this.getLastseen(this.state.lastseen) === 'offline' ? "last seen " + Moment(this.state.lastseen).fromNow() + '   ' : "online  "))} />
+                status={(this.state.lastseen && this.getLastseen(this.state.lastseen) === 'offline' ? "last seen " + Moment(this.state.lastseen).fromNow() + '   ' : "online  ")} />
                 {this.state.messages.length === 0 && (
                     <View style={[
                         StyleSheet.absoluteFill,

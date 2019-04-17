@@ -81,13 +81,13 @@ export default class CustomActions extends React.Component {
                     this.setModalVisible(false);
                 }}>
                     <NavButtonText style={{
-                        color: '#fff',
+                        color: Colors.primaryWhite,
                     }}>
                         {'Cancel'}
                     </NavButtonText>
                 </NavButton>
                 <NavTitle style={{
-                    color: '#fff',
+                    color: Colors.primaryWhite,
                 }}>
                     {'Camera Roll'}
                 </NavTitle>
@@ -103,7 +103,7 @@ export default class CustomActions extends React.Component {
                     this.setImages([]);
                 }}>
                     <NavButtonText style={{
-                        color: '#fff',
+                        color: Colors.primaryWhite,
                     }}>
                         {'Send'}
                     </NavButtonText>

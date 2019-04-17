@@ -110,14 +110,12 @@ class Local extends Component {
   async componentDidMount() {
     this.NetworkStatus()
     const status = this.state.ConnectionStatus
-    if (!status) {
+    if (status === 'offline') {
       const loadLocaldata = await AsyncStorage.getItem(LocalData)
-      if (loadLocaldata) {
-        this.setState({
-          data: loadLocaldata,
-          loading: false,
-        })
-      }
+      this.setState({
+        data: loadLocaldata,
+        loading: false,
+      })
     }
 
     const base = this.state.baseCurrency
@@ -337,10 +335,7 @@ class Local extends Component {
 
       })
     this.changeBtnBuy()
-    const status = this.state.ConnectionStatus
-    if (status) {
-      await AsyncStorage.setItem(LocalData, JSON.stringify(this.state.data))
-    }
+    await AsyncStorage.setItem(LocalData, JSON.stringify(this.state.data))
   }
   setBaseCurrency = async (currency) => {
     const { baseCurrency } = currency

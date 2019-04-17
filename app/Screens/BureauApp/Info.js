@@ -140,9 +140,8 @@ class Info extends Component {
             isSubmitting: true
         })
         await firebase.database().ref(`/infos/${this.state.phone}/publicInfo`)
-            .set({
+            .update({
                 address,
-
                 closeAt,
                 openAt,
                 workingDays,
@@ -307,7 +306,7 @@ class Info extends Component {
                     </ScrollView>
                     <Toast ref="toast"
                         style={{ backgroundColor: Colors.primary }}
-                        position='bottom'
+                        position='top'
                         positionValue={200}
                         fadeInDuration={750}
                         fadeOutDuration={1000}

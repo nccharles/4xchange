@@ -14,26 +14,22 @@ class AddButton extends Component {
         const { onPress } = this.props
 
         return (
-            <TouchableOpacity
-                onPress={onPress}>
-                <LinearGradient
-                    colors={Colors.gradientColors}
-                    start={{ x: 1.0, y: 0.5 }}
-                    end={{ x: 0, y: 0.5 }}
-                    style={styles.button}
-                >
 
+            <LinearGradient
+                colors={Colors.gradientColors}
+                start={{ x: 1.0, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
+                style={styles.chatbutton}
+            >
+                <TouchableOpacity
+                    onPress={onPress}>
                     <Feather
                         name="plus-circle"
                         size={20}
                         color="white" />
-                    <Text
-                        style={styles.buttonText}>
-                        Add currencies
-            </Text>
+                </TouchableOpacity>
+            </LinearGradient>
 
-                </LinearGradient>
-            </TouchableOpacity>
         )
     }
 }

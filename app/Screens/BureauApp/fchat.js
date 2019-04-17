@@ -210,10 +210,12 @@ class ForexChat extends Component {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: Colors.silver,
+                        backgroundColor: Colors.lightGray,
+                        fontFamily: 'Lucida-Grande',
                     },
                     right: {
                         backgroundColor: Colors.primary,
+                        fontFamily: 'Lucida-Grande',
                     }
                 }}
             />
