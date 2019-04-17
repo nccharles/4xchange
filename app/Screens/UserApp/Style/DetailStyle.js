@@ -67,14 +67,14 @@ export default StyleSheet.create({
     },
     infocontent: {
         marginLeft: 20,
-        fontFamily: 'space-mono',
+        fontFamily: 'Lucida-Grande',
 
     },
     itemTitle: {
         fontWeight: '900',
         paddingVertical: 15,
         color: Colors.darkGray,
-        fontFamily: 'space-mono',
+        fontFamily: 'Lucida-Grande',
     },
     infoTitle: {
         fontWeight: '900',

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
         marginVertical: 15,
-        fontFamily: 'Play-Fair',
+        fontFamily: 'Lucida-Grande-Bold',
     },
     // Text below header
     text: {

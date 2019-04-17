@@ -10,8 +10,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    // marginTop: 25,
-    backgroundColor: Colors.snow
+    backgroundColor: Colors.lightGray
   },
   row: {
     flex: 1,
@@ -25,23 +24,19 @@ export default StyleSheet.create({
     backgroundColor: Colors.snow,
     marginVertical: 10,
     margin: 10,
-    // padding: 5,
     paddingVertical: 10,
     borderRadius: Metrics.smallMargin,
     flexDirection: 'row'
   },
   boldLabel: {
     flex: 1,
-    fontWeight: 'bold',
     fontSize: 16,
-    // alignSelf: 'center',
+    fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryGray,
-    // textAlign: 'center',
-    // marginBottom: Metrics.smallMargin
   },
   label: {
     flex: 1,
-    // textAlign: 'center',
+    fontFamily: 'Lucida-Grande',
     color: 'grey'
   },
   listContent: {
@@ -57,7 +52,8 @@ export default StyleSheet.create({
     marginLeft: 5,
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Lucida-Grande',
   },
   cardContainer: {
     height: screenheight - 5,
@@ -69,13 +65,11 @@ export default StyleSheet.create({
   },
   input: {
     height: INPUT_HEIGHT,
-    // flex: 1,
     fontSize: 18,
     paddingHorizontal: 8,
     color: 'grey',
     borderWidth: 1,
     borderColor: '#CCD1D1',
     borderRadius: 10
-    // borderWidth: 2
   },
 })
