@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {
-  StyleSheet, Text, View, AsyncStorage,
-  FlatList, Image, Animated, Modal, ActivityIndicator, Dimensions,
-  TouchableOpacity, Alert
+  View, AsyncStorage,
+  FlatList, ActivityIndicator, Alert, NetInfo
 } from 'react-native';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import Moment from 'moment'
@@ -15,7 +14,7 @@ import CategoryBtn from '../../Components/Buttons/BtnCategory'
 import Card from '../../Components/Card/Card'
 import InputButton from '../../Components/InputButton/InputButton'
 import HeaderBtn from '../../Components/Buttons/HeaderBtn'
-import { userChoice } from '../../Config/constants'
+import { userChoice, LocalData } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
@@ -30,6 +29,7 @@ const initailState = {
   buyTextColor: Colors.primaryDark,
   sellBackgroundColor: 'transparent',
   sellTextColor: Colors.primaryDark,
+  ConnectionStatus: false,
   category: 'Buy',
   isBuying: true,
   userData: [],
@@ -108,12 +108,43 @@ class Local extends Component {
 
   // back-end code
   async componentDidMount() {
+    this.NetworkStatus()
+    const status = this.state.ConnectionStatus
+    if (!status) {
+      const loadLocaldata = await AsyncStorage.getItem(LocalData)
+      if (loadLocaldata) {
+        this.setState({
+          data: loadLocaldata,
+          loading: false,
+        })
+      }
+    }
+
     const base = this.state.baseCurrency
     this._fetchCurrencies(base)
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
     });
     console.log(this.state.data)
+  }
+  NetworkStatus = () => {
+    NetInfo.isConnected.fetch().then(isConnected => {
+      console.log('First, is ' + (isConnected ? 'online' : 'offline'));
+      this.setState({
+        ConnectionStatus: isConnected
+      })
+    });
+    function handleFirstConnectivityChange(isConnected) {
+      console.log('Then, is ' + (isConnected ? 'online' : 'offline'));
+      NetInfo.isConnected.removeEventListener(
+        'connectionChange',
+        handleFirstConnectivityChange
+      );
+    }
+    NetInfo.isConnected.addEventListener(
+      'connectionChange',
+      handleFirstConnectivityChange
+    );
   }
   requestUpdate = (User, Company) => {
     firebase
@@ -303,8 +334,13 @@ class Local extends Component {
           data: usersData,
           loading: false,
         })
+
       })
     this.changeBtnBuy()
+    const status = this.state.ConnectionStatus
+    if (status) {
+      await AsyncStorage.setItem(LocalData, JSON.stringify(this.state.data))
+    }
   }
   setBaseCurrency = async (currency) => {
     const { baseCurrency } = currency

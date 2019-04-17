@@ -22,7 +22,6 @@ export default StyleSheet.create({
     backgroundColor: Colors.snow,
     marginVertical: 10,
     margin: 10,
-    // padding: 5,
     paddingVertical: 10,
     borderRadius: Metrics.smallMargin,
     flexDirection: 'row'
@@ -39,9 +38,7 @@ export default StyleSheet.create({
     color: 'gray',
     fontSize: 13
   },
-  // listContent: {
-  //   marginTop: 10
-  // },
+
   image: {
     width: 80,
     height: 90,

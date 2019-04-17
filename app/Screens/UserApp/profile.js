@@ -35,7 +35,7 @@ export default class Details extends Component {
 
             headerTintColor: '#fff',
             headerTitleStyle: {
-                fontWeight: 'bold',
+                fontFamily: 'Lucida-Grande-Bold',
             },
         }
     };

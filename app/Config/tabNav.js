@@ -40,7 +40,7 @@ export default class TabNavigationScreen extends React.Component {
           <Icon.Entypo name="add-to-list" color='#fff' size={23} style={{ padding: 20 }} />
           <OptionsMenu
             button={more}
-            buttonStyle={{ width: screenWidth / 18, height: screenWidth / 18, color: "#fff", margin: 20, marginBottom: -1, resizeMode: "contain" }}
+            buttonStyle={{ width: screenWidth / 18, height: screenWidth / 18, margin: 20, marginBottom: -1, resizeMode: "contain" }}
             destructiveIndex={1}
             options={["Settings"]}
             actions={[this.Settings]} />
