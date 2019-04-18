@@ -18,7 +18,7 @@ import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
 import { LinearGradient } from "expo";
 import { Colors } from '../../Assets/Themes';
-import { userPhone, cName } from '../../Config/constants'
+import { userPhone, cName, forexCountry } from '../../Config/constants'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
@@ -112,6 +112,7 @@ export default class Phone extends Component {
             confirm: '',
             country: {
                 cca2: 'RW',
+                name: 'Rwanda',
                 callingCode: '250'
             },
 
@@ -124,16 +125,18 @@ export default class Phone extends Component {
         };
     }
     static navigationOptions = ({ navigation }) => {
-        let Title = 'Phone Number'
+        let Title = 'Manage your forex'
         return {
             headerTitle: Title + '   ',
             headerStyle: {
                 backgroundColor: Colors.primary,
+                elevation: 0
             },
 
             headerTintColor: '#fff',
             headerTitleStyle: {
                 fontWeight: 'bold',
+                fontFamily: 'Lucida-Grande',
             },
         }
     };
@@ -223,9 +226,10 @@ export default class Phone extends Component {
                         this.refs.toast.show("You have successfully verified your phone number");
                         try {
                             await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
+                            await AsyncStorage.setItem(forexCountry, this.state.country.name)
                                 .then(async () => {
                                     await AsyncStorage.setItem(cName, this.state.credentails.companyName)
-                                        .then(() => this.props.navigation.navigate("SignedIn"))
+                                        .then(() => this.props.navigation.navigate("AddCurrency"))
 
                                 })
                         } catch (error) {
@@ -233,13 +237,11 @@ export default class Phone extends Component {
                                 this.setState({ spinner: false });
                             });
                         }
-                    } else {
-                        setTimeout(async () => {
-                            await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
-                                .then(() => this.props.navigation.navigate('Agreement'));
-                        }, 100);
+                        return
                     }
-
+                    await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
+                    await AsyncStorage.setItem(forexCountry, this.state.country.name)
+                        .then(() => this.props.navigation.navigate('Register'));
 
                 }
 

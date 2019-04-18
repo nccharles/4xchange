@@ -26,6 +26,7 @@ export default StyleSheet.create({
     },
     title: {
         color: 'white',
+        fontSize: 20,
         fontFamily: 'Lucida-Grande-Bold',
         marginLeft: 15
     },

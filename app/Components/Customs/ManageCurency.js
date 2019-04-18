@@ -64,13 +64,14 @@ class ManageCurrency extends Component {
         const currentUser = await AsyncStorage.getItem(userPhone)
         console.log(currentUser)
         this.setState({
-            // companyName: currentUser.infos.businessInfo.displayName,
             companyName: await AsyncStorage.getItem(cName),
             userPhone: currentUser
         })
         this._getUserCurrencies()
         this._getAllCustomers(currentUser)
         registerForPushNotificationsAsync()
+        await AsyncStorage.setItem(chatName, this.state.companyName)
+        await AsyncStorage.setItem(chatNum, currentUser)
     }
 
     _getAllCustomers = async (forexPhone) => {
@@ -192,17 +193,7 @@ class ManageCurrency extends Component {
             })
     }
 
-    _handleSignOut = async () => {
-        try {
-            await AsyncStorage.setItem(chatName, this.state.companyName)
-            await AsyncStorage.setItem(chatNum, this.state.userPhone).then(() => {
-                this.props.navigation.navigate('WelcomeScreen')
-            });
-        } catch (error) {
-            this.refs.toast.show(error.message);
-        }
-    }
-    //backend ends
+
 
     Show_Custom_Alert = () => {
         this.setState({ AddModal: true });

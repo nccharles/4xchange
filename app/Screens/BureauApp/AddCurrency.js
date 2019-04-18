@@ -1,31 +1,16 @@
 import React, { Component } from 'react';
 import {
-  View,
-  FlatList,
-  ActivityIndicator,
-  AsyncStorage,
+  View, AsyncStorage
 } from 'react-native';
-import Toast, { DURATION } from 'react-native-easy-toast'
-import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
-import logout from '../../Assets/Icons/logout.png'
-import user from '../../Assets/Icons/user.png'
-import AddBtn from '../../Components/Buttons/AddCurrencyBtn'
-import ModalComponent from '../../Components/AddCurrencyModal/modal'
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
-import Card from '../../Components/Card/BureauCard/Card'
-import DialogComponent from '../../Components/Dialog/Dialog'
 import Header from '../../Components/Header/Header'
-import ChatBtn from '../../Components/Buttons/BtnChat'
 import styles from './Style/AddCurrencyStyle'
-
 //backend imports 
-import * as firebase from 'firebase'
 import _ from 'lodash'
-import { userPhone, cName, chatNum, chatName } from '../../Config/constants';
-import { registerForPushNotificationsAsync } from '../../Config/notice';
 import ManageCurrency from '../../Components/Customs/ManageCurency';
 import Details from '../UserApp/profile';
+import { chatName, chatNum } from '../../Config/constants';
 
 const initailState = {
   loading: true,
@@ -66,7 +51,6 @@ class AddCurrency extends Component {
     }
   };
 
-
   Show_Custom_Alert = () => {
     this.setState({ AddModal: true });
   }
@@ -75,7 +59,7 @@ class AddCurrency extends Component {
     return (
       <View style={styles.container}>
         <Header
-          onPress1={() => this.props.navigation.goBack()}
+          onPress1={() => this.props.navigation.navigate('TabNavScreen')}
           forex="Manage Forex"
           Add={this.Show_Custom_Alert.bind(this)}
           Update={() => this.props.navigation.navigate('Info')}

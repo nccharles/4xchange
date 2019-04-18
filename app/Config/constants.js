@@ -1,5 +1,6 @@
 export const userChoice = '@isUser#Choose@Recognized?eees'
 export const userPhone = '@isUser#Use@Phone??'
+export const forexCountry = '@isForex#Country??'
 export const cName = '@isUser#Company@Display???'
 export const chatName = '@isUser#Chatname@Display???'
 export const chatNum = '@isUser#Chatnum@Display???'

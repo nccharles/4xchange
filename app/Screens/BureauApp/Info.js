@@ -33,7 +33,7 @@ import _ from 'lodash'
 import { userPhone } from '../../Config/constants';
 class Info extends Component {
     static navigationOptions = ({ navigation }) => {
-        let Title = '4xChange   '
+        let Title = 'Update   '
         return {
             headerTitle: Title + '   ',
             headerStyle: {
@@ -43,6 +43,7 @@ class Info extends Component {
             headerTintColor: '#fff',
             headerTitleStyle: {
                 fontWeight: 'bold',
+                fontFamily: 'Lucida-Grande-Bold',
             },
         }
     };
@@ -146,6 +147,7 @@ class Info extends Component {
                 openAt,
                 workingDays,
                 email,
+                completed: true,
                 companyName,
                 latitude,
                 longitude,
@@ -154,9 +156,11 @@ class Info extends Component {
                 this.setState({
                     isSubmitting: false,
                 })
-                this.refs.toast.show("Information saved!", () => {
+                this.refs.toast.show("Information saved!")
+                setTimeout(() => {
                     this.props.navigation.goBack(null)
-                });
+                }, 1000)
+
             })
             .catch(err => {
                 console.log(err)
@@ -213,7 +217,7 @@ class Info extends Component {
                         />
                         <Input
                             placeholder='Email'
-                            leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
+                            leftIcon={{ type: 'entypo', name: 'email', color: Colors.primary }}
                             containerStyle={styles.input}
                             underlineColorAndroid={'transparent'}
                             inputStyle={styles.inputStyle}
@@ -306,11 +310,11 @@ class Info extends Component {
                     </ScrollView>
                     <Toast ref="toast"
                         style={{ backgroundColor: Colors.primary }}
-                        position='top'
-                        positionValue={200}
+                        position='bottom'
+                        positionValue={140}
                         fadeInDuration={750}
                         fadeOutDuration={1000}
-                        opacity={0.8}
+                        opacity={1}
                         textStyle={{ color: '#fff' }} />
                 </KeyboardAvoidingView>
             </View>

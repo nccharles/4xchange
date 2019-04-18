@@ -2,26 +2,16 @@ import React, { Component } from "react";
 import {
   View,
   KeyboardAvoidingView,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  Image,
-
-  Dimensions, AsyncStorage
+  ScrollView, AsyncStorage
 
 } from "react-native";
 import { LinearGradient } from 'expo';
 import { Button, Input } from "react-native-elements";
-import AwesomeAlert from "react-native-awesome-alerts";
-import SVGImage from "react-native-svg-image";
-import { userPhone, cName } from '../../Config/constants'
+import { userPhone, cName, forexCountry } from '../../Config/constants'
 import styles from "./Style/SignupStyles";
 import { Colors } from "../../Assets/Themes";
 //backend things
 import * as firebase from "firebase";
-
-const screenwidth = Dimensions.get("window").width;
-const screenheight = Dimensions.get("window").height;
 
 class InfoRegis extends Component {
   constructor(props) {
@@ -33,11 +23,8 @@ class InfoRegis extends Component {
         email: null,
         companyName: null
       },
-      countryName: "Rwanda",
       countries: null,
-      flag: "https://restcountries.eu/data/rwa.svg",
       isSubmitting: false,
-      showAlert: false,
       errs: {
         tinNumber: null
       }
@@ -45,27 +32,29 @@ class InfoRegis extends Component {
     };
   }
   static navigationOptions = ({ navigation }) => {
+
     return {
-      headerTransparent: true,
-      headerTintColor: "#fff"
-    };
+      headerTitle: 'Forex Info   ',
+      headerStyle: {
+        backgroundColor: Colors.primary,
+        elevation: 0,
+      },
+
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande',
+      },
+    }
   };
 
-  //Alert message that come when the page is opening
-  hideAlert = () => {
-    this._queryExistingRegInfo();
-    this.setState({
-      showAlert: false
-    });
-  };
-
-  //luc's backend things
 
   async componentDidMount() {
     this.setState({
-      showAlert: true,
-      userPhone: await AsyncStorage.getItem(userPhone)
+      userPhone: await AsyncStorage.getItem(userPhone),
+      countryName: await AsyncStorage.getItem(forexCountry)
     });
+    this._queryExistingRegInfo();
   }
   _queryExistingRegInfo = () => {
     const { userPhone } = this.state;
@@ -124,7 +113,6 @@ class InfoRegis extends Component {
       errs,
       isSubmitting,
       countryName,
-      flag
     } = this.state;
     await AsyncStorage.setItem(cName, companyName)
     if (isSubmitting) {
@@ -154,7 +142,6 @@ class InfoRegis extends Component {
         completed: true,
         isSubmitting: false,
         countryName,
-        flag
       })
       .then(resp => {
         that.setState({
@@ -170,7 +157,6 @@ class InfoRegis extends Component {
             email,
             userPhone,
             countryName,
-            flag
           })
           .then(resp => {
             that.props.navigation.navigate("AdditionalInfo", {
@@ -178,7 +164,6 @@ class InfoRegis extends Component {
               email,
               companyName,
               countryName,
-              flag
             });
           })
           .catch(error => {
@@ -191,22 +176,6 @@ class InfoRegis extends Component {
   };
   //backend end
 
-  setCountry = async country => {
-    // const {baseCurrency} = country
-    this.setState({
-      countries: country,
-      countryName: country.countryName,
-      flag: country.countryFlag
-    });
-    // console.log(this.state.countries.countryName)
-  };
-  getCountry = async setCountry => {
-    this.setState({
-      ...this.state
-    });
-    this.props.navigation.navigate("Country", { setCountry: this.setCountry });
-  };
-
   render() {
     return (
       <View
@@ -215,29 +184,18 @@ class InfoRegis extends Component {
         }}
         style={styles.container}
       >
-        <Text style={styles.logo}>About Company   </Text>
         <KeyboardAvoidingView
           behavior="padding"
           style={{ flex: 1 }}
           keyboardVerticalOffset={30}
         >
           <ScrollView>
-            <TouchableOpacity
-              onPress={() => this.getCountry(this.state.countries)}
-              style={styles.button}
-            >
-              <SVGImage
-                style={styles.flag_icon}
-                source={{ uri: this.state.flag }}
-              />
-              <Text style={styles.country_text}>{this.state.countryName + '   '}</Text>
-            </TouchableOpacity>
             <Input
               placeholder="Company name"
               leftIcon={{
                 type: "material-community",
                 name: "city",
-                color: Colors.snow
+                color: Colors.primary
               }}
               containerStyle={styles.input}
               underlineColorAndroid={"transparent"}
@@ -252,7 +210,7 @@ class InfoRegis extends Component {
               leftIcon={{
                 type: "foundation",
                 name: "database",
-                color: Colors.snow
+                color: Colors.primary
               }}
               keyboardType='numeric'
               containerStyle={styles.input}
@@ -266,7 +224,7 @@ class InfoRegis extends Component {
             />
             <Input
               placeholder='Email'
-              leftIcon={{ type: 'entypo', name: 'email', color: Colors.snow }}
+              leftIcon={{ type: 'entypo', name: 'email', color: Colors.primary }}
               containerStyle={styles.input}
               underlineColorAndroid={'transparent'}
               inputStyle={styles.inputStyle}
@@ -300,22 +258,6 @@ class InfoRegis extends Component {
             </LinearGradient>
           </ScrollView>
         </KeyboardAvoidingView>
-        <AwesomeAlert
-          show={this.state.showAlert}
-          showProgress={false}
-          title="Location"
-          message="4xChange is going to take your current location please make sure you are currently sitting in your forex bureau"
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={false}
-          showCancelButton={false}
-          showConfirmButton={true}
-          cancelText="No, cancel"
-          confirmText="Ok got it"
-          confirmButtonColor={Colors.primaryDark}
-          onConfirmPressed={() => {
-            this.hideAlert();
-          }}
-        />
       </View>
     );
   }

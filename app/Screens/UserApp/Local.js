@@ -34,7 +34,6 @@ const initailState = {
   isBuying: true,
   userData: [],
   showAlert: true,
-  flag: 'https://restcountries.eu/data/rwa.svg',
   fav_icon: false,
   bureau: null
 }

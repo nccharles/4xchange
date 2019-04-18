@@ -8,8 +8,9 @@ import {
   Image,
   Platform,
   Picker,
-  TimePickerAndroid
+  TimePickerAndroid,
 } from "react-native";
+import { LinearGradient } from 'expo';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import { Location, Permissions } from "expo";
 import { Icon, Button, Input } from "react-native-elements";
@@ -36,7 +37,6 @@ class Signup extends Component {
         companyName: "",
         email: "",
         countryName: "",
-        flag: ""
       },
       userPhone: null,
       errorMessage: null,
@@ -46,13 +46,22 @@ class Signup extends Component {
     };
   }
   static navigationOptions = ({ navigation }) => {
+    let Title = 'Address'
     return {
-      headerTransparent: true,
-      headerTintColor: "#fff"
-    };
+      headerTitle: Title + '   ',
+      headerStyle: {
+        backgroundColor: Colors.primary,
+        elevation: 0
+      },
+
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande',
+      },
+    }
   };
 
-  //luc's backend things
 
   componentDidMount() {
     const {
@@ -60,7 +69,6 @@ class Signup extends Component {
       email,
       companyName,
       countryName,
-      flag
     } = this.props.navigation.state.params;
     this.setState({
       showAlert: true,
@@ -70,7 +78,6 @@ class Signup extends Component {
         email,
         companyName,
         countryName,
-        flag
       }
     });
     const { latitude, longitude } = this.state.info;
@@ -125,7 +132,6 @@ class Signup extends Component {
         latitude,
         longitude,
         countryName,
-        flag
       },
       userPhone,
       isSubmitting
@@ -152,16 +158,14 @@ class Signup extends Component {
         latitude,
         longitude,
         countryName,
-        flag,
         completed: true,
         timestamp: this.timestamp
       })
       .then(response => {
-        this.refs.toast.show("Information saved!", () => {
-          that.props.navigation.navigate("SignedIn");
-          that.setState({
-            isSubmitting: false
-          });
+        this.refs.toast.show("Information saved!")
+        that.props.navigation.navigate("SignedIn");
+        that.setState({
+          isSubmitting: false
         });
       })
       .catch(err => {
@@ -204,7 +208,6 @@ class Signup extends Component {
         }}
         style={styles.container}
       >
-        <Text style={styles.logo}>4xChange   </Text>
         <KeyboardAvoidingView
           behavior="padding"
           style={{ flex: 1 }}
@@ -216,7 +219,7 @@ class Signup extends Component {
               leftIcon={{
                 type: "simple-line-icon",
                 name: "directions",
-                color: Colors.snow
+                color: Colors.primary
               }}
               containerStyle={styles.input}
               underlineColorAndroid={"transparent"}
@@ -232,7 +235,7 @@ class Signup extends Component {
                 leftIcon={
                   <Image
                     source={open}
-                    style={{ width: 30, height: 30, tintColor: Colors.snow }}
+                    style={{ width: 30, height: 30, tintColor: Colors.primary }}
                   />
                 }
                 containerStyle={styles.input}
@@ -251,7 +254,7 @@ class Signup extends Component {
                 leftIcon={
                   <Image
                     source={close}
-                    style={{ width: 30, height: 30, tintColor: Colors.snow }}
+                    style={{ width: 30, height: 30, tintColor: Colors.primary }}
                   />
                 }
                 containerStyle={styles.input}
@@ -268,7 +271,7 @@ class Signup extends Component {
               <Icon
                 name="calendar"
                 type="simple-line-icon"
-                color={Colors.snow}
+                color={Colors.primary}
               />
               <Text style={styles.label}>Working days</Text>
             </View>
@@ -298,14 +301,20 @@ class Signup extends Component {
                   <Picker.Item label="Whole week" value="Whole week" />
                 </Picker>
               )}
-            <Button
-              onPress={this._handleInfoSave.bind(this)}
-              title="Save   "
-              icon={{ type: "font-awesome", name: "save", color: "#fff" }}
-              buttonStyle={styles.button}
-              loading={this.state.isSubmitting}
-              activityIndicatorStyle={{ color: "white" }}
-            />
+            <LinearGradient
+              colors={Colors.gradientColors}
+              start={{ x: 1.0, y: 0.5 }}
+              end={{ x: 0, y: 0.5 }}
+              style={styles.button}
+            >
+              <Button
+                onPress={this._handleInfoSave.bind(this)}
+                title="Save   "
+                icon={{ type: "font-awesome", name: "save", color: "#fff" }}
+                loading={this.state.isSubmitting}
+                activityIndicatorStyle={{ color: "white" }}
+              />
+            </LinearGradient>
           </ScrollView>
           <Toast ref="toast"
             style={{ backgroundColor: Colors.primary }}

@@ -148,7 +148,7 @@ class Chatlist extends Component {
                         renderItem={({ item }) => (
                             <Card
                                 title={item.companyName}
-                                subtitle={item.email}
+                                subtitle={item.countryName}
                                 hideAvatar={false}
                                 roundAvatar={true}
                                 avatar={item.companyName.substring(0, 2).toUpperCase()}

@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
 import { Colors } from '../../../Assets/Themes'
 
@@ -7,19 +6,13 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.primary,
-    },
-    logo: {
-        color: '#fff',
-        opacity: 0.7,
-        fontWeight: 'bold',
-        fontSize: 40,
-        marginTop: height * .2,
-        marginLeft: width * .05,
-        // marginBottom: height * .05,
+        alignContent: 'center',
+        justifyContent: 'center',
+        paddingTop: width / 3,
+        backgroundColor: Colors.background,
     },
     input: {
-        backgroundColor: Colors.windowTint,
+        color: Colors.darkGray,
         borderRadius: 5,
         marginTop: height * .05,
         alignSelf: 'center',
@@ -27,24 +20,27 @@ const styles = StyleSheet.create({
         width: width - 50,
     },
     button: {
-        backgroundColor: Colors.primaryDark,
+        backgroundColor: Colors.background,
         marginTop: height * .05,
         width: width - 50,
         height: height / 14,
-        borderRadius: 5,
         alignContent: 'center',
         justifyContent: 'center',
-        elevation: 3,
+        elevation: 0,
+        fontFamily: 'Lucida-Grande-Bold',
+        color: Colors.darkGray,
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
     },
     inputStyle: {
-        color: '#fff',
+        color: '#333',
         textDecorationLine: 'none',
+        fontFamily: 'Lucida-Grande',
     },
     texterr: {
-        color: '#fff',
+        color: 'red',
+        fontFamily: 'Lucida-Grande',
         marginLeft: width * .07,
     },
     ilabel: {
@@ -52,12 +48,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginTop: height * .04,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     picker: {
         borderRadius: 5,
         // marginTop: height * .05,
-        marginLeft: width * .05,
-        marginRight: width * .05,
+        marginLeft: width / 5,
+        marginRight: width / 5,
         height: 40,
         borderTopWidth: 1,
         borderTopColor: 'gray',
@@ -71,30 +68,16 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 5,
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
-        color: Colors.snow
+        color: Colors.primary,
+        fontFamily: 'Lucida-Grande',
     },
     label: {
         marginLeft: height * .02,
         // marginTop: 10,
-        fontSize: 16,
-        color: Colors.snow
+        fontSize: 30,
+        color: Colors.primary,
+        fontFamily: 'Lucida-Grande-Bold',
     },
-    flag_icon: {
-        width: width / 8,
-        height: height / 25,
-        backgroundColor: 'transparent',
-        // alignSelf: 'center',
-        // justifyContent: 'center',
-        marginTop: 7,
-        marginLeft: 12
-    },
-    country_text: {
-        color: 'white',
-        fontWeight: 'bold',
-        position: 'absolute',
-        // marginRight: (screenwidth/ 3),
-        // marginLeft: screenwidth/ 6,
-        textAlign: 'center'
-    },
+
 });
 export default styles;

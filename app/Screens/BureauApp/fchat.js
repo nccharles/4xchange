@@ -152,9 +152,13 @@ class ForexChat extends Component {
     }
 
     get user() {
+        const fullNames = this.props.navigation.state.params.forex;
+        const firstWord = fullNames.replace(/ .*/, '');
+
+        console.log(firstWord);
         return {
             name: this.props.navigation.state.params.forex,
-            _id: 'f' + this.state.forexPhone,
+            _id: firstWord + this.state.forexPhone,
             timestamp: this.timestamp
         };
     }

@@ -19,6 +19,7 @@ import Country from "../Screens/BureauApp/countryList";
 import Chat from '../Screens/UserApp/Chat';
 import Chatlist from '../Screens/BureauApp/Chatlist'
 import ForexChat from '../Screens/BureauApp/fchat';
+import { Colors } from '../Assets/Themes';
 // Manifest of possible screens
 const Intro = createSwitchNavigator({
   WelcomeScreen: {
@@ -54,16 +55,12 @@ const InfoRegis = createStackNavigator({
     screen: Country
   }
 });
-const Login = createStackNavigator({
-  Loged: {
-    screen: Loged,
-  },
+const Register = createStackNavigator({
   Agreement: { screen: Agreement },
   InfoRegis: {
     screen: InfoRegis,
     navigationOptions: {
-      headerTransparent: true,
-      headerTintColor: "#fff"
+      header: () => null
     }
   },
   Country: { screen: Country },
@@ -79,6 +76,26 @@ const Login = createStackNavigator({
   AdditionalInfo: {
     screen: AdditionalInfo
   },
+
+});
+const SignedIn = createStackNavigator({
+  AddCurrency: {
+    screen: AddCurrency,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  Chatlist: {
+    screen: Chatlist,
+  },
+  ForexChat: {
+    screen: ForexChat,
+    navigationOptions: {
+      header: () => null
+    }
+  },
+  CurrencyList: { screen: CurrencyList },
+  Info: { screen: Info }
 });
 const WelcomeStack = createStackNavigator({
   TabNavScreen: {
@@ -131,32 +148,20 @@ const WelcomeStack = createStackNavigator({
     }
   },
   Login: {
-    screen: Login,
+    screen: Loged,
+  },
+  Register: {
+    screen: Register,
     navigationOptions: {
       header: () => null
     }
   },
-
-});
-
-const SignedIn = createStackNavigator({
-  AddCurrency: {
-    screen: AddCurrency,
+  SignedIn: {
+    screen: SignedIn,
     navigationOptions: {
       header: () => null
     }
   },
-  Chatlist: {
-    screen: Chatlist,
-  },
-  ForexChat: {
-    screen: ForexChat,
-    navigationOptions: {
-      header: () => null
-    }
-  },
-  CurrencyList: { screen: CurrencyList },
-  Info: { screen: Info }
 });
 
 export default (PrimaryNav = (initialRouter = "WelcomeStack") => {

@@ -11,9 +11,9 @@ import styles from './Style/agreementStyle'
 export default class Agreement extends Component {
 
   static navigationOptions = ({ navigation }) => {
-    let Title = '4xChange   '
+    let Title = 'Privacy'
     return {
-      headerTitle: Title + '   ',
+      headerTitle: Title,
       headerStyle: {
         backgroundColor: Colors.primary,
       },
@@ -21,6 +21,7 @@ export default class Agreement extends Component {
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande',
       },
     }
   };

@@ -60,6 +60,12 @@ export default StyleSheet.create({
         backgroundColor: "gray",
         margin: 8
     },
+    linearseparator: {
+        flex: 1,
+        height: 5,
+        width: screenwidth,
+        margin: 0
+    },
     itemContainer: {
         flexDirection: "row",
         marginLeft: 10,

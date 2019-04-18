@@ -19,7 +19,7 @@ import Form from 'react-native-form';
 import CountryPicker from 'react-native-country-picker-modal';
 import { LinearGradient } from "expo";
 import { Colors } from '../../Assets/Themes';
-import { chatNum } from '../../Config/constants'
+import { chatNum, userPhone, forexCountry } from '../../Config/constants'
 //backend imports 
 import _ from 'lodash'
 //back end done
@@ -110,6 +110,7 @@ export default class Phone extends Component {
             confirm: '',
             country: {
                 cca2: 'RW',
+                name: 'Rwanda',
                 callingCode: '250'
             },
             forexPhone: null,
@@ -212,8 +213,9 @@ export default class Phone extends Component {
                     this.setState({ spinner: false });
                     this.refs.toast.show("You have successfully verified your phone number");
                     try {
-
                         await AsyncStorage.setItem(chatNum, this.state.country.callingCode + this.state.Phone)
+                        await AsyncStorage.setItem(userPhone, this.state.country.callingCode + this.state.Phone)
+                        await AsyncStorage.setItem(forexCountry, this.state.country.name)
                             .then(() => {
                                 this.props.navigation.navigate("Chat", { forex: this.state.forex, forexPhone: this.state.forexPhone })
                             })

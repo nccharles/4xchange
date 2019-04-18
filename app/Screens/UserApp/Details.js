@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   ScrollView, Share, View, Text, Linking, TouchableOpacity, Platform, AsyncStorage, ActivityIndicator
 } from 'react-native';
-import SVGImage from 'react-native-svg-image'
 import styles from './Style/DetailStyle'
 import Header from '../../Components/Header/DetailsHeader'
 import ChatBtn from '../../Components/Buttons/BtnChat'
@@ -10,15 +9,15 @@ import { Colors } from '../../Assets/Themes'
 import gps from '../../Assets/Icons/get-directions-button.png'
 import NameDialogComponent from '../../Components/NameModal/Usermodal';
 import Toast, { DURATION } from 'react-native-easy-toast'
-
+import { LinearGradient } from "expo";
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { chatName, chatNum } from '../../Config/constants';
 import { Icon } from 'expo';
 const colors = [
-  '#7FB3D5', '#227093', '#B53471', '#5758BB', '#EB9CA8', '#48dbfb',
-  '#8A004F', '#C4E538', '#1dd1a1', '#00a3e1', '#9980FA'
+  '#7FB3D5', '#227093', '#B53471', '#5758BB',
+  '#EB9CA8', '#48dbfb', '#00a3e1', '#9980FA'
 ]
 
 export default class Details extends Component {
@@ -41,7 +40,6 @@ export default class Details extends Component {
         companyName: '',
         email: '',
         countryName: 'Rwanda',
-        flag: 'https://restcountries.eu/data/rwa.svg',
       },
       locate: true,
       loading: true,
@@ -143,7 +141,7 @@ export default class Details extends Component {
       });
   }
   render() {
-    const { loading, userInfo, userPhone, error } = this.state
+    const { loading, userInfo, error } = this.state
     if (loading) {
       return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -177,7 +175,11 @@ export default class Details extends Component {
               <Text style={styles.itemTitle}>Information  </Text>
             </View>
           </View>
-          <View style={styles.separator} />
+          <LinearGradient
+            colors={Colors.gradientColors}
+            start={{ x: 1.0, y: 0.5 }}
+            end={{ x: 0, y: 0.5 }}
+            style={styles.linearseparator} />
           <View style={styles.itemContainer}>
             <Icon.MaterialIcons name="location-city" color={Colors.primary} size={23} />
             <View style={styles.infocontent}>

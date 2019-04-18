@@ -47,7 +47,6 @@ export default class TabNavigationScreen extends React.Component {
         this.refs.toast.show(error.message)
       }
     } else {
-      console.log('Login')
       this.props.navigation.navigate('Login')
     }
 

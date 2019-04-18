@@ -6,7 +6,7 @@ import styles from './Style/DetailStyle'
 import { Colors } from '../../Assets/Themes'
 import Toast from 'react-native-easy-toast'
 import * as firebase from 'firebase'
-import { Icon } from 'expo';
+import { Icon, WebBrowser } from 'expo';
 import { userPhone } from '../../Config/constants';
 const colors = [
     '#7FB3D5', '#227093', '#B53471', '#5758BB', '#EB9CA8',
@@ -103,6 +103,11 @@ export default class Settings extends Component {
         }
 
     }
+    _handleHelpPress = () => {
+        WebBrowser.openBrowserAsync(
+            'http://mail.limitless.rw/'
+        );
+    };
     render() {
         const { loading } = this.state
         if (loading) {
@@ -124,13 +129,13 @@ export default class Settings extends Component {
                             <Text style={styles.info}>Manage your forex,add currencies</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={styles.itemContainer}>
+                    <TouchableOpacity onPress={this._handleHelpPress} style={styles.itemContainer}>
                         <Icon.MaterialIcons name="help-outline" color={Colors.primary} size={23} />
                         <View style={styles.infocontent}>
                             <Text style={styles.infoTitle}>Help</Text>
                             <Text style={styles.info}> FAQ,contact us,privacy policy</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.separator} />
                     <TouchableOpacity onPress={this.onShare} style={styles.itemContainer}>
                         <Icon.MaterialIcons name="share" color={Colors.primary} size={23} />

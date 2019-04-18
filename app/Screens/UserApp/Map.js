@@ -59,10 +59,10 @@ class MapScreen extends Component {
     const that = this
     await firebase.database().ref('/infos/').once('value').then(snapshot => {
       const coordinates = _.map(snapshot.val(), (val, uid) => {
-        if (val.publicInfo.latitude && val.publicInfo.latitude) {
-          return { ...val.publicInfo, uid }
+        if (!val.publicInfo.latitude && !val.publicInfo.latitude) {
+          return
         }
-
+        return { ...val.publicInfo, uid }
       })
       if (coordinates) {
         that.setState({
@@ -107,15 +107,18 @@ class MapScreen extends Component {
             }}
           >
             {forexCoords.map((marker, key) => {
-              return <MapView.Marker
-                onPress={() => this.props.navigation.navigate('Details', { userPhone: marker.userPhone })}
-                coordinate={{
-                  latitude: marker.latitude,
-                  longitude: marker.longitude
-                }}
-                key={key}
-                image={LocationBank}
-                title={marker.companyName} />
+              if (marker.longitude && marker.latitude) {
+                console.log(marker.longitude)
+                return <MapView.Marker
+                  onPress={() => this.props.navigation.navigate('Details', { userPhone: marker.userPhone })}
+                  coordinate={{
+                    latitude: marker.latitude,
+                    longitude: marker.longitude
+                  }}
+                  key={key}
+                  image={LocationBank}
+                  title={marker.companyName} />
+              }
             })}
             <MapView.Marker coordinate={{ latitude, longitude }}
               title={"Here you are!."} pinColor={"green"} image={UserLocation} />
