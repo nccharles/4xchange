@@ -153,9 +153,9 @@ class ForexChat extends Component {
 
     get user() {
         const fullNames = this.props.navigation.state.params.forex;
-        const firstWord = fullNames.replace(/ .*/, '');
+        const firstWord = fullNames.substring(0, 2);
 
-        console.log(firstWord);
+        console.log('cuted' + firstWord);
         return {
             name: this.props.navigation.state.params.forex,
             _id: firstWord + this.state.forexPhone,

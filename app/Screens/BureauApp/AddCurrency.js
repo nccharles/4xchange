@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import {
-  View, AsyncStorage
+  View,
 } from 'react-native';
 import { Colors } from '../../Assets/Themes'
-import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 import Header from '../../Components/Header/Header'
 import styles from './Style/AddCurrencyStyle'
 //backend imports 
 import _ from 'lodash'
 import ManageCurrency from '../../Components/Customs/ManageCurency';
 import Details from '../UserApp/profile';
-import { chatName, chatNum } from '../../Config/constants';
 
 const initailState = {
   loading: true,

@@ -56,10 +56,12 @@ class Chatlist extends Component {
     async componentDidMount() {
 
         const forexPhone = await AsyncStorage.getItem(userPhone)
+
         this.setState({
             companyName: await AsyncStorage.getItem(cName),
             forexPhone: forexPhone
         })
+        console.log(this.state.companyName)
         this._getAllmessages(forexPhone)
         this._countCustomerMessages(forexPhone)
         registerForPushNotificationsAsync()
@@ -82,8 +84,6 @@ class Chatlist extends Component {
     }
 
     _getAllmessages = async (forexPhone) => {
-        const that = this
-
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .orderByChild("unread")
             .on('value', snapshot => {
@@ -96,7 +96,7 @@ class Chatlist extends Component {
                     firebase.database().ref(`/Chats/${forexPhone}/all/${customerPhone}/messages`)
                         .limitToLast(1)
                         .orderByChild("createdAt")
-                        .on('value', snapshot => {
+                        .once('value').then(snapshot => {
                             if (snapshot.val()) {
                                 snapshot.forEach((child) => {
                                     listData = [...listData, {
@@ -116,11 +116,14 @@ class Chatlist extends Component {
 
 
                             }
-                            that.setState(() => ({
-                                data: [...listData],
-                                loading: false,
-                            }))
+
                         })
+                    setTimeout(() => {
+                        this.setState(() => ({
+                            data: listData,
+                            loading: false,
+                        }))
+                    }, 2000)
                 })
 
             }

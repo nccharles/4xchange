@@ -182,15 +182,7 @@ class Chat extends Component {
                 />
             );
         }
-        const options = {
-            'Action 1': (props) => {
-                alert('option 1');
-            },
-            'Action 2': (props) => {
-                alert('option 2');
-            },
-            'Cancel': () => { },
-        };
+
         return (
             <CustomActions
                 {...props}
@@ -205,11 +197,9 @@ class Chat extends Component {
                 wrapperStyle={{
                     left: {
                         backgroundColor: Colors.lightGray,
-                        fontFamily: 'Lucida-Grande',
                     },
                     right: {
                         backgroundColor: Colors.primary,
-                        fontFamily: 'Lucida-Grande',
                     }
                 }}
             />
@@ -294,7 +284,7 @@ class Chat extends Component {
     }
     get user() {
         const fullNames = this.state.Customer;
-        const firstWord = fullNames.replace(/ .*/, '');
+        const firstWord = fullNames.substring(0, 2);;
 
         console.log(firstWord);
         return {

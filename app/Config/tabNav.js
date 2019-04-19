@@ -11,7 +11,7 @@ import Chats from '../Screens/UserApp/Chatlist'
 import BureauChats from '../Screens/BureauApp/Chatlist'
 import more from '../Assets/Icons/more.png'
 import OptionsMenu from "react-native-options-menu";
-import { userPhone } from './constants';
+import { userPhone, cName } from './constants';
 import * as firebase from 'firebase'
 const screenWidth = Dimensions.get('window').width
 export default class TabNavigationScreen extends React.Component {
@@ -31,10 +31,11 @@ export default class TabNavigationScreen extends React.Component {
     if (retrieveduserPhone) {
       try {
         await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
-          .then(snapshot => {
+          .then(async (snapshot) => {
             const { completed } = snapshot.val()
+            const forexName = snapshot.val().companyName
             if (completed) {
-
+              await AsyncStorage.setItem(cName, forexName)
               this.props.navigation.navigate('AddCurrency')
             } else {
 

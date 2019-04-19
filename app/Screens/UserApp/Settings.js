@@ -7,7 +7,7 @@ import { Colors } from '../../Assets/Themes'
 import Toast from 'react-native-easy-toast'
 import * as firebase from 'firebase'
 import { Icon, WebBrowser } from 'expo';
-import { userPhone } from '../../Config/constants';
+import { userPhone, cName } from '../../Config/constants';
 const colors = [
     '#7FB3D5', '#227093', '#B53471', '#5758BB', '#EB9CA8',
     '#8A004F', '#48dbfb', '#1dd1a1', '#00a3e1', '#9980FA'
@@ -69,9 +69,11 @@ export default class Settings extends Component {
         if (retrieveduserPhone) {
             try {
                 await firebase.database().ref(`infos/${retrieveduserPhone}/publicInfo`).once("value")
-                    .then(snapshot => {
+                    .then(async (snapshot) => {
                         const { completed } = snapshot.val()
+                        const forexName = snapshot.val().companyName
                         if (completed) {
+                            await AsyncStorage.setItem(cName, forexName)
                             this.setState({
                                 signedIn: true,
                                 checkedSignIn: true,
