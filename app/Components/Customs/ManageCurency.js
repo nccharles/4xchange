@@ -3,7 +3,7 @@ import {
     View,
     FlatList,
     ActivityIndicator,
-    AsyncStorage,
+    AsyncStorage, StyleSheet, Image
 } from 'react-native';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import Moment from 'moment'
@@ -13,7 +13,7 @@ import ModalComponent from '../AddCurrencyModal/modal'
 import Card from '../Card/BureauCard/Card'
 import DialogComponent from '../Dialog/Dialog'
 import styles from '../../Screens/BureauApp/Style/AddCurrencyStyle'
-
+import emptydata from '../../Assets/Icons/empty.png'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
@@ -318,21 +318,37 @@ class ManageCurrency extends Component {
                 {isLoading ?
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <ActivityIndicator size="large" color={Colors.primary} />
-                    </View> :
-                    <FlatList
-                        data={this.state.data}
-                        renderItem={({ item }) => (
-                            <Card
-                                onPress={() => this.showUpdateDialog(item)}
-                                onPressDel={() => this.showDeleteDialog(item)}
-                                text={item.currency + '   '}
-                                askPrice={item.askPrice + '   '}
-                                bidPrice={item.bidPrice + '   '}
-                                time={Moment(item.updatedAt).fromNow() + '   '} />
-                        )}
-                        keyExtractor={this.keyExtractor}
-                        initialNumToRender={this.oneScreensWorth}
-                    />}
+                    </View> : this.state.data.length === 0 ?
+                        <View style={[
+                            StyleSheet.absoluteFill,
+                            {
+                                backgroundColor: 'white',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                bottom: 50
+                            }]}>
+                            <Image
+                                source={emptydata}
+                                style={{
+                                    ...StyleSheet.absoluteFillObject,
+                                    resizeMode: 'contain'
+                                }}
+                            />
+                        </View>
+                        : < FlatList
+                            data={this.state.data}
+                            renderItem={({ item }) => (
+                                <Card
+                                    onPress={() => this.showUpdateDialog(item)}
+                                    onPressDel={() => this.showDeleteDialog(item)}
+                                    text={item.currency + '   '}
+                                    askPrice={item.askPrice + '   '}
+                                    bidPrice={item.bidPrice + '   '}
+                                    time={Moment(item.updatedAt).fromNow() + '   '} />
+                            )}
+                            keyExtractor={this.keyExtractor}
+                            initialNumToRender={this.oneScreensWorth}
+                        />}
                 <ModalComponent
                     visible={this.state.AddModal}
                     onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
