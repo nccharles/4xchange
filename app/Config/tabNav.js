@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image, View, Dimensions, StyleSheet, TouchableOpacity, Text, AsyncStorage } from 'react-native'
-import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view'
+import { Image, View, Dimensions, StyleSheet, TouchableOpacity, NetInfo, Text, AsyncStorage } from 'react-native'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 import { Colors } from '../Assets/Themes'
 import MapView from '../Screens/UserApp/Map'
 import International from '../Screens/UserApp/International'
@@ -27,6 +27,7 @@ export default class TabNavigationScreen extends React.Component {
     // console.log('Settings')
   }
   _handleForex = async () => {
+    this.NetworkStatus()
     const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
     if (retrieveduserPhone) {
       try {
@@ -35,13 +36,17 @@ export default class TabNavigationScreen extends React.Component {
             const { completed } = snapshot.val()
             const forexName = snapshot.val().companyName
             if (completed) {
-              await AsyncStorage.setItem(cName, forexName)
-              this.props.navigation.navigate('AddCurrency')
+              await AsyncStorage.setItem(cName, forexName).then(
+                () => this.props.navigation.navigate('AddCurrency')
+              )
+
+
             } else {
 
               this.props.navigation.navigate('InfoRegis')
             }
           }).catch(error => {
+            this.refs.toast.show(error.message)
             this.props.navigation.navigate('InfoRegis')
           })
       } catch (error) {
@@ -57,7 +62,22 @@ export default class TabNavigationScreen extends React.Component {
     this.setState({
       userPhone: retrieveduserPhone
     })
-
+    this.NetworkStatus()
+  }
+  NetworkStatus = () => {
+    NetInfo.isConnected.fetch().then(isConnected => {
+      !isConnected && this.refs.toast.show('No Internet')
+    });
+    function handleFirstConnectivityChange(isConnected) {
+      NetInfo.isConnected.removeEventListener(
+        'connectionChange',
+        handleFirstConnectivityChange
+      );
+    }
+    NetInfo.isConnected.addEventListener(
+      'connectionChange',
+      handleFirstConnectivityChange
+    );
   }
   render() {
     return <View style={{ flex: 1 }}>
@@ -91,9 +111,9 @@ export default class TabNavigationScreen extends React.Component {
       <Toast ref="toast"
         style={{ backgroundColor: Colors.primary }}
         position='bottom'
-        positionValue={200}
+        positionValue={120}
         fadeInDuration={750}
-        fadeOutDuration={1000}
+        fadeOutDuration={1500}
         opacity={0.8}
         textStyle={{ color: '#fff' }} />
     </View>;

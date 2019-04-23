@@ -64,9 +64,10 @@ export default StyleSheet.create({
         fontFamily: 'Lucida-Grande-Bold',
     },
     forexOptions: {
-        fontSize: 15,
-        width: screenWidth / 14,
-        height: screenWidth / 14,
+        fontSize: 12,
+        resizeMode: "contain",
+        width: screenWidth / 18,
+        height: screenWidth / 18,
     },
     StatusText: {
         color: 'white',

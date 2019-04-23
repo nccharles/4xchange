@@ -5,7 +5,7 @@ import { LinearGradient, Icon } from "expo";
 import styles from './styles'
 import { Colors } from '../../Assets/Themes';
 
-class ChatButton extends Component {
+class EditButton extends Component {
 
     componentName = "GradientButton";
     typeMapping = {
@@ -26,8 +26,8 @@ class ChatButton extends Component {
                 style={styles.chatbutton}
             ><TouchableOpacity
                 onPress={onPress}>
-                    <Icon.MaterialIcons
-                        name="chat"
+                    <Icon.MaterialCommunityIcons
+                        name="account-edit"
                         size={30}
                         color="white" />
 
@@ -36,9 +36,9 @@ class ChatButton extends Component {
         )
     }
 }
-ChatButton.propTypes = {
+EditButton.propTypes = {
     onPress: PropTypes.func,
     value: PropTypes.number,
     status: PropTypes.string
 }
-export default ChatButton
+export default EditButton

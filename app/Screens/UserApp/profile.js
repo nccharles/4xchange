@@ -11,6 +11,8 @@ import * as firebase from 'firebase'
 import _ from 'lodash'
 import { userPhone } from '../../Config/constants';
 import { Icon } from 'expo';
+import editButton from '../../Components/Buttons/BtnEdit';
+import EditButton from '../../Components/Buttons/BtnEdit';
 export default class Details extends Component {
 
     constructor(props) {
@@ -130,7 +132,7 @@ export default class Details extends Component {
                         </View>
                     </View>
                 </ScrollView>
-
+                <EditButton onPress={() => this.props.navigation.navigate('Info')} />
                 <Toast ref="toast"
                     style={{ backgroundColor: Colors.primary }}
                     position='bottom'

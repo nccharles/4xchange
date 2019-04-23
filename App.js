@@ -51,6 +51,9 @@ export default class App extends React.Component {
             Font.loadAsync({
                 // This is the font that we are using for our tab bar
                 ...Icon.Ionicons.font,
+                ...Icon.Entypo.font,
+                ...Icon.MaterialIcons.font,
+                ...Icon.MaterialCommunityIcons.font,
                 'Lucida-Grande': require('./app/Assets/fonts/LucidaGrande.ttf'),
                 'Lucida-Grande-Bold': require('./app/Assets/fonts/LucidaGrandeBold.ttf'),
             }),

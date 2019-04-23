@@ -108,15 +108,6 @@ class Local extends Component {
   // back-end code
   async componentDidMount() {
     this.NetworkStatus()
-    const status = this.state.ConnectionStatus
-    if (status === 'offline') {
-      const loadLocaldata = await AsyncStorage.getItem(LocalData)
-      this.setState({
-        data: loadLocaldata,
-        loading: false,
-      })
-    }
-
     const base = this.state.baseCurrency
     this._fetchCurrencies(base)
     this.props.navigation.setParams({
@@ -125,11 +116,16 @@ class Local extends Component {
     console.log(this.state.data)
   }
   NetworkStatus = () => {
-    NetInfo.isConnected.fetch().then(isConnected => {
+    NetInfo.isConnected.fetch().then(async (isConnected) => {
+      console.log(isConnected)
       console.log('First, is ' + (isConnected ? 'online' : 'offline'));
-      this.setState({
-        ConnectionStatus: isConnected
-      })
+      if (!isConnected) {
+        const loadLocaldata = await AsyncStorage.getItem(LocalData)
+        this.setState({
+          data: loadLocaldata,
+          loading: false,
+        })
+      }
     });
     function handleFirstConnectivityChange(isConnected) {
       console.log('Then, is ' + (isConnected ? 'online' : 'offline'));
