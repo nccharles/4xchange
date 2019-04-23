@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    ScrollView, Share, View, Platform, Text, AsyncStorage, TouchableOpacity, ActivityIndicator
+    ScrollView, Share, NetInfo, View, Platform, Text, AsyncStorage, TouchableOpacity, ActivityIndicator
 } from 'react-native';
 import styles from './Style/DetailStyle'
 import { Colors } from '../../Assets/Themes'
@@ -44,6 +44,21 @@ export default class Settings extends Component {
             loading: false
         })
     }
+    NetworkStatus = () => {
+        NetInfo.isConnected.fetch().then(isConnected => {
+            !isConnected && this.refs.toast.show('No Internet')
+        });
+        function handleFirstConnectivityChange(isConnected) {
+            NetInfo.isConnected.removeEventListener(
+                'connectionChange',
+                handleFirstConnectivityChange
+            );
+        }
+        NetInfo.isConnected.addEventListener(
+            'connectionChange',
+            handleFirstConnectivityChange
+        );
+    }
     onShare = async () => {
         try {
             const result = await Share.share({
@@ -65,6 +80,7 @@ export default class Settings extends Component {
         }
     };
     _handleForex = async () => {
+        this.NetworkStatus()
         const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
         if (retrieveduserPhone) {
             try {

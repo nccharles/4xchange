@@ -45,6 +45,7 @@ export default class App extends React.Component {
                 require('./app/Assets/MapImage/dollar-spot.png'),
                 require('./app/Assets/Icons/gps.png'),
                 require('./app/Assets/Icons/get-directions-button.png'),
+                require('./app/Assets/Icons/empty.png'),
                 require('./app/Assets/Logo/icon.png'),
                 require('./app/Assets/Logo/title.png'),
             ]),

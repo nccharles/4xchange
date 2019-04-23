@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View, Dimensions, StyleSheet, TouchableOpacity, NetInfo, Text, AsyncStorage } from 'react-native'
+import { View, Dimensions, StyleSheet, TouchableOpacity, NetInfo, Text, AsyncStorage } from 'react-native'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import { Colors } from '../Assets/Themes'
 import MapView from '../Screens/UserApp/Map'

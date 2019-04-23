@@ -121,10 +121,12 @@ class Local extends Component {
       console.log('First, is ' + (isConnected ? 'online' : 'offline'));
       if (!isConnected) {
         const loadLocaldata = await AsyncStorage.getItem(LocalData)
-        this.setState({
-          data: loadLocaldata,
-          loading: false,
-        })
+        if (loadLocaldata !== null) {
+          this.setState({
+            data: JSON.parse(loadLocaldata),
+            loading: false,
+          })
+        }
       }
     });
     function handleFirstConnectivityChange(isConnected) {
