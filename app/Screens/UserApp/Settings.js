@@ -143,7 +143,7 @@ export default class Settings extends Component {
                     <TouchableOpacity onPress={this._handleForex.bind(this)} style={styles.itemContainer}>
                         <Icon.MaterialCommunityIcons name={Platform.OS === 'ios' ? 'account-switch' : 'account-switch'} color={Colors.primary} size={23} />
                         <View style={styles.infocontent}>
-                            <Text style={styles.infoTitle}>Manage Forex  </Text>
+                            <Text style={styles.infoTitle}>Manage Forex Bureau</Text>
                             <Text style={styles.info}>Manage your forex,add currencies</Text>
                         </View>
                     </TouchableOpacity>
