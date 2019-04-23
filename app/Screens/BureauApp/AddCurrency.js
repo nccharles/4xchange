@@ -67,6 +67,7 @@ class AddCurrency extends Component {
           initialPage={0}
           tabBarBackgroundColor={Colors.primary}
           tabBarActiveTextColor="#fff"
+          tabBarTextStyle={{ fontFamily: 'Lucida-Grande-Bold', fontSize: 15 }}
           tabBarUnderlineStyle={{ backgroundColor: '#fff' }}
           tabBarInactiveTextColor={Colors.lightGray}
         >

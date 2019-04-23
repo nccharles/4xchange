@@ -6,7 +6,7 @@ import Moment from 'moment'
 //backend firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { MaterialIcons } from '@expo/vector-icons'
+import { Icon } from 'expo'
 import { GiftedChat, Send, Actions, Bubble, SystemMessage } from 'react-native-gifted-chat';
 import { chatName, chatNum } from '../../Config/constants';
 import ChatsHeader from '../../Components/Header/ChatsHeader';
@@ -109,7 +109,7 @@ class Chat extends Component {
             >
 
                 <View style={{ marginRight: 10, marginBottom: 5 }}>
-                    <MaterialIcons
+                    <Icon.MaterialIcons
                         name="send"
                         size={30}
                         color={Colors.primary} />
@@ -365,12 +365,5 @@ class Chat extends Component {
         );
     }
 }
-const styles = StyleSheet.create({
-    mapView: {
-        width: 150,
-        height: 100,
-        borderRadius: 13,
-        margin: 3,
-    },
-});
+
 export default Chat;

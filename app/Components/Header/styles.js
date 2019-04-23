@@ -38,7 +38,6 @@ export default StyleSheet.create({
     ChatStatus: {
         flexDirection: 'column',
         color: 'white',
-        fontSize: 25,
         marginLeft: 15,
         top: -2,
         fontFamily: 'Lucida-Grande-Bold',

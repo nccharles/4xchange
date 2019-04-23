@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
   // Button text
   text: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande',
   },
 });

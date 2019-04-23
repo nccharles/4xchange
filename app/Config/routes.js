@@ -183,12 +183,7 @@ export default (PrimaryNav = (initialRouter = "WelcomeStack") => {
       InfoRegis: {
         screen: InfoRegis
       },
-      Details: {
-        screen: Details,
-        navigationOptions: {
-          header: () => null
-        }
-      },
+
     },
     {
       initialRouteName: `${initialRouter}`,

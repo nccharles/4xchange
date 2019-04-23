@@ -21,7 +21,7 @@ import {
 } from 'react-native-elements'
 import {
     Location,
-    Permissions
+    Permissions, LinearGradient
 } from 'expo';
 import styles from './Style/Infostyles'
 import open from '../../Assets/Icons/open-sign.png'
@@ -33,16 +33,15 @@ import _ from 'lodash'
 import { userPhone } from '../../Config/constants';
 class Info extends Component {
     static navigationOptions = ({ navigation }) => {
-        let Title = 'Update   '
+        let Title = 'Update'
         return {
-            headerTitle: Title + '   ',
+            headerTitle: Title,
             headerStyle: {
                 backgroundColor: Colors.primary,
             },
 
             headerTintColor: '#fff',
             headerTitleStyle: {
-                fontWeight: 'bold',
                 fontFamily: 'Lucida-Grande-Bold',
             },
         }
@@ -301,12 +300,18 @@ class Info extends Component {
                                 <Picker.Item label="Whole week" value="Whole week" />
                             </Picker>
                         }
-                        <Button
-                            onPress={this._handleInfoSave.bind(this)}
-                            title='Update Info'
-                            icon={{ type: 'feather', name: 'refresh-ccw', color: '#fff' }}
-                            buttonStyle={styles.button}
-                        />
+                        <LinearGradient
+                            colors={Colors.gradientColors}
+                            start={{ x: 1.0, y: 0.5 }}
+                            end={{ x: 0, y: 0.5 }}
+                            style={styles.button}
+                        >
+                            <Button
+                                onPress={this._handleInfoSave.bind(this)}
+                                title='Update Info'
+                                icon={{ type: 'feather', name: 'refresh-ccw', color: '#fff' }}
+                            />
+                        </LinearGradient>
                     </ScrollView>
                     <Toast ref="toast"
                         style={{ backgroundColor: Colors.primary }}

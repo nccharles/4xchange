@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     paddingHorizontal: 5
   },
   chatbutton: {

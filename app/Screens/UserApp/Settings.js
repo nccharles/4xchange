@@ -26,9 +26,9 @@ export default class Settings extends Component {
         }
     }
     static navigationOptions = ({ navigation }) => {
-        let Title = 'Settings   '
+        let Title = 'Settings'
         return {
-            headerTitle: Title + '   ',
+            headerTitle: Title,
             headerStyle: {
                 backgroundColor: Colors.primary,
             },
@@ -141,9 +141,9 @@ export default class Settings extends Component {
                 <ScrollView style={styles.card}>
 
                     <TouchableOpacity onPress={this._handleForex.bind(this)} style={styles.itemContainer}>
-                        <Icon.Ionicons name={Platform.OS === 'ios' ? 'ios-switch' : 'md-switch'} color={Colors.primary} size={23} />
+                        <Icon.MaterialCommunityIcons name={Platform.OS === 'ios' ? 'account-switch' : 'account-switch'} color={Colors.primary} size={23} />
                         <View style={styles.infocontent}>
-                            <Text style={styles.infoTitle}>Switch  </Text>
+                            <Text style={styles.infoTitle}>Manage Forex  </Text>
                             <Text style={styles.info}>Manage your forex,add currencies</Text>
                         </View>
                     </TouchableOpacity>

@@ -39,16 +39,16 @@ class Chatlist extends Component {
     };
 
     static navigationOptions = () => {
-        let Title = 'Chats   '
+        let Title = 'Chats'
         return {
-            headerTitle: Title + '   ',
+            headerTitle: Title,
             headerStyle: {
                 backgroundColor: Colors.primary,
             },
 
             headerTintColor: '#fff',
             headerTitleStyle: {
-                fontWeight: 'bold',
+                fontFamily: 'Lucida-Grande-Bold',
             },
         }
     };
@@ -176,7 +176,7 @@ class Chatlist extends Component {
                         renderItem={({ item }) => (
                             <Card
                                 title={item.user.name}
-                                subtitle={item.text}
+                                subtitle={item.text.length >= 20 ? item.text.substring(0, 20) + '...' : item.text}
                                 hideAvatar={false}
                                 roundAvatar={true}
                                 avatar={item.user.name.substring(0, 1).toUpperCase()}

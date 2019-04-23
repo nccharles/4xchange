@@ -100,13 +100,14 @@ export default class TabNavigationScreen extends React.Component {
         initialPage={0}
         tabBarBackgroundColor={Colors.primary}
         tabBarActiveTextColor="#fff"
+        tabBarTextStyle={styles.tabBar}
         tabBarUnderlineStyle={{ backgroundColor: '#fff' }}
         tabBarInactiveTextColor={Colors.lightGray}
       >
-        <Local tabLabel='LOCAL' {...this.props} />
-        <MapView tabLabel='LOCATE' {...this.props} />
-        <International tabLabel='GLOBAL' {...this.props} />
-        {this.state.userPhone ? <BureauChats tabLabel='CHATS' {...this.props} /> : <Chats tabLabel='CHATS' {...this.props} />}
+        <Local tabLabel='Local' {...this.props} />
+        <MapView tabLabel='Locate' {...this.props} />
+        <International tabLabel='Global' {...this.props} />
+        {this.state.userPhone ? <BureauChats tabLabel='Chats' {...this.props} /> : <Chats tabLabel='Chats' {...this.props} />}
       </ScrollableTabView>
       <Toast ref="toast"
         style={{ backgroundColor: Colors.primary }}
@@ -142,6 +143,10 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  tabBar: {
+    fontFamily: 'Lucida-Grande-Bold',
+    fontSize: 15
   },
   topBit: {
     flexDirection: 'row',
