@@ -64,6 +64,12 @@ export default class TabNavigationScreen extends React.Component {
     })
     this.NetworkStatus()
   }
+  checkUser = async () => {
+    const retrieveduserPhone = await AsyncStorage.getItem(userPhone);
+    this.setState({
+      userPhone: retrieveduserPhone
+    })
+  }
   NetworkStatus = () => {
     NetInfo.isConnected.fetch().then(isConnected => {
       !isConnected && this.refs.toast.show('No Internet')
@@ -100,6 +106,7 @@ export default class TabNavigationScreen extends React.Component {
         initialPage={0}
         tabBarBackgroundColor={Colors.primary}
         tabBarActiveTextColor="#fff"
+        onChangeTab={this.checkUser}
         tabBarTextStyle={styles.tabBar}
         tabBarUnderlineStyle={{ backgroundColor: '#fff' }}
         tabBarInactiveTextColor={Colors.lightGray}

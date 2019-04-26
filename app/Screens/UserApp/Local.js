@@ -113,17 +113,16 @@ class Local extends Component {
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
     });
-    console.log(this.state.data)
   }
   NetworkStatus = () => {
     NetInfo.isConnected.fetch().then(async (isConnected) => {
-      console.log(isConnected)
       console.log('First, is ' + (isConnected ? 'online' : 'offline'));
       if (!isConnected) {
         const loadLocaldata = await AsyncStorage.getItem(LocalData)
+        console.log(JSON.parse(loadLocaldata))
         if (loadLocaldata !== null) {
           this.setState({
-            data: JSON.parse(loadLocaldata),
+            data: loadLocaldata,
             loading: false,
           })
         }
@@ -476,4 +475,3 @@ Local.propType = {
 
 
 export default Local
-// export default Listcreen

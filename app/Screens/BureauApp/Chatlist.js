@@ -114,21 +114,22 @@ class Chatlist extends Component {
 
                                 })
 
-
+                                this.setState(() => ({
+                                    data: listData
+                                }))
                             }
 
                         })
-                    setTimeout(() => {
-                        this.setState(() => ({
-                            data: listData,
-                            loading: false,
-                        }))
-                    }, 2000)
+
                 })
 
             }
             )
-
+        setTimeout(() => {
+            this.setState(() => ({
+                loading: false,
+            }))
+        }, 2000)
 
     }
 
@@ -176,7 +177,7 @@ class Chatlist extends Component {
                         renderItem={({ item }) => (
                             <Card
                                 title={item.user.name}
-                                subtitle={item.text.length >= 20 ? item.text.substring(0, 20) + '...' : item.text}
+                                subtitle={item.text === undefined ? 'location' : (item.text.length >= 20 ? item.text.substring(0, 20) + '...' : item.text)}
                                 hideAvatar={false}
                                 roundAvatar={true}
                                 avatar={item.user.name.substring(0, 1).toUpperCase()}
