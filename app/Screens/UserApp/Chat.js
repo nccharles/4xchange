@@ -283,13 +283,9 @@ class Chat extends Component {
             })
     }
     get user() {
-        const fullNames = this.state.Customer;
-        const firstWord = fullNames.substring(0, 2);;
-
-        console.log(firstWord);
         return {
             name: this.state.Customer,
-            _id: firstWord + this.state.customerPhone,
+            _id: this.state.customerPhone,
             timestamp: this.timestamp
         };
     }

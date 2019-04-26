@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import Dialog from "react-native-dialog";
 import styles from './styles'
 class DialogNameComponent extends Component {
@@ -22,24 +22,24 @@ class DialogNameComponent extends Component {
         return (
             <View>
                 <Dialog.Container visible={visible}>
-                    <Dialog.Title>{title}   </Dialog.Title>
-                    <Dialog.Description>
+                    <Dialog.Title style={styles.title}>{title}   </Dialog.Title>
+                    <Dialog.Description style={styles.details}>
                         {description}
                     </Dialog.Description>
                     <Dialog.Input
                         style={styles.input}
-                        placeholder="Enter Your name"
+                        placeholder="Enter name"
                         autoCapitalize={'none'}
                         returnKeyType={'done'}
                         autoCorrect={false}
-                        autoFocus={true}
+                        autoFocus={Platform.OS === 'ios' ? true : false}
                         placeholderTextColor='#99A3A4'
                         underlineColorAndroid='transparent'
                         onChangeText={onChangeTextName}
                         value={valueName}
                     />
-                    <Dialog.Button label="Cancel   " onPress={onPressCancel} />
-                    <Dialog.Button label={label2} onPress={onPress} />
+                    <Dialog.Button style={styles.button} label="Cancel   " onPress={onPressCancel} />
+                    <Dialog.Button style={styles.button} label={label2} onPress={onPress} />
                 </Dialog.Container>
             </View>
         );

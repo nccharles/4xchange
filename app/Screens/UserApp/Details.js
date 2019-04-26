@@ -220,13 +220,13 @@ export default class Details extends Component {
         <ChatBtn onPress={this.handleCustomer} />
         <NameDialogComponent
           visible={this.state.InputDialogVisible}
-          title="Your Name  "
-          description="Add your name that will show in chat"
+          title="Enter name"
+          description="Please enter your name"
           onChangeTextName={(value) => this._handleChatNameInput(value)}
           valueName={this.state.chatname}
           onPress={this.handleChat}
           onPressCancel={() => this.setState({ InputDialogVisible: false })}
-          label2="Continue   "
+          label2="Continue"
         />
         <Toast ref="toast"
           style={{ backgroundColor: Colors.primary }}
