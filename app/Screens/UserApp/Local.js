@@ -119,10 +119,10 @@ class Local extends Component {
       console.log('First, is ' + (isConnected ? 'online' : 'offline'));
       if (!isConnected) {
         const loadLocaldata = await AsyncStorage.getItem(LocalData)
-        console.log(JSON.parse(loadLocaldata))
+        console.log(loadLocaldata)
         if (loadLocaldata !== null) {
           this.setState({
-            data: loadLocaldata,
+            data: JSON.parse(loadLocaldata),
             loading: false,
           })
         }
@@ -320,18 +320,20 @@ class Local extends Component {
     await firebase.database().ref(`/currencies`)
       .orderByChild('currency')
       .equalTo(base)
-      .on('value', snapshot => {
+      .on('value', async snapshot => {
         const usersData = _.map(snapshot.val(), (val, uid) => {
           return { ...val, uid }
-        })
-        that.setState({
-          data: usersData,
-          loading: false,
-        })
 
+        })
+        if (usersData !== null) {
+          await AsyncStorage.setItem(LocalData, JSON.stringify(usersData))
+          that.setState({
+            data: usersData,
+            loading: false,
+          })
+        }
       })
     this.changeBtnBuy()
-    await AsyncStorage.setItem(LocalData, JSON.stringify(this.state.data))
   }
   setBaseCurrency = async (currency) => {
     const { baseCurrency } = currency
