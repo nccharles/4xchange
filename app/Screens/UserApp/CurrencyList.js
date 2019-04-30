@@ -19,8 +19,7 @@ class CurrencyList extends Component {
     const { params } = navigation.state
     return {
       // headerTitle: 'ForExchange',
-      headerTitle: params.handleThis ? params.animation : '4xChange   ',
-      headerLeft: null,
+      headerTitle: params.handleThis ? params.animation : 'Currencies',
       headerRight: (
         <SearchHeader
           onPress={() => params.handleThis()}
@@ -32,7 +31,7 @@ class CurrencyList extends Component {
 
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
       },
     }
   };
@@ -72,9 +71,9 @@ class CurrencyList extends Component {
       <SearchBar
         ref={(ref) => this.searchBar = ref}
         data={this.state.data}
-        backgroundColor={Colors.primary}
+        backgroundColor="transparent"
         textColor='white'
-        iconColor='white'
+        iconColor={Colors.primary}
         hideX={true}
         handleChangeText={(text) => this.handleSearch(text)}
         showOnLoad
