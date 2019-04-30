@@ -13,6 +13,8 @@ import {
     AsyncStorage,
     TimePickerAndroid
 } from 'react-native'
+import moment from 'moment'
+import DateTimePicker from "react-native-modal-datetime-picker";
 import Toast, { DURATION } from 'react-native-easy-toast'
 import {
     Input,
@@ -50,6 +52,8 @@ class Info extends Component {
         super(props);
         this.state = {
             // showAlert: false,
+            isOpenTimePickerVisible: false,
+            isCloseTimePickerVisible: false,
             info: {
                 address: null,
                 openAt: null,
@@ -130,7 +134,27 @@ class Info extends Component {
             }
         }));
     }
-
+    showOpenTimePicker = () => this.setState({ isOpenTimePickerVisible: true });
+    showCloseTimePicker = () => this.setState({ isCloseTimePickerVisible: true });
+    hideTimePicker = () => this.setState({ isOpenTimePickerVisible: false, isCloseTimePickerVisible: false });
+    handleOpenTimePicked = time => {
+        this.setState(state => ({
+            info: {
+                ...state.info,
+                openAt: moment(time).format("HH:mm")
+            },
+            isTimePickerVisible: false
+        }));
+    };
+    handleCloseTimePicked = time => {
+        this.setState(state => ({
+            info: {
+                ...state.info,
+                closeAt: moment(time).format("HH:mm")
+            },
+            isTimePickerVisible: false
+        }));
+    };
     _handleInfoSave = async () => {
         const { info: { address, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, infoId, isSubmitting } = this.state
         if (isSubmitting) {
@@ -168,26 +192,7 @@ class Info extends Component {
                 })
             })
     }
-    _timePicker = async (key) => {
-        const pick = Platform.OS === 'ios' ? DatePickerIOS : TimePickerAndroid
-        try {
-            const { action, hour, minute } = await pick.open({
-                hour: 12,
-                minute: 0,
-                is24Hour: true, // Will display '2 PM'
-            });
-            if (action !== pick.dismissedAction) {
-                this.setState(state => ({
-                    info: {
-                        ...state.info,
-                        [key]: `${hour}: ${minute}`
-                    }
-                }))
-            }
-        } catch ({ code, message }) {
-            console.log('Cannot open time picker', message);
-        }
-    }
+
     render() {
         // const { showAlert } = this.state;
         const { address, email, openAt, closeAt, companyName, workingDays } = this.state.info
@@ -239,7 +244,7 @@ class Info extends Component {
                             onChangeText={value => this._handleTextInput('address', value)}
                             value={address}
                         />
-                        <TouchableOpacity onPress={() => this._timePicker('openAt')}>
+                        <TouchableOpacity onPress={this.showOpenTimePicker}>
                             <Input
                                 placeholder='Open at'
                                 leftIcon={<Image source={open} style={{ width: 30, height: 30, tintColor: Colors.primaryDark }} />}
@@ -253,7 +258,19 @@ class Info extends Component {
                                 value={openAt}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this._timePicker('closeAt')}>
+                        <DateTimePicker
+                            isVisible={this.state.isOpenTimePickerVisible}
+                            onConfirm={this.handleOpenTimePicked}
+                            onCancel={this.hideTimePicker}
+                            mode="time"
+                        />
+                        <DateTimePicker
+                            isVisible={this.state.isCloseTimePickerVisible}
+                            onConfirm={this.handleCloseTimePicked}
+                            onCancel={this.hideTimePicker}
+                            mode="time"
+                        />
+                        <TouchableOpacity onPress={this.showCloseTimePicker}>
                             <Input
                                 placeholder='Closed at'
                                 leftIcon={<Image source={close} style={{ width: 30, height: 30, tintColor: Colors.primaryDark }} />}
@@ -277,29 +294,16 @@ class Info extends Component {
                                 Working days
                             </Text>
                         </View>
-                        {(Platform.OS === 'ios') ?
-                            <PickerIOS
-                                mode="dropdown"
-                                selectedValue={workingDays}
-                                style={styles.picker}
-                                onValueChange={(itemValue, itemIndex) => this._handleTextInput('workingDays', itemValue)}>
-                                <PickerIOS.Item label="Monday to Friday" value="Monday to Friday" />
-                                <PickerIOS.Item label="Sunday to Firday" value="Sunday to Friday" />
-                                <PickerIOS.Item label="Monday to Saturday" value="Monday to Saturday" />
-                                <PickerIOS.Item label="Whole week" value="Whole week" />
-                            </PickerIOS>
-                            :
-                            <Picker
-                                mode="dropdown"
-                                selectedValue={workingDays}
-                                style={styles.picker}
-                                onValueChange={(itemValue, itemIndex) => this._handleTextInput('workingDays', itemValue)}>
-                                <Picker.Item label="Monday to Friday" value="Monday to Friday" />
-                                <Picker.Item label="Sunday to Firday" value="Sunday to Friday" />
-                                <Picker.Item label="Monday to Saturday" value="Monday to Saturday" />
-                                <Picker.Item label="Whole week" value="Whole week" />
-                            </Picker>
-                        }
+                        <Picker
+                            mode="dropdown"
+                            selectedValue={workingDays}
+                            style={styles.picker}
+                            onValueChange={(itemValue, itemIndex) => this._handleTextInput('workingDays', itemValue)}>
+                            <Picker.Item label="Monday to Friday" value="Monday to Friday" />
+                            <Picker.Item label="Sunday to Firday" value="Sunday to Friday" />
+                            <Picker.Item label="Monday to Saturday" value="Monday to Saturday" />
+                            <Picker.Item label="Whole week" value="Whole week" />
+                        </Picker>
                         <LinearGradient
                             colors={Colors.gradientColors}
                             start={{ x: 1.0, y: 0.5 }}

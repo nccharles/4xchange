@@ -4,16 +4,14 @@ import {
   View, AsyncStorage,
   FlatList, ActivityIndicator, Alert, NetInfo
 } from 'react-native';
-import Toast, { DURATION } from 'react-native-easy-toast'
+import Toast from 'react-native-easy-toast'
 import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
-import logout from '../../Assets/Icons/logout.png'
 import styles from './Style/ListStyle'
 
 import CategoryBtn from '../../Components/Buttons/BtnCategory'
 import Card from '../../Components/Card/Card'
 import InputButton from '../../Components/InputButton/InputButton'
-import HeaderBtn from '../../Components/Buttons/HeaderBtn'
 import { userChoice, LocalData } from '../../Config/constants'
 //firebase things
 import * as firebase from 'firebase'

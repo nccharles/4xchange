@@ -10,11 +10,9 @@ export default StyleSheet.create({
     alignSelf: 'center',
     width: screenwidth - 5,
     height: screenheight / 7.5,
-    // elevation: 3,
     backgroundColor: Colors.snow,
     marginVertical: 10,
     borderRadius: 5,
-    // flexDirection: 'row'
   },
   left: {
     width: 20,
@@ -38,21 +36,23 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     top: 8,
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: Colors.primaryGray,
+    fontSize: 14,
+    fontFamily: 'Lucida-Grande-Bold',
+    color: Colors.primaryDark,
+
   },
   label: {
     fontWeight: '500',
-    color: 'gray',
+    color: Colors.primaryGray,
     fontSize: 14,
     position: 'absolute',
     left: 15,
-    top: 30
+    top: 30,
+    fontFamily: 'Lucida-Grande',
   },
   label2: {
     fontWeight: '500',
-    color: 'gray',
+    color: Colors.primaryGray,
     fontSize: 14,
     position: 'absolute',
     left: 15,
@@ -64,18 +64,18 @@ export default StyleSheet.create({
     left: 30
   },
   amount: {
-    fontSize: 16,
-    color: '#99A3A4',
-    fontWeight: 'bold'
+    fontSize: 14,
+    color: Colors.lightGray,
+    fontFamily: 'Lucida-Grande-Bold',
   },
   time: {
     fontSize: 12,
-    color: '#3498db',
+    color: Colors.secondary,
   },
   currencyName: {
-    fontSize: 16,
-    color: '#99A3A4',
-    fontWeight: 'bold',
+    fontSize: 14,
+    color: Colors.lightGray,
+    fontFamily: 'Lucida-Grande-Bold',
     marginLeft: 5
   },
   rightContainer: {
@@ -86,10 +86,10 @@ export default StyleSheet.create({
   rightCategory: {
     fontSize: 16,
     color: Colors.primaryDark,
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     position: 'absolute',
     right: 15,
-    top: 25
+    top: 10
   },
   flag_icon: {
     width: screenwidth / 12,
@@ -97,10 +97,6 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     position: 'absolute',
     right: 15
-    // alignSelf: 'center',
-    // justifyContent: 'center',
-    // marginTop: -2,
-    // marginLeft: screenwidth/ 2.5 
   },
   equivalentContainer: {
     position: 'absolute',
@@ -114,7 +110,8 @@ export default StyleSheet.create({
     bottom: 0,
     fontWeight: '500',
     color: Colors.secondary,
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: 'Lucida-Grande',
   },
   parent: {
     flex: 1,
@@ -123,7 +120,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     // elevation: 3,
-    backgroundColor: Colors.snow,
+    backgroundColor: Colors.background,
     alignSelf: 'center',
     alignItems: 'center',
     marginVertical: 5,
@@ -148,7 +145,7 @@ export default StyleSheet.create({
     height: screenwidth / 8,
     borderRadius: screenwidth / 8,
     marginLeft: 8,
-    backgroundColor: '#CED0CE',
+    backgroundColor: Colors.lightGray,
     justifyContent: 'center',
     alignSelf: 'center'
   },
@@ -176,12 +173,14 @@ export default StyleSheet.create({
   title: {
     fontWeight: '500',
     color: 'black',
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'Lucida-Grande',
   },
   subTitle: {
     fontWeight: '500',
     color: 'gray',
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: 'Lucida-Grande',
   },
   right: {
     height: '100%',
@@ -202,14 +201,14 @@ export default StyleSheet.create({
     flex: 1,
     height: 1,
     width: screenwidth - 5,
-    backgroundColor: "#CED0CE",
+    backgroundColor: Colors.lightGray,
     // margin: 8
   },
   Chatseparator: {
     flex: 1,
     height: 1,
     width: screenwidth - 10,
-    backgroundColor: "#CED0CE",
+    backgroundColor: Colors.lightGray,
     marginLeft: screenwidth / 5
   }
 

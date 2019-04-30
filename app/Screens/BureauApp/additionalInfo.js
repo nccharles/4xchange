@@ -10,9 +10,10 @@ import {
   Picker,
   TimePickerAndroid,
 } from "react-native";
-import { LinearGradient } from 'expo';
+import moment from 'moment'
+import DateTimePicker from "react-native-modal-datetime-picker";
 import Toast, { DURATION } from 'react-native-easy-toast'
-import { Location, Permissions } from "expo";
+import { Location, Permissions, LinearGradient } from "expo";
 import { Icon, Button, Input } from "react-native-elements";
 import styles from "./Style/SignupStyles";
 import { Colors } from "../../Assets/Themes";
@@ -26,6 +27,8 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isOpenTimePickerVisible: false,
+      isCloseTimePickerVisible: false,
       info: {
         phoneNumber: "",
         address: "",
@@ -178,24 +181,26 @@ class Signup extends Component {
   get timestamp() {
     return new Date().valueOf();
   }
-  _timePicker = async key => {
-    try {
-      const { action, hour, minute } = await TimePickerAndroid.open({
-        hour: 12,
-        minute: 0,
-        is24Hour: true // Will display '2 PM'
-      });
-      if (action !== TimePickerAndroid.dismissedAction) {
-        this.setState(state => ({
-          info: {
-            ...state.info,
-            [key]: `${hour}: ${minute}`
-          }
-        }));
-      }
-    } catch ({ code, message }) {
-      console.log(code, message);
-    }
+  showOpenTimePicker = () => this.setState({ isOpenTimePickerVisible: true });
+  showCloseTimePicker = () => this.setState({ isCloseTimePickerVisible: true });
+  hideTimePicker = () => this.setState({ isOpenTimePickerVisible: false, isCloseTimePickerVisible: false });
+  handleOpenTimePicked = time => {
+    this.setState(state => ({
+      info: {
+        ...state.info,
+        openAt: moment(time).format("HH:mm")
+      },
+      isTimePickerVisible: false
+    }));
+  };
+  handleCloseTimePicked = time => {
+    this.setState(state => ({
+      info: {
+        ...state.info,
+        closeAt: moment(time).format("HH:mm")
+      },
+      isTimePickerVisible: false
+    }));
   };
 
   render() {
@@ -228,17 +233,12 @@ class Signup extends Component {
               value={address}
               onChangeText={value => this._handleTextInput("address", value)}
             />
-            <TouchableOpacity onPress={() => this._timePicker("openAt")}>
+            <TouchableOpacity onPress={this.showOpenTimePicker}>
               <Input
-                placeholder="Open at"
-                leftIcon={
-                  <Image
-                    source={open}
-                    style={{ width: 30, height: 30, tintColor: Colors.primary }}
-                  />
-                }
+                placeholder='Open at'
+                leftIcon={<Image source={open} style={{ width: 30, height: 30, tintColor: Colors.primaryDark }} />}
                 containerStyle={styles.input}
-                underlineColorAndroid={"transparent"}
+                underlineColorAndroid={'transparent'}
                 inputStyle={styles.inputStyle}
                 returnKeyType={"next"}
                 editable={true}
@@ -247,17 +247,24 @@ class Signup extends Component {
                 value={openAt}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this._timePicker("closeAt")}>
+            <DateTimePicker
+              isVisible={this.state.isOpenTimePickerVisible}
+              onConfirm={this.handleOpenTimePicked}
+              onCancel={this.hideTimePicker}
+              mode="time"
+            />
+            <DateTimePicker
+              isVisible={this.state.isCloseTimePickerVisible}
+              onConfirm={this.handleCloseTimePicked}
+              onCancel={this.hideTimePicker}
+              mode="time"
+            />
+            <TouchableOpacity onPress={this.showCloseTimePicker}>
               <Input
-                placeholder="Closed at"
-                leftIcon={
-                  <Image
-                    source={close}
-                    style={{ width: 30, height: 30, tintColor: Colors.primary }}
-                  />
-                }
+                placeholder='Closed at'
+                leftIcon={<Image source={close} style={{ width: 30, height: 30, tintColor: Colors.primaryDark }} />}
                 containerStyle={styles.input}
-                underlineColorAndroid={"transparent"}
+                underlineColorAndroid={'transparent'}
                 inputStyle={styles.inputStyle}
                 returnKeyType={"next"}
                 editable={true}
