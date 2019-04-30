@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Text, TouchableOpacity } from 'react-native'
-import { Feather } from '@expo/vector-icons'
-import { LinearGradient } from "expo";
+import { LinearGradient, Icon } from "expo";
 import styles from './styles'
 import { Colors } from '../../Assets/Themes';
 
@@ -23,7 +22,7 @@ class AddButton extends Component {
             >
                 <TouchableOpacity
                     onPress={onPress}>
-                    <Feather
+                    <Icon.Feather
                         name="plus-circle"
                         size={20}
                         color="white" />

@@ -10,6 +10,7 @@ const colors = {
   lightGray: "#a4b0be",
   primaryGray: '#747d8c',
   darkGray: '#2f3542',
+  leftbubble: "#dfe4ea"
 }
 
 export default colors

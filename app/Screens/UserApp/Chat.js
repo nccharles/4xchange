@@ -196,7 +196,7 @@ class Chat extends Component {
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: Colors.lightGray,
+                        backgroundColor: Colors.leftbubble
                     },
                     right: {
                         backgroundColor: Colors.primary,
