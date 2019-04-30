@@ -45,10 +45,10 @@ class Signup extends Component {
       isSubmitting: false
     };
   }
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ }) => {
     let Title = 'Address'
     return {
-      headerTitle: Title + '   ',
+      headerTitle: Title,
       headerStyle: {
         backgroundColor: Colors.primary,
         elevation: 0
@@ -56,8 +56,7 @@ class Signup extends Component {
 
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontWeight: 'bold',
-        fontFamily: 'Lucida-Grande',
+        fontFamily: 'Lucida-Grande-Bold',
       },
     }
   };

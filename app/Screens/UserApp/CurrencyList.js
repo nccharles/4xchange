@@ -73,7 +73,8 @@ class CurrencyList extends Component {
         data={this.state.data}
         backgroundColor="transparent"
         textColor='white'
-        iconColor={Colors.primary}
+        fontFamily="Lucida-Grande"
+        iconColor="transparent"
         hideX={true}
         handleChangeText={(text) => this.handleSearch(text)}
         showOnLoad

@@ -50,6 +50,7 @@
     "lodash": "^4.17.11",
     "native-base": "^2.11.0",
     "prop-types": "^15.7.2",
+    "moment": "^2.24.0",
     "react": "16.8.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-awesome-alerts": "^1.2.0",
