@@ -40,29 +40,6 @@ const initailState = {
 
 class Local extends Component {
 
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state
-    let Title = '4xChange   '
-    return {
-      headerTitle: Title + '   ',
-      headerRight: (
-        <HeaderBtn
-          onPress={() => params.handleThis()}
-          source={logout} />
-      ),
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        fontSize: 20,
-        marginLeft: 15,
-      },
-    }
-  };
-
-
   constructor(props) {
     super(props);
     this.state = initailState
@@ -146,10 +123,14 @@ class Local extends Component {
       .ref(`/infos/${User}/businessInfo`)
       .once("value")
       .then(sanpshot => {
-        Alert.alert('Update!', `Do you want to request for update ${this.state.baseCurrency}?`, [{
-          text: 'Yes',
-          onPress: () => this.Updated(User, sanpshot.val().email, Company)
-        }]);
+        if (sanpshot.val().email === null) {
+          return this.refs.toast.show("E-mail not Provided");
+        } else {
+          Alert.alert('Update!', `Do you want to request for update ${this.state.baseCurrency}?`, [{
+            text: 'Yes',
+            onPress: () => this.Updated(User, sanpshot.val().email, Company)
+          }]);
+        }
       })
       .catch(error => {
         console.log(error.message);
@@ -157,13 +138,14 @@ class Local extends Component {
 
   };
   Updated = (companyPhone, femail, fcompany) => {
-    //returning sendGridKey
+
     firebase
       .database()
       .ref(`/config`)
       .once("value")
       .then(sanpshot => {
         sendPushNotification('Customer', companyPhone, sanpshot.val().content)
+        //returning sendGridKey
         const body = {
           "personalizations": [
             {
