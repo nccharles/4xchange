@@ -7,13 +7,15 @@ const screenheight = Dimensions.get('window').height
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: screenwidth - 30,
+    width: screenwidth - 20,
     height: screenheight / 10,
-    elevation: 3,
+    elevation: 1,
     alignSelf: 'center',
-    marginVertical: 8,
-    backgroundColor: Colors.snow,
-    borderRadius: Metrics.smallMargin
+    marginVertical: 2,
+    borderLeftColor: Colors.primary,
+    borderLeftWidth: 2,
+    backgroundColor: Colors.background,
+    // borderRadius: Metrics.smallMargin
 
   },
   left: {
@@ -30,13 +32,13 @@ export default StyleSheet.create({
     // flexDirection: 'row',
   },
   leftContainer: {
-    // flex: 2.5, 
-    // justifyContent: 'center'
+    flex: 2.5,
+    justifyContent: 'center'
   },
   category: {
     alignSelf: 'center',
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryGray,
     fontSize: 20,
     marginLeft: 20
@@ -46,23 +48,19 @@ export default StyleSheet.create({
     // top: screenheight/250,
     left: 15,
     // top: 3,
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     fontSize: 16,
-    color: Colors.primaryGray,
+    color: Colors.primary,
   },
   label: {
-    fontWeight: '500',
-    color: 'gray',
+    color: Colors.primaryGray,
+    fontFamily: 'Lucida-Grande-Bold',
     fontSize: 14,
   },
   iconBtn: {
     position: 'absolute',
     right: 15,
     top: 5
-    // flex: 1,
-    // alignSelf: 'center',
-    // alignItems: 'center',
-    // marginLeft: screenwidth -180
   },
   updated: {
     position: 'absolute',
@@ -70,6 +68,7 @@ export default StyleSheet.create({
     bottom: 5,
     fontWeight: '500',
     color: Colors.secondary,
+    fontFamily: 'Lucida-Grande',
     fontSize: 13
   }
 })

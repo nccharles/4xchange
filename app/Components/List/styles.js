@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
     paddingHorizontal: 10,
-    // backgroundColor: 'white',
+    // backgroundColor: Colors.primaryWhite,
   },
   right: {
     height: '100%',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.primaryWhite,
   },
   titleContainer: {
     justifyContent: 'center'

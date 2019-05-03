@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     header: {
         color: Colors.primaryWhite,
         fontSize: 30,
-        fontWeight: 'bold',
         marginVertical: 15,
         fontFamily: 'Lucida-Grande-Bold',
     },

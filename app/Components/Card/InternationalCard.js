@@ -21,7 +21,7 @@ class InternationalCard extends Component {
     return (
       <View style={{ flex: 1 }} >
         <TouchableOpacity style={styles.parent} onPress={this.props.onPress}>
-          <View style={styles.imageContainer}>
+          <View style={styles.FlagContainer}>
             <Image style={styles.leftRectangular} resizeMode="stretch" source={this.props.avatar} />
           </View>
           <View style={styles.center}>
@@ -44,7 +44,7 @@ class InternationalCard extends Component {
             </Text>
           </View>
         </TouchableOpacity>
-        <View style={styles.separator} />
+        <View style={styles.Currenciesseparator} />
       </View>
     );
   }

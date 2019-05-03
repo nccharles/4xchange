@@ -48,19 +48,19 @@ class ChatCard extends Component {
                             </Text>
                         </View>
                     </View>
-                    <View style={styles.right} >
+                    <View style={styles.senttime} >
                         <Text style={styles.time} >
                             {this.props.rightComponentText ? this.props.rightComponentText.toString()
                                 : null
                             }
                         </Text>
+                        {this.props.value === 0 ? null : <Badge
+                            value={this.props.value}
+                            status={this.props.status}
+                            containerStyle={styles.message}
+                        />}
                     </View>
                 </TouchableOpacity>
-                {this.props.value === 0 ? null : <Badge
-                    value={this.props.value}
-                    status={this.props.status}
-                    containerStyle={styles.message}
-                />}
                 <View style={styles.Chatseparator} />
             </View>
         );

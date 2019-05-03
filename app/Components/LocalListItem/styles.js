@@ -1,4 +1,5 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
+import { Colors } from '../../Assets/Themes';
 
 const styles = StyleSheet.create({
     // $underlayColor: '#E2E2E2',
@@ -6,20 +7,20 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 16,
         flexDirection: 'row',
-        justifyContent : 'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: Colors.primaryWhite,
     },
-    wrapper:{
-        backgroundColor: '#00b174'
+    wrapper: {
+        backgroundColor: Colors.secondary
     },
     text: {
         fontSize: 16,
-        color: '#343434'
+        color: Colors.darkGray
     },
     separator: {
         marginLeft: 20,
-        backgroundColor: '#E2E2E2',
+        backgroundColor: Colors.lightGray,
         flex: 1,
         height: StyleSheet.hairlineWidth
     },

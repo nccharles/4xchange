@@ -263,7 +263,7 @@ class ForexChat extends Component {
                     <View style={[
                         StyleSheet.absoluteFill,
                         {
-                            backgroundColor: 'white',
+                            backgroundColor: Colors.primaryWhite,
                             justifyContent: 'center',
                             alignItems: 'center',
                             bottom: 50

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     elevation: 3
   },
   image: {
-    tintColor: 'white',
+    tintColor: Colors.primaryWhite,
   },
   buttonContainer: {
     marginBottom: 10,

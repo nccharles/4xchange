@@ -1,4 +1,5 @@
 import { StatusBar, StyleSheet } from 'react-native';
+import { Colors } from '../../Assets/Themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,20 +9,20 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    backgroundColor: Colors.darkGray,
   },
   inputContainer: {
     height: 48,
     flexDirection: 'row',
     width: '95%',
     paddingHorizontal: 8,
-    backgroundColor: 'white',
+    backgroundColor: Colors.primaryWhite,
   },
   input: {
     height: 47,
     width: '95%',
     paddingHorizontal: 8,
-    backgroundColor: 'white',
+    backgroundColor: Colors.primaryWhite,
     fontSize: 18,
   },
   buttonText: {

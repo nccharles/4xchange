@@ -10,7 +10,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     width: screenwidth - 5,
     height: screenheight / 7.5,
-    backgroundColor: Colors.snow,
+    backgroundColor: 'transparent',
     marginVertical: 10,
     borderRadius: 5,
   },
@@ -42,21 +42,20 @@ export default StyleSheet.create({
 
   },
   label: {
-    fontWeight: '500',
     color: Colors.primaryGray,
-    fontSize: 14,
+    fontSize: 12,
     position: 'absolute',
     left: 15,
     top: 30,
-    fontFamily: 'Lucida-Grande',
+    fontFamily: 'Lucida-Grande-Bold',
   },
   label2: {
-    fontWeight: '500',
     color: Colors.primaryGray,
-    fontSize: 14,
+    fontSize: 12,
     position: 'absolute',
     left: 15,
-    bottom: 10
+    bottom: 10,
+    fontFamily: 'Lucida-Grande-Bold',
   },
   icon_btn: {
     position: "absolute",
@@ -71,6 +70,8 @@ export default StyleSheet.create({
   time: {
     fontSize: 12,
     color: Colors.secondary,
+    top: 0,
+    fontFamily: 'Lucida-Grande',
   },
   currencyName: {
     fontSize: 14,
@@ -108,9 +109,8 @@ export default StyleSheet.create({
     position: 'absolute',
     right: 15,
     bottom: 0,
-    fontWeight: '500',
     color: Colors.secondary,
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Lucida-Grande',
   },
   parent: {
@@ -118,13 +118,10 @@ export default StyleSheet.create({
     width: screenwidth - 30,
     height: screenheight / 10,
     flexDirection: 'row',
-    backgroundColor: 'white',
-    // elevation: 3,
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.primaryWhite,
     alignSelf: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-between',
     marginVertical: 5,
-    // borderRadius: 5,
   },
   imageContainer: {
     borderWidth: 0.5,
@@ -135,6 +132,18 @@ export default StyleSheet.create({
     alignSelf: 'center'
   },
   leftRectangular: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  FlagContainer: {
+    width: screenwidth / 6,
+    height: screenheight / 17,
+    marginLeft: 8,
+    justifyContent: 'center',
+    alignSelf: 'center'
+  },
+  leftFlag: {
     flex: 1,
     width: '100%',
     height: '100%',
@@ -160,7 +169,7 @@ export default StyleSheet.create({
     flex: 0.90,
     flexDirection: 'column',
     paddingHorizontal: 5,
-    backgroundColor: 'white',
+    backgroundColor: Colors.primaryWhite,
     justifyContent: 'center',
     alignSelf: 'center'
   },
@@ -171,15 +180,13 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   title: {
-    fontWeight: '500',
-    color: 'black',
-    fontSize: 14,
-    fontFamily: 'Lucida-Grande',
+    color: Colors.primaryDark,
+    fontSize: 16,
+    fontFamily: 'Lucida-Grande-Bold',
   },
   subTitle: {
-    fontWeight: '500',
-    color: 'gray',
-    fontSize: 12,
+    color: Colors.primaryGray,
+    fontSize: 14,
     fontFamily: 'Lucida-Grande',
   },
   right: {
@@ -188,14 +195,19 @@ export default StyleSheet.create({
     paddingRight: 8,
     right: 0,
     top: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    justifyContent: 'space-evenly',
+    backgroundColor: Colors.primaryWhite,
+  },
+  senttime: {
+    paddingRight: 1,
+    flexDirection: 'column',
+    paddingVertical: 0,
+    justifyContent: 'space-evenly',
+    backgroundColor: Colors.primaryWhite,
   },
   message: {
-    position: 'absolute',
-    right: screenwidth / (screenwidth / 30),
-    bottom: 4,
+    right: 0,
+    bottom: 0,
   },
   separator: {
     flex: 1,
@@ -204,11 +216,18 @@ export default StyleSheet.create({
     backgroundColor: Colors.lightGray,
     // margin: 8
   },
+  Currenciesseparator: {
+    flex: 1,
+    height: 1,
+    width: screenwidth - 5,
+    backgroundColor: 'transparent',
+    // margin: 8
+  },
   Chatseparator: {
     flex: 1,
     height: 1,
     width: screenwidth - 10,
-    backgroundColor: Colors.lightGray,
+    backgroundColor: 'transparent',
     marginLeft: screenwidth / 5
   }
 

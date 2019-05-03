@@ -180,10 +180,7 @@ class Info extends Component {
                     isSubmitting: false,
                 })
                 this.refs.toast.show("Information saved!")
-                setTimeout(() => {
-                    this.props.navigation.goBack(null)
-                }, 1000)
-
+                this.props.navigation.goBack(null)
             })
             .catch(err => {
                 console.log(err)
