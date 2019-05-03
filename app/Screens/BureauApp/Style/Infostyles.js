@@ -6,12 +6,12 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: Colors.background,
     },
     logo: {
-        color: '#fff',
+        color: Colors.primaryWhite,
         opacity: 0.7,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         fontSize: 40,
         marginTop: height * .2,
         marginLeft: width * .05,

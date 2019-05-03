@@ -22,7 +22,7 @@ const InputWithButton = (props) => {
                 autoCapitalize={'none'}
                 returnKeyType={'done'}
                 autoCorrect={false}
-                placeholderTextColor='#99A3A4'
+                placeholderTextColor={Colors.primaryGray}
                 underlineColorAndroid='transparent'
                 onChangeText={onChangeText}
                 value={value}

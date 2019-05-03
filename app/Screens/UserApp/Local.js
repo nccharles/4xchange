@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {
   View, AsyncStorage,
-  FlatList, ActivityIndicator, Alert, NetInfo
+  FlatList, StyleSheet, Dimensions, Image, ActivityIndicator, Alert, NetInfo
 } from 'react-native';
 import Toast from 'react-native-easy-toast'
 import Moment from 'moment'
 import { Colors } from '../../Assets/Themes'
 import styles from './Style/ListStyle'
-
+import emptydata from '../../Assets/Icons/empty.png'
 import CategoryBtn from '../../Components/Buttons/BtnCategory'
 import Card from '../../Components/Card/Card'
 import InputButton from '../../Components/InputButton/InputButton'
@@ -17,10 +17,11 @@ import { userChoice, LocalData } from '../../Config/constants'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { sendPushNotification } from '../../Config/notice';
+const screenheight = Dimensions.get('window').width
 const initailState = {
   data: [],
   loading: true,
-  inputedValue: 0,
+  inputedValue: 1,
   baseCurrency: 'USD',
   initialCurrency: null,
   buyBackgroundColor: 'transparent',
@@ -47,8 +48,8 @@ class Local extends Component {
     this.setState({
       buyBackgroundColor: Colors.primaryDark,
       sellBackgroundColor: 'transparent',
-      category: 'Buy   ',
-      buyTextColor: 'white',
+      category: 'Buy',
+      buyTextColor: Colors.primaryWhite,
       sellTextColor: Colors.primaryDark,
       initialCurrency: 'RWF',
       isBuying: true
@@ -59,8 +60,8 @@ class Local extends Component {
     this.setState({
       sellBackgroundColor: Colors.primaryDark,
       buyBackgroundColor: 'transparent',
-      category: 'Sell   ',
-      sellTextColor: 'white',
+      category: 'Sell',
+      sellTextColor: Colors.primaryWhite,
       buyTextColor: Colors.primaryDark,
       initialCurrency: this.state.baseCurrency,
       isBuying: false,
@@ -76,7 +77,7 @@ class Local extends Component {
       return
     }
     this.setState({
-      inputedValue: 0
+      inputedValue: 1.0
     })
   }
 
@@ -340,15 +341,7 @@ class Local extends Component {
   oneScreensWorth = 20
 
   render() {
-    const { inputedValue } = this.state
-    if (this.state.loading) {
-      return (
-
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" color={Colors.primary} />
-        </View>
-      )
-    }
+    const { inputedValue, loading, data } = this.state
     return (
       <View style={styles.container}>
         <View style={{ marginTop: 10, }}>
@@ -371,7 +364,7 @@ class Local extends Component {
               height: '100%',
               width: '100%',
               justifyContent: 'center',
-              borderRadius: 2,
+              borderRadius: screenheight / 16,
             }}
             buyTextStyle={{
               color: this.state.buyTextColor,
@@ -386,7 +379,7 @@ class Local extends Component {
               height: '100%',
               width: '100%',
               justifyContent: 'center',
-              borderRadius: 2,
+              borderRadius: screenheight / 16,
             }}
             sellTextStyle={{
               color: this.state.sellTextColor,
@@ -395,34 +388,56 @@ class Local extends Component {
               textAlign: 'center'
             }} />
         </View>
-        <FlatList
-          contentContainerStyle={styles.listContent}
-          data={this.state.data}
-          extraData={this.state}
-          keyExtractor={this.keyExtractor}
-          renderItem={({ item, index }) => (
-            <Card
-              onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
-              onPress={() => this.requestUpdate(item.userPhone, item.companyName)}
-              text={item.companyName + '   '}
-              text2={parseInt(item.bidPrice) + '   '}
-              bidPrice={item.bidPrice + '   '}
-              askPrice={item.askPrice + '   '}
-              baseCurrency={item.currency + '   '}
-              time={Moment(item.updatedAt).fromNow() + '   '}
-              currency={this.state.initialCurrency + '   '}
-              equivalent={this.state.isBuying ? parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
-              category={this.state.category + '   '}
-              // source={this.state.flag}
-              iconStyle={this.state.fav_icon ? 'red' : 'grey'}
-              onPressIcon={() => this.handle_fav({ index, item })}
+        {loading ?
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color={Colors.primary} />
+          </View> : data.length === 0 ?
+            <View style={[
+              {
+                backgroundColor: Colors.primaryWhite,
+                justifyContent: 'center',
+                alignItems: 'center',
+                top: 10,
+                bottom: 50
+              }]}>
+              <Image
+                source={emptydata}
+                style={{
+                  ...StyleSheet.absoluteFillObject,
+                  resizeMode: 'contain'
+                }}
+              />
+            </View>
+            :
+            <FlatList
+              contentContainerStyle={styles.listContent}
+              data={data}
+              extraData={this.state}
+              keyExtractor={this.keyExtractor}
+              renderItem={({ item, index }) => (
+                <Card
+                  onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
+                  onPress={() => this.requestUpdate(item.userPhone, item.companyName)}
+                  text={item.companyName + '   '}
+                  text2={parseInt(item.bidPrice) + '   '}
+                  bidPrice={item.bidPrice + '   '}
+                  askPrice={item.askPrice + '   '}
+                  baseCurrency={item.currency + '   '}
+                  time={Moment(item.updatedAt).fromNow() + '   '}
+                  currency={this.state.initialCurrency + '   '}
+                  equivalent={this.state.isBuying ? parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
+                  category={this.state.category + '   '}
+                  // source={this.state.flag}
+                  iconStyle={this.state.fav_icon ? 'red' : 'grey'}
+                  onPressIcon={() => this.handle_fav({ index, item })}
+                />
+              )}
+              numColumns={1}
+              initialNumToRender={this.oneScreensWorth}
+              ListEmptyComponent={this.renderEmpty}
+            // ItemSeparatorComponent={this.renderSeparator}
             />
-          )}
-          numColumns={1}
-          initialNumToRender={this.oneScreensWorth}
-          ListEmptyComponent={this.renderEmpty}
-        // ItemSeparatorComponent={this.renderSeparator}
-        />
+        }
         <Toast ref="toast"
           style={{ backgroundColor: Colors.primary }}
           position='bottom'

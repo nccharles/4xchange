@@ -8,7 +8,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.snow
+    backgroundColor: Colors.background
   },
   row: {
     flex: 1,
@@ -19,8 +19,8 @@ export default StyleSheet.create({
     shadowOpacity: 5.0,
     shadowRadius: 2,
     elevation: 5,
-    backgroundColor: Colors.snow,
-    marginVertical: 10,
+    backgroundColor: Colors.lightGray,
+    marginVertical: 2,
     margin: 10,
     paddingVertical: 10,
     borderRadius: Metrics.smallMargin,
@@ -28,14 +28,14 @@ export default StyleSheet.create({
   },
   boldLabel: {
     paddingVertical: 2,
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     fontSize: 16,
     color: Colors.primaryGray,
   },
   label: {
     paddingVertical: 5,
-    fontWeight: '500',
-    color: 'gray',
+    fontFamily: 'Lucida-Grande-Bold',
+    color: Colors.primaryGray,
     fontSize: 13
   },
 
@@ -48,24 +48,22 @@ export default StyleSheet.create({
   textHead: {
     marginLeft: 5,
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     textAlign: 'center'
   },
   cardContainer: {
     height: screenheight - 5,
     width: screenwidth - 5,
-    backgroundColor: '#3498DB'
+    backgroundColor: Colors.primary
   },
   buttonContainer: {
     marginVertical: 20,
-    // marginLeft: 20, 
     flexDirection: 'row',
     borderWidth: 2,
-    borderColor: '#3498DB',
+    borderColor: Colors.primary,
     borderRadius: 20,
     height: 40,
     width: 200,
-    // paddingHorizontal: 35,
     alignSelf: 'center'
   },
 

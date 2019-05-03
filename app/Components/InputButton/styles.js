@@ -2,26 +2,17 @@ import { StyleSheet, Dimensions } from 'react-native'
 import { Colors } from '../../Assets/Themes'
 
 const INPUT_HEIGHT = 48
-const BORDER_RADIUS = 4
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
 
 export default StyleSheet.create({
-    // $buttonBackgroundColorBase: '$white',
-    // $buttonBackgroundColorModifier: 0.1,
-
     container: {
-        // backgroundColor: '#CCD1D1',
         width: screenwidth - 30,
-        // height: (screenheight /11)- 10,
-        borderRadius: BORDER_RADIUS,
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
         marginBottom: 10,
-        // margin: 10,
-        // marginHorizontal: 20
     },
     InputButton: {
         height: screenheight / 16,
@@ -29,16 +20,15 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5,
-        // backgroundColor: '#3498DB',
-        backgroundColor: Colors.primaryDark,
-        elevation: 10
+        borderBottomLeftRadius: screenheight / 16,
+        borderTopRightRadius: screenheight / 16,
+        elevation: 3
     },
     buttonText: {
-        fontWeight: '600',
+        fontFamily: 'Lucida-Grande-Bold',
         fontSize: 16,
         paddingHorizontal: 5,
-        color: 'white'
+        color: Colors.primaryWhite
     },
     buttonContainer: {
         height: screenheight / 16,
@@ -46,50 +36,48 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
-        borderColor: '#CCD1D1',
         borderRadius: 5,
-        borderWidth: 2,
-        borderColor: '#CCD1D1',
+        borderColor: Colors.primaryGray,
     },
     buttonTextInter: {
-        fontWeight: '600',
         fontSize: 18,
         paddingHorizontal: 16,
-        color: Colors.primary
+        color: Colors.primary,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     input: {
-        backgroundColor: Colors.snow,
+        backgroundColor: Colors.primaryWhite,
+        paddingLeft: 15,
         height: screenheight / 16,
         flex: 1,
         fontSize: 16,
-        paddingHorizontal: 8,
-        marginRight: 10,
-        color: 'grey',
-        borderWidth: 2,
-        borderColor: '#CCD1D1',
-        borderRadius: 5
-        // borderWidth: 2
+        marginRight: 0,
+        color: Colors.primaryGray,
+        borderBottomWidth: 2,
+        borderBottomRightRadius: screenheight / 16,
+        borderColor: Colors.primaryDark,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     inputInter: {
-        backgroundColor: Colors.snow,
+        backgroundColor: Colors.primaryWhite,
+        paddingLeft: 15,
         height: screenheight / 16,
-        // width: screenwidth -100,
         flex: 1,
-        fontSize: 15,
-        paddingHorizontal: 8,
-        marginLeft: 10,
-        color: 'grey',
-        borderWidth: 2,
-        borderColor: '#CCD1D1',
-        borderRadius: 10
+        fontSize: 16,
+        marginRight: 0,
+        color: Colors.primaryGray,
+        borderBottomWidth: 2,
+        borderBottomRightRadius: screenheight / 16,
+        borderColor: Colors.primaryDark,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     border: {
         height: INPUT_HEIGHT,
         width: StyleSheet.hairlineWidth,
-        borderColor: 'black'
+        borderBottomColor: 'black'
     },
     ContainerStylesDisabled: {
-        backgroundColor: 'grey'
+        backgroundColor: Colors.primaryGray
     },
 
 })

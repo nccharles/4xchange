@@ -8,7 +8,7 @@ const screenheight = Dimensions.get('window').height
 const styles = StyleSheet.create({
 
   actionButtonIcon: {
-    color: 'white',
+    color: Colors.primaryWhite,
   },
   button: {
     backgroundColor: Colors.primaryDark,
@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
     width: screenwidth - 30,
     alignContent: 'center',
     justifyContent: 'center',
-    elevation: 3,
+    elevation: 1,
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: Colors.primaryWhite,
     fontSize: 18,
     fontFamily: 'Lucida-Grande-Bold',
     paddingHorizontal: 5
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 10,
-    elevation: 3
+    elevation: 1
   },
   roundButton: {
     position: 'absolute',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     borderRadius: screenwidth / 5,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3
+    elevation: 1
   },
   image: {
     tintColor: Colors.primaryWhite,
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginBottom: 10,
     flexDirection: 'row',
-    borderRadius: 5,
-    height: screenheight / 16,
+    borderRadius: screenheight / 16,
+    height: screenheight / 20,
     width: screenwidth - 30,
     alignSelf: 'center',
     elevation: 1
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   headerImg: {
-    tintColor: 'white',
+    tintColor: Colors.primaryWhite,
     width: screenwidth / 16,
     height: screenwidth / 16,
   }

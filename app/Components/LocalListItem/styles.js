@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        color: Colors.darkGray
+        color: Colors.darkGray,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     separator: {
         marginLeft: 20,

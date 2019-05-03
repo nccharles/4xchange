@@ -54,11 +54,6 @@ const Card = ({
                             </View>
                             <Text style={styles.updated}>Updated {time}</Text>
                         </TouchableOpacity>
-                        {/* <Badge
-                            // value='3'
-                            status="success"
-                            containerStyle={{ position: 'absolute', top: 6, right: 4 }}
-                        /> */}
                     </View>
                 </View>
             </View>

@@ -26,7 +26,7 @@ class ChatCard extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }} >
+            <View style={{ flex: 1, justifyContent: 'space-between' }} >
                 <TouchableOpacity style={styles.parent} onPress={this.props.onPress}>
                     <View style={[styles.imageChatContainer, { backgroundColor: colors[Math.floor(Math.random() * colors.length)] }]}>
                         <Text style={styles.leftCircle}>{this.props.avatar}</Text>

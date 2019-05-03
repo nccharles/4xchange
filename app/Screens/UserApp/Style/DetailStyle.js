@@ -20,8 +20,8 @@ export default StyleSheet.create({
     },
     avatarTxt: {
         fontSize: 20,
-        color: 'white',
-        fontWeight: 'bold'
+        color: Colors.primaryWhite,
+        fontFamily: 'Lucida-Grande-Bold',
 
     },
     titleContainer: {
@@ -41,8 +41,8 @@ export default StyleSheet.create({
     title: {
         color: Colors.primaryLight,
         fontSize: 20,
-        fontWeight: 'bold',
-        paddingTop: 20,
+        fontFamily: 'Lucida-Grande-Bold',
+        paddingTop: 12,
     },
     contactContainer: {
         flexDirection: "row",
@@ -50,14 +50,14 @@ export default StyleSheet.create({
         justifyContent: 'space-between'
     },
     contacts: {
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         marginRight: 15,
     },
     separator: {
         flex: 1,
         height: 0.5,
         width: screenwidth,
-        backgroundColor: "gray",
+        backgroundColor: Colors.primaryGray,
         margin: 8
     },
     linearseparator: {
@@ -73,22 +73,22 @@ export default StyleSheet.create({
     },
     infocontent: {
         marginLeft: 20,
+        fontSize: 14,
         fontFamily: 'Lucida-Grande',
 
     },
     itemTitle: {
-        fontWeight: '900',
         paddingVertical: 15,
         color: Colors.darkGray,
-        fontFamily: 'Lucida-Grande',
+        fontFamily: 'Lucida-Grande-Bold',
     },
     infoTitle: {
-        fontWeight: '900',
+        fontSize: 15,
         color: Colors.darkGray,
         fontFamily: 'Lucida-Grande-Bold',
     },
     info: {
-        fontWeight: '600',
+        fontSize: 14,
         color: Colors.primaryGray,
         fontFamily: 'Lucida-Grande',
     }

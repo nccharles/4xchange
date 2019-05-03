@@ -19,7 +19,7 @@ export default StyleSheet.create({
         color: Colors.primary
     },
     title: {
-        fontFamily: 'Lucida-Grande',
+        fontFamily: 'Lucida-Grande-Bold',
         color: Colors.primary
     },
     details: {

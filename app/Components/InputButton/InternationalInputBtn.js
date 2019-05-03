@@ -22,7 +22,7 @@ const InternationalInputButton = (props) => {
                 autoCapitalize={'none'}
                 returnKeyType={'done'}
                 autoCorrect={false}
-                placeholderTextColor='#99A3A4'
+                placeholderTextColor={Colors.primaryGray}
                 underlineColorAndroid='transparent'
                 onChangeText={onChangeText}
                 value={value}
@@ -30,11 +30,8 @@ const InternationalInputButton = (props) => {
 
             <View
                 style={styles.buttonContainer}>
-                {/* // style={BtnStyle}
-                    // onPress={onPress}> */}
                 <Text
                     style={styles.buttonTextInter}
-                // style={BtnTextStyle}
                 >
                     {buttonText}
                 </Text>

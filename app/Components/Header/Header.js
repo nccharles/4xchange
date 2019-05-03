@@ -36,8 +36,8 @@ const Header = (props) => {
             button={more}
             buttonStyle={styles.forexOptions}
             destructiveIndex={1}
-            options={["Add Currency", "Update Info"]}
-            actions={[Add, Update]} />
+            options={["Update Info"]}
+            actions={[Update]} />
         </View>
       </View>
     </View>

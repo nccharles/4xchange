@@ -58,7 +58,7 @@ export default StyleSheet.create({
   cardContainer: {
     height: screenheight - 5,
     width: screenwidth - 5,
-    backgroundColor: '#3498DB'
+    backgroundColor: Colors.primary
   },
   searchBar: {
     backgroundColor: Colors.primaryLight
@@ -67,9 +67,9 @@ export default StyleSheet.create({
     height: INPUT_HEIGHT,
     fontSize: 18,
     paddingHorizontal: 8,
-    color: 'grey',
+    color: Colors.primaryGray,
     borderWidth: 1,
-    borderColor: '#CCD1D1',
+    borderColor: Colors.lightGray,
     borderRadius: 10
   },
 })

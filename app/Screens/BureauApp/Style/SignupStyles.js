@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: height / 16,
         width: width - 50,
+        fontFamily: 'Lucida-Grande',
     },
     button: {
         backgroundColor: Colors.background,

@@ -7,15 +7,15 @@ const screenheight = Dimensions.get('window').height
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: screenwidth - 20,
+    width: screenwidth - 10,
     height: screenheight / 10,
     elevation: 1,
     alignSelf: 'center',
-    marginVertical: 2,
+    marginVertical: 0,
     borderLeftColor: Colors.primary,
     borderLeftWidth: 2,
     backgroundColor: Colors.background,
-    // borderRadius: Metrics.smallMargin
+    borderRadius: Metrics.smallMargin
 
   },
   left: {

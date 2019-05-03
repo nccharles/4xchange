@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: sharedSytles.backgroundColor,
   },
   inputContainer: {
     height: screenheight / 8,
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
     flexDirection: 'row',
-    width: '99%',
+    width: screenwidth - 1,
     paddingHorizontal: 8,
     backgroundColor: Colors.primaryWhite,
   },
@@ -39,10 +38,10 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   buttonText: {
-    fontWeight: '600',
     fontSize: 20,
     paddingHorizontal: 16,
-    color: Colors.primary
+    color: Colors.primary,
+    fontFamily: 'Lucida-Grande-Bold',
   },
   separator: {
     height: '100%',

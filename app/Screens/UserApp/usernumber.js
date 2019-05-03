@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     header: {
         color: brandColor,
         opacity: 0.7,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         fontSize: 20,
         marginTop: height * .1,
         marginLeft: width * .05,
@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
         margin: 0,
         flex: 1,
         fontSize: 20,
-        color: brandColor
+        color: brandColor,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     button: {
         marginTop: 20,
@@ -72,19 +73,22 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     buttonText: {
-        color: '#fff',
+        color: Colors.primaryWhite,
         fontSize: 16,
-        fontWeight: 'bold'
+        fontFamily: 'Lucida-Grande-Bold',
     },
     wrongNumberText: {
         margin: 10,
         fontSize: 14,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: Colors.primaryGray,
+        fontFamily: 'Lucida-Grande',
     },
     disclaimerText: {
         marginTop: 30,
         fontSize: 12,
-        color: 'grey'
+        color: Colors.primaryGray,
+        fontFamily: 'Lucida-Grande',
     },
     callingCodeView: {
         alignItems: 'center',
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     callingCodeText: {
         fontSize: 20,
         color: brandColor,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         paddingRight: 10
     }
 });
@@ -126,7 +130,7 @@ export default class Phone extends Component {
                 backgroundColor: Colors.primary,
             },
 
-            headerTintColor: '#fff',
+            headerTintColor: Colors.primaryWhite,
             headerTitleStyle: {
                 fontWeight: 'bold',
             },
@@ -394,7 +398,7 @@ export default class Phone extends Component {
                         fadeInDuration={750}
                         fadeOutDuration={1000}
                         opacity={0.8}
-                        textStyle={{ color: '#fff' }} />
+                        textStyle={{ color: Colors.primaryWhite }} />
                 </KeyboardAvoidingView>
             </View>
         );

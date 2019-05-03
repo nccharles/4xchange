@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
         // justifyContent: 'space-between',
     },
     logo: {
-        color: '#fff',
+        color: Colors.primaryWhite,
         opacity: 0.7,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         fontSize: 40,
         marginTop: height * .2,
         marginLeft: width * .05,
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: height / 16,
         width: width - 50,
+        fontFamily: 'Lucida-Grande',
     },
     button: {
         backgroundColor: Colors.primaryDark,
@@ -44,12 +45,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     text: {
-        color: '#fff',
+        color: Colors.primaryWhite,
         marginLeft: width * .07,
         marginTop: 20,
+        fontFamily: 'Lucida-Grande',
     },
     texterr: {
-        color: '#fff',
+        color: Colors.primaryWhite,
         marginLeft: width * .07,
     },
     user: {

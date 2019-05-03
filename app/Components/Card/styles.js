@@ -12,7 +12,6 @@ export default StyleSheet.create({
     height: screenheight / 7.5,
     backgroundColor: 'transparent',
     marginVertical: 10,
-    borderRadius: 5,
   },
   left: {
     width: 20,
@@ -25,7 +24,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   leftContainer: {
-    flex: 2.5,
+    flex: 4,
   },
   leftCategory: {
     position: 'absolute',
@@ -36,14 +35,14 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     top: 8,
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryDark,
 
   },
   label: {
     color: Colors.primaryGray,
-    fontSize: 12,
+    fontSize: 14,
     position: 'absolute',
     left: 15,
     top: 30,
@@ -51,7 +50,7 @@ export default StyleSheet.create({
   },
   label2: {
     color: Colors.primaryGray,
-    fontSize: 12,
+    fontSize: 14,
     position: 'absolute',
     left: 15,
     bottom: 10,
@@ -70,7 +69,7 @@ export default StyleSheet.create({
   time: {
     fontSize: 12,
     color: Colors.secondary,
-    top: 0,
+    top: 2,
     fontFamily: 'Lucida-Grande',
   },
   currencyName: {
@@ -110,8 +109,8 @@ export default StyleSheet.create({
     right: 15,
     bottom: 0,
     color: Colors.secondary,
-    fontSize: 14,
-    fontFamily: 'Lucida-Grande',
+    fontSize: 10,
+    fontFamily: 'Lucida-Grande-Bold',
   },
   parent: {
     flex: 1,
@@ -137,9 +136,9 @@ export default StyleSheet.create({
     height: '100%',
   },
   FlagContainer: {
-    width: screenwidth / 6,
-    height: screenheight / 17,
-    marginLeft: 8,
+    width: screenwidth / 8,
+    height: screenheight / 19,
+    marginLeft: 5,
     justifyContent: 'center',
     alignSelf: 'center'
   },
@@ -192,26 +191,27 @@ export default StyleSheet.create({
   right: {
     height: '100%',
     position: 'absolute',
-    paddingRight: 8,
+    paddingRight: 0,
     right: 0,
     top: 0,
     justifyContent: 'space-evenly',
     backgroundColor: Colors.primaryWhite,
   },
   senttime: {
-    paddingRight: 1,
+    paddingRight: 0,
     flexDirection: 'column',
     paddingVertical: 0,
     justifyContent: 'space-evenly',
     backgroundColor: Colors.primaryWhite,
   },
   message: {
-    right: 0,
-    bottom: 0,
+    justifyContent: 'flex-end',
+    marginRight: 0,
+    marginBottom: 0,
   },
   separator: {
     flex: 1,
-    height: 1,
+    height: 0.2,
     width: screenwidth - 5,
     backgroundColor: Colors.lightGray,
     // margin: 8

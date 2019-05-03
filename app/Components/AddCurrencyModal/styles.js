@@ -15,29 +15,29 @@ export default StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 5
+    borderRadius: Metrics.smallMargin
   },
   currencyBtnTxt: {
-    color: 'white',
+    color: Colors.primaryWhite,
     fontSize: 20,
-    fontWeight: 'bold'
+    fontFamily: 'Lucida-Grande-Bold',
   },
   inputContainer: {
     flexDirection: 'row',
     marginVertical: 20
   },
   inputTitle: {
-    fontWeight: '900',
+    fontFamily: 'Lucida-Grande-Bold',
     fontSize: 20,
     marginTop: 7
   },
   input: {
     height: 40,
-    borderWidth: 2,
+    borderBottomWidth: 2,
     borderColor: Colors.lightGray,
     width: screenwidth - 70,
     paddingHorizontal: 10,
-    borderRadius: 5,
+    borderRadius: Metrics.smallMargin,
     fontSize: 18
   },
   button: {
@@ -45,16 +45,15 @@ export default StyleSheet.create({
     backgroundColor: Colors.primaryDark,
     width: screenwidth / 2.5,
     height: 40,
-    borderRadius: 5,
+    borderRadius: Metrics.smallMargin,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
-    // marginLeft: 50
+    elevation: 1,
   },
   btnTxt: {
-    color: 'white',
+    color: Colors.primaryWhite,
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Lucida-Grande-Bold',
     marginHorizontal: 5
   },
   button2: {
@@ -62,11 +61,10 @@ export default StyleSheet.create({
     backgroundColor: Colors.primaryDark,
     width: screenwidth / 2.5,
     height: 40,
-    borderRadius: 5,
+    borderRadius: Metrics.smallMargin,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 3,
-    // justifyContent: 'flex-end'
+    elevation: 1,
     marginLeft: 40
   }
 })

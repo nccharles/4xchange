@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
     paddingHorizontal: 10,
-    // backgroundColor: Colors.primaryWhite,
+
   },
   right: {
     height: '100%',
@@ -64,48 +64,42 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryWhite,
   },
   titleContainer: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    fontFamily: 'Lucida-Grande-Bold',
   },
   subTitleContainer: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    fontFamily: 'Lucida-Grande',
   },
   title: {
-    fontWeight: '500',
-    color: 'black',
+    fontFamily: 'Lucida-Grande-Bold',
+    color: Colors.primaryDark,
     fontSize: 14
   },
   subTitle: {
-    fontWeight: '500',
-    color: 'gray',
+    fontFamily: 'Lucida-Grande-Bold',
+    color: Colors.primaryGray,
     fontSize: 12
   },
   amount: {
     fontSize: 16,
-    fontWeight: '600',
-    color: 'rgba(0,150,0,1)'
+    fontFamily: 'Lucida-Grande-Bold',
+    color: Colors.secondary
   },
   imageContainer: {
     borderWidth: 0.5,
     width: screenwidth / 6,
     height: screenheight / 17,
-    // height: 38,
     marginLeft: 5,
     marginVertical: 5,
     alignSelf: 'center',
     justifyContent: 'center'
   },
-  // separator: {
-  //   height: 1,
-  //   width: screenwidth,
-  //   backgroundColor: "#CED0CE",
-  //   // marginLeft: "14%"
-  // },
   separator: {
     flex: 1,
-    height: 1,
+    height: 0.2,
     width: screenwidth - 5,
-    backgroundColor: "#CED0CE",
-    // margin: 8
+    backgroundColor: Colors.lightGray,
   },
 
 });

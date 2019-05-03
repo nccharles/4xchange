@@ -25,7 +25,7 @@ export default StyleSheet.create({
         marginTop: screenheight / 17,
     },
     title: {
-        color: 'white',
+        color: Colors.primaryWhite,
         fontSize: 20,
         fontFamily: 'Lucida-Grande-Bold',
         marginLeft: 15
@@ -37,7 +37,7 @@ export default StyleSheet.create({
     },
     ChatStatus: {
         flexDirection: 'column',
-        color: 'white',
+        color: Colors.primaryWhite,
         marginLeft: 15,
         top: -2,
         fontFamily: 'Lucida-Grande-Bold',
@@ -52,14 +52,13 @@ export default StyleSheet.create({
         paddingRight: 10
     },
     chattitle: {
-        color: 'white',
+        color: Colors.primaryWhite,
         fontFamily: 'Lucida-Grande-Bold',
     },
     forexTitle: {
-        color: 'white',
+        color: Colors.primaryWhite,
         fontSize: 20,
         marginRight: 20,
-        fontWeight: 'bold',
         fontFamily: 'Lucida-Grande-Bold',
     },
     forexOptions: {
@@ -69,19 +68,19 @@ export default StyleSheet.create({
         height: screenWidth / 18,
     },
     StatusText: {
-        color: 'white',
+        color: Colors.primaryWhite,
     },
     button: {
         marginRight: 35
     },
     image1: {
-        tintColor: 'white',
+        tintColor: Colors.primaryWhite,
         width: screenWidth / 14,
         height: screenWidth / 14,
         marginVertical: 2.5
     },
     image2: {
-        tintColor: 'white',
+        tintColor: Colors.primaryWhite,
         width: screenWidth / 16,
         height: screenWidth / 16,
         marginVertical: 5

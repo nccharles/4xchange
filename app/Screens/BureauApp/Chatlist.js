@@ -176,7 +176,7 @@ class Chatlist extends Component {
                         data={this.state.data}
                         renderItem={({ item }) => (
                             <Card
-                                title={item.user.name}
+                                title={item.user.name.length >= 12 ? item.user.name.substring(0, 12) + '...' : item.user.name}
                                 subtitle={item.text === undefined ? 'location' : (item.text.length >= 20 ? item.text.substring(0, 20) + '...' : item.text)}
                                 hideAvatar={false}
                                 roundAvatar={true}

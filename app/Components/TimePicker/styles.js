@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { Colors } from '../../Assets/Themes';
 const { height } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -10,11 +11,11 @@ const styles = StyleSheet.create({
     picker: {
         height: 50,
         width: 45,
-        backgroundColor: '#fff'
+        backgroundColor: Colors.primaryWhite
     },
     separator: {
         marginTop: 15,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
     }
 });
 export default styles;

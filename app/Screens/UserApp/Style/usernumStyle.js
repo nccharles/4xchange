@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     header: {
         color: brandColor,
         opacity: 0.7,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         fontSize: 20,
         marginTop: height * .1,
         marginLeft: width * .05,
@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         margin: 0,
         flex: 1,
         fontSize: 20,
-        color: brandColor
+        color: brandColor,
+        fontFamily: 'Lucida-Grande-Bold',
     },
     button: {
         marginTop: 20,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontSize: 16,
-        fontWeight: 'bold'
+        fontFamily: 'Lucida-Grande-Bold',
     },
     wrongNumberText: {
         margin: 10,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     disclaimerText: {
         marginTop: 30,
         fontSize: 12,
-        color: 'grey'
+        color: Colors.primaryGray
     },
     callingCodeView: {
         alignItems: 'center',
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     callingCodeText: {
         fontSize: 20,
         color: brandColor,
-        fontWeight: 'bold',
+        fontFamily: 'Lucida-Grande-Bold',
         paddingRight: 10
     }
 });

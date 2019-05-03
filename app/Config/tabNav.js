@@ -92,7 +92,7 @@ export default class TabNavigationScreen extends React.Component {
         <Text style={styles.logo}>4xChange</Text>
         <View style={styles.row}>
           <TouchableOpacity onPress={this._handleForex.bind(this)} >
-            <Icon.Entypo name="add-to-list" color='#fff' size={23} style={{ padding: 20 }} />
+            <Icon.Entypo name="add-to-list" color={Colors.primaryWhite} size={23} style={{ padding: 20 }} />
           </TouchableOpacity>
           <OptionsMenu
             button={more}
@@ -105,11 +105,11 @@ export default class TabNavigationScreen extends React.Component {
       <ScrollableTabView
         initialPage={0}
         tabBarBackgroundColor={Colors.primary}
-        tabBarActiveTextColor="#fff"
+        tabBarActiveTextColor={Colors.primaryWhite}
         onChangeTab={this.checkUser}
         tabBarTextStyle={styles.tabBar}
-        tabBarUnderlineStyle={{ backgroundColor: '#fff' }}
-        tabBarInactiveTextColor={Colors.lightGray}
+        tabBarUnderlineStyle={{ backgroundColor: Colors.primaryWhite }}
+        tabBarInactiveTextColor={Colors.primaryWhite}
       >
         <Local tabLabel='Local' {...this.props} />
         <MapView tabLabel='Locate' {...this.props} />
@@ -123,7 +123,7 @@ export default class TabNavigationScreen extends React.Component {
         fadeInDuration={750}
         fadeOutDuration={1500}
         opacity={0.8}
-        textStyle={{ color: '#fff' }} />
+        textStyle={{ color: Colors.primaryWhite }} />
     </View>;
   }
 }
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: Colors.primaryWhite,
   },
   welcome: {
     fontSize: 20,
@@ -140,12 +140,11 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   logo: {
-    color: '#fff',
+    color: Colors.primaryWhite,
     fontSize: 23,
     margin: 10,
     marginLeft: 20,
     fontFamily: 'Lucida-Grande-Bold',
-    fontWeight: '500',
   },
   row: {
     flexDirection: 'row',

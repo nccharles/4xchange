@@ -26,15 +26,6 @@ class DialogComponent extends Component {
           <Dialog.Button label="Cancel   " onPress={onPressCancel} />
           <Dialog.Button label={label2} onPress={onPress} />
         </Dialog.Container>
-
-        {/* <Dialog.Container visible={this.state.DeleteDialogVisible}>
-          <Dialog.Title>Account delete</Dialog.Title>
-          <Dialog.Description>
-            Are you sure you want to delete this currency?
-          </Dialog.Description>
-          <Dialog.Button label="Cancel" onPress={this.handleCancel} />
-          <Dialog.Button label="Delete" onPress={this.handleDelete} />
-        </Dialog.Container> */}
       </View>
     );
   }

@@ -6,14 +6,13 @@ export default StyleSheet.create({
     height: 25,
     width: '100%',
     paddingHorizontal: 5,
-    // marginTop: 2,
     justifyContent: 'center',
     backgroundColor: Colors.primary,
   },
   text: {
-    color: 'white',
+    color: Colors.primaryWhite,
     textAlign: 'center',
     fontSize: 14,
-    fontWeight: '600',
+    fontFamily: 'Lucida-Grande-Bold',
   },
 })
