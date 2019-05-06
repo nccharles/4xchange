@@ -30,14 +30,14 @@ export default StyleSheet.create({
   },
   boldLabel: {
     flex: 1,
-    fontSize: 16,
+    fontSize: screenwidth / 25,
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryGray,
   },
   label: {
     flex: 1,
     fontFamily: 'Lucida-Grande',
-    color: 'grey'
+    color: Colors.primaryGray
   },
   listContent: {
     marginTop: Metrics.baseMargin
@@ -50,8 +50,7 @@ export default StyleSheet.create({
   },
   textHead: {
     marginLeft: 5,
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: screenwidth / 20,
     textAlign: 'center',
     fontFamily: 'Lucida-Grande',
   },
@@ -65,7 +64,7 @@ export default StyleSheet.create({
   },
   input: {
     height: INPUT_HEIGHT,
-    fontSize: 18,
+    fontSize: screenwidth / 22,
     paddingHorizontal: 8,
     color: Colors.primaryGray,
     borderWidth: 1,

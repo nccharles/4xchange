@@ -3,6 +3,7 @@ const colors = {
   primaryLight: '#34ace0',
   primarytrans: '#22709365',
   primaryWhite: '#FFFFFF',
+  primaryBlack: '#000000',
   gradientColors: ["#227093", "#10ac84"],
   primaryDark: '#3c6382',
   secondary: '#10ac84',

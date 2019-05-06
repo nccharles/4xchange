@@ -11,7 +11,7 @@ export default StyleSheet.create({
         borderBottomColor: Colors.secondary,
         width: screenwidth - 70,
         paddingHorizontal: 10,
-        fontSize: 18,
+        fontSize: screenwidth / 25,
         fontFamily: 'Lucida-Grande',
     },
     button: {

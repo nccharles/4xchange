@@ -9,9 +9,9 @@ export default StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     width: screenwidth - 5,
-    height: screenheight / 7.5,
-    backgroundColor: 'transparent',
-    marginVertical: 10,
+    height: screenheight / 8,
+    backgroundColor: Colors.primaryWhite,
+    marginVertical: 5
   },
   left: {
     width: 20,
@@ -35,26 +35,26 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     top: 8,
-    fontSize: 15,
-    fontFamily: 'Lucida-Grande-Bold',
-    color: Colors.primaryDark,
+    fontSize: screenwidth / 25,
+    fontFamily: 'Lucida-Grande',
+    color: Colors.primaryBlack,
 
   },
   label: {
     color: Colors.primaryGray,
-    fontSize: 14,
+    fontSize: screenwidth / 30,
     position: 'absolute',
     left: 15,
-    top: 30,
-    fontFamily: 'Lucida-Grande-Bold',
+    bottom: 15,
+    fontFamily: 'Lucida-Grande',
   },
   label2: {
     color: Colors.primaryGray,
-    fontSize: 14,
+    fontSize: screenwidth / 30,
     position: 'absolute',
     left: 15,
-    bottom: 10,
-    fontFamily: 'Lucida-Grande-Bold',
+    bottom: 0,
+    fontFamily: 'Lucida-Grande',
   },
   icon_btn: {
     position: "absolute",
@@ -62,19 +62,19 @@ export default StyleSheet.create({
     left: 30
   },
   amount: {
-    fontSize: 14,
-    color: Colors.lightGray,
+    fontSize: screenwidth / 30,
+    color: Colors.darkGray,
     fontFamily: 'Lucida-Grande-Bold',
   },
   time: {
-    fontSize: 12,
+    fontSize: screenwidth / 30,
     color: Colors.secondary,
     top: 2,
     fontFamily: 'Lucida-Grande',
   },
   currencyName: {
-    fontSize: 14,
-    color: Colors.lightGray,
+    fontSize: screenwidth / 30,
+    color: Colors.darkGray,
     fontFamily: 'Lucida-Grande-Bold',
     marginLeft: 5
   },
@@ -84,8 +84,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   rightCategory: {
-    fontSize: 16,
-    color: Colors.primaryDark,
+    fontSize: screenwidth / 30,
+    color: Colors.primaryBlack,
     fontFamily: 'Lucida-Grande-Bold',
     position: 'absolute',
     right: 15,
@@ -109,7 +109,7 @@ export default StyleSheet.create({
     right: 15,
     bottom: 0,
     color: Colors.secondary,
-    fontSize: 10,
+    fontSize: screenwidth / 35,
     fontFamily: 'Lucida-Grande-Bold',
   },
   parent: {
@@ -120,13 +120,13 @@ export default StyleSheet.create({
     backgroundColor: Colors.primaryWhite,
     alignSelf: 'center',
     justifyContent: 'space-between',
-    marginVertical: 5,
+    marginVertical: screenwidth - (screenwidth - 5),
   },
   imageContainer: {
     borderWidth: 0.5,
     width: screenwidth / 6,
     height: screenheight / 17,
-    marginLeft: 8,
+    marginLeft: screenwidth - (screenwidth - 8),
     justifyContent: 'center',
     alignSelf: 'center'
   },
@@ -158,10 +158,10 @@ export default StyleSheet.create({
     alignSelf: 'center'
   },
   leftCircle: {
-    fontSize: 20,
-    color: 'white',
+    fontSize: screenwidth / 20,
+    color: Colors.primaryWhite,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontFamily: 'Lucida-Grande-Bold',
   },
   center: {
     height: '100%',
@@ -179,13 +179,13 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   title: {
-    color: Colors.primaryDark,
-    fontSize: 16,
-    fontFamily: 'Lucida-Grande-Bold',
+    color: Colors.primaryBlack,
+    fontSize: screenwidth / 25,
+    fontFamily: 'Lucida-Grande',
   },
   subTitle: {
     color: Colors.primaryGray,
-    fontSize: 14,
+    fontSize: screenwidth / 35,
     fontFamily: 'Lucida-Grande',
   },
   right: {
@@ -211,8 +211,8 @@ export default StyleSheet.create({
   },
   separator: {
     flex: 1,
-    height: 0.2,
-    width: screenwidth - 5,
+    height: 0.5,
+    width: screenwidth,
     backgroundColor: Colors.lightGray,
     // margin: 8
   },

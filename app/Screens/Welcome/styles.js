@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Colors } from '../../Assets/Themes'
-
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     //Swiper
     slide: {
@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
     // Header styles
     header: {
         color: Colors.primaryWhite,
-        fontSize: 30,
+        fontSize: width / 15,
         marginVertical: 15,
         fontFamily: 'Lucida-Grande-Bold',
     },
     // Text below header
     text: {
         color: Colors.primaryWhite,
-        fontSize: 18,
+        fontSize: width / 22,
         marginHorizontal: 40,
         textAlign: 'center',
         fontFamily: 'Lucida-Grande',

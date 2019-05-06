@@ -19,7 +19,7 @@ export default StyleSheet.create({
         borderRadius: (screenwidth / 6) / 2,
     },
     avatarTxt: {
-        fontSize: 20,
+        fontSize: screenwidth / 20,
         color: Colors.primaryWhite,
         fontFamily: 'Lucida-Grande-Bold',
 
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     },
     title: {
         color: Colors.primaryLight,
-        fontSize: 20,
+        fontSize: screenwidth / 20,
         fontFamily: 'Lucida-Grande-Bold',
         paddingTop: 12,
     },
@@ -73,7 +73,7 @@ export default StyleSheet.create({
     },
     infocontent: {
         marginLeft: 20,
-        fontSize: 14,
+        fontSize: screenwidth / 30,
         fontFamily: 'Lucida-Grande',
 
     },
@@ -83,12 +83,12 @@ export default StyleSheet.create({
         fontFamily: 'Lucida-Grande-Bold',
     },
     infoTitle: {
-        fontSize: 15,
+        fontSize: screenwidth / 25,
         color: Colors.darkGray,
         fontFamily: 'Lucida-Grande-Bold',
     },
     info: {
-        fontSize: 14,
+        fontSize: screenwidth / 30,
         color: Colors.primaryGray,
         fontFamily: 'Lucida-Grande',
     }

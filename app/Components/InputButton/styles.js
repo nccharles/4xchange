@@ -26,7 +26,7 @@ export default StyleSheet.create({
     },
     buttonText: {
         fontFamily: 'Lucida-Grande-Bold',
-        fontSize: 16,
+        fontSize: screenwidth / 25,
         paddingHorizontal: 5,
         color: Colors.primaryWhite
     },
@@ -40,7 +40,7 @@ export default StyleSheet.create({
         borderColor: Colors.primaryGray,
     },
     buttonTextInter: {
-        fontSize: 18,
+        fontSize: screenwidth / 25,
         paddingHorizontal: 16,
         color: Colors.primary,
         fontFamily: 'Lucida-Grande-Bold',
@@ -50,7 +50,7 @@ export default StyleSheet.create({
         paddingLeft: 15,
         height: screenheight / 16,
         flex: 1,
-        fontSize: 16,
+        fontSize: screenwidth / 25,
         marginRight: 0,
         color: Colors.primaryGray,
         borderBottomWidth: 2,
@@ -63,7 +63,7 @@ export default StyleSheet.create({
         paddingLeft: 15,
         height: screenheight / 16,
         flex: 1,
-        fontSize: 16,
+        fontSize: screenwidth / 25,
         marginRight: 0,
         color: Colors.primaryGray,
         borderBottomWidth: 2,
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     border: {
         height: INPUT_HEIGHT,
         width: StyleSheet.hairlineWidth,
-        borderBottomColor: 'black'
+        borderBottomColor: Colors.primaryBlack
     },
     ContainerStylesDisabled: {
         backgroundColor: Colors.primaryGray

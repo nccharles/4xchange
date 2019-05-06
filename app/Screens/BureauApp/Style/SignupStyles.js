@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     label: {
         marginLeft: height * .02,
         // marginTop: 10,
-        fontSize: 30,
+        fontSize: width / 15,
         color: Colors.primary,
         fontFamily: 'Lucida-Grande-Bold',
     },

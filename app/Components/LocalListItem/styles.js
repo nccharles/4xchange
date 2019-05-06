@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native'
 import { Colors } from '../../Assets/Themes';
 
 const styles = StyleSheet.create({
-    // $underlayColor: '#E2E2E2',
     row: {
         paddingHorizontal: 20,
         paddingVertical: 16,
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.secondary
     },
     text: {
-        fontSize: 16,
+        fontSize: screenwidth / 25,
         color: Colors.darkGray,
         fontFamily: 'Lucida-Grande-Bold',
     },

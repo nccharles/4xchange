@@ -19,7 +19,7 @@ export default StyleSheet.create({
   },
   currencyBtnTxt: {
     color: Colors.primaryWhite,
-    fontSize: 20,
+    fontSize: screenwidth / 20,
     fontFamily: 'Lucida-Grande-Bold',
   },
   inputContainer: {
@@ -28,7 +28,7 @@ export default StyleSheet.create({
   },
   inputTitle: {
     fontFamily: 'Lucida-Grande-Bold',
-    fontSize: 20,
+    fontSize: screenwidth / 20,
     marginTop: 7
   },
   input: {
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     width: screenwidth - 70,
     paddingHorizontal: 10,
     borderRadius: Metrics.smallMargin,
-    fontSize: 18
+    fontSize: screenwidth / 22
   },
   button: {
     flexDirection: 'row',
@@ -52,7 +52,7 @@ export default StyleSheet.create({
   },
   btnTxt: {
     color: Colors.primaryWhite,
-    fontSize: 20,
+    fontSize: screenwidth / 20,
     fontFamily: 'Lucida-Grande-Bold',
     marginHorizontal: 5
   },

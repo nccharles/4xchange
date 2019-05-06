@@ -40,7 +40,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryGray,
-    fontSize: 20,
+    fontSize: screenwidth / 15,
     marginLeft: 20
   },
   boldLabel: {
@@ -49,13 +49,13 @@ export default StyleSheet.create({
     left: 15,
     // top: 3,
     fontFamily: 'Lucida-Grande-Bold',
-    fontSize: 16,
+    fontSize: screenwidth / 20,
     color: Colors.primary,
   },
   label: {
     color: Colors.primaryGray,
     fontFamily: 'Lucida-Grande-Bold',
-    fontSize: 14,
+    fontSize: screenwidth / 25,
   },
   iconBtn: {
     position: 'absolute',
@@ -66,9 +66,8 @@ export default StyleSheet.create({
     position: 'absolute',
     right: 15,
     bottom: 5,
-    fontWeight: '500',
     color: Colors.secondary,
-    fontFamily: 'Lucida-Grande',
-    fontSize: 13
+    fontFamily: 'Lucida-Grande-Bold',
+    fontSize: screenwidth / 30
   }
 })

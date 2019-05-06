@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Colors } from '../../Assets/Themes'
-
+const screenwidth = Dimensions.get('window').width
 export default StyleSheet.create({
   wrapper: {
     height: 25,
@@ -12,7 +12,7 @@ export default StyleSheet.create({
   text: {
     color: Colors.primaryWhite,
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: screenwidth / 30,
     fontFamily: 'Lucida-Grande-Bold',
   },
 })

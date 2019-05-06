@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         color: Colors.primaryWhite,
         opacity: 0.7,
         fontFamily: 'Lucida-Grande-Bold',
-        fontSize: 40,
+        fontSize: width / 10,
         marginTop: height * .2,
         marginLeft: width * .05,
         marginBottom: height * .1,
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
         marginTop: height * .1,
     },
     here: {
-        fontWeight: 'bold',
-        color: '#fff',
+        fontFamily: 'Lucida-Grande-Bold',
+        color: Colors.primaryWhite,
         marginLeft: 5,
     },
     icou: {

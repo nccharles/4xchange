@@ -74,15 +74,15 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryDark,
-    fontSize: 14
+    fontSize: screenwidth / 30
   },
   subTitle: {
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryGray,
-    fontSize: 12
+    fontSize: screenwidth / 35
   },
   amount: {
-    fontSize: 16,
+    fontSize: screenwidth / 25,
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.secondary
   },

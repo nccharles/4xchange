@@ -24,16 +24,17 @@ const styles = StyleSheet.create({
         marginHorizontal: 20
     },
     title: {
-        fontSize: 18,
+        fontSize: width / 25,
         fontFamily: 'Lucida-Grande-Bold',
         textAlign: 'center',
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: width / 30,
         textAlign: 'center',
         fontFamily: 'Lucida-Grande',
     },
     text: {
+        fontSize: width / 35,
         marginHorizontal: 10,
         fontFamily: 'Lucida-Grande',
     }

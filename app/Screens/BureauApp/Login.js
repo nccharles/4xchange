@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         color: brandColor,
         opacity: 0.7,
         fontFamily: 'Lucida-Grande-Bold',
-        fontSize: 20,
+        fontSize: width / 20,
         marginTop: height * .1,
         marginLeft: width * .05,
         marginBottom: height * .1,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         padding: 0,
         margin: 0,
         flex: 1,
-        fontSize: 20,
+        fontSize: width / 18,
         color: brandColor,
         fontFamily: 'Lucida-Grande-Bold',
     },
@@ -75,19 +75,19 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: Colors.primaryWhite,
-        fontSize: 16,
+        fontSize: width / 25,
         fontFamily: 'Lucida-Grande-Bold',
     },
     wrongNumberText: {
         margin: 10,
-        fontSize: 14,
+        fontSize: width / 30,
         textAlign: 'center',
         color: Colors.primaryGray,
         fontFamily: 'Lucida-Grande',
     },
     disclaimerText: {
         marginTop: 30,
-        fontSize: 12,
+        fontSize: width / 35,
         color: Colors.primaryGray,
         fontFamily: 'Lucida-Grande',
     },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     callingCodeText: {
-        fontSize: 20,
+        fontSize: width / 18,
         color: brandColor,
         fontFamily: 'Lucida-Grande-Bold',
         paddingRight: 10

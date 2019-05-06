@@ -120,9 +120,9 @@ class CurrencyList extends Component {
   renderSeparator = () =>
     <View
       style={{
-        height: 1,
+        height: 0.5,
         width: "100%",
-        backgroundColor: "#CED0CE",
+        backgroundColor: Colors.lightGray,
       }}
     />
   keyExtractor = (item, index) => index.toString()

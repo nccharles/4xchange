@@ -17,7 +17,8 @@ import { userChoice, LocalData } from '../../Config/constants'
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { sendPushNotification } from '../../Config/notice';
-const screenheight = Dimensions.get('window').width
+const screenwidth = Dimensions.get('window').width
+const screenheight = Dimensions.get('window').height
 const initailState = {
   data: [],
   loading: true,
@@ -368,8 +369,8 @@ class Local extends Component {
             }}
             buyTextStyle={{
               color: this.state.buyTextColor,
-              fontSize: 12,
-              fontWeight: '300',
+              fontSize: screenwidth / 35,
+              fontFamily: 'Lucida-Grande',
               textAlign: 'center'
             }}
             btnSellStyle={{
@@ -383,8 +384,8 @@ class Local extends Component {
             }}
             sellTextStyle={{
               color: this.state.sellTextColor,
-              fontSize: 12,
-              fontWeight: '300',
+              fontSize: screenwidth / 35,
+              fontFamily: 'Lucida-Grande',
               textAlign: 'center'
             }} />
         </View>

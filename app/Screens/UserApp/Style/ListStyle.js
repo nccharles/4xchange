@@ -29,14 +29,14 @@ export default StyleSheet.create({
   boldLabel: {
     paddingVertical: 2,
     fontFamily: 'Lucida-Grande-Bold',
-    fontSize: 16,
+    fontSize: screenwidth / 25,
     color: Colors.primaryGray,
   },
   label: {
     paddingVertical: 5,
     fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryGray,
-    fontSize: 13
+    fontSize: screenwidth / 30
   },
 
   image: {
@@ -47,7 +47,7 @@ export default StyleSheet.create({
   },
   textHead: {
     marginLeft: 5,
-    fontSize: 20,
+    fontSize: screenwidth / 20,
     fontFamily: 'Lucida-Grande-Bold',
     textAlign: 'center'
   },

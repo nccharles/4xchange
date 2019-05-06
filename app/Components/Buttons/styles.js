@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: Colors.primaryWhite,
-    fontSize: 18,
+    fontSize: screenwidth / 22,
     fontFamily: 'Lucida-Grande-Bold',
     paddingHorizontal: 5
   },

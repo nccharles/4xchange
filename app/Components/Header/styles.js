@@ -26,7 +26,7 @@ export default StyleSheet.create({
     },
     title: {
         color: Colors.primaryWhite,
-        fontSize: 20,
+        fontSize: screenWidth / 20,
         fontFamily: 'Lucida-Grande-Bold',
         marginLeft: 15
     },
@@ -57,7 +57,7 @@ export default StyleSheet.create({
     },
     forexTitle: {
         color: Colors.primaryWhite,
-        fontSize: 20,
+        fontSize: screenWidth / 20,
         marginRight: 20,
         fontFamily: 'Lucida-Grande-Bold',
     },

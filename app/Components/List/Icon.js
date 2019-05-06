@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 20,
     paddingHorizontal: 8,
-    color: 'black',
+    color: Colors.primaryBlack,
   },
   footer: {
     paddingVertical: 20,
     borderTopWidth: 1,
-    borderColor: "#CED0CE"
+    borderColor: Colors.lightGray
   }
 });
