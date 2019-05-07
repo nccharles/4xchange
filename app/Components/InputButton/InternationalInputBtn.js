@@ -1,23 +1,22 @@
 import React from 'react'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
-
+import { LinearGradient } from "expo";
 import styles from './styles'
+import { Colors } from '../../Assets/Themes';
 
 const InternationalInputButton = (props) => {
     const {
         buttonText,
         text,
         onChangeText,
+        onPress,
         value } = props
 
     return (
         <View style={styles.container}>
-
-            <View style={styles.border} />
-
             <TextInput
-                style={styles.input}
+                style={styles.inputInter}
                 placeholder={text}
                 autoCapitalize={'none'}
                 returnKeyType={'done'}
@@ -28,14 +27,22 @@ const InternationalInputButton = (props) => {
                 value={value}
                 {...props} />
 
-            <View
-                style={styles.buttonContainer}>
-                <Text
-                    style={styles.buttonTextInter}
-                >
-                    {buttonText}
-                </Text>
-            </View>
+            <View style={styles.border} />
+            <LinearGradient
+                colors={Colors.gradientColors}
+                start={{ x: 1.0, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
+                style={styles.InputButton}
+            >
+                <TouchableOpacity
+                    onPress={onPress}>
+                    <Text
+                        style={styles.buttonText}
+                    >
+                        {buttonText}
+                    </Text>
+                </TouchableOpacity>
+            </LinearGradient>
 
         </View>
     )

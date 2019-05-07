@@ -4,7 +4,6 @@ import { FlatList, View, StatusBar } from 'react-native'
 import SearchBar from 'react-native-searchbar'
 import { contains } from '../../Config/constants'
 import _ from 'lodash'
-import { Ionicons } from '@expo/vector-icons'
 
 import ListItem from '../../Components/List/ListItem'
 import SearchHeader from '../../Components/Buttons/SearchHeader'
@@ -74,7 +73,7 @@ class CurrencyList extends Component {
         backgroundColor="transparent"
         textColor='white'
         fontFamily="Lucida-Grande"
-        iconColor="transparent"
+        hideBack={true}
         hideX={true}
         handleChangeText={(text) => this.handleSearch(text)}
         showOnLoad

@@ -7,8 +7,7 @@ import { userChoice } from '../../Config/constants'
 import { Colors } from '../../Assets/Themes'
 
 import Card from '../../Components/Card/InternationalCard'
-import InputButton from '../../Components/InputButton/InputButton'
-import HeaderBtn from '../../Components/Buttons/HeaderBtn'
+import InputButton from '../../Components/InputButton/InternationalInputBtn'
 import Toast, { DURATION } from 'react-native-easy-toast'
 import {
   currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url
@@ -20,27 +19,6 @@ import styles from './Style/shared-styles';
 
 let data;
 class International extends Component {
-
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state
-    let Title = '4xChange   '
-    return {
-      headerTitle: Title + '   ',
-      headerLeft: null,
-      headerRight: (
-        <HeaderBtn
-          onPress={() => params.handleThis()}
-          source={logout} />
-      ),
-      headerStyle: {
-        backgroundColor: Colors.primary,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }
-  };
 
   constructor(props) {
     super(props);
@@ -105,16 +83,6 @@ class International extends Component {
     this.setState({
       baseCurrency: baseCurrency,
     })
-  }
-  _clearChoiceCache = async () => {
-    // alert('click')
-    try {
-      await AsyncStorage.setItem(userChoice, '').then(() => {
-        this.props.navigation.navigate('WelcomeScreen')
-      });
-    } catch (error) {
-      this.refs.toast.show("Error: faild to peform action");
-    }
   }
 
   render() {

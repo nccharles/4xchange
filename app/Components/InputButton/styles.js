@@ -24,6 +24,26 @@ export default StyleSheet.create({
         borderTopRightRadius: screenheight / 16,
         elevation: 3
     },
+    baseButton: {
+        height: screenheight / 16,
+        width: screenwidth / 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottomLeftRadius: screenheight / 16,
+        borderTopLeftRadius: screenheight / 16,
+        elevation: 3
+    },
+    quoteButton: {
+        height: screenheight / 16,
+        width: screenwidth / 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderTopRightRadius: screenheight / 16,
+        borderBottomRightRadius: screenheight / 16,
+        elevation: 3
+    },
     buttonText: {
         fontFamily: 'Lucida-Grande-Bold',
         fontSize: screenwidth / 25,
@@ -54,7 +74,7 @@ export default StyleSheet.create({
         marginRight: 0,
         color: Colors.primaryGray,
         borderBottomWidth: 2,
-        borderBottomRightRadius: screenheight / 16,
+        // borderBottomRightRadius: screenheight / 16,
         borderColor: Colors.primaryDark,
         fontFamily: 'Lucida-Grande-Bold',
     },

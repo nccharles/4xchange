@@ -24,6 +24,7 @@ const initailState = {
   loading: true,
   inputedValue: 1,
   baseCurrency: 'USD',
+  activeCurrency: 'RWF',
   initialCurrency: null,
   buyBackgroundColor: 'transparent',
   buyTextColor: Colors.primaryDark,
@@ -52,7 +53,7 @@ class Local extends Component {
       category: 'Buy',
       buyTextColor: Colors.primaryWhite,
       sellTextColor: Colors.primaryDark,
-      initialCurrency: 'RWF',
+      initialCurrency: this.state.activeCurrency,
       isBuying: true
     })
   }
@@ -64,7 +65,7 @@ class Local extends Component {
       category: 'Sell',
       sellTextColor: Colors.primaryWhite,
       buyTextColor: Colors.primaryDark,
-      initialCurrency: this.state.baseCurrency,
+      initialCurrency: this.state.activeCurrency,
       isBuying: false,
     })
   }
@@ -117,6 +118,7 @@ class Local extends Component {
       handleFirstConnectivityChange
     );
   }
+
   requestUpdate = (User, Company) => {
     firebase
       .database()
@@ -349,8 +351,10 @@ class Local extends Component {
           <InputButton
             text='Enter Amount ...'
             onPress={() => this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })}
-            buttonText={this.state.baseCurrency + '   '}
+            baseText={this.state.baseCurrency + '   '}
+            quoteText={this.state.activeCurrency + '   '}
             editable={true}
+            defaultValue='1.00'
             keyboardType="numeric"
             onChangeText={(value) => this._handleCurrencyInput(value)}
           />
@@ -419,15 +423,15 @@ class Local extends Component {
                 <Card
                   onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
                   onPress={() => this.requestUpdate(item.userPhone, item.companyName)}
-                  text={item.companyName + '   '}
-                  text2={parseInt(item.bidPrice) + '   '}
-                  bidPrice={item.bidPrice + '   '}
-                  askPrice={item.askPrice + '   '}
-                  baseCurrency={item.currency + '   '}
-                  time={Moment(item.updatedAt).fromNow() + '   '}
-                  currency={this.state.initialCurrency + '   '}
-                  equivalent={this.state.isBuying ? parseInt(item.bidPrice) * parseInt(inputedValue) : parseInt(inputedValue) / parseInt(item.askPrice)}
-                  category={this.state.category + '   '}
+                  text={item.companyName}
+                  text2={parseInt(item.bidPrice)}
+                  bidPrice={item.bidPrice}
+                  askPrice={item.askPrice}
+                  baseCurrency={item.currency}
+                  time={Moment(item.updatedAt).fromNow()}
+                  currency={item.quote}
+                  equivalent={this.state.isBuying ? parseInt(item.askPrice) * parseInt(inputedValue) : parseInt(inputedValue) * parseInt(item.bidPrice)}
+                  category={this.state.category}
                   // source={this.state.flag}
                   iconStyle={this.state.fav_icon ? 'red' : 'grey'}
                   onPressIcon={() => this.handle_fav({ index, item })}

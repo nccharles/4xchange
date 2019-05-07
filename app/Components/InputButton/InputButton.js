@@ -8,14 +8,29 @@ import { Colors } from '../../Assets/Themes';
 const InputWithButton = (props) => {
     const {
         onPress,
-        buttonText,
+        baseText,
+        quoteText,
         text,
         onChangeText,
         value } = props
 
     return (
         <View style={styles.container}>
-
+            <LinearGradient
+                colors={Colors.gradientColors}
+                start={{ x: 1.0, y: 0.5 }}
+                end={{ x: 0, y: 0.5 }}
+                style={styles.baseButton}
+            >
+                <TouchableOpacity
+                    onPress={onPress}>
+                    <Text
+                        style={styles.buttonText}
+                    >
+                        {baseText}
+                    </Text>
+                </TouchableOpacity>
+            </LinearGradient>
             <TextInput
                 style={styles.input}
                 placeholder={text}
@@ -28,19 +43,19 @@ const InputWithButton = (props) => {
                 value={value}
                 {...props} />
 
-            <View style={styles.border} />
+            {/* <View style={styles.border} /> */}
             <LinearGradient
                 colors={Colors.gradientColors}
                 start={{ x: 1.0, y: 0.5 }}
                 end={{ x: 0, y: 0.5 }}
-                style={styles.InputButton}
+                style={styles.quoteButton}
             >
                 <TouchableOpacity
                     onPress={onPress}>
                     <Text
                         style={styles.buttonText}
                     >
-                        {buttonText}
+                        {quoteText}
                     </Text>
                 </TouchableOpacity>
             </LinearGradient>
@@ -52,7 +67,8 @@ InputWithButton.propTypes = {
     onPress: PropTypes.func,
     BtnStyle: PropTypes.any,
     BtnTextStyle: PropTypes.any,
-    ButtonText: PropTypes.string,
+    baseText: PropTypes.string,
+    quoteText: PropTypes.string,
     editable: PropTypes.bool,
     text: PropTypes.string,
     onChangeText: PropTypes.func,

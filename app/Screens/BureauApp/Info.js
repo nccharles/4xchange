@@ -226,7 +226,7 @@ class Info extends Component {
                             keyboardType="email-address"
                             autoCorrect={false}
                             returnKeyType={"next"}
-                            onChangeText={(input) => this._handleInput('email', input)}
+                            onChangeText={(input) => this._handleTextInput('email', input)}
                             value={email}
                             editable={true}
                         />

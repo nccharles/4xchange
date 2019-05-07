@@ -36,7 +36,7 @@ export default StyleSheet.create({
     left: 15,
     top: 8,
     fontSize: screenwidth / 25,
-    fontFamily: 'Lucida-Grande',
+    fontFamily: 'Lucida-Grande-Bold',
     color: Colors.primaryBlack,
 
   },
@@ -46,7 +46,7 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     bottom: 15,
-    fontFamily: 'Lucida-Grande',
+    fontFamily: 'Lucida-Grande-Bold',
   },
   label2: {
     color: Colors.primaryGray,
@@ -54,7 +54,7 @@ export default StyleSheet.create({
     position: 'absolute',
     left: 15,
     bottom: 0,
-    fontFamily: 'Lucida-Grande',
+    fontFamily: 'Lucida-Grande-Bold',
   },
   icon_btn: {
     position: "absolute",
