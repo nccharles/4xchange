@@ -14,16 +14,15 @@ import Card from '../Card/BureauCard/Card'
 import DialogComponent from '../Dialog/Dialog'
 import styles from '../../Screens/BureauApp/Style/AddCurrencyStyle'
 import emptydata from '../../Assets/Icons/empty.png'
-//backend imports 
+import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { userPhone, cName, chatNum, chatName } from '../../Config/constants';
 import { registerForPushNotificationsAsync } from '../../Config/notice';
 
-const initailState = {
+const initialState = {
     loading: true,
     inputedValue: 0,
-    baseCurrency: 'Choose',
     initialCurrency: null,
     category: 'Buy or Sell',
     isBuying: true,
@@ -34,6 +33,7 @@ const initailState = {
         askPrice: null,
         bidPrice: null,
         Currency: null,
+        quote: null,
         uid: null,
     },
     error: null,
@@ -45,14 +45,17 @@ class ManageCurrency extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...initailState,
+            ...initialState,
             data: null,
             isLoading: true,
             userPhone: null,
             companyName: null,
             customerMessage: 0,
+            baseCurrency: 'USD',
+            quoteCurrency: 'EUR',
             newCurrency: {
                 currency: null,
+                quote: null,
                 askPrice: null,
                 bidPrice: null,
             }
@@ -73,7 +76,39 @@ class ManageCurrency extends Component {
         await AsyncStorage.setItem(chatName, this.state.companyName)
         await AsyncStorage.setItem(chatNum, currentUser)
     }
+    handleBaseFlag = (currency) => {
+        if (currency) {
+            switch (currency) {
+                case 'BTC':
+                    return flagBTC;
+                case 'XDR':
+                    return flagXDR;
+                case 'XAU':
+                    return flagXAU;
+                case 'XAG':
+                    return flagXAG;
+                default:
+                    return `${flagUrl}/${currency.substr(0, 2)}.png`;
 
+            }
+        }
+    };
+    handleQuoteFlag = (currency) => {
+        if (currency) {
+            switch (currency) {
+                case 'BTC':
+                    return flagBTC;
+                case 'XDR':
+                    return flagXDR;
+                case 'XAU':
+                    return flagXAU;
+                case 'XAG':
+                    return flagXAG;
+                default:
+                    return `${flagUrl}/${currency.substr(0, 2)}.png`;
+            }
+        }
+    };
     _getAllCustomers = async (forexPhone) => {
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .on('value', snapshot => {
@@ -107,15 +142,16 @@ class ManageCurrency extends Component {
     }
     _handleSaveCurrency = async () => {
         console.log('done')
-        const { newCurrency: { currency, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
-        if (_.find(this.state.data, { currency: currency })) {
+        const { newCurrency: { currency, quote, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
+        if (_.find(this.state.data, { currency: currency, quote: quote })) {
             this.refs.toast.show(`${currency} already exist!!!`);
             this.setState(state => ({
-                ...initailState,
+                ...initialState,
                 newCurrency: {
                     askPrice: '',
                     bidPrice: '',
                     currency: '',
+                    quote: ''
                 },
             }))
 
@@ -131,7 +167,7 @@ class ManageCurrency extends Component {
         if (!userPhone) {
             return
         }
-        if (!currency || !askPrice || !bidPrice) {
+        if (!currency || !quote || !askPrice || !bidPrice) {
             this.setState({
                 error: 'complete required field',
                 isSubmitting: false,
@@ -143,6 +179,7 @@ class ManageCurrency extends Component {
         await firebase.database().ref(`/currencies`)
             .push({
                 currency,
+                quote,
                 askPrice,
                 bidPrice,
                 updatedAt,
@@ -152,11 +189,12 @@ class ManageCurrency extends Component {
 
             .then(response => {
                 that.setState(state => ({
-                    ...initailState,
+                    ...initialState,
                     newCurrency: {
                         askPrice: '',
                         bidPrice: '',
                         currency: '',
+                        quote: ''
                     },
                 }))
                 this.refs.toast.show('Currency added!');
@@ -166,7 +204,7 @@ class ManageCurrency extends Component {
             })
     }
     _handleUpdateCurrency = async () => {
-        const { currentItem: { askPrice, bidPrice, uid }, userPhone, isSubmitting, companyName } = this.state
+        const { currentItem: { askPrice, bidPrice, uid }, isSubmitting, companyName } = this.state
         const that = this
         if (isSubmitting) {
             return
@@ -184,7 +222,7 @@ class ManageCurrency extends Component {
             })
             .then(response => {
                 that.setState({
-                    ...initailState,
+                    ...initialState,
                 })
                 this.refs.toast.show('Currency updated!');
             })
@@ -206,7 +244,8 @@ class ManageCurrency extends Component {
                 askPrice: item.askPrice,
                 bidPrice: item.bidPrice,
                 uid: item.uid,
-                currency: item.currency
+                currency: item.currency,
+                quote: item.quote
             }
         });
     };
@@ -217,7 +256,8 @@ class ManageCurrency extends Component {
                 askPrice: item.askPrice,
                 bidPrice: item.bidPrice,
                 uid: item.uid,
-                currency: item.currency
+                currency: item.currency,
+                quote: item.quote
 
             }
         });
@@ -225,12 +265,12 @@ class ManageCurrency extends Component {
 
     handleCancel = () => {
         this.setState({
-            ...initailState
+            ...initialState
         });
     };
 
     handleDelete = () => {
-        const { userPhone, currentItem, isSubmitting } = this.state
+        const { currentItem, isSubmitting } = this.state
         const that = this
         if (isSubmitting) {
             return
@@ -246,7 +286,7 @@ class ManageCurrency extends Component {
             .catch(err => {
                 console.log(err)
             })
-        that.setState({ ...initailState })
+        that.setState({ ...initialState })
     };
     handleUpdate = () => {
         console.log('updated')
@@ -285,24 +325,54 @@ class ManageCurrency extends Component {
 
 
     setBaseCurrency = async (currency) => {
-        const { baseCurrency } = currency
-        this.setState(state => ({
-            baseCurrency: baseCurrency,
-            AddModal: true,
-            newCurrency: {
-                ...state.newCurrency,
-                currency: baseCurrency,
-            }
-        }))
 
+        const { baseCurrency } = currency
+        if (baseCurrency === this.state.quoteCurrency) {
+            this.refs.toast.show('Choose different Currency!');
+            this.setState(state => ({
+                AddModal: true,
+            }))
+        } else {
+            this.setState(state => ({
+                baseCurrency: baseCurrency,
+                AddModal: true,
+                newCurrency: {
+                    ...state.newCurrency,
+                    currency: baseCurrency
+                }
+            }))
+        }
     }
-    getCurrency = async (setBaseCurrency) => {
+    setQuoteCurrency = async (currency) => {
+        const { quoteCurrency } = currency
+        if (quoteCurrency === this.state.baseCurrency) {
+            this.refs.toast.show('Choose different Currency!');
+            this.setState(state => ({
+                AddModal: true,
+            }))
+        } else {
+            this.setState(state => ({
+                quoteCurrency: quoteCurrency,
+                AddModal: true,
+                newCurrency: {
+                    ...state.newCurrency,
+                    quote: quoteCurrency
+                }
+            }))
+        }
+    }
+    getBaseCurrency = async (setBaseCurrency) => {
         this.setState({
-            ...initailState,
+            ...initialState,
         })
         this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })
     }
-
+    getQuoteCurrency = async (setQuoteCurrency) => {
+        this.setState({
+            ...initialState,
+        })
+        this.props.navigation.navigate('CurrencyList', { setQuoteCurrency: this.setQuoteCurrency })
+    }
     keyExtractor = (item, index) => index.toString()
 
     oneScreensWorth = 30
@@ -341,39 +411,46 @@ class ManageCurrency extends Component {
                                 <Card
                                     onPress={() => this.showUpdateDialog(item)}
                                     onPressDel={() => this.showDeleteDialog(item)}
-                                    text={item.currency + '   '}
-                                    askPrice={item.askPrice + '   '}
-                                    bidPrice={item.bidPrice + '   '}
-                                    time={Moment(item.updatedAt).fromNow() + '   '} />
+                                    text={item.currency}
+                                    askPrice={item.askPrice}
+                                    bidPrice={item.bidPrice}
+                                    time={Moment(item.updatedAt).fromNow()} />
                             )}
                             keyExtractor={this.keyExtractor}
                             initialNumToRender={this.oneScreensWorth}
                         />}
                 <ModalComponent
                     visible={this.state.AddModal}
+                    baseFlag={{ uri: this.handleBaseFlag(this.state.baseCurrency) }}
+                    quoteFlag={{ uri: this.handleQuoteFlag(this.state.quoteCurrency) }}
                     onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
-                    onPressCurrency={() => this.getCurrency(this.state.baseCurrency)}
-                    baseCurrencyBtnTxt={this.state.baseCurrency + '   '}
+                    onPressBase={() => this.getBaseCurrency(this.state.baseCurrency)}
+                    onPressQuote={() => this.getQuoteCurrency(this.state.quoteCurrency)}
+                    baseCurrencyBtnTxt={this.state.baseCurrency}
+                    quoteCurrencyBtnTxt={this.state.quoteCurrency}
                     onChangeTextBuy={(value) => this._handleNewCurrencyTextInput('askPrice', value)}
                     onChangeTextSell={(value) => this._handleNewCurrencyTextInput('bidPrice', value)}
                     onPressCancel={this.handleCancel}
                     onPressAction={this._handleSaveCurrency.bind(this)}
-                    actionBtnTxt="Save   "
+                    actionBtnTxt="Save"
                     valueBuy={this.state.newCurrency.askPrice}
                     valueSell={this.state.newCurrency.bidPrice}
                     icon="download"
                 />
                 <ModalComponent
                     visible={this.state.UpdateModal}
+                    baseFlag={{ uri: this.handleBaseFlag(this.state.currentItem.currency) }}
+                    quoteFlag={{ uri: this.handleQuoteFlag(this.state.currentItem.quote) }}
                     onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
-                    baseCurrencyBtnTxt={this.state.currentItem.currency + '   '}
+                    baseCurrencyBtnTxt={this.state.currentItem.currency}
+                    quoteCurrencyBtnTxt={this.state.currentItem.quote}
                     onChangeTextBuy={(value) => this._handleUpdateCurrencyTextInput('askPrice', value)}
                     onChangeTextSell={(value) => this._handleUpdateCurrencyTextInput('bidPrice', value)}
                     onPressCancel={this.handleCancel}
                     onPressAction={this._handleUpdateCurrency.bind(this)}
                     valueBuy={this.state.currentItem.askPrice}
                     valueSell={this.state.currentItem.bidPrice}
-                    actionBtnTxt="Update   "
+                    actionBtnTxt="Update"
                     icon="refresh-ccw"
                 />
                 <DialogComponent
@@ -383,7 +460,7 @@ class ManageCurrency extends Component {
                     // input="892"
                     onPress={this.handleDelete}
                     onPressCancel={this.handleCancel}
-                    label2="Delete   "
+                    label2="Delete"
                 />
                 <AddBtn onPress={this.Show_Custom_Alert.bind(this)} />
                 <Toast ref="toast"

@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import {
-  Text, View, TouchableOpacity, Modal, TextInput
+  Text, View, TouchableOpacity, Modal, TextInput, Image
 } from 'react-native';
-// import Dialog from "react-native-dialog";
-import { Feather } from '@expo/vector-icons'
-
-// import { Colors } from '../../Assets/Themes'
-
+import { Icon, LinearGradient } from 'expo'
 import styles from './styles'
-
+import { Colors } from '../../Assets/Themes';
 
 class ModalComponent extends Component {
   render() {
     const {
       visible,
       onRequestClose,
-      onPressCurrency,
+      onPressBase,
+      onPressQuote,
       baseCurrencyBtnTxt,
+      quoteCurrencyBtnTxt,
       onChangeTextBuy,
       valueBuy,
       onChangeTextSell,
@@ -37,14 +35,34 @@ class ModalComponent extends Component {
           onRequestClose={onRequestClose}
         // onShow={()=> this.setBaseCurrency(this.state.Alert_Visibility)}
         >
-          <View style={styles.container}>
-            <TouchableOpacity
-              onPress={onPressCurrency}
-              style={styles.currencyBtn}>
-              <Text style={styles.currencyBtnTxt}>
-                {baseCurrencyBtnTxt}
-              </Text>
-            </TouchableOpacity>
+          <LinearGradient
+            colors={Colors.gradientColors}
+            start={{ x: 0.5, y: 1.0 }}
+            end={{ x: 1.0, y: 0 }}
+            style={styles.container}>
+            <View style={styles.currenciesbtn}>
+              <TouchableOpacity
+                onPress={onPressBase}
+                style={styles.currencyBtn}>
+                <Image style={styles.flag} resizeMode="stretch" source={this.props.baseFlag} />
+                <Text style={styles.currencyBtnTxt}>
+                  {baseCurrencyBtnTxt}
+                </Text>
+              </TouchableOpacity>
+              <Icon.FontAwesome
+                style={styles.exchange}
+                name="exchange"
+                size={20}
+                color={Colors.primaryWhite} />
+              <TouchableOpacity
+                onPress={onPressQuote}
+                style={styles.currencyBtn}>
+                <Image style={styles.flag} resizeMode="stretch" source={this.props.quoteFlag} />
+                <Text style={styles.currencyBtnTxt}>
+                  {quoteCurrencyBtnTxt}
+                </Text>
+              </TouchableOpacity>
+            </View>
             <View>
               <View style={styles.inputContainer}>
                 <Text style={styles.inputTitle}>Buy: </Text>
@@ -54,7 +72,7 @@ class ModalComponent extends Component {
                   autoCapitalize={'none'}
                   returnKeyType={'done'}
                   autoCorrect={false}
-                  placeholderTextColor='#99A3A4'
+                  placeholderTextColor={Colors.lightGray}
                   underlineColorAndroid='transparent'
                   onChangeText={onChangeTextBuy}
                   value={valueBuy}
@@ -70,7 +88,7 @@ class ModalComponent extends Component {
                   autoCapitalize={'none'}
                   returnKeyType={'done'}
                   autoCorrect={false}
-                  placeholderTextColor='#99A3A4'
+                  placeholderTextColor={Colors.lightGray}
                   underlineColorAndroid='transparent'
                   onChangeText={onChangeTextSell}
                   value={valueSell}
@@ -84,23 +102,23 @@ class ModalComponent extends Component {
               <TouchableOpacity
                 onPress={onPressCancel}
                 style={styles.button}>
-                <Feather
+                <Icon.Feather
                   name="x-circle"
                   size={25}
-                  color="white" />
+                  color={Colors.primaryWhite} />
                 <Text style={styles.btnTxt}>Cancel   </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={onPressAction}
                 style={styles.button2}>
-                <Feather
+                <Icon.Feather
                   name={icon}
                   size={25}
-                  color="white" />
+                  color={Colors.primaryWhite} />
                 <Text style={styles.btnTxt}>{actionBtnTxt}</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </LinearGradient>
         </Modal>
       </View>
     );
@@ -109,8 +127,10 @@ class ModalComponent extends Component {
 ModalComponent.propTypes = {
   visible: PropTypes.bool,
   onRequestClose: PropTypes.func,
-  onPressCurrency: PropTypes.func,
+  onPressBase: PropTypes.func,
+  onPressQuote: PropTypes.func,
   baseCurrencyBtnTxt: PropTypes.string,
+  quoteCurrencyBtnTxt: PropTypes.string,
   onChangeTextBuy: PropTypes.func,
   valueBuy: PropTypes.any,
   onChangeTextSell: PropTypes.func,

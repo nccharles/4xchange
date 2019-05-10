@@ -7,19 +7,38 @@ const screenheight = Dimensions.get('window').height
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop: 100
+    marginTop: screenheight / 4,
+    marginHorizontal: 10,
+    borderRadius: Metrics.smallMargin,
+    padding: 10,
+    elevation: 3
+  },
+
+  flag: {
+    width: screenheight / 20,
+    height: screenheight / 20,
+    borderRadius: Metrics.smallMargin,
+  },
+  currenciesbtn: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    justifyContent: 'space-between'
   },
   currencyBtn: {
-    backgroundColor: Colors.primaryDark,
-    width: 100,
-    height: 40,
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    borderColor: Colors.primaryWhite,
+    width: screenwidth / 3,
+    height: screenheight / 18,
+    marginHorizontal: 20,
     borderRadius: Metrics.smallMargin
   },
   currencyBtnTxt: {
     color: Colors.primaryWhite,
-    fontSize: screenwidth / 20,
+    fontSize: screenwidth / 12,
     fontFamily: 'Lucida-Grande-Bold',
   },
   inputContainer: {
@@ -32,23 +51,19 @@ export default StyleSheet.create({
     marginTop: 7
   },
   input: {
-    height: 40,
+    height: screenheight / 16,
     borderBottomWidth: 2,
     borderColor: Colors.lightGray,
     width: screenwidth - 70,
     paddingHorizontal: 10,
-    borderRadius: Metrics.smallMargin,
     fontSize: screenwidth / 22
   },
   button: {
     flexDirection: 'row',
-    backgroundColor: Colors.primaryDark,
     width: screenwidth / 2.5,
-    height: 40,
-    borderRadius: Metrics.smallMargin,
+    height: screenheight / 16,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 1,
   },
   btnTxt: {
     color: Colors.primaryWhite,
@@ -58,13 +73,15 @@ export default StyleSheet.create({
   },
   button2: {
     flexDirection: 'row',
-    backgroundColor: Colors.primaryDark,
     width: screenwidth / 2.5,
-    height: 40,
-    borderRadius: Metrics.smallMargin,
+    height: screenheight / 16,
     alignItems: 'center',
     justifyContent: 'center',
-    elevation: 1,
-    marginLeft: 40
+    marginLeft: 10
+  },
+  exchange: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10
   }
 })

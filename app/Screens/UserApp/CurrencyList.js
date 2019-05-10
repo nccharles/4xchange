@@ -100,10 +100,15 @@ class CurrencyList extends Component {
     }
   };
 
-  goBack = (baseCurrency) => {
+  goBack = (Currency) => {
     const { navigation } = this.props
     navigation.goBack();
-    navigation.state.params.setBaseCurrency({ baseCurrency: baseCurrency })
+    const { setBaseCurrency, setQuoteCurrency } = navigation.state.params
+    if (setBaseCurrency) {
+      setBaseCurrency({ baseCurrency: Currency })
+    } else {
+      setQuoteCurrency({ quoteCurrency: Currency })
+    }
   }
 
   handleSearch = (text) => {
