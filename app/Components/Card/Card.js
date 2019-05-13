@@ -25,19 +25,9 @@ const Card = ({
                             style={{ flex: 1 }}
                             onPress={onPress1}>
                             <Text style={styles.boldLabel}>{text}</Text>
-                            <Text style={styles.label}>Buy: {`${askPrice} ${''}`}</Text>
-                            <Text style={styles.label2}>Sell: {`${bidPrice} ${''}`}</Text>
+                            <Text style={styles.label}>Buy: {`${askPrice}`}</Text>
+                            <Text style={styles.label2}>Sell: {`${bidPrice}`}</Text>
                         </TouchableOpacity>
-                        {/* <TouchableOpacity
-                        style={styles.icon_btn}
-                        onPress={onPressIcon}>
-                    <Ionicons
-                        name= "md-heart-outline"
-                        color= {iconStyle}
-                        size={23}
-                        // style={iconStyle}
-                    />
-                </TouchableOpacity> */}
                     </View>
                     <View style={styles.rightContainer}>
                         <TouchableOpacity
@@ -63,8 +53,6 @@ const Card = ({
 
 Card.propTypes = {
     title: PropTypes.string,
-    text3: PropTypes.string,
-    text2: PropTypes.string,
     time: PropTypes.string,
     category: PropTypes.string,
     equivalent: PropTypes.number,

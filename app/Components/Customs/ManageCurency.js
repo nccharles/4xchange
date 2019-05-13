@@ -76,7 +76,7 @@ class ManageCurrency extends Component {
         await AsyncStorage.setItem(chatName, this.state.companyName)
         await AsyncStorage.setItem(chatNum, currentUser)
     }
-    handleBaseFlag = (currency) => {
+    handleFlag = (currency) => {
         if (currency) {
             switch (currency) {
                 case 'BTC':
@@ -90,22 +90,6 @@ class ManageCurrency extends Component {
                 default:
                     return `${flagUrl}/${currency.substr(0, 2)}.png`;
 
-            }
-        }
-    };
-    handleQuoteFlag = (currency) => {
-        if (currency) {
-            switch (currency) {
-                case 'BTC':
-                    return flagBTC;
-                case 'XDR':
-                    return flagXDR;
-                case 'XAU':
-                    return flagXAU;
-                case 'XAG':
-                    return flagXAG;
-                default:
-                    return `${flagUrl}/${currency.substr(0, 2)}.png`;
             }
         }
     };
@@ -421,8 +405,8 @@ class ManageCurrency extends Component {
                         />}
                 <ModalComponent
                     visible={this.state.AddModal}
-                    baseFlag={{ uri: this.handleBaseFlag(this.state.baseCurrency) }}
-                    quoteFlag={{ uri: this.handleQuoteFlag(this.state.quoteCurrency) }}
+                    baseFlag={{ uri: this.handleFlag(this.state.baseCurrency) }}
+                    quoteFlag={{ uri: this.handleFlag(this.state.quoteCurrency) }}
                     onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
                     onPressBase={() => this.getBaseCurrency(this.state.baseCurrency)}
                     onPressQuote={() => this.getQuoteCurrency(this.state.quoteCurrency)}
@@ -439,8 +423,8 @@ class ManageCurrency extends Component {
                 />
                 <ModalComponent
                     visible={this.state.UpdateModal}
-                    baseFlag={{ uri: this.handleBaseFlag(this.state.currentItem.currency) }}
-                    quoteFlag={{ uri: this.handleQuoteFlag(this.state.currentItem.quote) }}
+                    baseFlag={{ uri: this.handleFlag(this.state.currentItem.currency) }}
+                    quoteFlag={{ uri: this.handleFlag(this.state.currentItem.quote) }}
                     onRequestClose={() => this.Show_Custom_Alert(!this.state.Alert_Visibility)}
                     baseCurrencyBtnTxt={this.state.currentItem.currency}
                     quoteCurrencyBtnTxt={this.state.currentItem.quote}

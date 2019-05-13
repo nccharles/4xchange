@@ -94,7 +94,6 @@ const SignedIn = createStackNavigator({
       header: () => null
     }
   },
-  CurrencyList: { screen: CurrencyList },
   Info: { screen: Info }
 });
 const WelcomeStack = createStackNavigator({
@@ -119,7 +118,6 @@ const WelcomeStack = createStackNavigator({
       header: () => null
     }
   },
-  CurrencyList: { screen: CurrencyList },
   Info: { screen: Info },
   Settings: {
     screen: Settingscreen

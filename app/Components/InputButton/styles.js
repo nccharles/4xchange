@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { Colors } from '../../Assets/Themes'
+import { Colors, Metrics } from '../../Assets/Themes'
 
 const INPUT_HEIGHT = 48
 const screenwidth = Dimensions.get('window').width
@@ -12,7 +12,20 @@ export default StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
-        marginBottom: 10,
+        marginBottom: 5,
+    },
+    Localcontainer: {
+        width: screenwidth - 5,
+        height: screenheight / 7,
+        flexDirection: 'column',
+        padding: 10,
+        alignSelf: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 0,
+        backgroundColor: Colors.primary,
+        borderTopLeftRadius: Metrics.smallMargin,
+        borderTopRightRadius: Metrics.smallMargin,
+        elevation: 1
     },
     InputButton: {
         height: screenheight / 16,
@@ -24,26 +37,45 @@ export default StyleSheet.create({
         borderTopRightRadius: screenheight / 16,
         elevation: 3
     },
-    baseButton: {
+    input: {
+        padding: 0,
+        width: screenwidth - 80,
         height: screenheight / 16,
-        width: screenwidth / 5,
+        flex: 1,
+        alignSelf: 'center',
+        fontSize: screenwidth / 25,
+        color: Colors.primaryWhite,
+        borderBottomWidth: 2,
+        borderColor: Colors.primaryWhite,
+        fontFamily: 'Lucida-Grande-Bold',
+    },
+    Buttons: {
+        backgroundColor: "transparent",
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomLeftRadius: screenheight / 16,
-        borderTopLeftRadius: screenheight / 16,
-        elevation: 3
+        padding: 2,
+        justifyContent: 'space-between',
+        width: screenwidth / 4,
+        height: screenheight / 18,
+        borderRadius: Metrics.baseMargin,
     },
-    quoteButton: {
-        height: screenheight / 16,
-        width: screenwidth / 5,
+    Linear: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderTopRightRadius: screenheight / 16,
-        borderBottomRightRadius: screenheight / 16,
+        marginHorizontal: 0,
+        borderRadius: Metrics.baseMargin,
         elevation: 3
     },
+    flag: {
+        width: screenheight / 15,
+        height: screenheight / 20,
+        borderRadius: Metrics.baseMargin,
+    },
+    currencyBtn: {
+        flexDirection: 'row',
+        marginHorizontal: 20,
+        justifyContent: 'space-between'
+    },
+
     buttonText: {
         fontFamily: 'Lucida-Grande-Bold',
         fontSize: screenwidth / 25,
@@ -65,19 +97,7 @@ export default StyleSheet.create({
         color: Colors.primary,
         fontFamily: 'Lucida-Grande-Bold',
     },
-    input: {
-        backgroundColor: Colors.primaryWhite,
-        paddingLeft: 15,
-        height: screenheight / 16,
-        flex: 1,
-        fontSize: screenwidth / 25,
-        marginRight: 0,
-        color: Colors.primaryGray,
-        borderBottomWidth: 2,
-        // borderBottomRightRadius: screenheight / 16,
-        borderColor: Colors.primaryDark,
-        fontFamily: 'Lucida-Grande-Bold',
-    },
+
     inputInter: {
         backgroundColor: Colors.primaryWhite,
         paddingLeft: 15,
@@ -99,5 +119,9 @@ export default StyleSheet.create({
     ContainerStylesDisabled: {
         backgroundColor: Colors.primaryGray
     },
-
+    exchange: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
+    }
 })

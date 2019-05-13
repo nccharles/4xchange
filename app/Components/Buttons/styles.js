@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { Colors } from '../../Assets/Themes'
+import { Colors, Metrics } from '../../Assets/Themes'
 
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
@@ -56,11 +56,15 @@ const styles = StyleSheet.create({
     tintColor: Colors.primaryWhite,
   },
   buttonContainer: {
+    backgroundColor: Colors.primary,
     marginBottom: 10,
     flexDirection: 'row',
-    borderRadius: screenheight / 16,
-    height: screenheight / 20,
-    width: screenwidth - 30,
+    borderWidth: 2,
+    borderColor: Colors.primary,
+    borderBottomRightRadius: Metrics.smallMargin,
+    borderBottomLeftRadius: Metrics.smallMargin,
+    height: screenheight / 25,
+    width: screenwidth - 5,
     alignSelf: 'center',
     elevation: 1
   },

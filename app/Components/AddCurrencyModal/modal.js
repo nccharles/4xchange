@@ -72,7 +72,7 @@ class ModalComponent extends Component {
                   autoCapitalize={'none'}
                   returnKeyType={'done'}
                   autoCorrect={false}
-                  placeholderTextColor={Colors.lightGray}
+                  placeholderTextColor={Colors.primaryWhite}
                   underlineColorAndroid='transparent'
                   onChangeText={onChangeTextBuy}
                   value={valueBuy}
@@ -88,7 +88,7 @@ class ModalComponent extends Component {
                   autoCapitalize={'none'}
                   returnKeyType={'done'}
                   autoCorrect={false}
-                  placeholderTextColor={Colors.lightGray}
+                  placeholderTextColor={Colors.primaryWhite}
                   underlineColorAndroid='transparent'
                   onChangeText={onChangeTextSell}
                   value={valueSell}

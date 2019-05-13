@@ -11,7 +11,7 @@ import _ from 'lodash'
 import ManageCurrency from '../../Components/Customs/ManageCurency';
 import Details from '../UserApp/profile';
 
-const initailState = {
+const initialState = {
   loading: true,
   inputedValue: 0,
   baseCurrency: 'Choose',
@@ -36,7 +36,7 @@ class AddCurrency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...initailState,
+      ...initialState,
       data: null,
       isLoading: true,
       userPhone: null,

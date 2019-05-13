@@ -6,30 +6,29 @@ import {
 } from 'react-native';
 import Toast from 'react-native-easy-toast'
 import Moment from 'moment'
-import { Colors } from '../../Assets/Themes'
+import { Colors, Metrics } from '../../Assets/Themes'
 import styles from './Style/ListStyle'
 import emptydata from '../../Assets/Icons/empty.png'
 import CategoryBtn from '../../Components/Buttons/BtnCategory'
 import Card from '../../Components/Card/Card'
 import InputButton from '../../Components/InputButton/InputButton'
-import { userChoice, LocalData } from '../../Config/constants'
+import { userChoice, LocalData, Quote, Base } from '../../Config/constants'
+import { currencies, flagUrl, flagBTC, flagXAG, flagXAU, flagXDR, url } from '../../Assets/resources/data';
 //firebase things
 import * as firebase from 'firebase'
 import _ from 'lodash'
 import { sendPushNotification } from '../../Config/notice';
 const screenwidth = Dimensions.get('window').width
 const screenheight = Dimensions.get('window').height
-const initailState = {
+const initialState = {
   data: [],
   loading: true,
   inputedValue: 1,
-  baseCurrency: 'USD',
-  activeCurrency: 'RWF',
   initialCurrency: null,
   buyBackgroundColor: 'transparent',
-  buyTextColor: Colors.primaryDark,
+  buyTextColor: Colors.primaryWhite,
   sellBackgroundColor: 'transparent',
-  sellTextColor: Colors.primaryDark,
+  sellTextColor: Colors.primaryWhite,
   ConnectionStatus: false,
   category: 'Buy',
   isBuying: true,
@@ -40,32 +39,52 @@ const initailState = {
 }
 
 class Local extends Component {
-
   constructor(props) {
     super(props);
-    this.state = initailState
+    this.state = {
+      ...initialState,
+      baseCurrency: 'USD',
+      quoteCurrency: 'RWF',
+    }
+  };
+  handleFlag = (currency) => {
+    if (currency) {
+      switch (currency) {
+        case 'BTC':
+          return flagBTC;
+        case 'XDR':
+          return flagXDR;
+        case 'XAU':
+          return flagXAU;
+        case 'XAG':
+          return flagXAG;
+        default:
+          return `${flagUrl}/${currency.substr(0, 2)}.png`;
+
+      }
+    }
   };
 
   changeBtnBuy = () => {
     this.setState({
-      buyBackgroundColor: Colors.primaryDark,
+      buyBackgroundColor: Colors.primary,
       sellBackgroundColor: 'transparent',
       category: 'Buy',
       buyTextColor: Colors.primaryWhite,
-      sellTextColor: Colors.primaryDark,
-      initialCurrency: this.state.activeCurrency,
+      sellTextColor: Colors.primaryLight,
+      initialCurrency: this.state.quoteCurrency,
       isBuying: true
     })
   }
 
   changeBtnSell = () => {
     this.setState({
-      sellBackgroundColor: Colors.primaryDark,
+      sellBackgroundColor: Colors.primary,
       buyBackgroundColor: 'transparent',
       category: 'Sell',
       sellTextColor: Colors.primaryWhite,
-      buyTextColor: Colors.primaryDark,
-      initialCurrency: this.state.activeCurrency,
+      buyTextColor: Colors.primaryLight,
+      initialCurrency: this.state.quoteCurrency,
       isBuying: false,
     })
   }
@@ -86,8 +105,11 @@ class Local extends Component {
   // back-end code
   async componentDidMount() {
     this.NetworkStatus()
-    const base = this.state.baseCurrency
-    this._fetchCurrencies(base)
+    const baseCurrency = await AsyncStorage.getItem(Base)
+    const quoteCurrency = await AsyncStorage.getItem(Quote)
+    !baseCurrency ? await AsyncStorage.setItem(Base, this.state.baseCurrency) : this.setState({ baseCurrency: baseCurrency })
+    !quoteCurrency ? await AsyncStorage.setItem(Quote, this.state.quoteCurrency) : this.setState({ quoteCurrency: quoteCurrency })
+    this._fetchCurrencies()
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
     });
@@ -296,38 +318,60 @@ class Local extends Component {
       });
 
   }
-  _fetchCurrencies = async (base) => {
+  _fetchCurrencies = async () => {
+
     this.setState({
       loading: true
     })
+    const base = await AsyncStorage.getItem(Base)
+    const quote = await AsyncStorage.getItem(Quote)
     const that = this
     await firebase.database().ref(`/currencies`)
       .orderByChild('currency')
       .equalTo(base)
       .on('value', async snapshot => {
         const usersData = _.map(snapshot.val(), (val, uid) => {
-          return { ...val, uid }
-
+          return val.quote === quote && { ...val, uid }
         })
-        if (usersData !== null) {
+        if (usersData !== undefined) {
           await AsyncStorage.setItem(LocalData, JSON.stringify(usersData))
           that.setState({
             data: usersData,
             loading: false,
           })
         }
+        that.setState({
+          loading: false,
+        })
+
       })
     this.changeBtnBuy()
   }
+
+
   setBaseCurrency = async (currency) => {
+
     const { baseCurrency } = currency
-    this.setState({
-      ...initailState,
-      baseCurrency: baseCurrency,
+    this.setState(state => ({
+      ...initialState,
+      baseCurrency: baseCurrency
+    }))
+    await AsyncStorage.setItem(Base, baseCurrency).then(async () => {
+      this._fetchCurrencies()
     })
-    const base = baseCurrency
-    this._fetchCurrencies(base)
+
   }
+  setQuoteCurrency = async (currency) => {
+    const { quoteCurrency } = currency
+    this.setState(state => ({
+      ...initialState,
+      quoteCurrency: quoteCurrency,
+    }))
+    await AsyncStorage.setItem(Quote, quoteCurrency).then(async () => {
+      this._fetchCurrencies()
+    })
+  }
+
   _clearChoiceCache = async () => {
     try {
       await AsyncStorage.setItem(userChoice, '').then(() => {
@@ -350,15 +394,16 @@ class Local extends Component {
         <View style={{ marginTop: 10, }}>
           <InputButton
             text='Enter Amount ...'
-            onPress={() => this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })}
-            baseText={this.state.baseCurrency + '   '}
-            quoteText={this.state.activeCurrency + '   '}
+            baseFlag={{ uri: this.handleFlag(this.state.baseCurrency) }}
+            quoteFlag={{ uri: this.handleFlag(this.state.quoteCurrency) }}
+            onPressBase={() => this.props.navigation.navigate('CurrencyList', { setBaseCurrency: this.setBaseCurrency })}
+            onPressQuote={() => this.props.navigation.navigate('CurrencyList', { setQuoteCurrency: this.setQuoteCurrency })}
+            baseText={this.state.baseCurrency}
+            quoteText={this.state.quoteCurrency}
             editable={true}
-            defaultValue='1.00'
             keyboardType="numeric"
             onChangeText={(value) => this._handleCurrencyInput(value)}
           />
-
           <CategoryBtn
             onPressBuy={this.changeBtnBuy}
             onPressSell={this.changeBtnSell}
@@ -369,12 +414,13 @@ class Local extends Component {
               height: '100%',
               width: '100%',
               justifyContent: 'center',
-              borderRadius: screenheight / 16,
+              borderBottomWidth: 0.5,
+              borderBottomColor: Colors.primaryWhite,
             }}
             buyTextStyle={{
               color: this.state.buyTextColor,
               fontSize: screenwidth / 35,
-              fontFamily: 'Lucida-Grande',
+              fontFamily: 'Lucida-Grande-Bold',
               textAlign: 'center'
             }}
             btnSellStyle={{
@@ -384,12 +430,13 @@ class Local extends Component {
               height: '100%',
               width: '100%',
               justifyContent: 'center',
-              borderRadius: screenheight / 16,
+              borderBottomWidth: 0.5,
+              borderBottomColor: Colors.primaryWhite,
             }}
             sellTextStyle={{
               color: this.state.sellTextColor,
               fontSize: screenwidth / 35,
-              fontFamily: 'Lucida-Grande',
+              fontFamily: 'Lucida-Grande-Bold',
               textAlign: 'center'
             }} />
         </View>
@@ -419,24 +466,26 @@ class Local extends Component {
               data={data}
               extraData={this.state}
               keyExtractor={this.keyExtractor}
-              renderItem={({ item, index }) => (
-                <Card
-                  onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
-                  onPress={() => this.requestUpdate(item.userPhone, item.companyName)}
-                  text={item.companyName}
-                  text2={parseInt(item.bidPrice)}
-                  bidPrice={item.bidPrice}
-                  askPrice={item.askPrice}
-                  baseCurrency={item.currency}
-                  time={Moment(item.updatedAt).fromNow()}
-                  currency={item.quote}
-                  equivalent={this.state.isBuying ? parseInt(item.askPrice) * parseInt(inputedValue) : parseInt(inputedValue) * parseInt(item.bidPrice)}
-                  category={this.state.category}
-                  // source={this.state.flag}
-                  iconStyle={this.state.fav_icon ? 'red' : 'grey'}
-                  onPressIcon={() => this.handle_fav({ index, item })}
-                />
-              )}
+              renderItem={({ item, index }) => {
+                if (item.companyName) {
+                  return <Card
+                    onPress1={() => this.props.navigation.navigate('Details', { userPhone: item.userPhone })}
+                    onPress={() => this.requestUpdate(item.userPhone, item.companyName)}
+                    text={item.companyName}
+                    text2={parseInt(item.bidPrice)}
+                    bidPrice={item.bidPrice}
+                    askPrice={item.askPrice}
+                    baseCurrency={item.currency}
+                    time={Moment(item.updatedAt).fromNow()}
+                    currency={item.quote}
+                    equivalent={this.state.isBuying ? parseInt(item.askPrice) * parseInt(inputedValue) : parseInt(inputedValue) * parseInt(item.bidPrice)}
+                    category={this.state.category}
+                    // source={this.state.flag}
+                    iconStyle={this.state.fav_icon ? 'red' : 'grey'}
+                    onPressIcon={() => this.handle_fav({ index, item })}
+                  />
+                }
+              }}
               numColumns={1}
               initialNumToRender={this.oneScreensWorth}
               ListEmptyComponent={this.renderEmpty}
