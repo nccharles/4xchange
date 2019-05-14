@@ -21,21 +21,18 @@ const initialState = {
     loading: true,
     error: null,
     isSubmitting: false,
+    data: [],
+    forexPhone: null,
+    companyName: null,
+    customerMessage: 0
 }
 
 class Chatlist extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            ...initialState,
-            data: [],
-            loading: true,
+        this.state = initialState
 
-            forexPhone: null,
-            companyName: null,
-            customerMessage: 0
-        }
     };
 
     static navigationOptions = () => {
@@ -70,17 +67,17 @@ class Chatlist extends Component {
     _countCustomerMessages = async (forexPhone) => {
         firebase.database().ref(`/Chats/${forexPhone}/Customer`)
             .on('value', snapshot => {
-
-                snapshot.forEach((child) => {
-                    const customerMessage = child.val().countsent;
-                    if (customerMessage) {
-                        this.setState({
-
-                            customerMessage: customerMessage
-                        })
-                    }
+                const customerMessage = _.map(snapshot.val(), (val, uid) => {
+                    return { ...val.countsent, uid }
                 })
+                if (customerMessage) {
+                    this.setState({
+
+                        customerMessage: customerMessage
+                    })
+                }
             })
+
     }
 
     _getAllmessages = async (forexPhone) => {
@@ -88,6 +85,7 @@ class Chatlist extends Component {
             .orderByChild("unread")
             .on('value', snapshot => {
                 let listData = []
+
                 snapshot.forEach((child) => {
                     const customerPhone = child.val().customerPhone;
                     const name = child.val().name

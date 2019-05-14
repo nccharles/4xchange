@@ -50,12 +50,11 @@ class ManageCurrency extends Component {
             isLoading: true,
             userPhone: null,
             companyName: null,
-            customerMessage: 0,
             baseCurrency: 'USD',
             quoteCurrency: 'EUR',
             newCurrency: {
-                currency: null,
-                quote: null,
+                currency: 'USD',
+                quote: 'EUR',
                 askPrice: null,
                 bidPrice: null,
             }
@@ -63,7 +62,13 @@ class ManageCurrency extends Component {
     };
 
     async componentWillMount() {
-        this.setState({ customerMessage: null })
+        this.setState(state => ({
+            newCurrency: {
+                ...state.newCurrency,
+                currency: 'USD',
+                quote: 'EUR',
+            }
+        }))
         const currentUser = await AsyncStorage.getItem(userPhone)
         console.log(currentUser)
         this.setState({
@@ -93,20 +98,7 @@ class ManageCurrency extends Component {
             }
         }
     };
-    _getAllCustomers = async (forexPhone) => {
-        firebase.database().ref(`/Chats/${forexPhone}/Customer`)
-            .on('value', snapshot => {
 
-                snapshot.forEach((child) => {
-                    const customerMessage = child.val().countsent;
-                    if (customerMessage) {
-                        this.setState({
-                            customerMessage: customerMessage
-                        })
-                    }
-                })
-            })
-    }
     _getUserCurrencies = async () => {
         const { userPhone } = this.state
         const that = this
@@ -125,17 +117,19 @@ class ManageCurrency extends Component {
             })
     }
     _handleSaveCurrency = async () => {
-        console.log('done')
         const { newCurrency: { currency, quote, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
+        console.log(currency)
+        console.log(quote)
         if (_.find(this.state.data, { currency: currency, quote: quote })) {
-            this.refs.toast.show(`${currency} already exist!!!`);
+            console.log(currency)
+            this.refs.toast.show(`${currency} in ${quote} already exist!!!`);
             this.setState(state => ({
                 ...initialState,
                 newCurrency: {
                     askPrice: '',
                     bidPrice: '',
-                    currency: '',
-                    quote: ''
+                    currency: 'USD',
+                    quote: 'EUR'
                 },
             }))
 
@@ -177,8 +171,8 @@ class ManageCurrency extends Component {
                     newCurrency: {
                         askPrice: '',
                         bidPrice: '',
-                        currency: '',
-                        quote: ''
+                        currency: 'USD',
+                        quote: 'EUR'
                     },
                 }))
                 this.refs.toast.show('Currency added!');
@@ -248,9 +242,17 @@ class ManageCurrency extends Component {
     };
 
     handleCancel = () => {
-        this.setState({
-            ...initialState
-        });
+        this.setState((state) => ({
+            ...initialState,
+            baseCurrency: 'USD',
+            quoteCurrency: 'EUR',
+            newCurrency: {
+                ...state.newCurrency,
+                currency: 'USD',
+                quote: 'EUR'
+            }
+
+        }));
     };
 
     handleDelete = () => {
@@ -396,8 +398,8 @@ class ManageCurrency extends Component {
                                     onPress={() => this.showUpdateDialog(item)}
                                     onPressDel={() => this.showDeleteDialog(item)}
                                     text={item.currency}
-                                    askPrice={item.askPrice}
-                                    bidPrice={item.bidPrice}
+                                    askPrice={item.askPrice + ' ' + item.quote}
+                                    bidPrice={item.bidPrice + ' ' + item.quote}
                                     time={Moment(item.updatedAt).fromNow()} />
                             )}
                             keyExtractor={this.keyExtractor}
@@ -452,8 +454,8 @@ class ManageCurrency extends Component {
                     position='bottom'
                     positionValue={200}
                     fadeInDuration={750}
-                    fadeOutDuration={1000}
-                    opacity={0.8}
+                    fadeOutDuration={1500}
+                    opacity={1}
                     textStyle={{ color: '#fff' }} />
             </View>
         );

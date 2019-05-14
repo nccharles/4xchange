@@ -9,9 +9,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     width: screenwidth - 10,
     height: screenheight / 10,
-    elevation: 1,
+    elevation: 3,
     alignSelf: 'center',
-    marginVertical: 0,
+    marginVertical: 2,
     borderLeftColor: Colors.primary,
     borderLeftWidth: 2,
     backgroundColor: Colors.background,
@@ -54,7 +54,7 @@ export default StyleSheet.create({
   },
   label: {
     color: Colors.primaryGray,
-    fontFamily: 'Lucida-Grande-Bold',
+    fontFamily: 'Lucida-Grande',
     fontSize: screenwidth / 25,
   },
   iconBtn: {

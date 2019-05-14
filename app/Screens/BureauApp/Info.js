@@ -155,7 +155,7 @@ class Info extends Component {
             isTimePickerVisible: false
         }));
     };
-    _handleInfoSave = async () => {
+    _handleInfoUpdate = async () => {
         const { info: { address, closeAt, openAt, workingDays, companyName, email, latitude, longitude }, infoId, isSubmitting } = this.state
         if (isSubmitting) {
             return
@@ -180,7 +180,11 @@ class Info extends Component {
                     isSubmitting: false,
                 })
                 this.refs.toast.show("Information saved!")
-                this.props.navigation.goBack(null)
+                const { navigation } = this.props
+                navigation.goBack();
+                const { setUpdate } = navigation.state.params
+                setUpdate({ forexPhone: this.state.phone })
+
             })
             .catch(err => {
                 console.log(err)
@@ -308,7 +312,7 @@ class Info extends Component {
                             style={styles.button}
                         >
                             <Button
-                                onPress={this._handleInfoSave.bind(this)}
+                                onPress={this._handleInfoUpdate.bind(this)}
                                 title='Update Info'
                                 icon={{ type: 'feather', name: 'refresh-ccw', color: '#fff' }}
                             />

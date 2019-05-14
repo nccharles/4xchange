@@ -29,7 +29,9 @@ const InputWithButton = (props) => {
                     <TouchableOpacity
                         style={styles.Buttons}
                         onPress={onPressBase}>
-                        <Image style={styles.flag} resizeMode="stretch" source={baseFlag} />
+                        <View style={styles.flag}>
+                            <Image style={styles.flag} resizeMode="stretch" source={baseFlag} />
+                        </View>
                         <Text style={styles.buttonText} >
                             {baseText}
                         </Text>

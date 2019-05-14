@@ -23,7 +23,7 @@ class International extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      baseCurrency: currencies[0].code,
+      baseCurrency: currencies[149].code,
       userEntered: 1.00, currencies,
     };
   };

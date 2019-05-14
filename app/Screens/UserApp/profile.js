@@ -12,31 +12,33 @@ import _ from 'lodash'
 import { userPhone } from '../../Config/constants';
 import { Icon } from 'expo';
 import EditButton from '../../Components/Buttons/BtnEdit';
+const initialState = {
+    InputDialogVisible: false,
+    forexPhone: null,
+    chatname: null,
+    inputedValue: '',
+    userInfo: {
+        phone: '',
+        address: '',
+        openAt: '',
+        closeAt: '',
+        workingDays: '',
+        latitude: '',
+        longitude: '',
+        companyName: '',
+        email: '',
+        countryName: 'Rwanda',
+    },
+    locate: true,
+    loading: true,
+    error: false,
+}
 export default class Details extends Component {
+
 
     constructor(props) {
         super(props)
-        this.state = {
-            InputDialogVisible: false,
-            forexPhone: null,
-            chatname: null,
-            inputedValue: '',
-            userInfo: {
-                phone: '',
-                address: '',
-                openAt: '',
-                closeAt: '',
-                workingDays: '',
-                latitude: '',
-                longitude: '',
-                companyName: '',
-                email: '',
-                countryName: 'Rwanda',
-            },
-            locate: true,
-            loading: true,
-            error: false,
-        }
+        this.state = initialState
     }
 
     async componentDidMount() {
@@ -46,7 +48,16 @@ export default class Details extends Component {
         })
         this._getCompanyProfile(forexPhone)
     }
-
+    setUpdate = async () => {
+        const forexPhone = await AsyncStorage.getItem(userPhone)
+        this._getCompanyProfile(forexPhone)
+    }
+    getUpdate = async () => {
+        this.setState({
+            ...initialState,
+        })
+        this.props.navigation.navigate('Info', { setUpdate: this.setUpdate })
+    }
 
     _getCompanyProfile = async (forexPhone) => {
         const that = this
@@ -69,7 +80,7 @@ export default class Details extends Component {
             });
     }
     render() {
-        const { loading, userInfo, forexPhone, error } = this.state
+        const { loading, userInfo, error } = this.state
         if (loading) {
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -92,9 +103,9 @@ export default class Details extends Component {
                         <View style={styles.titleContainer}>
                             <Text
                                 style={styles.title}>
-                                {userInfo.companyName + '   '}
+                                {userInfo.companyName}
                             </Text>
-                            <Text style={styles.itemTitle}>{userInfo.email + '   '}  </Text>
+                            <Text style={styles.itemTitle}>{userInfo.email}  </Text>
                         </View>
                     </View>
                     <LinearGradient
@@ -105,7 +116,7 @@ export default class Details extends Component {
                     <View style={styles.itemContainer}>
                         <Icon.MaterialIcons name="location-city" color={Colors.primary} size={23} />
                         <View style={styles.infocontent}>
-                            <Text style={styles.infoTitle}>Country  </Text>
+                            <Text style={styles.infoTitle}>Country</Text>
                             <Text style={styles.info}>{userInfo.countryName}</Text>
                         </View>
                     </View>
@@ -131,7 +142,7 @@ export default class Details extends Component {
                         </View>
                     </View>
                 </ScrollView>
-                <EditButton onPress={() => this.props.navigation.navigate('Info')} />
+                <EditButton onPress={() => this.getUpdate()} />
                 <Toast ref="toast"
                     style={{ backgroundColor: Colors.primary }}
                     position='bottom'

@@ -67,7 +67,7 @@ class Local extends Component {
 
   changeBtnBuy = () => {
     this.setState({
-      buyBackgroundColor: Colors.primary,
+      buyBackgroundColor: 'transparent',
       sellBackgroundColor: 'transparent',
       category: 'Buy',
       buyTextColor: Colors.primaryWhite,
@@ -79,7 +79,7 @@ class Local extends Component {
 
   changeBtnSell = () => {
     this.setState({
-      sellBackgroundColor: Colors.primary,
+      sellBackgroundColor: 'transparent',
       buyBackgroundColor: 'transparent',
       category: 'Sell',
       sellTextColor: Colors.primaryWhite,
@@ -105,11 +105,6 @@ class Local extends Component {
   // back-end code
   async componentDidMount() {
     this.NetworkStatus()
-    const baseCurrency = await AsyncStorage.getItem(Base)
-    const quoteCurrency = await AsyncStorage.getItem(Quote)
-    !baseCurrency ? await AsyncStorage.setItem(Base, this.state.baseCurrency) : this.setState({ baseCurrency: baseCurrency })
-    !quoteCurrency ? await AsyncStorage.setItem(Quote, this.state.quoteCurrency) : this.setState({ quoteCurrency: quoteCurrency })
-    this._fetchCurrencies()
     this.props.navigation.setParams({
       handleThis: this._clearChoiceCache
     });
@@ -126,6 +121,12 @@ class Local extends Component {
             loading: false,
           })
         }
+      } else {
+        const baseCurrency = await AsyncStorage.getItem(Base)
+        const quoteCurrency = await AsyncStorage.getItem(Quote)
+        !baseCurrency ? await AsyncStorage.setItem(Base, this.state.baseCurrency) : this.setState({ baseCurrency: baseCurrency })
+        !quoteCurrency ? await AsyncStorage.setItem(Quote, this.state.quoteCurrency) : this.setState({ quoteCurrency: quoteCurrency })
+        this._fetchCurrencies()
       }
     });
     function handleFirstConnectivityChange(isConnected) {
@@ -333,6 +334,7 @@ class Local extends Component {
         const usersData = _.map(snapshot.val(), (val, uid) => {
           return val.quote === quote && { ...val, uid }
         })
+        console.log(usersData)
         if (usersData !== undefined) {
           await AsyncStorage.setItem(LocalData, JSON.stringify(usersData))
           that.setState({
@@ -414,14 +416,16 @@ class Local extends Component {
               height: '100%',
               width: '100%',
               justifyContent: 'center',
-              borderBottomWidth: 0.5,
-              borderBottomColor: Colors.primaryWhite,
+              borderRadius: screenheight,
+              marginHorizontal: 40,
             }}
             buyTextStyle={{
               color: this.state.buyTextColor,
-              fontSize: screenwidth / 35,
+              fontSize: screenwidth / 30,
               fontFamily: 'Lucida-Grande-Bold',
-              textAlign: 'center'
+              textAlign: 'center',
+              elevation: 3,
+
             }}
             btnSellStyle={{
               flex: 1,
@@ -430,14 +434,16 @@ class Local extends Component {
               height: '100%',
               width: '100%',
               justifyContent: 'center',
-              borderBottomWidth: 0.5,
-              borderBottomColor: Colors.primaryWhite,
+              borderRadius: screenheight,
+              marginHorizontal: 40,
+
             }}
             sellTextStyle={{
               color: this.state.sellTextColor,
-              fontSize: screenwidth / 35,
+              fontSize: screenwidth / 30,
               fontFamily: 'Lucida-Grande-Bold',
-              textAlign: 'center'
+              textAlign: 'center',
+              elevation: 3,
             }} />
         </View>
         {loading ?
