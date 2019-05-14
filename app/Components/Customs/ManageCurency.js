@@ -118,21 +118,11 @@ class ManageCurrency extends Component {
     }
     _handleSaveCurrency = async () => {
         const { newCurrency: { currency, quote, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
-        console.log(currency)
-        console.log(quote)
         if (_.find(this.state.data, { currency: currency, quote: quote })) {
-            console.log(currency)
-            this.refs.toast.show(`${currency} in ${quote} already exist!!!`);
-            this.setState(state => ({
-                ...initialState,
-                newCurrency: {
-                    askPrice: '',
-                    bidPrice: '',
-                    currency: 'USD',
-                    quote: 'EUR'
-                },
-            }))
-
+            alert(`${currency} in ${quote} already exist!!!`);
+            this.setState({
+                isSubmitting: false,
+            })
             return
         }
         if (isSubmitting) {
@@ -146,8 +136,8 @@ class ManageCurrency extends Component {
             return
         }
         if (!currency || !quote || !askPrice || !bidPrice) {
+            alert('complete required field');
             this.setState({
-                error: 'complete required field',
                 isSubmitting: false,
             })
             return
