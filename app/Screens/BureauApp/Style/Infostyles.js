@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 5,
         borderTopRightRadius: 5,
         color: Colors.primary,
-        fontFamily: 'Lucida-Grande',
     },
     button: {
         backgroundColor: Colors.background,

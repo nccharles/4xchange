@@ -109,23 +109,35 @@ class Local extends Component {
       handleThis: this._clearChoiceCache
     });
   }
-  NetworkStatus = () => {
+  NetworkStatus = async () => {
+    const currency = await AsyncStorage.getItem(Base)
+    const quote = await AsyncStorage.getItem(Quote)
+    const filter = {
+      currency,
+      quote
+    };
     NetInfo.isConnected.fetch().then(async (isConnected) => {
       console.log('First, is ' + (isConnected ? 'online' : 'offline'));
       if (!isConnected) {
         const loadLocaldata = await AsyncStorage.getItem(LocalData)
         console.log(loadLocaldata)
         if (loadLocaldata !== null) {
+          const Localdata = JSON.parse(loadLocaldata)
+          const allCurrencies = Localdata.filter((currency) => {
+            for (let key in filter) {
+              if (currency[key] === undefined || currency[key] != filter[key])
+                return false;
+            }
+            return true;
+          });
           this.setState({
-            data: JSON.parse(loadLocaldata),
+            data: allCurrencies,
             loading: false,
           })
         }
       } else {
-        const baseCurrency = await AsyncStorage.getItem(Base)
-        const quoteCurrency = await AsyncStorage.getItem(Quote)
-        !baseCurrency ? await AsyncStorage.setItem(Base, this.state.baseCurrency) : this.setState({ baseCurrency: baseCurrency })
-        !quoteCurrency ? await AsyncStorage.setItem(Quote, this.state.quoteCurrency) : this.setState({ quoteCurrency: quoteCurrency })
+        !currency ? await AsyncStorage.setItem(Base, this.state.baseCurrency) : this.setState({ baseCurrency: currency })
+        !quote ? await AsyncStorage.setItem(Quote, this.state.quoteCurrency) : this.setState({ quoteCurrency: quote })
         this._fetchCurrencies()
       }
     });
@@ -324,22 +336,32 @@ class Local extends Component {
     this.setState({
       loading: true
     })
-    const base = await AsyncStorage.getItem(Base)
+    const currency = await AsyncStorage.getItem(Base)
     const quote = await AsyncStorage.getItem(Quote)
+    const filter = {
+      currency,
+      quote
+    };
     const that = this
     await firebase.database().ref(`/currencies`)
-      .orderByChild('currency')
-      .equalTo(base)
       .on('value', async snapshot => {
         const usersData = _.map(snapshot.val(), (val, uid) => {
-          return val.quote === quote && { ...val, uid }
+          return { ...val, uid }
         })
         console.log(usersData)
         if (usersData !== undefined) {
-          await AsyncStorage.setItem(LocalData, JSON.stringify(usersData))
-          that.setState({
-            data: usersData,
-            loading: false,
+          await AsyncStorage.setItem(LocalData, JSON.stringify(usersData)).then(() => {
+            const allCurrencies = usersData.filter((currency) => {
+              for (let key in filter) {
+                if (currency[key] === undefined || currency[key] != filter[key])
+                  return false;
+              }
+              return true;
+            });
+            that.setState({
+              data: allCurrencies,
+              loading: false,
+            })
           })
         }
         that.setState({
@@ -359,7 +381,7 @@ class Local extends Component {
       baseCurrency: baseCurrency
     }))
     await AsyncStorage.setItem(Base, baseCurrency).then(async () => {
-      this._fetchCurrencies()
+      this.NetworkStatus()
     })
 
   }
@@ -370,7 +392,7 @@ class Local extends Component {
       quoteCurrency: quoteCurrency,
     }))
     await AsyncStorage.setItem(Quote, quoteCurrency).then(async () => {
-      this._fetchCurrencies()
+      this.NetworkStatus()
     })
   }
 

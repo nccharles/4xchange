@@ -32,7 +32,7 @@ import { Colors } from '../../Assets/Themes'
 //backend imports 
 import * as firebase from 'firebase'
 import _ from 'lodash'
-import { userPhone } from '../../Config/constants';
+import { userPhone, cName } from '../../Config/constants';
 class Info extends Component {
     static navigationOptions = ({ navigation }) => {
         let Title = 'Update'
@@ -163,6 +163,7 @@ class Info extends Component {
         this.setState({
             isSubmitting: true
         })
+
         await firebase.database().ref(`/infos/${this.state.phone}/publicInfo`)
             .update({
                 address,
@@ -175,10 +176,13 @@ class Info extends Component {
                 latitude,
                 longitude,
             })
-            .then(response => {
-                this.setState({
-                    isSubmitting: false,
+            .then(async () => {
+                await AsyncStorage.setItem(cName, companyName).then(() => {
+                    this.setState({
+                        isSubmitting: false,
+                    })
                 })
+
                 this.refs.toast.show("Information saved!")
                 const { navigation } = this.props
                 navigation.goBack();

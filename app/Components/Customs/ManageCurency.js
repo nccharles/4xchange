@@ -3,7 +3,7 @@ import {
     View,
     FlatList,
     ActivityIndicator,
-    AsyncStorage, StyleSheet, Image
+    AsyncStorage, StyleSheet, Image, Alert
 } from 'react-native';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import Moment from 'moment'
@@ -119,7 +119,7 @@ class ManageCurrency extends Component {
     _handleSaveCurrency = async () => {
         const { newCurrency: { currency, quote, askPrice, bidPrice }, userPhone, companyName, isSubmitting } = this.state
         if (_.find(this.state.data, { currency: currency, quote: quote })) {
-            alert(`${currency} in ${quote} already exist!!!`);
+            Alert.alert(`${currency} in ${quote} already exist!`, 'Click to the flag buttons to change currencies exchange and add your amount.');
             this.setState({
                 isSubmitting: false,
             })
@@ -131,12 +131,11 @@ class ManageCurrency extends Component {
         this.setState({
             isSubmitting: true
         })
-        //console.log(baseCurrency, inputedValue, userPhone)
         if (!userPhone) {
             return
         }
         if (!currency || !quote || !askPrice || !bidPrice) {
-            alert('complete required field');
+            Alert.alert('Uncomplete!', 'Please insert your exchange price related to the currencies.');
             this.setState({
                 isSubmitting: false,
             })
